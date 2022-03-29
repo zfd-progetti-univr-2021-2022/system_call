@@ -1,0 +1,5 @@
+# ignore previous builds
+src/obj
+src/client_0
+src/server
+dist/
