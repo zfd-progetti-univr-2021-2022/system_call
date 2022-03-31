@@ -1,7 +1,7 @@
 
 build:
 	mkdir -p dist
-	cd src && make
+	cd src && $(MAKE)
 	cp src/client_0 dist/.
 	cp src/server dist/.
 

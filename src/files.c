@@ -36,7 +36,7 @@ files_list * append(files_list * head, char * path) {
     //step 2. copy the current word
     strcpy(next->path, path);
 
-    printf("Sto aggiungendo %s che diventera': %s\n", path, next->path);
+    // printf("Sto aggiungendo %s che diventera': %s\n", path, next->path);
 
     if (head == NULL) {
         return next;
@@ -144,7 +144,7 @@ files_list * find_sendme_files(char *searchPath, files_list * head) {
 
             // if match is 1, then a research ...
             if (matchFileName == 1 && matchSize == 1) {
-                printf("Trovato nuovo file, lo aggiungo alla lista: %s\n", searchPath);
+                // printf("Trovato nuovo file, lo aggiungo alla lista: %s\n", searchPath);
                 head = append(head, searchPath);
             }
             

@@ -94,26 +94,106 @@ void SIGUSR1SignalHandler(int sig) {
 }
 
 
+/**
+ * Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server.
+ * 
+ * ANNOTAZIONE: la parte di codice per la suddivisione dei caratteri e' 
+ * generica mentre i buffer sono hard coded. Che sia da utilizzare un'array di array per i buffer per poter gestire tutto da una singola macro?
+ * > problema dell'anticipo del cambiamento
+ * 
+ * ANNOTAZIONE: siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo?
+ * Esempio: 2 caratteri possono essere divisi in:
+ * - caratteri per parte: 1 1 0 0
+ * - oppure: 2 0 0 0
+ * 
+ * Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri
+ * 
+ * Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore:
+ * Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore
+ * 
+ */
 void operazioni_figlio(char * filePath){
     printf("Sono il figlio %d e sto lavorando sul file %s\n", getpid(), filePath);
 
-    /*
-    long numChar; //numero dei caratteri nel file
     // apre il file
-    int file = open(percorso_file, O_RDONLY);
+    int fd = open(filePath, O_RDONLY);
 
-    //controllo che non ci siano errori
-    if (file == -1) {
-	     printf("File %s does not exist\n", percorso_file);
-	     continue;
+    // controllo che non ci siano errori
+    if (fd == -1) {
+	    ErrExit("open failed");
     }
 
     // determina il numero di caratteri totali
-    numChar=lseek(fd, 0, SEEK_END);
+    long numChar; 
+    numChar = lseek(fd, 0, SEEK_END);
+    
+    printf("Il file %s contiene %ld caratteri (dimensione %ld)\n", filePath, numChar, getFileSize(filePath));
 
     // divide il file in quattro parti contenenti lo stesso numero di caratteri (l'ultimo file puo' avere meno caratteri)
+    long msg_lengths[MSG_PARTS_NUM];
+
+    for (int i = 0; i < MSG_PARTS_NUM; i++) {
+        msg_lengths[i] = numChar / MSG_PARTS_NUM;
+    }
+
+    for (int i = 0; i < (numChar % MSG_PARTS_NUM) && i < MSG_PARTS_NUM; i++) {
+        msg_lengths[i] += 1;
+    }
+
+    printf("Il file %s contiene verra' diviso in parti con questi caratteri: %d %d %d %d\n", filePath, msg_lengths[0], msg_lengths[1], msg_lengths[2], msg_lengths[3]);
 
     // prepara i quattro messaggi (4 porzioni del contenuto del file) per l’invio
+    // > NOTA: questo codice sarebbe da sistemare: forse si puo' creare una matrice 4 x (MSG_BUFFER_SZ+1) e usare un for?
+    lseek(fd, 0, SEEK_SET);
+    char msg1_buffer[MSG_BUFFER_SZ + 1];
+    char msg2_buffer[MSG_BUFFER_SZ + 1];
+    char msg3_buffer[MSG_BUFFER_SZ + 1];
+    char msg4_buffer[MSG_BUFFER_SZ + 1];
+
+    ssize_t bR = 0;
+    bR = read(fd, msg1_buffer, msg_lengths[0]);
+    if (bR > 0) {
+        // add the character '\0' to let printf know where a
+        // string ends
+        msg1_buffer[bR] = '\0';
+        printf("Parte 1 file %s: '%s'\n", filePath, msg1_buffer);
+    }
+    else {
+        printf("Non sono riuscito a leggere la parte 1\n");
+    }
+
+    bR = read(fd, msg2_buffer, msg_lengths[1]);
+    if (bR > 0) {
+        // add the character '\0' to let printf know where a
+        // string ends
+        msg2_buffer[bR] = '\0';
+        printf("Parte 2 file %s: '%s'\n", filePath, msg2_buffer);
+    }
+    else {
+        printf("Non sono riuscito a leggere la parte 2\n");
+    }
+
+    bR = read(fd, msg3_buffer, msg_lengths[2]);
+    if (bR > 0) {
+        // add the character '\0' to let printf know where a
+        // string ends
+        msg3_buffer[bR] = '\0';
+        printf("Parte 3 file %s: '%s'\n", filePath, msg3_buffer);
+    }
+    else {
+        printf("Non sono riuscito a leggere la parte 3\n");
+    }
+
+    bR = read(fd, msg4_buffer, msg_lengths[3]);
+    if (bR > 0) {
+        // add the character '\0' to let printf know where a
+        // string ends
+        msg4_buffer[bR] = '\0';
+        printf("Parte 4 file %s: '%s'\n", filePath, msg4_buffer);
+    }
+    else {
+        printf("Non sono riuscito a leggere la parte 4\n");
+    }
 
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
     // > Attesa con semop() finche' non arriva a zero.
@@ -134,10 +214,11 @@ void operazioni_figlio(char * filePath){
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
 
     // chiude il file
-    close(file);
+    if (close(fd) == -1) {
+        ErrExit("close failed");
+    }
 
     // termina
-    */
 }
 
 
