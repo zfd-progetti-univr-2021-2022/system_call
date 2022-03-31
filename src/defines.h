@@ -3,3 +3,5 @@
 ///         e funzioni specifiche del progetto.
 
 #pragma once
+
+#define BUFFER_SZ 255
