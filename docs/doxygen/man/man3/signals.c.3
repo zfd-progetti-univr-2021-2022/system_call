@@ -1,0 +1,52 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/signals.c" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/signals.c \- Contiene le funzioni specifiche per la gestione dei SEGNALI\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <signal\&.h>\fP
+.br
+\fC#include 'signals\&.h'\fP
+.br
+
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "void \fBblock_sig_no_SIGINT_SIGUSR1\fP ()"
+.br
+.ti -1c
+.RI "void \fBblock_all_signals\fP ()"
+.br
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene le funzioni specifiche per la gestione dei SEGNALI\&. 
+
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "void block_all_signals ()"
+Blocca tutti i segnali:
+.IP "\(bu" 2
+creando un set di tutti i segnali
+.IP "\(bu" 2
+impostando la maschera per bloccare i segnali del set 
+.PP
+
+.SS "void block_sig_no_SIGINT_SIGUSR1 ()"
+Blocca tutti i segnali meno SIGINT e SIGUSR1:
+.IP "\(bu" 2
+creando un set di tutti i segnali
+.IP "\(bu" 2
+togliendo SIGINT e SIGUSR1 dal set
+.IP "\(bu" 2
+impostando la maschera per bloccare i segnali del set 
+.PP
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

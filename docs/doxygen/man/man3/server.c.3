@@ -1,0 +1,41 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/server.c \- Contiene l'implementazione del server\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'err_exit\&.h'\fP
+.br
+\fC#include 'defines\&.h'\fP
+.br
+\fC#include 'shared_memory\&.h'\fP
+.br
+\fC#include 'semaphore\&.h'\fP
+.br
+\fC#include 'fifo\&.h'\fP
+.br
+
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene l'implementazione del server\&. 
+
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "int main (int argc, char * argv[])"
+ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file\&. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine\&.
+.PP
+terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&. 
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

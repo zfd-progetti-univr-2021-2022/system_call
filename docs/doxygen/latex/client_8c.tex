@@ -1,0 +1,193 @@
+\hypertarget{client_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/client.c}
+\label{client_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/client.\+c@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/client.\+c}}
+
+
+Contiene l\textquotesingle{}implementazione del client.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}signals.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per client.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{client_8c_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
+\begin{DoxyCompactList}\small\item\em contiene percorso passato come parametro \end{DoxyCompactList}\item 
+void \hyperlink{client_8c_a50b22adcb76198fcd9402a97ff4711bf}{S\+I\+G\+U\+S\+R1\+Signal\+Handler} (int sig)
+\begin{DoxyCompactList}\small\item\em Handler del segnale S\+I\+G\+U\+S\+R1. \end{DoxyCompactList}\item 
+void \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi} (int fd, char $\ast$buf, size\+\_\+t count, char $\ast$file\+Path, int parte)
+\begin{DoxyCompactList}\small\item\em Divide in 4 parti il contenuto del file da inviare al server. \end{DoxyCompactList}\item 
+void \hyperlink{client_8c_a54b47b58f228d7bc9827d2919687e25a}{operazioni\+\_\+figlio} (char $\ast$file\+Path)
+\begin{DoxyCompactList}\small\item\em Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variabili}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8c_ab68195a262278b18e5dc84f677ad434d}\label{client_8c_ab68195a262278b18e5dc84f677ad434d}} 
+char $\ast$ {\bfseries search\+Path} = N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrizione dettagliata}
+Contiene l\textquotesingle{}implementazione del client. 
+
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000001}{Da fare}]Completare l\textquotesingle{}implementazione delle funzioni. 
+
+Rimuovere printf di debug o gestirle tramite flag di compilazione. 
+
+Spostare la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} ? (una opzione e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c}) \end{DoxyRefDesc}
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{client_8c_a55586f2b7e9b3620294cf78cda8abdad}\label{client_8c_a55586f2b7e9b3620294cf78cda8abdad}} 
+\index{client.\+c@{client.\+c}!dividi@{dividi}}
+\index{dividi@{dividi}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{dividi()}{dividi()}}
+{\footnotesize\ttfamily void dividi (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{buf,  }\item[{size\+\_\+t}]{count,  }\item[{char $\ast$}]{file\+Path,  }\item[{int}]{parte }\end{DoxyParamCaption})}
+
+
+
+Divide in 4 parti il contenuto del file da inviare al server. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em fd} & File descriptor del file da inviare \\
+\hline
+{\em buf} & Buffer in cui memorizzare la porzione del messaggio \\
+\hline
+{\em count} & Dimensione della porzione di messaggio \\
+\hline
+{\em file\+Path} & Percorso del file da suddividere \\
+\hline
+{\em parte} & Numero identificativo della porzione di messaggio \\
+\hline
+\end{DoxyParams}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{client_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{client.\+c@{client.\+c}!main@{main}}
+\index{main@{main}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Memorizza il percorso passato come parametro, gestisce segnali e handler, attende i segnali S\+I\+G\+I\+NT o S\+I\+G\+U\+S\+R1.
+
+
+\begin{DoxyParams}{Parametri}
+{\em argc} & Numero argomenti passati da linea di comando (compreso il nome dell\textquotesingle{}eseguibile) \\
+\hline
+{\em argv} & Array di argomenti passati da linea di comando \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Exit code dell\textquotesingle{}intero programma 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_a54b47b58f228d7bc9827d2919687e25a}\label{client_8c_a54b47b58f228d7bc9827d2919687e25a}} 
+\index{client.\+c@{client.\+c}!operazioni\+\_\+figlio@{operazioni\+\_\+figlio}}
+\index{operazioni\+\_\+figlio@{operazioni\+\_\+figlio}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{operazioni\+\_\+figlio()}{operazioni\_figlio()}}
+{\footnotesize\ttfamily void operazioni\+\_\+figlio (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+Path }\end{DoxyParamCaption})}
+
+
+
+Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. 
+
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000004}{Da fare}]Aggiungere la sincronizzazione con gli altri client\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000005}{Da fare}]Aggiungere la parte di comunicazione delle quattro parti dei messaggi\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000001}{Warnings}]siccome l\textquotesingle{}ultima parte del messaggio e\textquotesingle{} l\textquotesingle{}unica che puo\textquotesingle{} essere piu\textquotesingle{} corta per specifica... Cosa bisogna fare in casi in cui non e\textquotesingle{} possibile garantire questo vincolo? Esempio\+: 2 caratteri possono essere divisi in\+:
+\begin{DoxyItemize}
+\item caratteri per parte\+: 1 1 0 0
+\item oppure\+: 2 0 0 0
+\end{DoxyItemize}\end{DoxyRefDesc}
+
+
+Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri
+
+Non posso garantire come ad esempio nel caso di 3 caratteri che sono l\textquotesingle{}ultimo numero sia inferiore\+: Esempio di suddivisione di 3 caratteri\+: 1 1 1 0. L\textquotesingle{}ultimo, come per specifica, e\textquotesingle{} l\textquotesingle{}unico di dimensione inferiore
+
+
+\begin{DoxyParams}{Parametri}
+{\em file\+Path} & Percorso del file che il client deve suddividere e mandare al server. \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8c_a48d605ff689f470746c858648f0a98c2}\label{client_8c_a48d605ff689f470746c858648f0a98c2}} 
+\index{client.\+c@{client.\+c}!S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}}
+\index{S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+I\+N\+T\+Signal\+Handler()}{SIGINTSignalHandler()}}
+{\footnotesize\ttfamily void S\+I\+G\+I\+N\+T\+Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+contiene percorso passato come parametro 
+
+Handler del segnale S\+I\+G\+I\+NT. Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{client_8c_a48d605ff689f470746c858648f0a98c2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8c_a50b22adcb76198fcd9402a97ff4711bf}\label{client_8c_a50b22adcb76198fcd9402a97ff4711bf}} 
+\index{client.\+c@{client.\+c}!S\+I\+G\+U\+S\+R1\+Signal\+Handler@{S\+I\+G\+U\+S\+R1\+Signal\+Handler}}
+\index{S\+I\+G\+U\+S\+R1\+Signal\+Handler@{S\+I\+G\+U\+S\+R1\+Signal\+Handler}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+U\+S\+R1\+Signal\+Handler()}{SIGUSR1SignalHandler()}}
+{\footnotesize\ttfamily void S\+I\+G\+U\+S\+R1\+Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Handler del segnale S\+I\+G\+U\+S\+R1. 
+
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000003}{Da fare}]Gestire la chiusura delle risorse. Potrebbe non essere necessario\+: dipende dalla implementazione delle altre funzioni.\end{DoxyRefDesc}
+
+
+Termina il processo del client 0.
+
+
+\begin{DoxyParams}{Parametri}
+{\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
+\hline
+\end{DoxyParams}

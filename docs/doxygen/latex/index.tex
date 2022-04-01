@@ -1,0 +1,29 @@
+Elaborato System Call per il Corso di Sistemi Operativi (2021-\/2022) 
+
+
+
+Work In Progress.
+
+\subsection*{Comandi utili}
+
+Compilazione\+: 
+\begin{DoxyCode}
+make
+\end{DoxyCode}
+ \begin{quote}
+Gli eseguibili finiranno nella cartella {\ttfamily dist} \end{quote}
+
+
+\begin{quote}
+N\+O\+TA\+: a volte non vengono rilevate le modifiche e quindi occorre cancellare gli eseguibili dalla cartella src \end{quote}
+
+
+Terminazione del client\+:
+\begin{DoxyEnumerate}
+\item Aprire un altro terminale
+\item Eseguire il comando\+:
+
+```bash kill -\/s S\+I\+G\+U\+S\+R1 \$(pgrep client\+\_\+0) ```
+
+$>$ Prende l\textquotesingle{}output del comando pgrep, che restituisce il P\+ID del processo con nome client\+\_\+0, e usa il P\+ID restituito per mandargli il segnale S\+I\+G\+U\+S\+R1 di terminazione. 
+\end{DoxyEnumerate}

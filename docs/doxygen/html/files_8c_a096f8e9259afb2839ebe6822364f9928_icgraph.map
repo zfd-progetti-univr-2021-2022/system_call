@@ -1,0 +1,4 @@
+<map id="getFileSize" name="getFileSize">
+<area shape="rect" id="node2" href="$client_8h.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="145,5,275,32"/>
+<area shape="rect" id="node3" href="$files_8h.html#a5ac4517096592013308a3252f3226f60" title="Restituisce 1 se il percorso ha la dimensione &lt;= 4 KB, 0 altrimenti. " alt="" coords="155,56,265,83"/>
+</map>

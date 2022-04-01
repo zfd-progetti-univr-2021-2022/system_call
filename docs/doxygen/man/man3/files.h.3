@@ -1,0 +1,204 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/files.h" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/files.h \- Contiene la definizioni di variabili e funzioni specifiche per la gestione dei FILE\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Strutture dati"
+
+.in +1c
+.ti -1c
+.RI "struct \fBfiles_list\fP"
+.br
+.in -1c
+.SS "Ridefinizioni di tipo (typedef)"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBfiles_list\fP \fBfiles_list\fP"
+.br
+.in -1c
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "void \fBprint_list\fP (\fBfiles_list\fP *head)"
+.br
+.RI "Visualizza il contenuto della lista concatenata di filePath\&. "
+.ti -1c
+.RI "\fBfiles_list\fP * \fBappend\fP (\fBfiles_list\fP *head, char *path)"
+.br
+.RI "Aggiunge in fondo alla coda un nuovo filePath\&. "
+.ti -1c
+.RI "void \fBfree_list\fP (\fBfiles_list\fP *head)"
+.br
+.RI "Libera la memoria dello HEAP occupata dalla lista di filePath\&. "
+.ti -1c
+.RI "int \fBcount_files\fP (\fBfiles_list\fP *head)"
+.br
+.RI "Conta il numero di file nella lista concatenata di filePath\&. "
+.ti -1c
+.RI "long \fBgetFileSize\fP (char *filePath)"
+.br
+.RI "Restituisce la dimensione in byte del file con percorso filePath\&. "
+.ti -1c
+.RI "int \fBcheckFileSize\fP (char *filePath)"
+.br
+.RI "Restituisce 1 se il percorso ha la dimensione <= 4 KB, 0 altrimenti\&. "
+.ti -1c
+.RI "int \fBcheckFileName\fP (char *fileName)"
+.br
+.RI "Restituisce 1 se il percorso inizia con 'sendme_', 0 altrimenti\&. "
+.ti -1c
+.RI "\fBfiles_list\fP * \fBfind_sendme_files\fP (char *searchPath, \fBfiles_list\fP *head)"
+.br
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene la definizioni di variabili e funzioni specifiche per la gestione dei FILE\&. 
+
+
+.SH "Documentazione delle ridefinizioni di tipo (typedef)"
+.PP 
+.SS "typedef struct \fBfiles_list\fP  \fBfiles_list\fP"
+Nodo di una lista concatenata di filePath\&. 
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "\fBfiles_list\fP* append (\fBfiles_list\fP * head, char * path)"
+
+.PP
+Aggiunge in fondo alla coda un nuovo filePath\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIhead\fP Nodo di testa della coda 
+.br
+\fIpath\fP filePath da aggiungere in fondo 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+files_list* Nodo di testa della coda (se head == NULL verra' creato il primo nodo) 
+.RE
+.PP
+
+.SS "int checkFileName (char * fileName)"
+
+.PP
+Restituisce 1 se il percorso inizia con 'sendme_', 0 altrimenti\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfileName\fP Percorso del file 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Vale 1 se il percorso inizia con 'sendme_', 0 altrimenti 
+.RE
+.PP
+
+.SS "int checkFileSize (char * filePath)"
+
+.PP
+Restituisce 1 se il percorso ha la dimensione <= 4 KB, 0 altrimenti\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfilePath\fP Percorso del file 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Vale 1 se il percorso ha la dimensione <= 4 KB, 0 altrimenti 
+.RE
+.PP
+
+.SS "int count_files (\fBfiles_list\fP * head)"
+
+.PP
+Conta il numero di file nella lista concatenata di filePath\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIhead\fP Nodo di testa della coda 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Numero di file 
+.RE
+.PP
+
+.SS "\fBfiles_list\fP* find_sendme_files (char * searchPath, \fBfiles_list\fP * head)"
+Ricerca ricorsivamente nel percorso searchPath i file che inizianano con 'sendme_' e che hanno la dimensione <= 4 KB\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsearchPath\fP Percorso in cui ricercare i file 
+.br
+\fIhead\fP Testa della lista concatenata in cui verranno restituiti i percorsi dei file che hanno i requisiti richiesti 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+files_list* Testa della lista concatenata con i percorsi dei file che hanno i requisiti richiesti 
+.RE
+.PP
+
+.SS "void free_list (\fBfiles_list\fP * head)"
+
+.PP
+Libera la memoria dello HEAP occupata dalla lista di filePath\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIhead\fP Nodo di testa della coda 
+.RE
+.PP
+
+.SS "long getFileSize (char * filePath)"
+
+.PP
+Restituisce la dimensione in byte del file con percorso filePath\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfilePath\fP Percorso del file 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+long Dimensione del file in byte
+.RE
+.PP
+Restituisce la dimensione in byte del file con percorso filePath\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfilePath\fP 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+long 
+.RE
+.PP
+
+.SS "void print_list (\fBfiles_list\fP * head)"
+
+.PP
+Visualizza il contenuto della lista concatenata di filePath\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIhead\fP Nodo di testa della coda 
+.RE
+.PP
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

@@ -1,0 +1,5 @@
+<map id="operazioni_figlio" name="operazioni_figlio">
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="196,5,261,32"/>
+<area shape="rect" id="node3" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce dimensione del file in byte. " alt="" coords="183,56,275,83"/>
+<area shape="rect" id="node4" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="199,107,258,133"/>
+</map>

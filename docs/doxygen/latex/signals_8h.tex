@@ -1,0 +1,59 @@
+\hypertarget{signals_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/signals.h}
+\label{signals_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/signals.\+h@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/signals.\+h}}
+
+
+Contiene la definizioni di variabili e funzioni specifiche per la gestione dei S\+E\+G\+N\+A\+LI.  
+
+
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{signals_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{signals_8h_a6060ad9cb62b184abfe113560b29f3c4}{block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1} ()
+\item 
+void \hyperlink{signals_8h_a6e96709c7c3ecbcde283f4a2a09e4baf}{block\+\_\+all\+\_\+signals} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrizione dettagliata}
+Contiene la definizioni di variabili e funzioni specifiche per la gestione dei S\+E\+G\+N\+A\+LI. 
+
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{signals_8h_a6e96709c7c3ecbcde283f4a2a09e4baf}\label{signals_8h_a6e96709c7c3ecbcde283f4a2a09e4baf}} 
+\index{signals.\+h@{signals.\+h}!block\+\_\+all\+\_\+signals@{block\+\_\+all\+\_\+signals}}
+\index{block\+\_\+all\+\_\+signals@{block\+\_\+all\+\_\+signals}!signals.\+h@{signals.\+h}}
+\subsubsection{\texorpdfstring{block\+\_\+all\+\_\+signals()}{block\_all\_signals()}}
+{\footnotesize\ttfamily void block\+\_\+all\+\_\+signals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Blocca tutti i segnali\+:
+\begin{DoxyItemize}
+\item creando un set di tutti i segnali
+\item impostando la maschera per bloccare i segnali del set 
+\end{DoxyItemize}Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{signals_8h_a6e96709c7c3ecbcde283f4a2a09e4baf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{signals_8h_a6060ad9cb62b184abfe113560b29f3c4}\label{signals_8h_a6060ad9cb62b184abfe113560b29f3c4}} 
+\index{signals.\+h@{signals.\+h}!block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1@{block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1}}
+\index{block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1@{block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1}!signals.\+h@{signals.\+h}}
+\subsubsection{\texorpdfstring{block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1()}{block\_sig\_no\_SIGINT\_SIGUSR1()}}
+{\footnotesize\ttfamily void block\+\_\+sig\+\_\+no\+\_\+\+S\+I\+G\+I\+N\+T\+\_\+\+S\+I\+G\+U\+S\+R1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Blocca tutti i segnali meno S\+I\+G\+I\+NT e S\+I\+G\+U\+S\+R1\+:
+\begin{DoxyItemize}
+\item creando un set di tutti i segnali
+\item togliendo S\+I\+G\+I\+NT e S\+I\+G\+U\+S\+R1 dal set
+\item impostando la maschera per bloccare i segnali del set 
+\end{DoxyItemize}

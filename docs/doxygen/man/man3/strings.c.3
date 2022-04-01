@@ -1,0 +1,78 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/strings.c" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/strings.c \- Contiene le funzioni specifiche per la gestione delle STRINGHE\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'strings\&.h'\fP
+.br
+
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBappend2Path\fP (char *path, char *directory)"
+.br
+.RI "Concatena la cartella directory al percorso path\&. "
+.ti -1c
+.RI "bool \fBStartsWith\fP (const char *a, const char *b)"
+.br
+.RI "Restituisce vero se la stringa a inizia con la sotto stringa b\&. "
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene le funzioni specifiche per la gestione delle STRINGHE\&. 
+
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "size_t append2Path (char * path, char * directory)"
+
+.PP
+Concatena la cartella directory al percorso path\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIpath\fP Percorso root a cui aggiungere directory 
+.br
+\fIdirectory\fP Nome cartella da aggiungere al path 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+size_t Dimensione caratteri di directory 
+.RE
+.PP
+
+.SS "bool StartsWith (const char * a, const char * b)"
+
+.PP
+Restituisce vero se la stringa a inizia con la sotto stringa b\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP 
+.br
+\fIb\fP 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+true 
+.PP
+false 
+.RE
+.PP
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

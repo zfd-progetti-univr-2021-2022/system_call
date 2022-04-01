@@ -1,0 +1,187 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/client.c \- Contiene l'implementazione del client\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include 'defines\&.h'\fP
+.br
+\fC#include 'err_exit\&.h'\fP
+.br
+\fC#include 'signals\&.h'\fP
+.br
+\fC#include 'files\&.h'\fP
+.br
+\fC#include 'client\&.h'\fP
+.br
+
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "void \fBSIGINTSignalHandler\fP (int sig)"
+.br
+.RI "contiene percorso passato come parametro "
+.ti -1c
+.RI "void \fBSIGUSR1SignalHandler\fP (int sig)"
+.br
+.RI "Handler del segnale SIGUSR1\&. "
+.ti -1c
+.RI "void \fBdividi\fP (int fd, char *buf, size_t count, char *filePath, int parte)"
+.br
+.RI "Divide in 4 parti il contenuto del file da inviare al server\&. "
+.ti -1c
+.RI "void \fBoperazioni_figlio\fP (char *filePath)"
+.br
+.RI "Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server\&. "
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variabili"
+
+.in +1c
+.ti -1c
+.RI "char * \fBsearchPath\fP = NULL"
+.br
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene l'implementazione del client\&. 
+
+
+.PP
+\fBDa fare\fP
+.RS 4
+Completare l'implementazione delle funzioni\&. 
+.PP
+Rimuovere printf di debug o gestirle tramite flag di compilazione\&. 
+.PP
+Spostare la funzione \fBdividi()\fP ? (una opzione e' metterla in \fBfiles\&.c\fP) 
+.RE
+.PP
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "void dividi (int fd, char * buf, size_t count, char * filePath, int parte)"
+
+.PP
+Divide in 4 parti il contenuto del file da inviare al server\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfd\fP File descriptor del file da inviare 
+.br
+\fIbuf\fP Buffer in cui memorizzare la porzione del messaggio 
+.br
+\fIcount\fP Dimensione della porzione di messaggio 
+.br
+\fIfilePath\fP Percorso del file da suddividere 
+.br
+\fIparte\fP Numero identificativo della porzione di messaggio 
+.RE
+.PP
+
+.SS "int main (int argc, char * argv[])"
+Memorizza il percorso passato come parametro, gestisce segnali e handler, attende i segnali SIGINT o SIGUSR1\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIargc\fP Numero argomenti passati da linea di comando (compreso il nome dell'eseguibile) 
+.br
+\fIargv\fP Array di argomenti passati da linea di comando 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Exit code dell'intero programma 
+.RE
+.PP
+
+.SS "void operazioni_figlio (char * filePath)"
+
+.PP
+Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server\&. 
+.PP
+\fBDa fare\fP
+.RS 4
+Aggiungere la sincronizzazione con gli altri client
+.RE
+.PP
+.PP
+\fBDa fare\fP
+.RS 4
+Aggiungere la parte di comunicazione delle quattro parti dei messaggi
+.RE
+.PP
+.PP
+\fBWarnings\fP
+.RS 4
+siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica\&.\&.\&. Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:
+.IP "\(bu" 2
+caratteri per parte: 1 1 0 0
+.IP "\(bu" 2
+oppure: 2 0 0 0
+.PP
+.RE
+.PP
+.PP
+Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, \&.\&.\&. caratteri
+.PP
+Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0\&. L'ultimo, come per specifica, e' l'unico di dimensione inferiore
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfilePath\fP Percorso del file che il client deve suddividere e mandare al server\&. 
+.RE
+.PP
+
+.SS "void SIGINTSignalHandler (int sig)"
+
+.PP
+contiene percorso passato come parametro Handler del segnale SIGINT\&. 
+.SS "void SIGUSR1SignalHandler (int sig)"
+
+.PP
+Handler del segnale SIGUSR1\&. 
+.PP
+\fBDa fare\fP
+.RS 4
+Gestire la chiusura delle risorse\&. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni\&.
+.RE
+.PP
+.PP
+Termina il processo del client 0\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsig\fP Valore intero corrispondente a SIGUSR1 
+.RE
+.PP
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

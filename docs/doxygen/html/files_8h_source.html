@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL:  File sorgente /mnt/c/Users/stefa/Desktop/system_call/src/files.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('files_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">files.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="files_8h.html">Vai alla documentazione di questo file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structfiles__list.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structfiles__list.html">files_list</a>{</div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structfiles__list.html#a986ecc1174faf39b15c1ef655c2ed966">   12</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="structfiles__list.html#a986ecc1174faf39b15c1ef655c2ed966">path</a>;</div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structfiles__list.html#a3cdd0098b7fb9589480f8a9facad90ce">   14</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structfiles__list.html">files_list</a> *<a class="code" href="structfiles__list.html#a3cdd0098b7fb9589480f8a9facad90ce">next</a>;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <a class="code" href="files_8h.html#a3f6241808ea8d0846cdb77a688f7b82f">files_list</a>;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="files_8h.html#a1cdd9b5b37408e31d80f31e474a71483">print_list</a>(<a class="code" href="structfiles__list.html">files_list</a> * head);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="structfiles__list.html">files_list</a> * <a class="code" href="files_8h.html#a6a46f37bcdbf048db0fba5bb3e0e6342">append</a>(<a class="code" href="structfiles__list.html">files_list</a> * head, <span class="keywordtype">char</span> * <a class="code" href="structfiles__list.html#a986ecc1174faf39b15c1ef655c2ed966">path</a>);</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="files_8h.html#a786a7b6f9c01e8489d7196a79f5f3862">free_list</a>(<a class="code" href="structfiles__list.html">files_list</a> * head);</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">int</span> <a class="code" href="files_8h.html#a3ba19f05c37434e7f20facff3445651a">count_files</a>(<a class="code" href="structfiles__list.html">files_list</a> * head);</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">long</span> <a class="code" href="files_8h.html#a096f8e9259afb2839ebe6822364f9928">getFileSize</a>(<span class="keywordtype">char</span> * filePath);</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">int</span> <a class="code" href="files_8h.html#a5ac4517096592013308a3252f3226f60">checkFileSize</a>(<span class="keywordtype">char</span> * filePath);</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">int</span> <a class="code" href="files_8h.html#a675d61c6bfe0d9ddd1be59233dfd7d5c">checkFileName</a>(<span class="keywordtype">char</span> * fileName);</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<a class="code" href="structfiles__list.html">files_list</a> * <a class="code" href="files_8h.html#a627e4b202ea71f3bd241ccf562449bd6">find_sendme_files</a>(<span class="keywordtype">char</span> *searchPath, <a class="code" href="structfiles__list.html">files_list</a> * head);</div><div class="ttc" id="files_8h_html_a3ba19f05c37434e7f20facff3445651a"><div class="ttname"><a href="files_8h.html#a3ba19f05c37434e7f20facff3445651a">count_files</a></div><div class="ttdeci">int count_files(files_list *head)</div><div class="ttdoc">Conta il numero di file nella lista concatenata di filePath. </div><div class="ttdef"><b>Definition:</b> files.c:73</div></div>
+<div class="ttc" id="files_8h_html_a675d61c6bfe0d9ddd1be59233dfd7d5c"><div class="ttname"><a href="files_8h.html#a675d61c6bfe0d9ddd1be59233dfd7d5c">checkFileName</a></div><div class="ttdeci">int checkFileName(char *fileName)</div><div class="ttdoc">Restituisce 1 se il percorso inizia con &quot;sendme_&quot;, 0 altrimenti. </div><div class="ttdef"><b>Definition:</b> files.c:109</div></div>
+<div class="ttc" id="files_8h_html_a786a7b6f9c01e8489d7196a79f5f3862"><div class="ttname"><a href="files_8h.html#a786a7b6f9c01e8489d7196a79f5f3862">free_list</a></div><div class="ttdeci">void free_list(files_list *head)</div><div class="ttdoc">Libera la memoria dello HEAP occupata dalla lista di filePath. </div><div class="ttdef"><b>Definition:</b> files.c:55</div></div>
+<div class="ttc" id="files_8h_html_a096f8e9259afb2839ebe6822364f9928"><div class="ttname"><a href="files_8h.html#a096f8e9259afb2839ebe6822364f9928">getFileSize</a></div><div class="ttdeci">long getFileSize(char *filePath)</div><div class="ttdoc">Restituisce la dimensione in byte del file con percorso filePath. </div><div class="ttdef"><b>Definition:</b> files.c:91</div></div>
+<div class="ttc" id="files_8h_html_a3f6241808ea8d0846cdb77a688f7b82f"><div class="ttname"><a href="files_8h.html#a3f6241808ea8d0846cdb77a688f7b82f">files_list</a></div><div class="ttdeci">struct files_list files_list</div></div>
+<div class="ttc" id="files_8h_html_a5ac4517096592013308a3252f3226f60"><div class="ttname"><a href="files_8h.html#a5ac4517096592013308a3252f3226f60">checkFileSize</a></div><div class="ttdeci">int checkFileSize(char *filePath)</div><div class="ttdoc">Restituisce 1 se il percorso ha la dimensione &lt;= 4 KB, 0 altrimenti. </div><div class="ttdef"><b>Definition:</b> files.c:103</div></div>
+<div class="ttc" id="structfiles__list_html_a3cdd0098b7fb9589480f8a9facad90ce"><div class="ttname"><a href="structfiles__list.html#a3cdd0098b7fb9589480f8a9facad90ce">files_list::next</a></div><div class="ttdeci">struct files_list * next</div><div class="ttdoc">Puntatore al prossimo nodo. </div><div class="ttdef"><b>Definition:</b> files.h:14</div></div>
+<div class="ttc" id="files_8h_html_a1cdd9b5b37408e31d80f31e474a71483"><div class="ttname"><a href="files_8h.html#a1cdd9b5b37408e31d80f31e474a71483">print_list</a></div><div class="ttdeci">void print_list(files_list *head)</div><div class="ttdoc">Visualizza il contenuto della lista concatenata di filePath. </div><div class="ttdef"><b>Definition:</b> files.c:16</div></div>
+<div class="ttc" id="structfiles__list_html"><div class="ttname"><a href="structfiles__list.html">files_list</a></div><div class="ttdef"><b>Definition:</b> files.h:10</div></div>
+<div class="ttc" id="files_8h_html_a6a46f37bcdbf048db0fba5bb3e0e6342"><div class="ttname"><a href="files_8h.html#a6a46f37bcdbf048db0fba5bb3e0e6342">append</a></div><div class="ttdeci">files_list * append(files_list *head, char *path)</div><div class="ttdoc">Aggiunge in fondo alla coda un nuovo filePath. </div><div class="ttdef"><b>Definition:</b> files.c:28</div></div>
+<div class="ttc" id="files_8h_html_a627e4b202ea71f3bd241ccf562449bd6"><div class="ttname"><a href="files_8h.html#a627e4b202ea71f3bd241ccf562449bd6">find_sendme_files</a></div><div class="ttdeci">files_list * find_sendme_files(char *searchPath, files_list *head)</div><div class="ttdef"><b>Definition:</b> files.c:117</div></div>
+<div class="ttc" id="structfiles__list_html_a986ecc1174faf39b15c1ef655c2ed966"><div class="ttname"><a href="structfiles__list.html#a986ecc1174faf39b15c1ef655c2ed966">files_list::path</a></div><div class="ttdeci">char * path</div><div class="ttdoc">Percorso file. </div><div class="ttdef"><b>Definition:</b> files.h:12</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="files_8h.html">files.h</a></li>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

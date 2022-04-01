@@ -1,0 +1,216 @@
+\hypertarget{files_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/files.c}
+\label{files_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/files.\+c@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/files.\+c}}
+
+
+Contiene le funzioni specifiche per la gestione dei F\+I\+LE.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}strings.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per files.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{files_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{files_8c_a1cdd9b5b37408e31d80f31e474a71483}{print\+\_\+list} (\hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
+\begin{DoxyCompactList}\small\item\em Visualizza il contenuto della lista concatenata di file\+Path. \end{DoxyCompactList}\item 
+\hyperlink{structfiles__list}{files\+\_\+list} $\ast$ \hyperlink{files_8c_a6a46f37bcdbf048db0fba5bb3e0e6342}{append} (\hyperlink{structfiles__list}{files\+\_\+list} $\ast$head, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Aggiunge in fondo alla coda un nuovo file\+Path. \end{DoxyCompactList}\item 
+void \hyperlink{files_8c_a786a7b6f9c01e8489d7196a79f5f3862}{free\+\_\+list} (\hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
+\begin{DoxyCompactList}\small\item\em Libera la memoria dello H\+E\+AP occupata dalla lista di file\+Path. \end{DoxyCompactList}\item 
+int \hyperlink{files_8c_a3ba19f05c37434e7f20facff3445651a}{count\+\_\+files} (\hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
+\begin{DoxyCompactList}\small\item\em Conta il numero di file nella lista concatenata di file\+Path. \end{DoxyCompactList}\item 
+long \hyperlink{files_8c_a096f8e9259afb2839ebe6822364f9928}{get\+File\+Size} (char $\ast$file\+Path)
+\begin{DoxyCompactList}\small\item\em Restituisce dimensione del file in byte. \end{DoxyCompactList}\item 
+int \hyperlink{files_8c_a5ac4517096592013308a3252f3226f60}{check\+File\+Size} (char $\ast$file\+Path)
+\begin{DoxyCompactList}\small\item\em Restituisce 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti. \end{DoxyCompactList}\item 
+int \hyperlink{files_8c_a675d61c6bfe0d9ddd1be59233dfd7d5c}{check\+File\+Name} (char $\ast$file\+Name)
+\begin{DoxyCompactList}\small\item\em Restituisce 1 se il percorso inizia con \char`\"{}sendme\+\_\+\char`\"{}, 0 altrimenti. \end{DoxyCompactList}\item 
+\hyperlink{structfiles__list}{files\+\_\+list} $\ast$ \hyperlink{files_8c_a627e4b202ea71f3bd241ccf562449bd6}{find\+\_\+sendme\+\_\+files} (char $\ast$search\+Path, \hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrizione dettagliata}
+Contiene le funzioni specifiche per la gestione dei F\+I\+LE. 
+
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{files_8c_a6a46f37bcdbf048db0fba5bb3e0e6342}\label{files_8c_a6a46f37bcdbf048db0fba5bb3e0e6342}} 
+\index{files.\+c@{files.\+c}!append@{append}}
+\index{append@{append}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily \hyperlink{structfiles__list}{files\+\_\+list}$\ast$ append (\begin{DoxyParamCaption}\item[{\hyperlink{structfiles__list}{files\+\_\+list} $\ast$}]{head,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Aggiunge in fondo alla coda un nuovo file\+Path. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em head} & Nodo di testa della coda \\
+\hline
+{\em path} & file\+Path da aggiungere in fondo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+files\+\_\+list$\ast$ Nodo di testa della coda (se head == N\+U\+LL verra\textquotesingle{} creato il primo nodo) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{files_8c_a675d61c6bfe0d9ddd1be59233dfd7d5c}\label{files_8c_a675d61c6bfe0d9ddd1be59233dfd7d5c}} 
+\index{files.\+c@{files.\+c}!check\+File\+Name@{check\+File\+Name}}
+\index{check\+File\+Name@{check\+File\+Name}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{check\+File\+Name()}{checkFileName()}}
+{\footnotesize\ttfamily int check\+File\+Name (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+Restituisce 1 se il percorso inizia con \char`\"{}sendme\+\_\+\char`\"{}, 0 altrimenti. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em file\+Name} & Percorso del file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Vale 1 se il percorso inizia con \char`\"{}sendme\+\_\+\char`\"{}, 0 altrimenti 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{files_8c_a675d61c6bfe0d9ddd1be59233dfd7d5c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{files_8c_a5ac4517096592013308a3252f3226f60}\label{files_8c_a5ac4517096592013308a3252f3226f60}} 
+\index{files.\+c@{files.\+c}!check\+File\+Size@{check\+File\+Size}}
+\index{check\+File\+Size@{check\+File\+Size}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{check\+File\+Size()}{checkFileSize()}}
+{\footnotesize\ttfamily int check\+File\+Size (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+Path }\end{DoxyParamCaption})}
+
+
+
+Restituisce 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em file\+Path} & Percorso del file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Vale 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{files_8c_a5ac4517096592013308a3252f3226f60_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{files_8c_a3ba19f05c37434e7f20facff3445651a}\label{files_8c_a3ba19f05c37434e7f20facff3445651a}} 
+\index{files.\+c@{files.\+c}!count\+\_\+files@{count\+\_\+files}}
+\index{count\+\_\+files@{count\+\_\+files}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{count\+\_\+files()}{count\_files()}}
+{\footnotesize\ttfamily int count\+\_\+files (\begin{DoxyParamCaption}\item[{\hyperlink{structfiles__list}{files\+\_\+list} $\ast$}]{head }\end{DoxyParamCaption})}
+
+
+
+Conta il numero di file nella lista concatenata di file\+Path. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em head} & Nodo di testa della coda \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Numero di file 
+\end{DoxyReturn}
+\mbox{\Hypertarget{files_8c_a627e4b202ea71f3bd241ccf562449bd6}\label{files_8c_a627e4b202ea71f3bd241ccf562449bd6}} 
+\index{files.\+c@{files.\+c}!find\+\_\+sendme\+\_\+files@{find\+\_\+sendme\+\_\+files}}
+\index{find\+\_\+sendme\+\_\+files@{find\+\_\+sendme\+\_\+files}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{find\+\_\+sendme\+\_\+files()}{find\_sendme\_files()}}
+{\footnotesize\ttfamily \hyperlink{structfiles__list}{files\+\_\+list}$\ast$ find\+\_\+sendme\+\_\+files (\begin{DoxyParamCaption}\item[{char $\ast$}]{search\+Path,  }\item[{\hyperlink{structfiles__list}{files\+\_\+list} $\ast$}]{head }\end{DoxyParamCaption})}
+
+Ricerca ricorsivamente nel percorso search\+Path i file che inizianano con \char`\"{}sendme\+\_\+\char`\"{} e che hanno la dimensione $<$= 4 KB.
+
+
+\begin{DoxyParams}{Parametri}
+{\em search\+Path} & Percorso in cui ricercare i file \\
+\hline
+{\em head} & Testa della lista concatenata in cui verranno restituiti i percorsi dei file che hanno i requisiti richiesti \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+files\+\_\+list$\ast$ Testa della lista concatenata con i percorsi dei file che hanno i requisiti richiesti 
+\end{DoxyReturn}
+\mbox{\Hypertarget{files_8c_a786a7b6f9c01e8489d7196a79f5f3862}\label{files_8c_a786a7b6f9c01e8489d7196a79f5f3862}} 
+\index{files.\+c@{files.\+c}!free\+\_\+list@{free\+\_\+list}}
+\index{free\+\_\+list@{free\+\_\+list}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{free\+\_\+list()}{free\_list()}}
+{\footnotesize\ttfamily void free\+\_\+list (\begin{DoxyParamCaption}\item[{\hyperlink{structfiles__list}{files\+\_\+list} $\ast$}]{head }\end{DoxyParamCaption})}
+
+
+
+Libera la memoria dello H\+E\+AP occupata dalla lista di file\+Path. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em head} & Nodo di testa della coda \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{files_8c_a096f8e9259afb2839ebe6822364f9928}\label{files_8c_a096f8e9259afb2839ebe6822364f9928}} 
+\index{files.\+c@{files.\+c}!get\+File\+Size@{get\+File\+Size}}
+\index{get\+File\+Size@{get\+File\+Size}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{get\+File\+Size()}{getFileSize()}}
+{\footnotesize\ttfamily long get\+File\+Size (\begin{DoxyParamCaption}\item[{char $\ast$}]{file\+Path }\end{DoxyParamCaption})}
+
+
+
+Restituisce dimensione del file in byte. 
+
+Restituisce la dimensione in byte del file con percorso file\+Path.
+
+
+\begin{DoxyParams}{Parametri}
+{\em file\+Path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+long 
+\end{DoxyReturn}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{files_8c_a096f8e9259afb2839ebe6822364f9928_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{files_8c_a1cdd9b5b37408e31d80f31e474a71483}\label{files_8c_a1cdd9b5b37408e31d80f31e474a71483}} 
+\index{files.\+c@{files.\+c}!print\+\_\+list@{print\+\_\+list}}
+\index{print\+\_\+list@{print\+\_\+list}!files.\+c@{files.\+c}}
+\subsubsection{\texorpdfstring{print\+\_\+list()}{print\_list()}}
+{\footnotesize\ttfamily void print\+\_\+list (\begin{DoxyParamCaption}\item[{\hyperlink{structfiles__list}{files\+\_\+list} $\ast$}]{head }\end{DoxyParamCaption})}
+
+
+
+Visualizza il contenuto della lista concatenata di file\+Path. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em head} & Nodo di testa della coda \\
+\hline
+\end{DoxyParams}
