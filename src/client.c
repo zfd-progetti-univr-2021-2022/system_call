@@ -20,7 +20,6 @@
 
 char * searchPath = NULL;  /// contiene percorso passato come parametro
 
-
 void SIGINTSignalHandler(int sig) {
     // blocca tutti i segnali (compresi SIGUSR1 e SIGINT) modificando la maschera
     block_all_signals();
@@ -112,6 +111,21 @@ void SIGUSR1SignalHandler(int sig) {
  * Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore
  *
  */
+ 
+//funzione per dividere in parti il file
+void dividi(int fd,char *buf,size_t count,char*filePath,int parte)
+{
+  ssize_t bR = read(fd, buf, count);
+  if (bR > 0) {
+      // add the character '\0' to let printf know where a string ends
+      buf[bR] = '\0';
+      printf("Parte 1 file %s: '%s'\n", filePath, buf);
+  }
+  else {
+      printf("Non sono riuscito a leggere la parte %d\n",parte);
+  }
+}
+
 void operazioni_figlio(char * filePath){
     printf("Sono il figlio %d e sto lavorando sul file %s\n", getpid(), filePath);
 
@@ -140,7 +154,7 @@ void operazioni_figlio(char * filePath){
         msg_lengths[i] += 1;
     }
 
-    printf("Il file %s contiene verra' diviso in parti con questi caratteri: %d %d %d %d\n", filePath, msg_lengths[0], msg_lengths[1], msg_lengths[2], msg_lengths[3]);
+    printf("Il file %s contiene verra' diviso in parti con questi caratteri: %ld %ld %ld %ld\n", filePath, msg_lengths[0], msg_lengths[1], msg_lengths[2], msg_lengths[3]);
 
     // prepara i quattro messaggi (4 porzioni del contenuto del file) per l’invio
     // > NOTA: questo codice sarebbe da sistemare: forse si puo' creare una matrice 4 x (MSG_BUFFER_SZ+1) e usare un for?
@@ -148,7 +162,7 @@ void operazioni_figlio(char * filePath){
     char msg_buffer[4][MSG_BUFFER_SZ + 1];
 
     for(int i=0; i<4; i++){
-        dividi(fd,msg_buffer[i],msg_lengths[i],filepath,i+1)
+        dividi(fd,msg_buffer[i],msg_lengths[i],filePath,i+1);
     }
 
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
@@ -177,7 +191,6 @@ void operazioni_figlio(char * filePath){
     // termina
 }
 
-
 int main(int argc, char * argv[]) {
 
     // assicurati che sia stato passato un percorso come parametro e memorizzalo
@@ -204,18 +217,4 @@ int main(int argc, char * argv[]) {
         pause();
 
     return 0;
-}
-
-//funzione per dividere in parti il file
-public void dividi(int fd,void *buf,size_t count,char*filepath,int parte)
-{
-  ssize_t bR  bR = read(fd, buf, count);
-  if (bR > 0) {
-      // add the character '\0' to let printf know where a string ends
-      buf[bR] = '\0';
-      printf("Parte 1 file %s: '%s'\n", filePath, buf);
-  }
-  else {
-      printf("Non sono riuscito a leggere la parte %d\n",parte);
-  }
 }
