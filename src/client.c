@@ -148,7 +148,7 @@ void operazioni_figlio(char * filePath){
     char msg_buffer[4][MSG_BUFFER_SZ + 1];
 
     for(int i=0; i<4; i++){
-        dividi(fd,msg_buffer[i][],msg_lengths[i],filepath,i+1)
+        dividi(fd,msg_buffer[i],msg_lengths[i],filepath,i+1)
     }
 
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
