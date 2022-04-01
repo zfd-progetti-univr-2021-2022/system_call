@@ -1,5 +1,11 @@
-/// @file client.c
-/// @brief Contiene l'implementazione del client.
+/**
+ * @file client.c
+ * @brief Contiene l'implementazione del client.
+ *
+ * @todo Completare l'implementazione delle funzioni.
+ * @todo Rimuovere printf di debug o gestirle tramite flag di compilazione.
+ * @todo Spostare la funzione dividi() ? (una opzione e' metterla in files.c)
+*/
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -18,7 +24,9 @@
 #include "files.h"
 #include "client.h"
 
-char * searchPath = NULL;  /// contiene percorso passato come parametro
+/// contiene percorso passato come parametro
+char * searchPath = NULL;
+
 
 void SIGINTSignalHandler(int sig) {
     // blocca tutti i segnali (compresi SIGUSR1 e SIGINT) modificando la maschera
@@ -93,38 +101,18 @@ void SIGUSR1SignalHandler(int sig) {
 }
 
 
-/**
- * Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server.
- *
- * ANNOTAZIONE: la parte di codice per la suddivisione dei caratteri e'
- * generica mentre i buffer sono hard coded. Che sia da utilizzare un'array di array per i buffer per poter gestire tutto da una singola macro?
- * > problema dell'anticipo del cambiamento
- *
- * ANNOTAZIONE: siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo?
- * Esempio: 2 caratteri possono essere divisi in:
- * - caratteri per parte: 1 1 0 0
- * - oppure: 2 0 0 0
- *
- * Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri
- *
- * Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore:
- * Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore
- *
- */
- 
-//funzione per dividere in parti il file
-void dividi(int fd,char *buf,size_t count,char*filePath,int parte)
-{
-  ssize_t bR = read(fd, buf, count);
-  if (bR > 0) {
-      // add the character '\0' to let printf know where a string ends
-      buf[bR] = '\0';
-      printf("Parte 1 file %s: '%s'\n", filePath, buf);
-  }
-  else {
-      printf("Non sono riuscito a leggere la parte %d\n",parte);
-  }
+void dividi(int fd, char *buf, size_t count, char *filePath, int parte) {
+    ssize_t bR = read(fd, buf, count);
+    if (bR > 0) {
+        // add the character '\0' to let printf know where a string ends
+        buf[bR] = '\0';
+        printf("Parte 1 file %s: '%s'\n", filePath, buf);
+    }
+    else {
+        printf("Non sono riuscito a leggere la parte %d\n",parte);
+    }
 }
+
 
 void operazioni_figlio(char * filePath){
     printf("Sono il figlio %d e sto lavorando sul file %s\n", getpid(), filePath);
@@ -159,10 +147,10 @@ void operazioni_figlio(char * filePath){
     // prepara i quattro messaggi (4 porzioni del contenuto del file) per l’invio
     // > NOTA: questo codice sarebbe da sistemare: forse si puo' creare una matrice 4 x (MSG_BUFFER_SZ+1) e usare un for?
     lseek(fd, 0, SEEK_SET);
-    char msg_buffer[4][MSG_BUFFER_SZ + 1];
+    char msg_buffer[MSG_PARTS_NUM][MSG_BUFFER_SZ + 1];
 
-    for(int i=0; i<4; i++){
-        dividi(fd,msg_buffer[i],msg_lengths[i],filePath,i+1);
+    for (int i = 0; i < MSG_PARTS_NUM; i++){
+        dividi(fd, msg_buffer[i], msg_lengths[i], filePath, i+1);
     }
 
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
@@ -190,6 +178,7 @@ void operazioni_figlio(char * filePath){
 
     // termina
 }
+
 
 int main(int argc, char * argv[]) {
 

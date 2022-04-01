@@ -3,3 +3,6 @@ src/obj
 src/client_0
 src/server
 dist/
+
+# doxygen ignores
+docs/doxygen/warnings.log
