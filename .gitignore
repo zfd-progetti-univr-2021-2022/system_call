@@ -6,3 +6,5 @@ dist/
 
 # doxygen ignores
 docs/doxygen/warnings.log
+
+docs/doxygen/theory/*/build
