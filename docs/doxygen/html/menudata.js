@@ -34,5 +34,6 @@ var menudata={children:[
 {text:"o",url:"globals_func.html#index_o"},
 {text:"p",url:"globals_func.html#index_p"},
 {text:"s",url:"globals_func.html#index_s"}]},
+{text:"Variabili",url:"globals_vars.html"},
 {text:"Ridefinizioni di tipo (typedef)",url:"globals_type.html"},
 {text:"Definizioni",url:"globals_defs.html"}]}]}]}

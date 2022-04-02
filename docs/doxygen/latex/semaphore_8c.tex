@@ -5,17 +5,45 @@
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la gestione dei S\+E\+M\+A\+F\+O\+RI.  
 
 
+{\ttfamily \#include $<$sys/sem.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}semaphore.\+h\char`\"{}}\newline
 Grafo delle dipendenze di inclusione per semaphore.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=242pt]{semaphore_8c__incl}
+\includegraphics[width=326pt]{semaphore_8c__incl}
 \end{center}
 \end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{semaphore_8c_a77c6570406059144bb6a8ecf04f481da}{sem\+Op} (int semid, unsigned short sem\+\_\+num, short sem\+\_\+op)
+\begin{DoxyCompactList}\small\item\em Funzione di supporto per manipolare i valori di un set di semafori. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la gestione dei S\+E\+M\+A\+F\+O\+RI. 
 
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{semaphore_8c_a77c6570406059144bb6a8ecf04f481da}\label{semaphore_8c_a77c6570406059144bb6a8ecf04f481da}} 
+\index{semaphore.\+c@{semaphore.\+c}!sem\+Op@{sem\+Op}}
+\index{sem\+Op@{sem\+Op}!semaphore.\+c@{semaphore.\+c}}
+\subsubsection{\texorpdfstring{sem\+Op()}{semOp()}}
+{\footnotesize\ttfamily void sem\+Op (\begin{DoxyParamCaption}\item[{int}]{semid,  }\item[{unsigned short}]{sem\+\_\+num,  }\item[{short}]{sem\+\_\+op }\end{DoxyParamCaption})}
+
+
+
+Funzione di supporto per manipolare i valori di un set di semafori. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em semid} & Identificatore del set di semagori \\
+\hline
+{\em sem\+\_\+num} & Indice di un semaforo nel set \\
+\hline
+{\em sem\+\_\+op} & Operazione eseguita sul semaforo sem\+\_\+num \\
+\hline
+\end{DoxyParams}

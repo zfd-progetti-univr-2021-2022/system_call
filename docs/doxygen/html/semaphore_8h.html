@@ -19,6 +19,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
@@ -82,6 +88,9 @@ $(document).ready(function(){initNavTree('semaphore_8h.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Strutture dati</a> &#124;
+<a href="#func-members">Funzioni</a>  </div>
   <div class="headertitle">
 <div class="title">Riferimenti per il file semaphore.h</div>  </div>
 </div><!--header-->
@@ -96,9 +105,66 @@ Questo grafo mostra quali altri file includono direttamente o indirettamente que
 </div>
 </div>
 <p><a href="semaphore_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Strutture dati</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionsemun.html">semun</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:a77c6570406059144bb6a8ecf04f481da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="semaphore_8h.html#a77c6570406059144bb6a8ecf04f481da">semOp</a> (int semid, unsigned short sem_num, short sem_op)</td></tr>
+<tr class="memdesc:a77c6570406059144bb6a8ecf04f481da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di supporto per manipolare i valori di un set di semafori.  <a href="#a77c6570406059144bb6a8ecf04f481da">Continua...</a><br /></td></tr>
+<tr class="separator:a77c6570406059144bb6a8ecf04f481da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEMAFORI. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a77c6570406059144bb6a8ecf04f481da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77c6570406059144bb6a8ecf04f481da">&#9670;&nbsp;</a></span>semOp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void semOp </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>semid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>sem_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>sem_op</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di supporto per manipolare i valori di un set di semafori. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">semid</td><td>Identificatore del set di semagori </td></tr>
+    <tr><td class="paramname">sem_num</td><td>Indice di un semaforo nel set </td></tr>
+    <tr><td class="paramname">sem_op</td><td>Operazione eseguita sul semaforo sem_num </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

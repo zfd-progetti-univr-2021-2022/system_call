@@ -31,7 +31,7 @@ Grafo delle dipendenze di inclusione per client.\+c\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{client_8c_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
-\begin{DoxyCompactList}\small\item\em contiene percorso passato come parametro \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Handler del segnale S\+I\+G\+I\+NT. \end{DoxyCompactList}\item 
 void \hyperlink{client_8c_a50b22adcb76198fcd9402a97ff4711bf}{S\+I\+G\+U\+S\+R1\+Signal\+Handler} (int sig)
 \begin{DoxyCompactList}\small\item\em Handler del segnale S\+I\+G\+U\+S\+R1. \end{DoxyCompactList}\item 
 void \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi} (int fd, char $\ast$buf, size\+\_\+t count, char $\ast$file\+Path, int parte)
@@ -44,8 +44,8 @@ int \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, cha
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{client_8c_ab68195a262278b18e5dc84f677ad434d}\label{client_8c_ab68195a262278b18e5dc84f677ad434d}} 
-char $\ast$ {\bfseries search\+Path} = N\+U\+LL
-\end{DoxyCompactItemize}
+char $\ast$ \hyperlink{client_8c_ab68195a262278b18e5dc84f677ad434d}{search\+Path} = N\+U\+LL
+\begin{DoxyCompactList}\small\item\em contiene percorso passato come parametro \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
@@ -56,7 +56,19 @@ Contiene l\textquotesingle{}implementazione del client.
 
 Rimuovere printf di debug o gestirle tramite flag di compilazione. 
 
-Spostare la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} ? (una opzione e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c}) \end{DoxyRefDesc}
+Spostare la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} ? (una opzione e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c})\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000001}{Warnings}]La specifica non richiede la documentazione. E\textquotesingle{} richiesta?\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000002}{Warnings}]I percorsi dei file hanno dimensione massima?\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000003}{Warnings}]I caratteri nei file di testo in input ai client sono A\+S\+C\+II? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...? \end{DoxyRefDesc}
 
 
 \subsection{Documentazione delle funzioni}
@@ -83,12 +95,11 @@ Divide in 4 parti il contenuto del file da inviare al server.
 {\em parte} & Numero identificativo della porzione di messaggio \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=257pt]{client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph}
+\includegraphics[width=350pt]{client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{client_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{client_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
@@ -120,36 +131,40 @@ int Exit code dell\textquotesingle{}intero programma
 Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000004}{Da fare}]Aggiungere la sincronizzazione con gli altri client\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000005}{Da fare}]Aggiungere la sincronizzazione con gli altri client\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000005}{Da fare}]Aggiungere la parte di comunicazione delle quattro parti dei messaggi\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000006}{Da fare}]Aggiungere la parte di comunicazione delle quattro parti dei messaggi\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000001}{Warnings}]siccome l\textquotesingle{}ultima parte del messaggio e\textquotesingle{} l\textquotesingle{}unica che puo\textquotesingle{} essere piu\textquotesingle{} corta per specifica... Cosa bisogna fare in casi in cui non e\textquotesingle{} possibile garantire questo vincolo? Esempio\+: 2 caratteri possono essere divisi in\+:
+\item[\hyperlink{warning__warning000007}{Warnings}]siccome l\textquotesingle{}ultima parte del messaggio e\textquotesingle{} l\textquotesingle{}unica che puo\textquotesingle{} essere piu\textquotesingle{} corta per specifica... Cosa bisogna fare in casi in cui non e\textquotesingle{} possibile garantire questo vincolo? Esempio\+: 2 caratteri possono essere divisi in\+:
 \begin{DoxyItemize}
 \item caratteri per parte\+: 1 1 0 0
-\item oppure\+: 2 0 0 0
+\item oppure\+: 2 0 0 0 ~\newline
+ Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri. ~\newline
+ Non posso garantire come ad esempio nel caso di 3 caratteri che sono l\textquotesingle{}ultimo numero sia inferiore\+: Esempio di suddivisione di 3 caratteri\+: 1 1 1 0. L\textquotesingle{}ultimo, come per specifica, e\textquotesingle{} l\textquotesingle{}unico di dimensione inferiore
 \end{DoxyItemize}\end{DoxyRefDesc}
 
-
-Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri
-
-Non posso garantire come ad esempio nel caso di 3 caratteri che sono l\textquotesingle{}ultimo numero sia inferiore\+: Esempio di suddivisione di 3 caratteri\+: 1 1 1 0. L\textquotesingle{}ultimo, come per specifica, e\textquotesingle{} l\textquotesingle{}unico di dimensione inferiore
 
 
 \begin{DoxyParams}{Parametri}
 {\em file\+Path} & Percorso del file che il client deve suddividere e mandare al server. \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=282pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{client_8c_a48d605ff689f470746c858648f0a98c2}\label{client_8c_a48d605ff689f470746c858648f0a98c2}} 
@@ -160,14 +175,49 @@ Questo è il grafo delle chiamate per questa funzione\+:
 
 
 
-contiene percorso passato come parametro 
+Handler del segnale S\+I\+G\+I\+NT. 
 
-Handler del segnale S\+I\+G\+I\+NT. Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000002}{Da fare}]Gestire la parte di comunicazione con il server.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000003}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Altro problema\+: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero\+: \$\$25 + 100 $\ast$ 25 = 2525\$\$ Ovvero 2525 KB, circa 2.\+5 MB.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000004}{Warnings}]Per ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send\+\_\+me si puo\textquotesingle{} creare il processo figlio per inviare il file. Per fare questo B\+I\+S\+O\+G\+NA sapere se il numero di file puo\textquotesingle{} cambiare durante l\textquotesingle{}esecuzione del programma\+: se trovo 3 file e dopo un file viene cancellato cosa succede? ~\newline
+ N\+O\+TA\+: questo problema puo\textquotesingle{} esserci anche nella situazione attuale...\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000005}{Warnings}]Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Probabilmente prima bisogna attendere il messaggio di fine e poi aspettare che tutti i figlio terminino (prima di liberare la lista dei file e).\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000006}{Warnings}]Il percorso passato al client deve essere assoluto o puo\textquotesingle{} essere relativo? Se si passa un percorso relativo chdir() fallira\textquotesingle{} alla seconda esecuzione. ~\newline
+ S\+O\+L\+U\+Z\+I\+O\+NE\+: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo.\end{DoxyRefDesc}
+
+
+Esegue tutte le funzionalita\textquotesingle{} principali del client.
+
+
+\begin{DoxyParams}{Parametri}
+{\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=334pt]{client_8c_a48d605ff689f470746c858648f0a98c2_cgraph}
+\includegraphics[width=350pt]{client_8c_a48d605ff689f470746c858648f0a98c2_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{client_8c_a48d605ff689f470746c858648f0a98c2_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{client_8c_a50b22adcb76198fcd9402a97ff4711bf}\label{client_8c_a50b22adcb76198fcd9402a97ff4711bf}} 
@@ -181,7 +231,7 @@ Handler del segnale S\+I\+G\+I\+NT. Questo è il grafo delle chiamate per questa
 Handler del segnale S\+I\+G\+U\+S\+R1. 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000003}{Da fare}]Gestire la chiusura delle risorse. Potrebbe non essere necessario\+: dipende dalla implementazione delle altre funzioni.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000004}{Da fare}]Gestire la chiusura delle risorse. Potrebbe non essere necessario\+: dipende dalla implementazione delle altre funzioni.\end{DoxyRefDesc}
 
 
 Termina il processo del client 0.
@@ -191,3 +241,10 @@ Termina il processo del client 0.
 {\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
 \hline
 \end{DoxyParams}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{client_8c_a50b22adcb76198fcd9402a97ff4711bf_icgraph}
+\end{center}
+\end{figure}

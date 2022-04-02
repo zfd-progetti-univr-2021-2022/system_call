@@ -1,3 +1,17 @@
 <map id="SIGINTSignalHandler" name="SIGINTSignalHandler">
-<area shape="rect" id="node2" href="$signals_8c.html#a6e96709c7c3ecbcde283f4a2a09e4baf" title="block_all_signals" alt="" coords="211,5,344,32"/>
+<area shape="rect" id="node2" href="$signals_8c.html#a6e96709c7c3ecbcde283f4a2a09e4baf" title="block_all_signals" alt="" coords="223,5,356,32"/>
+<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="444,119,509,145"/>
+<area shape="rect" id="node4" href="$files_8c.html#a627e4b202ea71f3bd241ccf562449bd6" title="find_sendme_files" alt="" coords="220,283,359,309"/>
+<area shape="rect" id="node11" href="$files_8c.html#a1cdd9b5b37408e31d80f31e474a71483" title="Visualizza il contenuto della lista concatenata di filePath. " alt="" coords="250,157,329,184"/>
+<area shape="rect" id="node12" href="$files_8c.html#a3ba19f05c37434e7f20facff3445651a" title="Conta il numero di file nella lista concatenata di filePath. " alt="" coords="243,208,335,235"/>
+<area shape="rect" id="node13" href="$client_8c.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="225,56,354,83"/>
+<area shape="rect" id="node15" href="$files_8c.html#a786a7b6f9c01e8489d7196a79f5f3862" title="Libera la memoria dello HEAP occupata dalla lista di filePath. " alt="" coords="252,333,327,360"/>
+<area shape="rect" id="node16" href="$signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4" title="block_sig_no_SIGINT\l_SIGUSR1" alt="" coords="211,385,368,426"/>
+<area shape="rect" id="node5" href="$strings_8c.html#a21b51584b636c81767ed74b8a527ffd3" title="Concatena la cartella directory al percorso path. " alt="" coords="423,232,530,259"/>
+<area shape="rect" id="node6" href="$files_8c.html#a675d61c6bfe0d9ddd1be59233dfd7d5c" title="Restituisce 1 se il percorso inizia con &quot;sendme_&quot;, 0 altrimenti. " alt="" coords="416,333,537,360"/>
+<area shape="rect" id="node8" href="$files_8c.html#a5ac4517096592013308a3252f3226f60" title="Restituisce 1 se il percorso ha la dimensione &lt;= 4 KB, 0 altrimenti. " alt="" coords="422,283,531,309"/>
+<area shape="rect" id="node10" href="$files_8c.html#a6a46f37bcdbf048db0fba5bb3e0e6342" title="Aggiunge in fondo alla coda un nuovo filePath. " alt="" coords="441,181,512,208"/>
+<area shape="rect" id="node7" href="$strings_8c.html#ab6b8529148710caedf063c1de6b0db16" title="Restituisce vero se la stringa a inizia con la sotto stringa b. " alt="" coords="586,333,677,360"/>
+<area shape="rect" id="node9" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce dimensione del file in byte. " alt="" coords="585,144,677,171"/>
+<area shape="rect" id="node14" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="447,68,506,95"/>
 </map>

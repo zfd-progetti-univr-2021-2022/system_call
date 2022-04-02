@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.c" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.c" 3 "Sab 2 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,15 +7,42 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <sys/sem\&.h>\fP
+.br
 \fC#include 'err_exit\&.h'\fP
 .br
 \fC#include 'semaphore\&.h'\fP
 .br
 
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "void \fBsemOp\fP (int semid, unsigned short sem_num, short sem_op)"
+.br
+.RI "Funzione di supporto per manipolare i valori di un set di semafori\&. "
+.in -1c
 .SH "Descrizione dettagliata"
 .PP 
 Contiene l'implementazione delle funzioni specifiche per la gestione dei SEMAFORI\&. 
 
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "void semOp (int semid, unsigned short sem_num, short sem_op)"
+
+.PP
+Funzione di supporto per manipolare i valori di un set di semafori\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semagori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
+.br
+\fIsem_op\fP Operazione eseguita sul semaforo sem_num 
+.RE
+.PP
 
 .SH "Autore"
 .PP 

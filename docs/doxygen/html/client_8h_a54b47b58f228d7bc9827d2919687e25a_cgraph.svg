@@ -8,54 +8,54 @@
  viewBox="0.00 0.00 210.00 104.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 100)">
 <title>operazioni_figlio</title>
-<!-- Node5 -->
+<!-- Node24 -->
 <g id="node1" class="node">
-<title>Node5</title>
+<title>Node24</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-38.5 0,-57.5 97,-57.5 97,-38.5 0,-38.5"/>
 <text text-anchor="middle" x="48.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_figlio</text>
 </g>
-<!-- Node6 -->
+<!-- Node25 -->
 <g id="node2" class="node">
-<title>Node6</title>
+<title>Node25</title>
 <g id="a_node2"><a xlink:href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" target="_top" xlink:title="Prints the error message of the last failed system call and terminates the calling process...">
 <polygon fill="none" stroke="#000000" points="143,-76.5 143,-95.5 192,-95.5 192,-76.5 143,-76.5"/>
 <text text-anchor="middle" x="167.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">ErrExit</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node6 -->
+<!-- Node24&#45;&gt;Node25 -->
 <g id="edge1" class="edge">
-<title>Node5&#45;&gt;Node6</title>
+<title>Node24&#45;&gt;Node25</title>
 <path fill="none" stroke="#191970" d="M78.5287,-57.589C95.1051,-62.8823 115.7643,-69.4794 133.0016,-74.9837"/>
 <polygon fill="#191970" stroke="#191970" points="132.1077,-78.3723 142.6986,-78.0802 134.2372,-71.7041 132.1077,-78.3723"/>
 </g>
-<!-- Node7 -->
+<!-- Node26 -->
 <g id="node3" class="node">
-<title>Node7</title>
+<title>Node26</title>
 <g id="a_node3"><a xlink:href="files_8c.html#a096f8e9259afb2839ebe6822364f9928" target="_top" xlink:title="Restituisce dimensione del file in byte. ">
 <polygon fill="none" stroke="#000000" points="133,-38.5 133,-57.5 202,-57.5 202,-38.5 133,-38.5"/>
 <text text-anchor="middle" x="167.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">getFileSize</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node7 -->
+<!-- Node24&#45;&gt;Node26 -->
 <g id="edge2" class="edge">
-<title>Node5&#45;&gt;Node7</title>
+<title>Node24&#45;&gt;Node26</title>
 <path fill="none" stroke="#191970" d="M97.2452,-48C105.6396,-48 114.3294,-48 122.616,-48"/>
 <polygon fill="#191970" stroke="#191970" points="122.8442,-51.5001 132.8442,-48 122.8441,-44.5001 122.8442,-51.5001"/>
 </g>
-<!-- Node8 -->
+<!-- Node27 -->
 <g id="node4" class="node">
-<title>Node8</title>
+<title>Node27</title>
 <g id="a_node4"><a xlink:href="client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" target="_top" xlink:title="Divide in 4 parti il contenuto del file da inviare al server. ">
 <polygon fill="none" stroke="#000000" points="145.5,-.5 145.5,-19.5 189.5,-19.5 189.5,-.5 145.5,-.5"/>
 <text text-anchor="middle" x="167.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">dividi</text>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node8 -->
+<!-- Node24&#45;&gt;Node27 -->
 <g id="edge3" class="edge">
-<title>Node5&#45;&gt;Node8</title>
+<title>Node24&#45;&gt;Node27</title>
 <path fill="none" stroke="#191970" d="M78.5287,-38.411C95.9109,-32.8604 117.7825,-25.8762 135.4903,-20.2216"/>
 <polygon fill="#191970" stroke="#191970" points="136.9084,-23.4429 145.3698,-17.0668 134.779,-16.7747 136.9084,-23.4429"/>
 </g>

@@ -19,6 +19,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
@@ -88,6 +94,13 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="textblock"><p>Elaborato System Call per il Corso di Sistemi Operativi (2021-2022) </p><hr/>
 <p>Work In Progress.</p>
+<h2>Documentazione Doxygen</h2>
+<p>E' possibile raggiungere la <a href="https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/index.html">documentazione generata da Doxygen cliccando qui</a>.</p>
+<p>Navigando il menu' a tendina a sinistra e' possibile vedere:</p><ul>
+<li>Commenti delle funzioni e dei parametri con grafici interattivi delle chiamate (<a href="https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/files.html">link diretto</a>)</li>
+<li>Problemi o incomprensioni delle specifiche da risolvere (<a href="https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/warning.html">link diretto</a>)</li>
+<li>Lista delle cose da implementare (<a href="https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/todo.html">link diretto</a>)</li>
+</ul>
 <h2>Comandi utili</h2>
 <p>Compilazione: </p><div class="fragment"><div class="line">make</div></div><!-- fragment --> <blockquote class="doxtable">
 <p>Gli eseguibili finiranno nella cartella <code>dist</code> </p>

@@ -1,4 +1,4 @@
-.TH "todo" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "todo" 3 "Sab 2 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,13 +9,17 @@ Completare l'implementazione delle funzioni\&.
 .PP
 Rimuovere printf di debug o gestirle tramite flag di compilazione\&. 
 .PP
-Spostare la funzione \fBdividi()\fP ? (una opzione e' metterla in \fBfiles\&.c\fP)  
+Spostare la funzione \fBdividi()\fP ? (una opzione e' metterla in \fBfiles\&.c\fP) 
 .IP "\fBGlobale \fBoperazioni_figlio\fP (char *filePath)\fP" 1c
 Aggiungere la sincronizzazione con gli altri client
 .PP
 Aggiungere la parte di comunicazione delle quattro parti dei messaggi 
+.IP "\fBClasse \fBsemun\fP \fP" 1c
+Commentare la union semun e i suoi attributi\&.  
 .IP "\fBGlobale \fBSIGINTSignalHandler\fP (int sig)\fP" 1c
-Gestire la parte di comunicazione con il server\&. 
+Gestire la parte di comunicazione con il server\&.
+.PP
+Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0\&. Attualmente la dimensione massima occupata dal client e': $$100 file * dim\&. path + 100 file * dim\&. pointer$$\&. Assumento dim\&. path massima = 250 caratteri e dim\&. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte\&. Altro problema: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero: $$25 + 100 * 25 = 2525$$ Ovvero 2525 KB, circa 2\&.5 MB\&. 
 .IP "\fBGlobale \fBSIGUSR1SignalHandler\fP (int sig)\fP" 1c
 Gestire la chiusura delle risorse\&. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni\&.
 .PP

@@ -1,8 +1,11 @@
 var searchData=
 [
   ['system_5fcall',['system_call',['../index.html',1,'']]],
+  ['searchpath',['searchPath',['../client_8c.html#ab68195a262278b18e5dc84f677ad434d',1,'client.c']]],
   ['semaphore_2ec',['semaphore.c',['../semaphore_8c.html',1,'']]],
   ['semaphore_2eh',['semaphore.h',['../semaphore_8h.html',1,'']]],
+  ['semop',['semOp',['../semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da',1,'semOp(int semid, unsigned short sem_num, short sem_op):&#160;semaphore.c'],['../semaphore_8h.html#a77c6570406059144bb6a8ecf04f481da',1,'semOp(int semid, unsigned short sem_num, short sem_op):&#160;semaphore.c']]],
+  ['semun',['semun',['../unionsemun.html',1,'']]],
   ['server_2ec',['server.c',['../server_8c.html',1,'']]],
   ['shared_5fmemory_2ec',['shared_memory.c',['../shared__memory_8c.html',1,'']]],
   ['shared_5fmemory_2eh',['shared_memory.h',['../shared__memory_8h.html',1,'']]],

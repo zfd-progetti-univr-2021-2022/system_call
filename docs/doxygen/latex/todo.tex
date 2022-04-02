@@ -6,16 +6,21 @@ File \hyperlink{client_8c}{client.c} ]Completare l\textquotesingle{}implementazi
 
 Rimuovere printf di debug o gestirle tramite flag di compilazione. 
 
-Spostare la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} ? (una opzione e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c})  
-\item[\label{todo__todo000004}%
-\Hypertarget{todo__todo000004}%
+Spostare la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} ? (una opzione e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c}) 
+\item[\label{todo__todo000005}%
+\Hypertarget{todo__todo000005}%
 Globale \hyperlink{client_8h_a54b47b58f228d7bc9827d2919687e25a}{operazioni\+\_\+figlio} (char $\ast$file\+Path)]Aggiungere la sincronizzazione con gli altri client
 
 Aggiungere la parte di comunicazione delle quattro parti dei messaggi 
+\item[\label{todo__todo000007}%
+\Hypertarget{todo__todo000007}%
+Classe \hyperlink{unionsemun}{semun} ]Commentare la union semun e i suoi attributi.  
 \item[\label{todo__todo000002}%
 \Hypertarget{todo__todo000002}%
-Globale \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)]Gestire la parte di comunicazione con il server. 
-\item[\label{todo__todo000003}%
-\Hypertarget{todo__todo000003}%
+Globale \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)]Gestire la parte di comunicazione con il server.
+
+Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Altro problema\+: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero\+: \$\$25 + 100 $\ast$ 25 = 2525\$\$ Ovvero 2525 KB, circa 2.\+5 MB. 
+\item[\label{todo__todo000004}%
+\Hypertarget{todo__todo000004}%
 Globale \hyperlink{client_8h_a50b22adcb76198fcd9402a97ff4711bf}{S\+I\+G\+U\+S\+R1\+Signal\+Handler} (int sig)]Gestire la chiusura delle risorse. Potrebbe non essere necessario\+: dipende dalla implementazione delle altre funzioni.
 \end{DoxyRefList}

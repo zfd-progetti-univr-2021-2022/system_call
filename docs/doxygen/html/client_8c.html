@@ -19,6 +19,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
@@ -116,7 +122,7 @@ Grafo delle dipendenze di inclusione per client.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funzioni</h2></td></tr>
 <tr class="memitem:a48d605ff689f470746c858648f0a98c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a> (int sig)</td></tr>
-<tr class="memdesc:a48d605ff689f470746c858648f0a98c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">contiene percorso passato come parametro  <a href="#a48d605ff689f470746c858648f0a98c2">Continua...</a><br /></td></tr>
+<tr class="memdesc:a48d605ff689f470746c858648f0a98c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler del segnale SIGINT.  <a href="#a48d605ff689f470746c858648f0a98c2">Continua...</a><br /></td></tr>
 <tr class="separator:a48d605ff689f470746c858648f0a98c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50b22adcb76198fcd9402a97ff4711bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a50b22adcb76198fcd9402a97ff4711bf">SIGUSR1SignalHandler</a> (int sig)</td></tr>
 <tr class="memdesc:a50b22adcb76198fcd9402a97ff4711bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler del segnale SIGUSR1.  <a href="#a50b22adcb76198fcd9402a97ff4711bf">Continua...</a><br /></td></tr>
@@ -133,15 +139,19 @@ Funzioni</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variabili</h2></td></tr>
 <tr class="memitem:ab68195a262278b18e5dc84f677ad434d"><td class="memItemLeft" align="right" valign="top"><a id="ab68195a262278b18e5dc84f677ad434d"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>searchPath</b> = NULL</td></tr>
+char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ab68195a262278b18e5dc84f677ad434d">searchPath</a> = NULL</td></tr>
+<tr class="memdesc:ab68195a262278b18e5dc84f677ad434d"><td class="mdescLeft">&#160;</td><td class="mdescRight">contiene percorso passato come parametro <br /></td></tr>
 <tr class="separator:ab68195a262278b18e5dc84f677ad434d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene l'implementazione del client. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Da fare:</a></b></dt><dd><p class="startdd">Completare l'implementazione delle funzioni. </p>
 <p>Rimuovere printf di debug o gestirle tramite flag di compilazione. </p>
-<p class="enddd">Spostare la funzione <a class="el" href="client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. ">dividi()</a> ? (una opzione e' metterla in <a class="el" href="files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. ">files.c</a>) </p>
+<p class="enddd">Spostare la funzione <a class="el" href="client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. ">dividi()</a> ? (una opzione e' metterla in <a class="el" href="files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. ">files.c</a>)</p>
 </dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000001">Warnings:</a></b></dt><dd>La specifica non richiede la documentazione. E' richiesta?</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000002">Warnings:</a></b></dt><dd>I percorsi dei file hanno dimensione massima?</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000003">Warnings:</a></b></dt><dd>I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...? </dd></dl>
 </div><h2 class="groupheader">Documentazione delle funzioni</h2>
 <a id="a55586f2b7e9b3620294cf78cda8abdad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55586f2b7e9b3620294cf78cda8abdad">&#9670;&nbsp;</a></span>dividi()</h2>
@@ -201,8 +211,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>searchPath</b> = NU
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph.svg" width="247" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph.svg" width="555" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -261,15 +270,15 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 </div><div class="memdoc">
 
 <p>Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Da fare:</a></b></dt><dd>Aggiungere la sincronizzazione con gli altri client</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Da fare:</a></b></dt><dd>Aggiungere la parte di comunicazione delle quattro parti dei messaggi</dd></dl>
-<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000001">Warnings:</a></b></dt><dd>siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:<ul>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Da fare:</a></b></dt><dd>Aggiungere la sincronizzazione con gli altri client</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Da fare:</a></b></dt><dd>Aggiungere la parte di comunicazione delle quattro parti dei messaggi</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000007">Warnings:</a></b></dt><dd>siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:<ul>
 <li>caratteri per parte: 1 1 0 0</li>
-<li>oppure: 2 0 0 0</li>
+<li>oppure: 2 0 0 0 <br />
+ Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri. <br />
+ Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore</li>
 </ul>
 </dd></dl>
-<p>Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri</p>
-<p>Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">filePath</td><td>Percorso del file che il client deve suddividere e mandare al server. </td></tr>
@@ -279,8 +288,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="280" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="280" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_icgraph.svg" width="448" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -301,13 +314,30 @@ Questo è il grafo delle chiamate per questa funzione:</div>
       </table>
 </div><div class="memdoc">
 
-<p>contiene percorso passato come parametro </p>
 <p>Handler del segnale SIGINT. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Da fare:</a></b></dt><dd>Gestire la parte di comunicazione con il server.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Da fare:</a></b></dt><dd>Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0. Attualmente la dimensione massima occupata dal client e': $$100 file * dim. path + 100 file * dim. pointer$$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte. Altro problema: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero: $$25 + 100 * 25 = 2525$$ Ovvero 2525 KB, circa 2.5 MB.</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000004">Warnings:</a></b></dt><dd>Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send_me si puo' creare il processo figlio per inviare il file. Per fare questo BISOGNA sapere se il numero di file puo' cambiare durante l'esecuzione del programma: se trovo 3 file e dopo un file viene cancellato cosa succede? <br />
+ NOTA: questo problema puo' esserci anche nella situazione attuale...</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000005">Warnings:</a></b></dt><dd>Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Probabilmente prima bisogna attendere il messaggio di fine e poi aspettare che tutti i figlio terminino (prima di liberare la lista dei file e).</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000006">Warnings:</a></b></dt><dd>Il percorso passato al client deve essere assoluto o puo' essere relativo? Se si passa un percorso relativo chdir() fallira' alla seconda esecuzione. <br />
+ SOLUZIONE: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo.</dd></dl>
+<p>Esegue tutte le funzionalita' principali del client.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sig</td><td>Valore intero corrispondente a SIGINT </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="350" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -329,7 +359,7 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 </div><div class="memdoc">
 
 <p>Handler del segnale SIGUSR1. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Da fare:</a></b></dt><dd>Gestire la chiusura delle risorse. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Da fare:</a></b></dt><dd>Gestire la chiusura delle risorse. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni.</dd></dl>
 <p>Termina il processo del client 0.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
@@ -337,6 +367,11 @@ Questo è il grafo delle chiamate per questa funzione:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>

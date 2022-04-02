@@ -1,15 +1,35 @@
-.TH "warning" 3 "Ven 1 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "warning" 3 "Sab 2 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 warningWarnings 
  \- 
+.IP "\fBFile \fBclient\&.c\fP \fP" 1c
+La specifica non richiede la documentazione\&. E' richiesta?
+.PP
+I percorsi dei file hanno dimensione massima?
+.PP
+I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, \&.\&.\&.?  
 .IP "\fBGlobale \fBoperazioni_figlio\fP (char *filePath)\fP" 1c
 siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica\&.\&.\&. Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:
 .IP "\(bu" 2
 caratteri per parte: 1 1 0 0
 .IP "\(bu" 2
-oppure: 2 0 0 0
+oppure: 2 0 0 0 
+.br
+ Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, \&.\&.\&. caratteri\&. 
+.br
+ Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0\&. L'ultimo, come per specifica, e' l'unico di dimensione inferiore 
 .PP
+.IP "\fBGlobale \fBSIGINTSignalHandler\fP (int sig)\fP" 1c
+Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send_me si puo' creare il processo figlio per inviare il file\&. Per fare questo BISOGNA sapere se il numero di file puo' cambiare durante l'esecuzione del programma: se trovo 3 file e dopo un file viene cancellato cosa succede? 
+.br
+ NOTA: questo problema puo' esserci anche nella situazione attuale\&.\&.\&.
+.PP
+Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server\&.\&.\&. Probabilmente prima bisogna attendere il messaggio di fine e poi aspettare che tutti i figlio terminino (prima di liberare la lista dei file e)\&.
+.PP
+Il percorso passato al client deve essere assoluto o puo' essere relativo? Se si passa un percorso relativo chdir() fallira' alla seconda esecuzione\&. 
+.br
+ SOLUZIONE: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo\&.
 .PP
 

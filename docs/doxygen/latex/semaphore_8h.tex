@@ -12,8 +12,40 @@ Questo grafo mostra quali altri file includono direttamente o indirettamente que
 \includegraphics[width=342pt]{semaphore_8h__dep__incl}
 \end{center}
 \end{figure}
+\subsection*{Strutture dati}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{unionsemun}{semun}
+\end{DoxyCompactItemize}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{semaphore_8h_a77c6570406059144bb6a8ecf04f481da}{sem\+Op} (int semid, unsigned short sem\+\_\+num, short sem\+\_\+op)
+\begin{DoxyCompactList}\small\item\em Funzione di supporto per manipolare i valori di un set di semafori. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
 Contiene la definizioni di variabili e funzioni specifiche per la gestione dei S\+E\+M\+A\+F\+O\+RI. 
 
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{semaphore_8h_a77c6570406059144bb6a8ecf04f481da}\label{semaphore_8h_a77c6570406059144bb6a8ecf04f481da}} 
+\index{semaphore.\+h@{semaphore.\+h}!sem\+Op@{sem\+Op}}
+\index{sem\+Op@{sem\+Op}!semaphore.\+h@{semaphore.\+h}}
+\subsubsection{\texorpdfstring{sem\+Op()}{semOp()}}
+{\footnotesize\ttfamily void sem\+Op (\begin{DoxyParamCaption}\item[{int}]{semid,  }\item[{unsigned short}]{sem\+\_\+num,  }\item[{short}]{sem\+\_\+op }\end{DoxyParamCaption})}
+
+
+
+Funzione di supporto per manipolare i valori di un set di semafori. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em semid} & Identificatore del set di semagori \\
+\hline
+{\em sem\+\_\+num} & Indice di un semaforo nel set \\
+\hline
+{\em sem\+\_\+op} & Operazione eseguita sul semaforo sem\+\_\+num \\
+\hline
+\end{DoxyParams}

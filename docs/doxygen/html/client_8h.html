@@ -19,6 +19,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
@@ -177,8 +183,7 @@ Funzioni</h2></td></tr>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a55586f2b7e9b3620294cf78cda8abdad_icgraph.svg" width="247" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a55586f2b7e9b3620294cf78cda8abdad_icgraph.svg" width="555" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -219,6 +224,11 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <dl class="section return"><dt>Restituisce</dt><dd>int Exit code dell'intero programma</dd></dl>
 <p>ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.</p>
 <p>terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC. </p>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
 
 </div>
 </div>
@@ -239,15 +249,15 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 </div><div class="memdoc">
 
 <p>Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Da fare:</a></b></dt><dd>Aggiungere la sincronizzazione con gli altri client</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Da fare:</a></b></dt><dd>Aggiungere la parte di comunicazione delle quattro parti dei messaggi</dd></dl>
-<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000001">Warnings:</a></b></dt><dd>siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:<ul>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Da fare:</a></b></dt><dd>Aggiungere la sincronizzazione con gli altri client</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Da fare:</a></b></dt><dd>Aggiungere la parte di comunicazione delle quattro parti dei messaggi</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000007">Warnings:</a></b></dt><dd>siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:<ul>
 <li>caratteri per parte: 1 1 0 0</li>
-<li>oppure: 2 0 0 0</li>
+<li>oppure: 2 0 0 0 <br />
+ Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri. <br />
+ Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore</li>
 </ul>
 </dd></dl>
-<p>Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri</p>
-<p>Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">filePath</td><td>Percorso del file che il client deve suddividere e mandare al server. </td></tr>
@@ -257,8 +267,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="280" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="280" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_icgraph.svg" width="448" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -281,19 +295,28 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 
 <p>Handler del segnale SIGINT. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Da fare:</a></b></dt><dd>Gestire la parte di comunicazione con il server.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Da fare:</a></b></dt><dd>Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0. Attualmente la dimensione massima occupata dal client e': $$100 file * dim. path + 100 file * dim. pointer$$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte. Altro problema: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero: $$25 + 100 * 25 = 2525$$ Ovvero 2525 KB, circa 2.5 MB.</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000004">Warnings:</a></b></dt><dd>Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send_me si puo' creare il processo figlio per inviare il file. Per fare questo BISOGNA sapere se il numero di file puo' cambiare durante l'esecuzione del programma: se trovo 3 file e dopo un file viene cancellato cosa succede? <br />
+ NOTA: questo problema puo' esserci anche nella situazione attuale...</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000005">Warnings:</a></b></dt><dd>Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Probabilmente prima bisogna attendere il messaggio di fine e poi aspettare che tutti i figlio terminino (prima di liberare la lista dei file e).</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000006">Warnings:</a></b></dt><dd>Il percorso passato al client deve essere assoluto o puo' essere relativo? Se si passa un percorso relativo chdir() fallira' alla seconda esecuzione. <br />
+ SOLUZIONE: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo.</dd></dl>
 <p>Esegue tutte le funzionalita' principali del client.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sig</td><td>Valore intero corrispondente a SIGINT</td></tr>
+    <tr><td class="paramname">sig</td><td>Valore intero corrispondente a SIGINT </td></tr>
   </table>
   </dd>
 </dl>
-<p>Handler del segnale SIGINT. </p>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="350" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -315,7 +338,7 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 </div><div class="memdoc">
 
 <p>Handler del segnale SIGUSR1. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Da fare:</a></b></dt><dd>Gestire la chiusura delle risorse. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Da fare:</a></b></dt><dd>Gestire la chiusura delle risorse. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni.</dd></dl>
 <p>Termina il processo del client 0.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
@@ -323,6 +346,11 @@ Questo è il grafo delle chiamate per questa funzione:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
