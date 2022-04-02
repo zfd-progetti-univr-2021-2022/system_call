@@ -1,0 +1,551 @@
+.TH "md_theory_signals_signals" 3 "Sab 2 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_signals_signalsTeoria: segnali 
+ \- 
+.SS "Introduzione"
+.PP
+Un segnale e' una notifica che indica ad un processo che un certo evento e' avvenuto\&. 
+.PP
+.RS 4
+E quindi puo' essere ricevuto in qualsiasi momento\&. 
+.RE
+.PP
+.PP
+I segnali interrompono il normale flusso del programma e vengono gestiti da una (o piu') funzione specifica ('signal handler')\&. Al termine della esecuzione della funzione il programma inizia ad eseguire la istruzione su cui era stato interrotto in precedenza dal segnale\&.
+.PP
+Un segnale che e' stato generato ma che non e' ancora arrivato al processo si dice pendente ('pending')\&.
+.PP
+Un processo puo' gestire i segnali con un handler di default (che segue dei comportamenti predefiniti), puo' gestirli con un handler personalizzato oppure puo' ignorarli\&. 
+.PP
+.RS 4
+NON e' possibile ignorare i segnali \fCSIGKILL\fP (termina il processo forzatamente) e \fCSIGSTOP\fP (mette in pausa il processo per farne eseguire un altro)\&. 
+.RE
+.PP
+.PP
+.SS "Tipi di segnali"
+.PP
+Segnali che terminano un processo:
+.IP "\(bu" 2
+\fCSIGTERM\fP: indica al processo di terminare in modo sicuro (dopo aver salvato e chiuso tutte le risorse)\&.
+.IP "\(bu" 2
+\fCSIGINT\fP: termina forzatamente un processo\&. 
+.PP
+.RS 4
+E' inviato al processo quando l'utente preme sulla tastiera \fCCtrl+C\fP 
+.RE
+.PP
+
+.IP "\(bu" 2
+\fCSIGQUIT\fP: termina il processo facendogli produrre un file core dump utile per il debugging
+.IP "\(bu" 2
+\fCSIGKILL\fP: termina forzatamente un processo e non puo' essere gestito in nessun modo\&. 
+.PP
+.RS 4
+Non si possono creare handler personalizzati per gestirlo 
+.RE
+.PP
+
+.PP
+.PP
+Segnali che mettono in pausa e fanno ripartire processi:
+.IP "\(bu" 2
+\fCSIGSTOP\fP: ferma/mette in pausa un processo\&. Non puo' essere gestito in nessun modo\&. 
+.PP
+.RS 4
+Non si possono creare handler personalizzati per gestirlo 
+.RE
+.PP
+
+.IP "\(bu" 2
+\fCSIGCONT\fP: fa ripartire un processo in pausa\&.
+.PP
+.PP
+Altri segnali:
+.IP "\(bu" 2
+\fCSIGPIPE\fP: generato da un processo che cerca di scrivere su una PIPE
+.IP "\(bu" 2
+\fCSIGALRM\fP: segnale generato dalla system call alarm\&. La system call fa partire un timer e al suo termine genera il segnale\&.
+.IP "\(bu" 2
+\fCSIGUSR1\fP: e' un segnale utilizzabile dal programmatore per i suoi scopi e che quindi non ha un significato standard\&. 
+.PP
+.RS 4
+Ad esempio puo' essere usato per sincronizzare dei processi\&. 
+.RE
+.PP
+
+.IP "\(bu" 2
+\fCSIGSTOP\fPSIGUSR2```: e' un segnale utilizzabile dal programmatore per i suoi scopi e che quindi non ha un significato standard\&. 
+.PP
+.RS 4
+Ad esempio puo' essere usato per sincronizzare dei processi\&. 
+.RE
+.PP
+
+.PP
+.PP
+.SS "Signal handler"
+.PP
+E' una funzione che viene eseguita quando il processo riceve un certo segnale\&. 
+.PP
+.RS 4
+il kernel si occupa di richiamarla 
+.RE
+.PP
+.PP
+Tutti i signal handler hanno la seguente struttura: 
+.PP
+.nf
+void <nome_funzione>(int sig){
+    // codice gestione segnale/i
+}
+
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fC<nome_funzione>\fP: e' il nome della funzione, non e' importante\&.
+.IP "\(bu" 2
+\fCsig\fP: e' un intero che indica quale tipo di segnale ha fatto eseguire 
+.PP
+.RS 4
+e' utile quando si usa lo stesso handler per gestire piu' tipi di segnali\&. 
+.RE
+.PP
+
+.PP
+.PP
+.RS 4
+personalmente utilizzerei un unico handler per piu' segnali solo se la maggior parte (o tutte) delle operazioni da eseguire sono identiche\&. 
+.RE
+.PP
+.IP "\(bu" 2
+Non ha valori di ritorno
+.PP
+.PP
+Dopo aver eseguito l'handler, il programma prosegue la sua esecuzione da dove era stato interrotto\&.
+.PP
+.SS "Impostare un signal handler personalizzato"
+.PP
+La system call \fCsignal()\fP permette di impostare un signal handler personalizzato: 
+.PP
+.nf
+#include <signal\&.h>
+typedef void (*sighandler_t)(int);
+
+signal(int signum, sighandler_t handler);
+
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCsignum\fP: e' il segnale da gestire con il signal handler 'handler'
+.IP "\(bu" 2
+\fChandler\fP\&. Puo' essere:
+.IP "  \(bu" 4
+l'indirizzo del nuovo signal handler
+.IP "  \(bu" 4
+\fCSIG_DFL\fP: costante che permette di resettare il comportamento di default
+.IP "  \(bu" 4
+\fCSIG_IGN\fP: costante che permette di ignorare il segnale
+.PP
+
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+void sigHandler(int sig) {
+    printf("Ho ricevuto un SIGINT!\n");
+}
+
+
+int main (int argc, char *argv[]) {
+    if (signal(SIGINT, sigHandler) == SIG_ERR) {
+        printf("Non sono riuscito ad impostare il nuovo signal handler!\n");
+        exit(1);
+    }
+}
+
+.fi
+.PP
+.PP
+Per impostare lo stesso signal handler per piu' segnali oppure per impostare signal handler diversi a certi segnali e' sufficiente richiamare \fCsignal()\fP come descritto sopra\&.
+.PP
+Esempio: 
+.PP
+.nf
+// dopo aver definito due signal handler chiamati
+// sigHandlerperSIGINT e sigHandlerperSIGUSR1
+
+// \&.\&.\&.
+
+if (signal(SIGINT, sigHandlerperSIGINT) == SIG_ERR ||
+    signal(SIGUSR1, sigHandlerperSIGUSR1) == SIG_ERR) {
+    printf("Non sono riuscito ad impostare i nuovi signal handler!\n");
+    exit(1);
+}
+
+.fi
+.PP
+.PP
+Per resettare il comportamento di default: 
+.PP
+.nf
+if (signal(SIGINT, SIG_DFL) == SIG_ERR){
+    printf("Non sono riuscito a resettare il comportamento da eseguire quando ricevero' il segnale SIGINT\n");
+    exit(1);
+}
+
+.fi
+.PP
+.PP
+Per ignorare un segnale: 
+.PP
+.nf
+if (signal(SIGINT, SIG_IGN) == SIG_ERR){
+    printf("Non sono riuscito a memorizzare il fatto che dovro' ignorare il segnale SIGINT\n");
+    exit(1);
+}
+
+.fi
+.PP
+.PP
+.SS "Informazioni utili"
+.PP
+.IP "\(bu" 2
+Non e' possibile bloccare i segnali \fCSIGKILL\fP e \fCSIGSTOP\fP
+.IP "\(bu" 2
+Non e' possibile prevedere quando arrivera' un segnale
+.IP "\(bu" 2
+Il flusso di esecuzione del programma viene interrotto quando viene ricevuto un segnale non bloccato per eseguire il signal handler\&. Quando il signal handler termina il programma torna ad eseguire il flusso 'originale'\&.
+.IP "\(bu" 2
+Se arrivano piu' segnali di un tipo ignorato nel momento in cui si sblocca il segnale arrivera' al processo una volta sola\&.
+.IP "\(bu" 2
+Anche il signal handler puo' essere interrotto da un segnale
+.IP "\(bu" 2
+Se un processo padre e' configurato per gestire in un certo modo dei segnali, i figli erediteranno quella configurazione\&.
+.PP
+.PP
+.SS "Attendere un segnale per un tempo indefinito"
+.PP
+Richiamando \fCpause()\fP si sospende l'esecuzione di un processo che riprendera' solo quando verra' ricevuto un segnale\&.
+.PP
+Quel segnale fara' eseguire il signal handler o terminera' il processo\&.
+.PP
+.PP
+.nf
+#include <unistd\&.h>
+
+int pause();
+.fi
+.PP
+.PP
+La funzione restituisce sempre -1 e imposta errno a EINTR\&.
+.PP
+.SS "Attendere un segnale per una certa quantita' di tempo"
+.PP
+Richiamando \fCsleep()\fP e' possibile sospendere il processo che riprendera' solo quando verra' ricevuto un segnale oppure quando sara' scaduto il tempo\&.
+.PP
+.PP
+.nf
+#include <unistd\&.h>
+
+unsigned int sleep(unsigned int seconds);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCseconds\fP: numero di secondi massimo per cui sospendere il processo
+.IP "\(bu" 2
+Restituisce:
+.IP "  \(bu" 4
+0 se il tempo di sospensione e' scaduto
+.IP "  \(bu" 4
+un numero maggiore di 0 se il processo viene svegliato da un segnale\&.
+.PP
+Quel numero indica quanti secondi mancavano per far scadere il tempo\&.
+.PP
+In termini matematici: $$seconds - tempo \\ sospensione$$
+.PP
+
+.PP
+.PP
+Esempio:
+.PP
+.PP
+.nf
+void sigHandler(int sig) {
+    printf("\nMi hai svegliato! volevo dormire ancora\&.\&.\&.\n");
+}
+
+int main (int argc, char *argv[]) {
+    if (signal(SIGINT, sigHandler) == SIG_ERR) {
+        printf("Non sono riuscito ad impostare il nuovo signal handler\n");
+        exit(1);
+    }
+
+    int time = 5;
+    printf("Dormo per %d secondi!\n", time);
+
+    int rem_time = sleep(time); // mi sospendo per al massimo 5 secondi
+
+    if (rem_time == 0){
+        printf("Ho dormito per tutti i %d secondi senza interruzioni\n", time);
+    }
+    else {
+        printf("Volevo dormire altri %d secondi\&.\&.\&.\n", rem_time);
+    }
+
+    return 0;
+}
+.fi
+.PP
+.PP
+.SS "Mandare un segnale ad un altro processo"
+.PP
+La system call usata per mandare un segnale e':
+.PP
+.PP
+.nf
+#include <signal\&.h>
+
+int kill(pid_t pid, int sig);
+.fi
+.PP
+ 
+.PP
+.RS 4
+Contrariamente a quello che fa pensare il nome, questa system call puo' mandare tutti i segnali: non solo SIGKILL! 
+.RE
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCpid\fP: in genere e' il PID del processo a cui mandare il segnale\&.
+.PP
+In realta' puo' essere:
+.IP "  \(bu" 4
+maggiore di zero: e' il PID del processo a cui mandare il segnale
+.IP "  \(bu" 4
+uguale a zero: il segnale e' mandato a tutti i processi appartenenti allo stesso gruppo del processo che manda il messaggio, incluso se stesso > E' un broadcast che comprende il mittente stesso
+.IP "  \(bu" 4
+uguale a -1: il segnale viene mandato a tutti i processi a cui il mittente ha i permessi di mandare messaggi\&. > Ad esempio non puo' mandarlo a init e a se stesso
+.IP "  \(bu" 4
+minore di -1: il segnale e' mandato a tutti i processi che appartengono al gruppo con pid uguale al valore assoluto di \fCpid\fP
+.PP
+
+.IP "\(bu" 2
+\fCsig\fP: e' il segnale da mandare al processo
+.IP "\(bu" 2
+Restituisce: -1 in caso di errore, 0 altrimenti
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+int main (int argc, char *argv[]) {
+    pid_t child = fork();
+    if (child == -1) {
+        errExit("fork");
+    }
+    else if (child == 0) {
+        // il processo figlio e' bloccato qui
+        while(1);
+    }
+    else {
+        // processo padre
+        sleep(10); // aspetta 10 secondi
+        kill(child, SIGKILL); // manda segnale SIGKILL al processo figlio
+    }
+    return 0;
+}
+
+.fi
+.PP
+.PP
+.SS "Mandare un segnale a se stessi dopo una certa quantita' di tempo"
+.PP
+La system call alarm permette di impostare un timer dopo cui si ricevera' una 'notifica di promemoria':
+.PP
+.PP
+.nf
+#include <signal\&.h>
+
+unsigned int alarm(unsigned int seconds);
+.fi
+.PP
+ 
+.PP
+.RS 4
+Non puo' mai fallire\&. 
+.RE
+.PP
+.PP
+Dopo \fCseconds\fP secondi il timer scadra' e il processo ricevera' la notifica\&.
+.PP
+La notifica e' un segnale chiamato \fCSIGALRM\fP\&.
+.PP
+Restituisce:
+.IP "\(bu" 2
+il numero di secondi rimanente da un timer impostato precedentemente
+.IP "\(bu" 2
+0 se e' stato impostato un unico timer
+.PP
+.PP
+Impostare un timer con \fCalarm\fP sovrascrive i timer impostati precedentemente\&.
+.PP
+.SS "Filtrare segnali"
+.PP
+Esistono diverse funzioni che permettono di creare e impostare oppure di eliminare filtri che servono per bloccare (o sbloccare) determinati segnali\&. 
+.PP
+.RS 4
+In gergo tecnico questi filtri vengono chiamati 'maschera' 
+.RE
+.PP
+.PP
+Per prima cosa bisogna creare un insieme di segnali da bloccare (o sbloccare)\&. 
+.PP
+.nf
+#include <signal\&.h>
+typedef unsigned long sigset_t;
+
+int sigemptyset(sigset_t *set);
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Restituisce 0 in caso di successo o -1 in caso di errore 
+.RE
+.PP
+Inizializza il filtro \fCset\fP per essere vuoto\&.
+.PP
+.PP
+.nf
+#include <signal\&.h>
+typedef unsigned long sigset_t;
+
+int sigfillset(sigset_t *set);
+.fi
+.PP
+ 
+.PP
+.RS 4
+Restituisce 0 in caso di successo o -1 in caso di errore 
+.RE
+.PP
+Inizializza il filtro \fCset\fP per contenere tutti i segnali\&.
+.PP
+Poi bisogna aggiungere o rimuovere segnali dal filtro: 
+.PP
+.nf
+#include <signal\&.h>
+
+int sigaddset(sigset_t *set, int sig);
+
+.fi
+.PP
+ Aggiunge all'insieme \fCset\fP il segnale \fCsig\fP\&.
+.PP
+.PP
+.nf
+#include <signal\&.h>
+
+int sigdelset(sigset_t *set, int sig);
+.fi
+.PP
+ Elimina dall'insieme \fCset\fP il segnale \fCsig\fP\&.
+.PP
+Se si vuole si puo' verificare se un segnale e' contenuto nel filtro: 
+.PP
+.nf
+#include <signal\&.h>
+
+int sigismember(const sigset_t *set, int sig);
+
+.fi
+.PP
+ Restituisce 1 se il segnale \fCsig\fP e' contenuto nell'insieme \fCset\fP\&.
+.PP
+Dopo aver creato il filtro adatto per le nostre esigenze bisogna impostarlo con: 
+.PP
+.nf
+#include <signal\&.h>
+
+int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Restituisce 0 in caso di successo o -1 in caso di errore 
+.RE
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fChow\fP indica come usare il filtro\&.
+.PP
+Puo' essere:
+.IP "  \(bu" 4
+\fCSIG_BLOCK\fP: continua a bloccare i segnali gia' bloccati e in piu' blocca quelli contenuti in \fCset\fP
+.IP "  \(bu" 4
+\fCSIG_UNBLOCK\fP: sblocca i segnali in \fCset\fP\&. > Se i segnali in \fCset\fP non sono bloccati non succede niente: non ci sono errori\&.
+.IP "  \(bu" 4
+\fCSIG_SETMASK\fP: imposta come segnali bloccati SOLO i segnali contenuti in \fCset\fP\&. > Quindi se \fCset\fP NON contiene segnali bloccati precedentemente, questi verranno sbloccati
+.PP
+
+.IP "\(bu" 2
+\fCset\fP:
+.IP "  \(bu" 4
+filtro di segnali da bloccare/sbloccare
+.IP "  \(bu" 4
+NULL se si desidera recuperare la maschera precedente senza modificarla > \fColdset\fP deve essere un puntatore ad una variabile in cui memorizzarla\&. \fChow\fP viene ignorato\&.
+.PP
+
+.IP "\(bu" 2
+\fColdset\fP:
+.IP "  \(bu" 4
+se e' NULL la maschera precedente viene persa
+.IP "  \(bu" 4
+se e' una variabile che puo' ospitare una maschera, questa memorizzera' la maschera precedente
+.PP
+
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+int main (int argc, char *argv[]) {
+    sigset_t mySet, prevSet;
+
+    // inizializza mySet con tutti i segnali
+    sigfillset(&mySet);
+
+    // rimuovi SIGTERM e SIGINT da mySet
+    sigdelset(&mySet, SIGTERM);
+    sigdelset(&mySet, SIGINT);
+
+    // blocca tutti i segnali tranne SIGTERM e SIGINT
+    sigprocmask(SIG_SETMASK, &mySet, &prevSet);
+
+    // il codice qui puo' solo essere interrotto da SIGTERM, SIGINT
+    // e dai segnali non bloccabili (SIGKILL e SIGSTOP)
+
+    // reset the signal mask of the process
+    sigprocmask(SIG_SETMASK, &prevSet, NULL);
+    // if SIGTERM is pending, only at this point it is
+    // delivered to the process
+    return 0;
+}
+
+.fi
+.PP
+ 

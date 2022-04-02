@@ -1,0 +1,424 @@
+\subsection*{Introduzione}
+
+Un segnale e\textquotesingle{} una notifica che indica ad un processo che un certo evento e\textquotesingle{} avvenuto. \begin{quote}
+E quindi puo\textquotesingle{} essere ricevuto in qualsiasi momento. \end{quote}
+
+
+I segnali interrompono il normale flusso del programma e vengono gestiti da una (o piu\textquotesingle{}) funzione specifica (\char`\"{}signal handler\char`\"{}). Al termine della esecuzione della funzione il programma inizia ad eseguire la istruzione su cui era stato interrotto in precedenza dal segnale.
+
+Un segnale che e\textquotesingle{} stato generato ma che non e\textquotesingle{} ancora arrivato al processo si dice pendente (\char`\"{}pending\char`\"{}).
+
+Un processo puo\textquotesingle{} gestire i segnali con un handler di default (che segue dei comportamenti predefiniti), puo\textquotesingle{} gestirli con un handler personalizzato oppure puo\textquotesingle{} ignorarli. \begin{quote}
+N\+ON e\textquotesingle{} possibile ignorare i segnali {\ttfamily S\+I\+G\+K\+I\+LL} (termina il processo forzatamente) e {\ttfamily S\+I\+G\+S\+T\+OP} (mette in pausa il processo per farne eseguire un altro). \end{quote}
+
+
+\subsection*{Tipi di segnali}
+
+Segnali che terminano un processo\+:
+\begin{DoxyItemize}
+\item {\ttfamily S\+I\+G\+T\+E\+RM}\+: indica al processo di terminare in modo sicuro (dopo aver salvato e chiuso tutte le risorse).
+\item {\ttfamily S\+I\+G\+I\+NT}\+: termina forzatamente un processo. \begin{quote}
+E\textquotesingle{} inviato al processo quando l\textquotesingle{}utente preme sulla tastiera {\ttfamily Ctrl+C} \end{quote}
+
+\item {\ttfamily S\+I\+G\+Q\+U\+IT}\+: termina il processo facendogli produrre un file core dump utile per il debugging
+\item {\ttfamily S\+I\+G\+K\+I\+LL}\+: termina forzatamente un processo e non puo\textquotesingle{} essere gestito in nessun modo. \begin{quote}
+Non si possono creare handler personalizzati per gestirlo \end{quote}
+
+\end{DoxyItemize}
+
+Segnali che mettono in pausa e fanno ripartire processi\+:
+\begin{DoxyItemize}
+\item {\ttfamily S\+I\+G\+S\+T\+OP}\+: ferma/mette in pausa un processo. Non puo\textquotesingle{} essere gestito in nessun modo. \begin{quote}
+Non si possono creare handler personalizzati per gestirlo \end{quote}
+
+\item {\ttfamily S\+I\+G\+C\+O\+NT}\+: fa ripartire un processo in pausa.
+\end{DoxyItemize}
+
+Altri segnali\+:
+\begin{DoxyItemize}
+\item {\ttfamily S\+I\+G\+P\+I\+PE}\+: generato da un processo che cerca di scrivere su una P\+I\+PE
+\item {\ttfamily S\+I\+G\+A\+L\+RM}\+: segnale generato dalla system call alarm. La system call fa partire un timer e al suo termine genera il segnale.
+\item {\ttfamily S\+I\+G\+U\+S\+R1}\+: e\textquotesingle{} un segnale utilizzabile dal programmatore per i suoi scopi e che quindi non ha un significato standard. \begin{quote}
+Ad esempio puo\textquotesingle{} essere usato per sincronizzare dei processi. \end{quote}
+
+\item {\ttfamily S\+I\+G\+S\+T\+OP}S\+I\+G\+U\+S\+R2```\+: e\textquotesingle{} un segnale utilizzabile dal programmatore per i suoi scopi e che quindi non ha un significato standard. \begin{quote}
+Ad esempio puo\textquotesingle{} essere usato per sincronizzare dei processi. \end{quote}
+
+\end{DoxyItemize}
+
+\subsection*{Signal handler}
+
+E\textquotesingle{} una funzione che viene eseguita quando il processo riceve un certo segnale. \begin{quote}
+il kernel si occupa di richiamarla \end{quote}
+
+
+Tutti i signal handler hanno la seguente struttura\+: 
+\begin{DoxyCode}
+void <nome\_funzione>(\textcolor{keywordtype}{int} sig)\{
+    \textcolor{comment}{// codice gestione segnale/i}
+\}
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily $<$nome\+\_\+funzione$>$}\+: e\textquotesingle{} il nome della funzione, non e\textquotesingle{} importante.
+\item {\ttfamily sig}\+: e\textquotesingle{} un intero che indica quale tipo di segnale ha fatto eseguire \begin{quote}
+e\textquotesingle{} utile quando si usa lo stesso handler per gestire piu\textquotesingle{} tipi di segnali. \end{quote}
+
+\end{DoxyItemize}
+
+\begin{quote}
+personalmente utilizzerei un unico handler per piu\textquotesingle{} segnali solo se la maggior parte (o tutte) delle operazioni da eseguire sono identiche. \end{quote}
+
+\begin{DoxyItemize}
+\item Non ha valori di ritorno
+\end{DoxyItemize}
+
+Dopo aver eseguito l\textquotesingle{}handler, il programma prosegue la sua esecuzione da dove era stato interrotto.
+
+\subsection*{Impostare un signal handler personalizzato}
+
+La system call {\ttfamily signal()} permette di impostare un signal handler personalizzato\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+\textcolor{keyword}{typedef} void (*sighandler\_t)(int);
+
+signal(\textcolor{keywordtype}{int} signum, sighandler\_t handler);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily signum}\+: e\textquotesingle{} il segnale da gestire con il signal handler \char`\"{}handler\char`\"{}
+\item {\ttfamily handler}. Puo\textquotesingle{} essere\+:
+\begin{DoxyItemize}
+\item l\textquotesingle{}indirizzo del nuovo signal handler
+\item {\ttfamily S\+I\+G\+\_\+\+D\+FL}\+: costante che permette di resettare il comportamento di default
+\item {\ttfamily S\+I\+G\+\_\+\+I\+GN}\+: costante che permette di ignorare il segnale
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} sigHandler(\textcolor{keywordtype}{int} sig) \{
+    printf(\textcolor{stringliteral}{"Ho ricevuto un SIGINT!\(\backslash\)n"});
+\}
+
+
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+    \textcolor{keywordflow}{if} (signal(SIGINT, sigHandler) == SIG\_ERR) \{
+        printf(\textcolor{stringliteral}{"Non sono riuscito ad impostare il nuovo signal handler!\(\backslash\)n"});
+        exit(1);
+    \}
+\}
+\end{DoxyCode}
+
+
+Per impostare lo stesso signal handler per piu\textquotesingle{} segnali oppure per impostare signal handler diversi a certi segnali e\textquotesingle{} sufficiente richiamare {\ttfamily signal()} come descritto sopra.
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{comment}{// dopo aver definito due signal handler chiamati}
+\textcolor{comment}{// sigHandlerperSIGINT e sigHandlerperSIGUSR1}
+
+\textcolor{comment}{// ...}
+
+\textcolor{keywordflow}{if} (signal(SIGINT, sigHandlerperSIGINT) == SIG\_ERR ||
+    signal(SIGUSR1, sigHandlerperSIGUSR1) == SIG\_ERR) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito ad impostare i nuovi signal handler!\(\backslash\)n"});
+    exit(1);
+\}
+\end{DoxyCode}
+
+
+Per resettare il comportamento di default\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (signal(SIGINT, SIG\_DFL) == SIG\_ERR)\{
+    printf(\textcolor{stringliteral}{"Non sono riuscito a resettare il comportamento da eseguire quando ricevero' il segnale SIGINT\(\backslash\)n
+      "});
+    exit(1);
+\}
+\end{DoxyCode}
+
+
+Per ignorare un segnale\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (signal(SIGINT, SIG\_IGN) == SIG\_ERR)\{
+    printf(\textcolor{stringliteral}{"Non sono riuscito a memorizzare il fatto che dovro' ignorare il segnale SIGINT\(\backslash\)n"});
+    exit(1);
+\}
+\end{DoxyCode}
+
+
+\subsection*{Informazioni utili}
+
+
+\begin{DoxyItemize}
+\item Non e\textquotesingle{} possibile bloccare i segnali {\ttfamily S\+I\+G\+K\+I\+LL} e {\ttfamily S\+I\+G\+S\+T\+OP}
+\item Non e\textquotesingle{} possibile prevedere quando arrivera\textquotesingle{} un segnale
+\item Il flusso di esecuzione del programma viene interrotto quando viene ricevuto un segnale non bloccato per eseguire il signal handler. Quando il signal handler termina il programma torna ad eseguire il flusso \char`\"{}originale\char`\"{}.
+\item Se arrivano piu\textquotesingle{} segnali di un tipo ignorato nel momento in cui si sblocca il segnale arrivera\textquotesingle{} al processo una volta sola.
+\item Anche il signal handler puo\textquotesingle{} essere interrotto da un segnale
+\item Se un processo padre e\textquotesingle{} configurato per gestire in un certo modo dei segnali, i figli erediteranno quella configurazione.
+\end{DoxyItemize}
+
+\subsection*{Attendere un segnale per un tempo indefinito}
+
+Richiamando {\ttfamily pause()} si sospende l\textquotesingle{}esecuzione di un processo che riprendera\textquotesingle{} solo quando verra\textquotesingle{} ricevuto un segnale.
+
+Quel segnale fara\textquotesingle{} eseguire il signal handler o terminera\textquotesingle{} il processo.
+
+
+\begin{DoxyCode}
+#include <unistd.h>
+
+int pause();
+\end{DoxyCode}
+
+
+La funzione restituisce sempre -\/1 e imposta errno a E\+I\+N\+TR.
+
+\subsection*{Attendere un segnale per una certa quantita\textquotesingle{} di tempo}
+
+Richiamando {\ttfamily sleep()} e\textquotesingle{} possibile sospendere il processo che riprendera\textquotesingle{} solo quando verra\textquotesingle{} ricevuto un segnale oppure quando sara\textquotesingle{} scaduto il tempo.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <unistd.h>}
+
+\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sleep(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} seconds);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily seconds}\+: numero di secondi massimo per cui sospendere il processo
+\item Restituisce\+:
+\begin{DoxyItemize}
+\item 0 se il tempo di sospensione e\textquotesingle{} scaduto
+\item un numero maggiore di 0 se il processo viene svegliato da un segnale.
+
+Quel numero indica quanti secondi mancavano per far scadere il tempo.
+
+In termini matematici\+: \$\$seconds -\/ tempo \textbackslash{} sospensione\$\$
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Esempio\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} sigHandler(\textcolor{keywordtype}{int} sig) \{
+    printf(\textcolor{stringliteral}{"\(\backslash\)nMi hai svegliato! volevo dormire ancora...\(\backslash\)n"});
+\}
+
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+    \textcolor{keywordflow}{if} (signal(SIGINT, sigHandler) == SIG\_ERR) \{
+        printf(\textcolor{stringliteral}{"Non sono riuscito ad impostare il nuovo signal handler\(\backslash\)n"});
+        exit(1);
+    \}
+
+    \textcolor{keywordtype}{int} time = 5;
+    printf(\textcolor{stringliteral}{"Dormo per %d secondi!\(\backslash\)n"}, time);
+
+    \textcolor{keywordtype}{int} rem\_time = sleep(time); \textcolor{comment}{// mi sospendo per al massimo 5 secondi}
+
+    \textcolor{keywordflow}{if} (rem\_time == 0)\{
+        printf(\textcolor{stringliteral}{"Ho dormito per tutti i %d secondi senza interruzioni\(\backslash\)n"}, time);
+    \}
+    \textcolor{keywordflow}{else} \{
+        printf(\textcolor{stringliteral}{"Volevo dormire altri %d secondi...\(\backslash\)n"}, rem\_time);
+    \}
+
+    \textcolor{keywordflow}{return} 0;
+\}
+\end{DoxyCode}
+
+
+\subsection*{Mandare un segnale ad un altro processo}
+
+La system call usata per mandare un segnale e\textquotesingle{}\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+
+\textcolor{keywordtype}{int} kill(pid\_t pid, \textcolor{keywordtype}{int} sig);
+\end{DoxyCode}
+ \begin{quote}
+Contrariamente a quello che fa pensare il nome, questa system call puo\textquotesingle{} mandare tutti i segnali\+: non solo S\+I\+G\+K\+I\+L\+L! \end{quote}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily pid}\+: in genere e\textquotesingle{} il P\+ID del processo a cui mandare il segnale.
+
+In realta\textquotesingle{} puo\textquotesingle{} essere\+:
+\begin{DoxyItemize}
+\item maggiore di zero\+: e\textquotesingle{} il P\+ID del processo a cui mandare il segnale
+\item uguale a zero\+: il segnale e\textquotesingle{} mandato a tutti i processi appartenenti allo stesso gruppo del processo che manda il messaggio, incluso se stesso $>$ E\textquotesingle{} un broadcast che comprende il mittente stesso
+\item uguale a -\/1\+: il segnale viene mandato a tutti i processi a cui il mittente ha i permessi di mandare messaggi. $>$ Ad esempio non puo\textquotesingle{} mandarlo a init e a se stesso
+\item minore di -\/1\+: il segnale e\textquotesingle{} mandato a tutti i processi che appartengono al gruppo con pid uguale al valore assoluto di {\ttfamily pid}
+\end{DoxyItemize}
+\item {\ttfamily sig}\+: e\textquotesingle{} il segnale da mandare al processo
+\item Restituisce\+: -\/1 in caso di errore, 0 altrimenti
+\end{DoxyItemize}
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+    pid\_t child = fork();
+    \textcolor{keywordflow}{if} (child == -1) \{
+        errExit(\textcolor{stringliteral}{"fork"});
+    \}
+    \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (child == 0) \{
+        \textcolor{comment}{// il processo figlio e' bloccato qui}
+        \textcolor{keywordflow}{while}(1);
+    \}
+    \textcolor{keywordflow}{else} \{
+        \textcolor{comment}{// processo padre}
+        sleep(10); \textcolor{comment}{// aspetta 10 secondi}
+        kill(child, SIGKILL); \textcolor{comment}{// manda segnale SIGKILL al processo figlio}
+    \}
+    \textcolor{keywordflow}{return} 0;
+\}
+\end{DoxyCode}
+
+
+\subsection*{Mandare un segnale a se stessi dopo una certa quantita\textquotesingle{} di tempo}
+
+La system call alarm permette di impostare un timer dopo cui si ricevera\textquotesingle{} una \char`\"{}notifica di promemoria\char`\"{}\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+
+\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} alarm(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} seconds);
+\end{DoxyCode}
+ \begin{quote}
+Non puo\textquotesingle{} mai fallire. \end{quote}
+
+
+Dopo {\ttfamily seconds} secondi il timer scadra\textquotesingle{} e il processo ricevera\textquotesingle{} la notifica.
+
+La notifica e\textquotesingle{} un segnale chiamato {\ttfamily S\+I\+G\+A\+L\+RM}.
+
+Restituisce\+:
+\begin{DoxyItemize}
+\item il numero di secondi rimanente da un timer impostato precedentemente
+\item 0 se e\textquotesingle{} stato impostato un unico timer
+\end{DoxyItemize}
+
+Impostare un timer con {\ttfamily alarm} sovrascrive i timer impostati precedentemente.
+
+\subsection*{Filtrare segnali}
+
+Esistono diverse funzioni che permettono di creare e impostare oppure di eliminare filtri che servono per bloccare (o sbloccare) determinati segnali. \begin{quote}
+In gergo tecnico questi filtri vengono chiamati \char`\"{}maschera\char`\"{} \end{quote}
+
+
+Per prima cosa bisogna creare un insieme di segnali da bloccare (o sbloccare). 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+\textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} sigset\_t;
+
+\textcolor{keywordtype}{int} sigemptyset(sigset\_t *\textcolor{keyword}{set});
+\end{DoxyCode}
+ \begin{quote}
+Restituisce 0 in caso di successo o -\/1 in caso di errore \end{quote}
+Inizializza il filtro {\ttfamily set} per essere vuoto.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+\textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} sigset\_t;
+
+\textcolor{keywordtype}{int} sigfillset(sigset\_t *\textcolor{keyword}{set});
+\end{DoxyCode}
+ \begin{quote}
+Restituisce 0 in caso di successo o -\/1 in caso di errore \end{quote}
+Inizializza il filtro {\ttfamily set} per contenere tutti i segnali.
+
+Poi bisogna aggiungere o rimuovere segnali dal filtro\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+
+\textcolor{keywordtype}{int} sigaddset(sigset\_t *\textcolor{keyword}{set}, \textcolor{keywordtype}{int} sig);
+\end{DoxyCode}
+ Aggiunge all\textquotesingle{}insieme {\ttfamily set} il segnale {\ttfamily sig}.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+
+\textcolor{keywordtype}{int} sigdelset(sigset\_t *\textcolor{keyword}{set}, \textcolor{keywordtype}{int} sig);
+\end{DoxyCode}
+ Elimina dall\textquotesingle{}insieme {\ttfamily set} il segnale {\ttfamily sig}.
+
+Se si vuole si puo\textquotesingle{} verificare se un segnale e\textquotesingle{} contenuto nel filtro\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+
+\textcolor{keywordtype}{int} sigismember(\textcolor{keyword}{const} sigset\_t *\textcolor{keyword}{set}, \textcolor{keywordtype}{int} sig);
+\end{DoxyCode}
+ Restituisce 1 se il segnale {\ttfamily sig} e\textquotesingle{} contenuto nell\textquotesingle{}insieme {\ttfamily set}.
+
+Dopo aver creato il filtro adatto per le nostre esigenze bisogna impostarlo con\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <signal.h>}
+
+\textcolor{keywordtype}{int} sigprocmask(\textcolor{keywordtype}{int} how, \textcolor{keyword}{const} sigset\_t *\textcolor{keyword}{set}, sigset\_t *oldset);
+\end{DoxyCode}
+ \begin{quote}
+Restituisce 0 in caso di successo o -\/1 in caso di errore \end{quote}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily how} indica come usare il filtro.
+
+Puo\textquotesingle{} essere\+:
+\begin{DoxyItemize}
+\item {\ttfamily S\+I\+G\+\_\+\+B\+L\+O\+CK}\+: continua a bloccare i segnali gia\textquotesingle{} bloccati e in piu\textquotesingle{} blocca quelli contenuti in {\ttfamily set}
+\item {\ttfamily S\+I\+G\+\_\+\+U\+N\+B\+L\+O\+CK}\+: sblocca i segnali in {\ttfamily set}. $>$ Se i segnali in {\ttfamily set} non sono bloccati non succede niente\+: non ci sono errori.
+\item {\ttfamily S\+I\+G\+\_\+\+S\+E\+T\+M\+A\+SK}\+: imposta come segnali bloccati S\+O\+LO i segnali contenuti in {\ttfamily set}. $>$ Quindi se {\ttfamily set} N\+ON contiene segnali bloccati precedentemente, questi verranno sbloccati
+\end{DoxyItemize}
+\item {\ttfamily set}\+:
+\begin{DoxyItemize}
+\item filtro di segnali da bloccare/sbloccare
+\item N\+U\+LL se si desidera recuperare la maschera precedente senza modificarla $>$ {\ttfamily oldset} deve essere un puntatore ad una variabile in cui memorizzarla. {\ttfamily how} viene ignorato.
+\end{DoxyItemize}
+\item {\ttfamily oldset}\+:
+\begin{DoxyItemize}
+\item se e\textquotesingle{} N\+U\+LL la maschera precedente viene persa
+\item se e\textquotesingle{} una variabile che puo\textquotesingle{} ospitare una maschera, questa memorizzera\textquotesingle{} la maschera precedente
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+    sigset\_t mySet, prevSet;
+
+    \textcolor{comment}{// inizializza mySet con tutti i segnali}
+    sigfillset(&mySet);
+
+    \textcolor{comment}{// rimuovi SIGTERM e SIGINT da mySet}
+    sigdelset(&mySet, SIGTERM);
+    sigdelset(&mySet, SIGINT);
+
+    \textcolor{comment}{// blocca tutti i segnali tranne SIGTERM e SIGINT}
+    sigprocmask(SIG\_SETMASK, &mySet, &prevSet);
+
+    \textcolor{comment}{// il codice qui puo' solo essere interrotto da SIGTERM, SIGINT}
+    \textcolor{comment}{// e dai segnali non bloccabili (SIGKILL e SIGSTOP)}
+
+    \textcolor{comment}{// reset the signal mask of the process}
+    sigprocmask(SIG\_SETMASK, &prevSet, NULL);
+    \textcolor{comment}{// if SIGTERM is pending, only at this point it is}
+    \textcolor{comment}{// delivered to the process}
+    \textcolor{keywordflow}{return} 0;
+\}
+\end{DoxyCode}
+ 

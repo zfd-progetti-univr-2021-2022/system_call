@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: segnali</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_signals_signals.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: segnali </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>Introduzione</h2>
+<p>Un segnale e' una notifica che indica ad un processo che un certo evento e' avvenuto. </p><blockquote class="doxtable">
+<p>E quindi puo' essere ricevuto in qualsiasi momento. </p>
+</blockquote>
+<p>I segnali interrompono il normale flusso del programma e vengono gestiti da una (o piu') funzione specifica ("signal handler"). Al termine della esecuzione della funzione il programma inizia ad eseguire la istruzione su cui era stato interrotto in precedenza dal segnale.</p>
+<p>Un segnale che e' stato generato ma che non e' ancora arrivato al processo si dice pendente ("pending").</p>
+<p>Un processo puo' gestire i segnali con un handler di default (che segue dei comportamenti predefiniti), puo' gestirli con un handler personalizzato oppure puo' ignorarli. </p><blockquote class="doxtable">
+<p>NON e' possibile ignorare i segnali <code>SIGKILL</code> (termina il processo forzatamente) e <code>SIGSTOP</code> (mette in pausa il processo per farne eseguire un altro). </p>
+</blockquote>
+<h2>Tipi di segnali</h2>
+<p>Segnali che terminano un processo:</p><ul>
+<li><code>SIGTERM</code>: indica al processo di terminare in modo sicuro (dopo aver salvato e chiuso tutte le risorse).</li>
+<li><code>SIGINT</code>: termina forzatamente un processo. <blockquote class="doxtable">
+<p>E' inviato al processo quando l'utente preme sulla tastiera <code>Ctrl+C</code> </p>
+</blockquote>
+</li>
+<li><code>SIGQUIT</code>: termina il processo facendogli produrre un file core dump utile per il debugging</li>
+<li><code>SIGKILL</code>: termina forzatamente un processo e non puo' essere gestito in nessun modo. <blockquote class="doxtable">
+<p>Non si possono creare handler personalizzati per gestirlo </p>
+</blockquote>
+</li>
+</ul>
+<p>Segnali che mettono in pausa e fanno ripartire processi:</p><ul>
+<li><code>SIGSTOP</code>: ferma/mette in pausa un processo. Non puo' essere gestito in nessun modo. <blockquote class="doxtable">
+<p>Non si possono creare handler personalizzati per gestirlo </p>
+</blockquote>
+</li>
+<li><code>SIGCONT</code>: fa ripartire un processo in pausa.</li>
+</ul>
+<p>Altri segnali:</p><ul>
+<li><code>SIGPIPE</code>: generato da un processo che cerca di scrivere su una PIPE</li>
+<li><code>SIGALRM</code>: segnale generato dalla system call alarm. La system call fa partire un timer e al suo termine genera il segnale.</li>
+<li><code>SIGUSR1</code>: e' un segnale utilizzabile dal programmatore per i suoi scopi e che quindi non ha un significato standard. <blockquote class="doxtable">
+<p>Ad esempio puo' essere usato per sincronizzare dei processi. </p>
+</blockquote>
+</li>
+<li><code>SIGSTOP</code>SIGUSR2```: e' un segnale utilizzabile dal programmatore per i suoi scopi e che quindi non ha un significato standard. <blockquote class="doxtable">
+<p>Ad esempio puo' essere usato per sincronizzare dei processi. </p>
+</blockquote>
+</li>
+</ul>
+<h2>Signal handler</h2>
+<p>E' una funzione che viene eseguita quando il processo riceve un certo segnale. </p><blockquote class="doxtable">
+<p>il kernel si occupa di richiamarla </p>
+</blockquote>
+<p>Tutti i signal handler hanno la seguente struttura: </p><div class="fragment"><div class="line">void &lt;nome_funzione&gt;(<span class="keywordtype">int</span> sig){</div><div class="line">    <span class="comment">// codice gestione segnale/i</span></div><div class="line">}</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>&lt;nome_funzione&gt;</code>: e' il nome della funzione, non e' importante.</li>
+<li><code>sig</code>: e' un intero che indica quale tipo di segnale ha fatto eseguire <blockquote class="doxtable">
+<p>e' utile quando si usa lo stesso handler per gestire piu' tipi di segnali. </p>
+</blockquote>
+</li>
+</ul>
+<blockquote class="doxtable">
+<p>personalmente utilizzerei un unico handler per piu' segnali solo se la maggior parte (o tutte) delle operazioni da eseguire sono identiche. </p>
+</blockquote>
+<ul>
+<li>Non ha valori di ritorno</li>
+</ul>
+<p>Dopo aver eseguito l'handler, il programma prosegue la sua esecuzione da dove era stato interrotto.</p>
+<h2>Impostare un signal handler personalizzato</h2>
+<p>La system call <code>signal()</code> permette di impostare un signal handler personalizzato: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"><span class="keyword">typedef</span> void (*sighandler_t)(int);</div><div class="line"></div><div class="line">signal(<span class="keywordtype">int</span> signum, sighandler_t handler);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>signum</code>: e' il segnale da gestire con il signal handler "handler"</li>
+<li><code>handler</code>. Puo' essere:<ul>
+<li>l'indirizzo del nuovo signal handler</li>
+<li><code>SIG_DFL</code>: costante che permette di resettare il comportamento di default</li>
+<li><code>SIG_IGN</code>: costante che permette di ignorare il segnale</li>
+</ul>
+</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> sigHandler(<span class="keywordtype">int</span> sig) {</div><div class="line">    printf(<span class="stringliteral">&quot;Ho ricevuto un SIGINT!\n&quot;</span>);</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> <a class="code" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) {</div><div class="line">    <span class="keywordflow">if</span> (signal(SIGINT, sigHandler) == SIG_ERR) {</div><div class="line">        printf(<span class="stringliteral">&quot;Non sono riuscito ad impostare il nuovo signal handler!\n&quot;</span>);</div><div class="line">        exit(1);</div><div class="line">    }</div><div class="line">}</div></div><!-- fragment --><p>Per impostare lo stesso signal handler per piu' segnali oppure per impostare signal handler diversi a certi segnali e' sufficiente richiamare <code>signal()</code> come descritto sopra.</p>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="comment">// dopo aver definito due signal handler chiamati</span></div><div class="line"><span class="comment">// sigHandlerperSIGINT e sigHandlerperSIGUSR1</span></div><div class="line"></div><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (signal(SIGINT, sigHandlerperSIGINT) == SIG_ERR ||</div><div class="line">    signal(SIGUSR1, sigHandlerperSIGUSR1) == SIG_ERR) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito ad impostare i nuovi signal handler!\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div></div><!-- fragment --><p>Per resettare il comportamento di default: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (signal(SIGINT, SIG_DFL) == SIG_ERR){</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a resettare il comportamento da eseguire quando ricevero&#39; il segnale SIGINT\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div></div><!-- fragment --><p>Per ignorare un segnale: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (signal(SIGINT, SIG_IGN) == SIG_ERR){</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a memorizzare il fatto che dovro&#39; ignorare il segnale SIGINT\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div></div><!-- fragment --><h2>Informazioni utili</h2>
+<ul>
+<li>Non e' possibile bloccare i segnali <code>SIGKILL</code> e <code>SIGSTOP</code></li>
+<li>Non e' possibile prevedere quando arrivera' un segnale</li>
+<li>Il flusso di esecuzione del programma viene interrotto quando viene ricevuto un segnale non bloccato per eseguire il signal handler. Quando il signal handler termina il programma torna ad eseguire il flusso "originale".</li>
+<li>Se arrivano piu' segnali di un tipo ignorato nel momento in cui si sblocca il segnale arrivera' al processo una volta sola.</li>
+<li>Anche il signal handler puo' essere interrotto da un segnale</li>
+<li>Se un processo padre e' configurato per gestire in un certo modo dei segnali, i figli erediteranno quella configurazione.</li>
+</ul>
+<h2>Attendere un segnale per un tempo indefinito</h2>
+<p>Richiamando <code>pause()</code> si sospende l'esecuzione di un processo che riprendera' solo quando verra' ricevuto un segnale.</p>
+<p>Quel segnale fara' eseguire il signal handler o terminera' il processo.</p>
+<div class="fragment"><div class="line">#include &lt;unistd.h&gt;</div><div class="line"></div><div class="line">int pause();</div></div><!-- fragment --><p>La funzione restituisce sempre -1 e imposta errno a EINTR.</p>
+<h2>Attendere un segnale per una certa quantita' di tempo</h2>
+<p>Richiamando <code>sleep()</code> e' possibile sospendere il processo che riprendera' solo quando verra' ricevuto un segnale oppure quando sara' scaduto il tempo.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> sleep(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seconds);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>seconds</code>: numero di secondi massimo per cui sospendere il processo</li>
+<li>Restituisce:<ul>
+<li>0 se il tempo di sospensione e' scaduto</li>
+<li><p class="startli">un numero maggiore di 0 se il processo viene svegliato da un segnale.</p>
+<p class="startli">Quel numero indica quanti secondi mancavano per far scadere il tempo.</p>
+<p class="startli">In termini matematici: $$seconds - tempo \ sospensione$$</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Esempio:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> sigHandler(<span class="keywordtype">int</span> sig) {</div><div class="line">    printf(<span class="stringliteral">&quot;\nMi hai svegliato! volevo dormire ancora...\n&quot;</span>);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">int</span> <a class="code" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) {</div><div class="line">    <span class="keywordflow">if</span> (signal(SIGINT, sigHandler) == SIG_ERR) {</div><div class="line">        printf(<span class="stringliteral">&quot;Non sono riuscito ad impostare il nuovo signal handler\n&quot;</span>);</div><div class="line">        exit(1);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordtype">int</span> time = 5;</div><div class="line">    printf(<span class="stringliteral">&quot;Dormo per %d secondi!\n&quot;</span>, time);</div><div class="line"></div><div class="line">    <span class="keywordtype">int</span> rem_time = sleep(time); <span class="comment">// mi sospendo per al massimo 5 secondi</span></div><div class="line"></div><div class="line">    <span class="keywordflow">if</span> (rem_time == 0){</div><div class="line">        printf(<span class="stringliteral">&quot;Ho dormito per tutti i %d secondi senza interruzioni\n&quot;</span>, time);</div><div class="line">    }</div><div class="line">    <span class="keywordflow">else</span> {</div><div class="line">        printf(<span class="stringliteral">&quot;Volevo dormire altri %d secondi...\n&quot;</span>, rem_time);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keywordflow">return</span> 0;</div><div class="line">}</div></div><!-- fragment --><h2>Mandare un segnale ad un altro processo</h2>
+<p>La system call usata per mandare un segnale e':</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> kill(pid_t pid, <span class="keywordtype">int</span> sig);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Contrariamente a quello che fa pensare il nome, questa system call puo' mandare tutti i segnali: non solo SIGKILL! </p>
+</blockquote>
+<p>Dove:</p><ul>
+<li><p class="startli"><code>pid</code>: in genere e' il PID del processo a cui mandare il segnale.</p>
+<p class="startli">In realta' puo' essere:</p><ul>
+<li>maggiore di zero: e' il PID del processo a cui mandare il segnale</li>
+<li>uguale a zero: il segnale e' mandato a tutti i processi appartenenti allo stesso gruppo del processo che manda il messaggio, incluso se stesso &gt; E' un broadcast che comprende il mittente stesso</li>
+<li>uguale a -1: il segnale viene mandato a tutti i processi a cui il mittente ha i permessi di mandare messaggi. &gt; Ad esempio non puo' mandarlo a init e a se stesso</li>
+<li>minore di -1: il segnale e' mandato a tutti i processi che appartengono al gruppo con pid uguale al valore assoluto di <code>pid</code></li>
+</ul>
+</li>
+<li><code>sig</code>: e' il segnale da mandare al processo</li>
+<li>Restituisce: -1 in caso di errore, 0 altrimenti</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> <a class="code" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) {</div><div class="line">    pid_t child = fork();</div><div class="line">    <span class="keywordflow">if</span> (child == -1) {</div><div class="line">        errExit(<span class="stringliteral">&quot;fork&quot;</span>);</div><div class="line">    }</div><div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (child == 0) {</div><div class="line">        <span class="comment">// il processo figlio e&#39; bloccato qui</span></div><div class="line">        <span class="keywordflow">while</span>(1);</div><div class="line">    }</div><div class="line">    <span class="keywordflow">else</span> {</div><div class="line">        <span class="comment">// processo padre</span></div><div class="line">        sleep(10); <span class="comment">// aspetta 10 secondi</span></div><div class="line">        kill(child, SIGKILL); <span class="comment">// manda segnale SIGKILL al processo figlio</span></div><div class="line">    }</div><div class="line">    <span class="keywordflow">return</span> 0;</div><div class="line">}</div></div><!-- fragment --><h2>Mandare un segnale a se stessi dopo una certa quantita' di tempo</h2>
+<p>La system call alarm permette di impostare un timer dopo cui si ricevera' una "notifica di promemoria":</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> alarm(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seconds);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Non puo' mai fallire. </p>
+</blockquote>
+<p>Dopo <code>seconds</code> secondi il timer scadra' e il processo ricevera' la notifica.</p>
+<p>La notifica e' un segnale chiamato <code>SIGALRM</code>.</p>
+<p>Restituisce:</p><ul>
+<li>il numero di secondi rimanente da un timer impostato precedentemente</li>
+<li>0 se e' stato impostato un unico timer</li>
+</ul>
+<p>Impostare un timer con <code>alarm</code> sovrascrive i timer impostati precedentemente.</p>
+<h2>Filtrare segnali</h2>
+<p>Esistono diverse funzioni che permettono di creare e impostare oppure di eliminare filtri che servono per bloccare (o sbloccare) determinati segnali. </p><blockquote class="doxtable">
+<p>In gergo tecnico questi filtri vengono chiamati "maschera" </p>
+</blockquote>
+<p>Per prima cosa bisogna creare un insieme di segnali da bloccare (o sbloccare). </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"><span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sigset_t;</div><div class="line"></div><div class="line"><span class="keywordtype">int</span> sigemptyset(sigset_t *<span class="keyword">set</span>);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Restituisce 0 in caso di successo o -1 in caso di errore </p>
+</blockquote>
+<p>Inizializza il filtro <code>set</code> per essere vuoto.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"><span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sigset_t;</div><div class="line"></div><div class="line"><span class="keywordtype">int</span> sigfillset(sigset_t *<span class="keyword">set</span>);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Restituisce 0 in caso di successo o -1 in caso di errore </p>
+</blockquote>
+<p>Inizializza il filtro <code>set</code> per contenere tutti i segnali.</p>
+<p>Poi bisogna aggiungere o rimuovere segnali dal filtro: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> sigaddset(sigset_t *<span class="keyword">set</span>, <span class="keywordtype">int</span> sig);</div></div><!-- fragment --><p> Aggiunge all'insieme <code>set</code> il segnale <code>sig</code>.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> sigdelset(sigset_t *<span class="keyword">set</span>, <span class="keywordtype">int</span> sig);</div></div><!-- fragment --><p> Elimina dall'insieme <code>set</code> il segnale <code>sig</code>.</p>
+<p>Se si vuole si puo' verificare se un segnale e' contenuto nel filtro: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> sigismember(<span class="keyword">const</span> sigset_t *<span class="keyword">set</span>, <span class="keywordtype">int</span> sig);</div></div><!-- fragment --><p> Restituisce 1 se il segnale <code>sig</code> e' contenuto nell'insieme <code>set</code>.</p>
+<p>Dopo aver creato il filtro adatto per le nostre esigenze bisogna impostarlo con: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;signal.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> sigprocmask(<span class="keywordtype">int</span> how, <span class="keyword">const</span> sigset_t *<span class="keyword">set</span>, sigset_t *oldset);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Restituisce 0 in caso di successo o -1 in caso di errore </p>
+</blockquote>
+<p>Dove:</p><ul>
+<li><p class="startli"><code>how</code> indica come usare il filtro.</p>
+<p class="startli">Puo' essere:</p><ul>
+<li><code>SIG_BLOCK</code>: continua a bloccare i segnali gia' bloccati e in piu' blocca quelli contenuti in <code>set</code></li>
+<li><code>SIG_UNBLOCK</code>: sblocca i segnali in <code>set</code>. &gt; Se i segnali in <code>set</code> non sono bloccati non succede niente: non ci sono errori.</li>
+<li><code>SIG_SETMASK</code>: imposta come segnali bloccati SOLO i segnali contenuti in <code>set</code>. &gt; Quindi se <code>set</code> NON contiene segnali bloccati precedentemente, questi verranno sbloccati</li>
+</ul>
+</li>
+<li><code>set</code>:<ul>
+<li>filtro di segnali da bloccare/sbloccare</li>
+<li>NULL se si desidera recuperare la maschera precedente senza modificarla &gt; <code>oldset</code> deve essere un puntatore ad una variabile in cui memorizzarla. <code>how</code> viene ignorato.</li>
+</ul>
+</li>
+<li><code>oldset</code>:<ul>
+<li>se e' NULL la maschera precedente viene persa</li>
+<li>se e' una variabile che puo' ospitare una maschera, questa memorizzera' la maschera precedente</li>
+</ul>
+</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> <a class="code" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) {</div><div class="line">    sigset_t mySet, prevSet;</div><div class="line"></div><div class="line">    <span class="comment">// inizializza mySet con tutti i segnali</span></div><div class="line">    sigfillset(&amp;mySet);</div><div class="line"></div><div class="line">    <span class="comment">// rimuovi SIGTERM e SIGINT da mySet</span></div><div class="line">    sigdelset(&amp;mySet, SIGTERM);</div><div class="line">    sigdelset(&amp;mySet, SIGINT);</div><div class="line"></div><div class="line">    <span class="comment">// blocca tutti i segnali tranne SIGTERM e SIGINT</span></div><div class="line">    sigprocmask(SIG_SETMASK, &amp;mySet, &amp;prevSet);</div><div class="line"></div><div class="line">    <span class="comment">// il codice qui puo&#39; solo essere interrotto da SIGTERM, SIGINT</span></div><div class="line">    <span class="comment">// e dai segnali non bloccabili (SIGKILL e SIGSTOP)</span></div><div class="line"></div><div class="line">    <span class="comment">// reset the signal mask of the process</span></div><div class="line">    sigprocmask(SIG_SETMASK, &amp;prevSet, NULL);</div><div class="line">    <span class="comment">// if SIGTERM is pending, only at this point it is</span></div><div class="line">    <span class="comment">// delivered to the process</span></div><div class="line">    <span class="keywordflow">return</span> 0;</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>
