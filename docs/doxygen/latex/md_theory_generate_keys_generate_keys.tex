@@ -1,0 +1,65 @@
+Le chiavi sono dei numeri interi che servono ad alcune system call per creare una I\+PC (se non esiste gia\textquotesingle{}) e restituire il suo identificatore che permette poi di utilizzarla per comunicare con altri processi. \begin{quote}
+Le I\+PC sono meccanismi di comunicazione tra processi. Puo\textquotesingle{} essere la memoria condivisa, la coda F\+I\+FO, la P\+I\+PE, i segnali, i semafori, le code di messaggi. \end{quote}
+
+
+Per fare un\textquotesingle{}analogia con i file di testo e\textquotesingle{} possibile vedere le chiavi come il percorso del file e l\textquotesingle{}identificatore come il file descriptor\+:
+\begin{DoxyItemize}
+\item I primi servono per creare i secondi
+\item I secondi permettono di gestire il file/la I\+PC
+\end{DoxyItemize}
+
+I processi che conoscono la chiave possono comunicare fra di loro creando ed utilizzando le I\+PC.
+
+Per creare le chiavi esistono piu\textquotesingle{} modi diversi.
+
+\subsection*{Macro I\+P\+C\+\_\+\+P\+R\+I\+V\+A\+TE}
+
+La macro {\ttfamily I\+P\+C\+\_\+\+P\+R\+I\+V\+A\+TE} permette di generare una chiave che sara\textquotesingle{} sicuramente univoca perche\textquotesingle{} il kernel ce lo garantira\textquotesingle{}.
+
+Esempio di creazione di un semaforo utilizzando la macro\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{id} = semget(IPC\_PRIVATE, 10, S\_IRUSR | S\_IWUSR);
+\end{DoxyCode}
+
+
+E\textquotesingle{} comoda quando un processo padre crea la I\+PC prima di creare i processi figli con cui comunichera\textquotesingle{} in seguito.
+
+E\textquotesingle{} difficile utilizzarla quando i processi che devono comunicare non sono imparentati.
+
+\subsection*{Funzione file to key}
+
+La funzione {\ttfamily ftok()} (file to key) converte il percorso di un file ed un identificativo di progetto in una chiave.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/ipc.h>}
+\textcolor{comment}{// Returns integer key on succcess, or -1 on error (check errno)}
+key\_t ftok(\textcolor{keywordtype}{char} *pathname, \textcolor{keywordtype}{int} proj\_id);
+\end{DoxyCode}
+ \begin{quote}
+Vengono usati solo gli ultimi 8 bit di proj\+\_\+id \end{quote}
+
+
+Il file nel percorso pathname deve essere esistente e accessibile (bisogna avere i permessi giusti)
+
+
+\begin{DoxyCode}
+Esempio:
+key\_t key = ftok(\textcolor{stringliteral}{"/mydir/myfile"}, \textcolor{charliteral}{'a'});
+\textcolor{keywordflow}{if} (key == -1)
+    errExit(\textcolor{stringliteral}{"ftok failed"});
+
+\textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = semget(key, 10, S\_IRUSR | S\_IWUSR);
+
+\textcolor{keywordflow}{if} (\textcolor{keywordtype}{id} == -1)
+    errExit(\textcolor{stringliteral}{"semget failed"});
+\end{DoxyCode}
+
+
+Questa opzione e\textquotesingle{} comoda per far comunicare processi non imparentati mantenendo un punto di riferimento fisso.
+
+\subsection*{Inserimento manuale}
+
+Per progetti semplici posso scegliere di fissare un numero per gestire le I\+PC.
+
+Questa opzione e\textquotesingle{} comoda per far comunicare processi non imparentati in progetti piccoli. 

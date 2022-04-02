@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: memoria condivisa</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_shared_memory_shared_memory.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: memoria condivisa </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>E' una porzione di memoria gestita dal kernel e che e' condivisa tra piu' processi.</p>
+<p>I dati posso essere scritti e letti immediatamente sulla memoria: e' necessario un sistema di sincronizzazione come, ad esempio, i semafori.</p>
+<h2>Creazione memoria condivisa</h2>
+<p>La system call <code>shmget()</code> permette di creare una nuova memoria condivisa oppure di ottenere un identificatore di un segmento di memoria gia' esistente. </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/shm.h&gt;</span></div><div class="line"><span class="comment">// Returns a shared memory segment identifier on success, or -1 on error</span></div><div class="line"><span class="keywordtype">int</span> shmget(key_t key, <span class="keywordtype">size_t</span> size, <span class="keywordtype">int</span> shmflg);</div></div><!-- fragment --><p>La memoria creata sara' inizializzata a 0.</p>
+<p>I parametri sono:</p><ul>
+<li><code>key</code>: chiave IPC</li>
+<li><code>size</code>: dimensione desiderata della memoria condivisa in byte <blockquote class="doxtable">
+<p>La dimensione viene arrottondata al multiplo superiore della dimensione di pagina del sistema. Se non si vuole creare una memoria condivisa esistente deve essere minore o uguale al valore size con cui era stata creata precedentemente. </p>
+</blockquote>
+</li>
+<li><p class="startli"><code>shmflg</code>: specificano i permessi.</p>
+<p class="startli">Possono essere usate tutte le flag di <code>mode</code> per i file e in piu' possono essere usate anche:</p><ul>
+<li><code>IPC_CREAT</code>: se non esiste un segmento di memoria legato alla chiave attuale, creane uno nuovo</li>
+<li><code>IPC_EXCL</code>: se usato con <code>IPC_CREAT</code>, permette al comando di fallire se esiste gia' una memoria condivisa legata alla chiave <code>key</code></li>
+</ul>
+</li>
+</ul>
+<p>Per vedere come generare la chiave andare nella <a href="md_theory_generate_keys_generate_keys.html">sezione relativa qui</a></p>
+<p>Esempi creazione memoria condivisa: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> shmid;</div><div class="line">ket_t key = <span class="comment">//... (generazione chiave)</span></div><div class="line"></div><div class="line"><span class="keywordtype">size_t</span> size = <span class="comment">//... (dimensione calcolabile)</span></div><div class="line"></div><div class="line"><span class="comment">// A) Crea la memoria condivisa facendo scegliere al kernel la chiave</span></div><div class="line">shmid = shmget(IPC_PRIVATE, size, S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// B) Crea la memoria condivisa utilizzando la chiave key, solo se non esiste</span></div><div class="line">shmid = shmget(key, size, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// C) Crea la memoria condivisa utilizzando la chiave key,</span></div><div class="line"><span class="comment">//    fallisce se la memoria e&#39; gia&#39; esistente</span></div><div class="line">shmid = shmget(key, size, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);</div></div><!-- fragment --><h2>Collegamento alla memoria condivisa</h2>
+<p>Per usare la memoria condivisa bisogna aggiungerla allo spazio degli indirizzi del processo (in modo virtuale) con la system call:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/shm.h&gt;</span></div><div class="line"><span class="comment">// Returns address at which shared memory is attached on success</span></div><div class="line"><span class="comment">// or (void *)-1 on error</span></div><div class="line"><span class="keywordtype">void</span> *shmat(<span class="keywordtype">int</span> shmid, <span class="keyword">const</span> <span class="keywordtype">void</span> *shmaddr, <span class="keywordtype">int</span> shmflg);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>shmat sta per "shared memory attach" </p>
+</blockquote>
+<p>Dove:</p><ul>
+<li><code>shmid</code>: e' l'identificativo ottenuto dalla chiave</li>
+<li><p class="startli"><code>shmaddr</code>:</p><ul>
+<li>NULL: il kernel sceglie l'indirizzo in cui "collegare" la memoria condivisa. &gt; Ignora le flag.</li>
+</ul>
+<p class="startli">&gt; Questa opzione permette di rendere l'applicazione il piu' portatile possibile e riduce il rischio di collegare la memoria in zone gia' occupate (evitando cosi' di andare in errore)</p><ul>
+<li>indirizzo: se <code>shmflg</code> e' <code>SHM_RND</code> verra' utilizzato indirizzo in cui "collegare" la memoria condivisa</li>
+</ul>
+</li>
+<li><code>shmflg</code>:<ul>
+<li><code>SHM_RND</code>: permette di usare l'indirizzo <code>shmaddr</code> &gt; RND sta per round ed ha a che fare con l'arrotondamento della dimensione delle pagine</li>
+<li><code>SHM_RDONLY</code>: imposta la memoria condivisa in sola lettura</li>
+<li>0: modalita' lettura e scrittura</li>
+</ul>
+</li>
+</ul>
+<p>I processi figlio ereditano le shared memory del padre.</p>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="comment">// ottieni puntatore per gestire la memoria condivisa</span></div><div class="line"><span class="comment">// in modalita&#39; lettura/scritura</span></div><div class="line"><span class="keywordtype">int</span> *ptr_1 = (<span class="keywordtype">int</span> *)shmat(shmid, NULL, 0);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (prt_1 == -1) {</div><div class="line">    <a class="code" href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27">ErrExit</a>(<span class="stringliteral">&quot;shmat failed&quot;</span>);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// ottieni puntatore per gestire la memoria condivisa in sola lettura</span></div><div class="line"><span class="keywordtype">int</span> *ptr_2 = (<span class="keywordtype">int</span> *)shmat(shmid, NULL, SHM_RDONLY);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (prt_2 == -1) {</div><div class="line">    <a class="code" href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27">ErrExit</a>(<span class="stringliteral">&quot;shmat failed&quot;</span>);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// scrivi la memoria condivisa usando il puntatore mod. lettura/scrittura</span></div><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 10; ++i)</div><div class="line">    ptr_1[i] = i;</div><div class="line"></div><div class="line"><span class="comment">// leggi la memoria condivisa con il puntatore in mod. lettura</span></div><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 10; ++i)</div><div class="line">    printf(<span class="stringliteral">&quot;integer: %d\n&quot;</span>, ptr_2[i]);</div></div><!-- fragment --><h2>Scollegamento della memoria condivisa</h2>
+<p>Quando un processo non necessita' piu' di una memoria condivisa puo' scollegarla eseguendo: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/shm.h&gt;</span></div><div class="line"><span class="comment">// Returns 0 on success, or -1 on error</span></div><div class="line"><span class="keywordtype">int</span> shmdt(<span class="keyword">const</span> <span class="keywordtype">void</span> *shmaddr);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>shmaddr</code>: indirizzo della memoria da scollegare <blockquote class="doxtable">
+<p>Valore restituito da <code>shmat</code> </p>
+</blockquote>
+</li>
+</ul>
+<p>Le memorie condivise vengono scollegate automaticamente quando:</p><ul>
+<li>viene eseguito una exec</li>
+<li>viene terminato il processo</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="comment">// collega la memoria condivisa in lettura/scrittura</span></div><div class="line"><span class="keywordtype">int</span> *ptr_1 = (<span class="keywordtype">int</span> *)shmat(shmid, NULL, 0);</div><div class="line"><span class="keywordflow">if</span> (ptr_1 == (<span class="keywordtype">void</span> *)-1)</div><div class="line">    errExit(<span class="stringliteral">&quot;first shmat failed&quot;</span>);</div><div class="line"></div><div class="line"><span class="comment">// scollega la memoria condivisa</span></div><div class="line"><span class="keywordflow">if</span> (shmdt(ptr_1) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;shmdt failed&quot;</span>);</div></div><!-- fragment --><h2>Operazioni di controllo</h2>
+<p>La system call <code>shmctl</code> permette di controllare la memoria condivisa.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/msg.h&gt;</span></div><div class="line"><span class="comment">// Returns 0 on success, or -1 error</span></div><div class="line"><span class="keywordtype">int</span> shmctl(<span class="keywordtype">int</span> shmid, <span class="keywordtype">int</span> cmd, <span class="keyword">struct</span> shmid_ds *buf);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>shmid</code>: identificativo ottenuto dalla chiave</li>
+<li><code>cmd</code>: comando da eseguire<ul>
+<li><code>IPC_RMID</code>: quando tutti i processi si saranno scollegati dalla memoria condivisa, questa verra' cancellata</li>
+<li><code>IPC_STAT</code>: memorizza in <code>buf</code> le statistiche della memoria condivisa</li>
+<li><code>IPC_SET</code>: usa <code>buf</code> per modificare le proprieta' della memoria condivisa &gt; L'unico campo modificabile e' <code>shm_perm</code></li>
+</ul>
+</li>
+<li><code>buf</code>: puntatore a struttura dati usata per memorizzare/impostare proprieta' della memoria condivisa</li>
+</ul>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (shmctl(shmid, IPC_RMID, NULL) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;shmctl failed&quot;</span>);</div><div class="line"><span class="keywordflow">else</span></div><div class="line">    printf(<span class="stringliteral">&quot;shared memory segment removed successfully\n&quot;</span>);</div></div><!-- fragment --><p>Struttura shmid_ds buf: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>shmid_ds {</div><div class="line">    <span class="keyword">struct </span>ipc_perm shm_perm; <span class="comment">// permessi e proprietario (kernel)</span></div><div class="line">    <span class="keywordtype">size_t</span> shm_segsz; <span class="comment">// dimensione in byte</span></div><div class="line">    time_t shm_atime; <span class="comment">// tempo dell&#39;ultima shmat()</span></div><div class="line">    time_t shm_dtime; <span class="comment">// tempo dell&#39;ultimo shmdt()</span></div><div class="line">    time_t shm_ctime; <span class="comment">// tempo dell&#39;ultima modifica</span></div><div class="line">    pid_t shm_cpid; <span class="comment">// PID del creatore</span></div><div class="line">    pid_t shm_lpid; <span class="comment">// PID dell&#39;ultimo shmat() / shmdt()</span></div><div class="line">    shmatt_t shm_nattch; <span class="comment">// Numero di processi attualmente collegati</span></div><div class="line">};</div></div><!-- fragment --><p>L'unico campo modificabile e' <code>shm_perm</code> per gestire i permessi. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: coda dei messaggi</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_message_queue_message_queue.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: coda dei messaggi </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>Creazione della coda dei messaggi</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/msg.h&gt;</span></div><div class="line"><span class="comment">// Returns message queue identifier on success, or -1 error</span></div><div class="line"><span class="keywordtype">int</span> msgget(key_t key, <span class="keywordtype">int</span> msgflg);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>key</code>: e' una chiave IPC</li>
+<li><code>msgflg</code>: descrive i permessi<ul>
+<li>puo' essere una delle flag del parametro <code>mode</code> di <code>open()</code></li>
+<li><code>IPC_CREAT</code>: se non esiste la message queue legata alla chiave, creala</li>
+<li><code>IPC_EXCEL</code>: usata insieme a <code>IPC_CREAT</code>, fa fallire msgget se esiste gia' una coda di messaggi legata alla chiave</li>
+</ul>
+</li>
+</ul>
+<p>Esempi: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> msqid;</div><div class="line"></div><div class="line">ket_t key = <span class="comment">//... (generazione chiave)</span></div><div class="line"></div><div class="line"><span class="comment">// A) Fai scegliere la chiave al kernel</span></div><div class="line">msqid = msgget(IPC_PRIVATE, S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// B) Ottieni identificativo della coda dei messaggi con la chiave key,</span></div><div class="line"><span class="comment">//    creala se non esiste</span></div><div class="line">msqid = msgget(key, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// C) Ottieni identificativo della coda dei messaggi con la chiave key,</span></div><div class="line"><span class="comment">//    fallisce se esiste gia&#39;</span></div><div class="line">msqid = msgget(key, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);</div></div><!-- fragment --><h2>Struttura dei messaggi</h2>
+<p>La coda dei messaggi serve per inviare e ricevere messaggi.</p>
+<p>Un messaggio e' una struttura che possiede un campo chiamato mtype di tipo long maggiore di zero e poi i dati da inviare.</p>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>mymsg {</div><div class="line">    <span class="keywordtype">long</span> mtype;   <span class="comment">/* tipo del messaggio */</span></div><div class="line">    <span class="keywordtype">char</span> mtext[]; <span class="comment">/* Testo */</span></div><div class="line">};</div></div><!-- fragment --><p>Oppure: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>mymsg {</div><div class="line">    <span class="keywordtype">long</span> mtype;   <span class="comment">/* tipo del messaggio */</span></div><div class="line">    <span class="keywordtype">int</span> a;        <span class="comment">/* Intero 1 */</span></div><div class="line">    <span class="keywordtype">int</span> b;        <span class="comment">/* Intero 2 */</span></div><div class="line">};</div></div><!-- fragment --><p>Oppure: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>mymsg {</div><div class="line">    <span class="keywordtype">long</span> mtype;   <span class="comment">/* tipo del messaggio */</span></div><div class="line">};</div></div><!-- fragment --><h2>Inviare un messaggio</h2>
+<p>Per scrivere un messaggio bisogna usare la system call: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/msg.h&gt;</span></div><div class="line"><span class="comment">// Returns 0 on success, or -1 error</span></div><div class="line"><span class="keywordtype">int</span> msgsnd(<span class="keywordtype">int</span> msqid, <span class="keyword">const</span> <span class="keywordtype">void</span> *msgp, <span class="keywordtype">size_t</span> msgsz, <span class="keywordtype">int</span> msgflg);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>msqid</code>: identificatore della coda dei messaggi</li>
+<li><code>msgp</code>: indirizzo che punta alla struttura dei messaggi</li>
+<li><code>msgsz</code>: specifica il numero di byte contenuti nel corpo del messaggio (quindi senza contare mtype)</li>
+<li><code>msgflg</code>:<ul>
+<li>0: se la coda dei messaggi e' piena, questa system call si blocca in attesa di spazio libero</li>
+<li><code>IPC_NOWAIT</code>: se la coda dei messaggi e' piena prosegue restituendo l'errore EAGAIN</li>
+</ul>
+</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="comment">// Struttura del messaggio</span></div><div class="line"><span class="keyword">struct </span>mymsg {</div><div class="line">    <span class="keywordtype">long</span> mtype;</div><div class="line">    <span class="keywordtype">char</span> mtext[100]; <span class="comment">/* stringa */</span></div><div class="line">} m;</div><div class="line"></div><div class="line"><span class="comment">// messaggio di tipo 1</span></div><div class="line">m.mtype = 1;</div><div class="line"></div><div class="line"><span class="comment">// il messaggio contiene la seguente stringa</span></div><div class="line"><span class="keywordtype">char</span> *text = <span class="stringliteral">&quot;Ciao mondo!&quot;</span>;</div><div class="line"></div><div class="line"><span class="comment">// copia la stringa dentro a mtext</span></div><div class="line">memcpy(m.mtext, text, strlen(text) + 1);</div><div class="line"></div><div class="line"><span class="comment">// calcolo dimensione del messaggio ignorando mtype</span></div><div class="line"><span class="keywordtype">size_t</span> mSize = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>mymsg) - sizeof(long);</div><div class="line"></div><div class="line"><span class="comment">// invia il messaggio nella coda dei messaggi</span></div><div class="line"><span class="keywordflow">if</span> (msgsnd(msqid, &amp;m, mSize, 0) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;msgsnd failed&quot;</span>);</div></div><!-- fragment --><h2>Ricevere un messaggio</h2>
+<p>La system call <code>msgrcv()</code> legge e rimuove il messaggio dalla queue dei messaggi:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/msg.h&gt;</span></div><div class="line"><span class="comment">// Returns number of bytes copied into msgp on success, or -1 error</span></div><div class="line">ssize_t msgrcv(<span class="keywordtype">int</span> msqid, <span class="keywordtype">void</span> *msgp, <span class="keywordtype">size_t</span> msgsz, <span class="keywordtype">long</span> msgtype, <span class="keywordtype">int</span> msgflg);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>msgid</code>: identificativo della coda dei messaggi</li>
+<li><code>msgp</code>: buffer dove leggere il messaggio</li>
+<li><code>msgsz</code>: dimensione del messaggio (senza <code>mtype</code>)</li>
+<li><code>msgtype</code>: tipo del messaggio<ul>
+<li>maggiore di 0: il primo messaggio della coda che ha il tipo uguale a msgtype viene rimosso e restituito al lettore</li>
+<li>uguale a 0: viene letto e rimosso il primo messaggio della coda</li>
+<li>minore di 0: viene letto e rimosso il messagio con mtype piu' piccolo e che ha valore minore o uguale al valore assoluto di <code>msgtype</code></li>
+</ul>
+</li>
+<li><code>msgflg</code>: flag<ul>
+<li><p class="startli">0: se si cerca di leggere un messaggio di tipo msgtype che non c'e' la chiamata e' bloccante.</p>
+<p class="startli">Se la dimensione del messaggio (senza mtype) supera la dimensione definita in msgsize verra' restituito un errore.</p>
+</li>
+<li><code>IPC_NOWAIT</code>: se si cerca di leggere un messaggio di tipo msgtype che non c'e' la chiamata NON e' bloccante. &gt; Verra' restituito l'errore ENOMSG</li>
+<li><p class="startli"><code>MSG_NOERROR</code>: Se la dimensione del messaggio (senza mtype) supera la dimensione definita in msgsize NON dara' errore.</p>
+<p class="startli">Il messaggio verra' cancellato dalla coda dei messaggi e verra' troncato per stare in msgsz bytes.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="comment">// struttura dei messaggi</span></div><div class="line"><span class="keyword">struct </span>mymsg {</div><div class="line">    <span class="keywordtype">long</span> mtype;</div><div class="line">    <span class="keywordtype">char</span> mtext[100]; <span class="comment">/* corpo del messaggio */</span></div><div class="line">} m;</div><div class="line"></div><div class="line"><span class="comment">// Calcola la dimensione di mtext</span></div><div class="line"><span class="keywordtype">size_t</span> mSize = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>mymsg) - sizeof(long);</div><div class="line"></div><div class="line"><span class="comment">// Aspetta un messaggio di tipo 1</span></div><div class="line"><span class="keywordflow">if</span> (msgrcv(msqid, &amp;m, mSize, 1, 0) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;msgrcv failed&quot;</span>);</div></div><!-- fragment --><h2>Operazioni di controllo</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/msg.h&gt;</span></div><div class="line"><span class="comment">// Returns 0 on success, or -1 error</span></div><div class="line"><span class="keywordtype">int</span> msgctl(<span class="keywordtype">int</span> msqid, <span class="keywordtype">int</span> cmd, <span class="keyword">struct</span> msqid_ds *buf);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>msqid</code>: identificativo della coda dei messaggi</li>
+<li><code>cmd</code>: comando da eseguire<ul>
+<li><code>IPC_RMID</code>: rimuove immediatamente la coda. Cancella tutti i messaggi e sveglia i processi in attesa con errore EIDRM.</li>
+<li><code>IPC_STAT</code>: salva in <code>buf</code> le statistiche della coda</li>
+<li><code>IPC_SET</code>: modifica impostazioni della coda utilizzando <code>buf</code> &gt; si possono modificare i campi <code>msg_perm</code> e<code>msg_qbytes</code>.</li>
+</ul>
+</li>
+<li><code>buf</code>: buffer.</li>
+</ul>
+<p>Esempio. Cancella la coda: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (msgctl(msqid, IPC_RMID, NULL) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;msgctl failed&quot;</span>);</div><div class="line"><span class="keywordflow">else</span></div><div class="line">    printf(<span class="stringliteral">&quot;message queue removed successfully\n&quot;</span>);</div></div><!-- fragment --><p>Struttura msqid_ds *buf: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>msqid_ds {</div><div class="line">    <span class="keyword">struct </span>ipc_perm msg_perm; <span class="comment">// proprietario e permessi</span></div><div class="line">    time_t msg_stime; <span class="comment">// tempo dell&#39;ultimo last msgsnd()</span></div><div class="line">    time_t msg_rtime; <span class="comment">// tempo dell&#39;ultimo msgrcv()</span></div><div class="line">    time_t msg_ctime; <span class="comment">// tempo dell&#39;ultima modifica</span></div><div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> __msg_cbytes; <span class="comment">// numero di byte nella coda</span></div><div class="line">    msgqnum_t msg_qnum; <span class="comment">// numero di messaggi nella coda</span></div><div class="line">    msglen_t msg_qbytes; <span class="comment">// numero massimo di byte inseribili nella coda</span></div><div class="line">    pid_t msg_lspid; <span class="comment">// PID dell&#39;ultimo msgsnd()</span></div><div class="line">    pid_t msg_lrpid; <span class="comment">// PID dell&#39;ultimo msgrcv()</span></div><div class="line">};</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Con <code>IPC_SET</code> si possono modificare i campi <code>msg_perm</code> e<code>msg_qbytes</code>. </p>
+</blockquote>
+<p>Esempio. Cambiare quantita' massima di byte memorizzabili nella coda: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>msqid_ds ds;</div><div class="line"></div><div class="line"><span class="comment">// Ottieni la struttura della coda dei messaggi</span></div><div class="line"><span class="keywordflow">if</span> (msgctl(msqid, IPC_STAT, &amp;ds) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;msgctl&quot;</span>);</div><div class="line"></div><div class="line"><span class="comment">// Cambia il limite di byte massimi dell&#39;mtext</span></div><div class="line"><span class="comment">// per tutti i messaggi a 1 Kbyte</span></div><div class="line">ds.msg_qbytes = 1024;</div><div class="line"></div><div class="line"><span class="comment">// Aggiorna la struttura nel kernel in kernel</span></div><div class="line"><span class="keywordflow">if</span> (msgctl(msqid, IPC_SET, &amp;ds) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;msgctl&quot;</span>);</div></div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+.TH "md_theory_message_queue_message_queue" 3 "Sab 2 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_message_queue_message_queueTeoria: coda dei messaggi 
+ \- 
+.SS "Creazione della coda dei messaggi"
+.PP
+.PP
+.nf
+#include <sys/msg\&.h>
+// Returns message queue identifier on success, or -1 error
+int msgget(key_t key, int msgflg);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCkey\fP: e' una chiave IPC
+.IP "\(bu" 2
+\fCmsgflg\fP: descrive i permessi
+.IP "  \(bu" 4
+puo' essere una delle flag del parametro \fCmode\fP di \fCopen()\fP
+.IP "  \(bu" 4
+\fCIPC_CREAT\fP: se non esiste la message queue legata alla chiave, creala
+.IP "  \(bu" 4
+\fCIPC_EXCEL\fP: usata insieme a \fCIPC_CREAT\fP, fa fallire msgget se esiste gia' una coda di messaggi legata alla chiave
+.PP
+
+.PP
+.PP
+Esempi: 
+.PP
+.nf
+int msqid;
+
+ket_t key = //\&.\&.\&. (generazione chiave)
+
+// A) Fai scegliere la chiave al kernel
+msqid = msgget(IPC_PRIVATE, S_IRUSR | S_IWUSR);
+
+// B) Ottieni identificativo della coda dei messaggi con la chiave key,
+//    creala se non esiste
+msqid = msgget(key, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// C) Ottieni identificativo della coda dei messaggi con la chiave key,
+//    fallisce se esiste gia'
+msqid = msgget(key, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);
+
+.fi
+.PP
+.PP
+.SS "Struttura dei messaggi"
+.PP
+La coda dei messaggi serve per inviare e ricevere messaggi\&.
+.PP
+Un messaggio e' una struttura che possiede un campo chiamato mtype di tipo long maggiore di zero e poi i dati da inviare\&.
+.PP
+Esempio: 
+.PP
+.nf
+struct mymsg {
+    long mtype;   /* tipo del messaggio */
+    char mtext[]; /* Testo */
+};
+
+.fi
+.PP
+.PP
+Oppure: 
+.PP
+.nf
+struct mymsg {
+    long mtype;   /* tipo del messaggio */
+    int a;        /* Intero 1 */
+    int b;        /* Intero 2 */
+};
+
+.fi
+.PP
+.PP
+Oppure: 
+.PP
+.nf
+struct mymsg {
+    long mtype;   /* tipo del messaggio */
+};
+
+.fi
+.PP
+.PP
+.SS "Inviare un messaggio"
+.PP
+Per scrivere un messaggio bisogna usare la system call: 
+.PP
+.nf
+#include <sys/msg\&.h>
+// Returns 0 on success, or -1 error
+int msgsnd(int msqid, const void *msgp, size_t msgsz, int msgflg);
+
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCmsqid\fP: identificatore della coda dei messaggi
+.IP "\(bu" 2
+\fCmsgp\fP: indirizzo che punta alla struttura dei messaggi
+.IP "\(bu" 2
+\fCmsgsz\fP: specifica il numero di byte contenuti nel corpo del messaggio (quindi senza contare mtype)
+.IP "\(bu" 2
+\fCmsgflg\fP:
+.IP "  \(bu" 4
+0: se la coda dei messaggi e' piena, questa system call si blocca in attesa di spazio libero
+.IP "  \(bu" 4
+\fCIPC_NOWAIT\fP: se la coda dei messaggi e' piena prosegue restituendo l'errore EAGAIN
+.PP
+
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+// Struttura del messaggio
+struct mymsg {
+    long mtype;
+    char mtext[100]; /* stringa */
+} m;
+
+// messaggio di tipo 1
+m\&.mtype = 1;
+
+// il messaggio contiene la seguente stringa
+char *text = "Ciao mondo!";
+
+// copia la stringa dentro a mtext
+memcpy(m\&.mtext, text, strlen(text) + 1);
+
+// calcolo dimensione del messaggio ignorando mtype
+size_t mSize = sizeof(struct mymsg) - sizeof(long);
+
+// invia il messaggio nella coda dei messaggi
+if (msgsnd(msqid, &m, mSize, 0) == -1)
+    errExit("msgsnd failed");
+
+.fi
+.PP
+.PP
+.SS "Ricevere un messaggio"
+.PP
+La system call \fCmsgrcv()\fP legge e rimuove il messaggio dalla queue dei messaggi:
+.PP
+.PP
+.nf
+#include <sys/msg\&.h>
+// Returns number of bytes copied into msgp on success, or -1 error
+ssize_t msgrcv(int msqid, void *msgp, size_t msgsz, long msgtype, int msgflg);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCmsgid\fP: identificativo della coda dei messaggi
+.IP "\(bu" 2
+\fCmsgp\fP: buffer dove leggere il messaggio
+.IP "\(bu" 2
+\fCmsgsz\fP: dimensione del messaggio (senza \fCmtype\fP)
+.IP "\(bu" 2
+\fCmsgtype\fP: tipo del messaggio
+.IP "  \(bu" 4
+maggiore di 0: il primo messaggio della coda che ha il tipo uguale a msgtype viene rimosso e restituito al lettore
+.IP "  \(bu" 4
+uguale a 0: viene letto e rimosso il primo messaggio della coda
+.IP "  \(bu" 4
+minore di 0: viene letto e rimosso il messagio con mtype piu' piccolo e che ha valore minore o uguale al valore assoluto di \fCmsgtype\fP
+.PP
+
+.IP "\(bu" 2
+\fCmsgflg\fP: flag
+.IP "  \(bu" 4
+0: se si cerca di leggere un messaggio di tipo msgtype che non c'e' la chiamata e' bloccante\&.
+.PP
+Se la dimensione del messaggio (senza mtype) supera la dimensione definita in msgsize verra' restituito un errore\&.
+.IP "  \(bu" 4
+\fCIPC_NOWAIT\fP: se si cerca di leggere un messaggio di tipo msgtype che non c'e' la chiamata NON e' bloccante\&. > Verra' restituito l'errore ENOMSG
+.IP "  \(bu" 4
+\fCMSG_NOERROR\fP: Se la dimensione del messaggio (senza mtype) supera la dimensione definita in msgsize NON dara' errore\&.
+.PP
+Il messaggio verra' cancellato dalla coda dei messaggi e verra' troncato per stare in msgsz bytes\&.
+.PP
+
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+// struttura dei messaggi
+struct mymsg {
+    long mtype;
+    char mtext[100]; /* corpo del messaggio */
+} m;
+
+// Calcola la dimensione di mtext
+size_t mSize = sizeof(struct mymsg) - sizeof(long);
+
+// Aspetta un messaggio di tipo 1
+if (msgrcv(msqid, &m, mSize, 1, 0) == -1)
+    errExit("msgrcv failed");
+
+.fi
+.PP
+.PP
+.SS "Operazioni di controllo"
+.PP
+.PP
+.nf
+#include <sys/msg\&.h>
+// Returns 0 on success, or -1 error
+int msgctl(int msqid, int cmd, struct msqid_ds *buf);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCmsqid\fP: identificativo della coda dei messaggi
+.IP "\(bu" 2
+\fCcmd\fP: comando da eseguire
+.IP "  \(bu" 4
+\fCIPC_RMID\fP: rimuove immediatamente la coda\&. Cancella tutti i messaggi e sveglia i processi in attesa con errore EIDRM\&.
+.IP "  \(bu" 4
+\fCIPC_STAT\fP: salva in \fCbuf\fP le statistiche della coda
+.IP "  \(bu" 4
+\fCIPC_SET\fP: modifica impostazioni della coda utilizzando \fCbuf\fP > si possono modificare i campi \fCmsg_perm\fP e\fCmsg_qbytes\fP\&.
+.PP
+
+.IP "\(bu" 2
+\fCbuf\fP: buffer\&.
+.PP
+.PP
+Esempio\&. Cancella la coda: 
+.PP
+.nf
+if (msgctl(msqid, IPC_RMID, NULL) == -1)
+    errExit("msgctl failed");
+else
+    printf("message queue removed successfully\n");
+
+.fi
+.PP
+.PP
+Struttura msqid_ds *buf: 
+.PP
+.nf
+struct msqid_ds {
+    struct ipc_perm msg_perm; // proprietario e permessi
+    time_t msg_stime; // tempo dell'ultimo last msgsnd()
+    time_t msg_rtime; // tempo dell'ultimo msgrcv()
+    time_t msg_ctime; // tempo dell'ultima modifica
+    unsigned long __msg_cbytes; // numero di byte nella coda
+    msgqnum_t msg_qnum; // numero di messaggi nella coda
+    msglen_t msg_qbytes; // numero massimo di byte inseribili nella coda
+    pid_t msg_lspid; // PID dell'ultimo msgsnd()
+    pid_t msg_lrpid; // PID dell'ultimo msgrcv()
+};
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Con \fCIPC_SET\fP si possono modificare i campi \fCmsg_perm\fP e\fCmsg_qbytes\fP\&. 
+.RE
+.PP
+.PP
+Esempio\&. Cambiare quantita' massima di byte memorizzabili nella coda: 
+.PP
+.nf
+struct msqid_ds ds;
+
+// Ottieni la struttura della coda dei messaggi
+if (msgctl(msqid, IPC_STAT, &ds) == -1)
+    errExit("msgctl");
+
+// Cambia il limite di byte massimi dell'mtext
+// per tutti i messaggi a 1 Kbyte
+ds\&.msg_qbytes = 1024;
+
+// Aggiorna la struttura nel kernel in kernel
+if (msgctl(msqid, IPC_SET, &ds) == -1)
+    errExit("msgctl");
+
+.fi
+.PP
+ 

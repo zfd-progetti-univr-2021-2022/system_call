@@ -1,0 +1,201 @@
+E\textquotesingle{} una porzione di memoria gestita dal kernel e che e\textquotesingle{} condivisa tra piu\textquotesingle{} processi.
+
+I dati posso essere scritti e letti immediatamente sulla memoria\+: e\textquotesingle{} necessario un sistema di sincronizzazione come, ad esempio, i semafori.
+
+\subsection*{Creazione memoria condivisa}
+
+La system call {\ttfamily shmget()} permette di creare una nuova memoria condivisa oppure di ottenere un identificatore di un segmento di memoria gia\textquotesingle{} esistente. 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/shm.h>}
+\textcolor{comment}{// Returns a shared memory segment identifier on success, or -1 on error}
+\textcolor{keywordtype}{int} shmget(key\_t key, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{int} shmflg);
+\end{DoxyCode}
+
+
+La memoria creata sara\textquotesingle{} inizializzata a 0.
+
+I parametri sono\+:
+\begin{DoxyItemize}
+\item {\ttfamily key}\+: chiave I\+PC
+\item {\ttfamily size}\+: dimensione desiderata della memoria condivisa in byte \begin{quote}
+La dimensione viene arrottondata al multiplo superiore della dimensione di pagina del sistema. Se non si vuole creare una memoria condivisa esistente deve essere minore o uguale al valore size con cui era stata creata precedentemente. \end{quote}
+
+\item {\ttfamily shmflg}\+: specificano i permessi.
+
+Possono essere usate tutte le flag di {\ttfamily mode} per i file e in piu\textquotesingle{} possono essere usate anche\+:
+\begin{DoxyItemize}
+\item {\ttfamily I\+P\+C\+\_\+\+C\+R\+E\+AT}\+: se non esiste un segmento di memoria legato alla chiave attuale, creane uno nuovo
+\item {\ttfamily I\+P\+C\+\_\+\+E\+X\+CL}\+: se usato con {\ttfamily I\+P\+C\+\_\+\+C\+R\+E\+AT}, permette al comando di fallire se esiste gia\textquotesingle{} una memoria condivisa legata alla chiave {\ttfamily key}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Per vedere come generare la chiave andare nella \href{md_theory_generate_keys_generate_keys.html}{\tt sezione relativa qui}
+
+Esempi creazione memoria condivisa\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} shmid;
+ket\_t key = \textcolor{comment}{//... (generazione chiave)}
+
+\textcolor{keywordtype}{size\_t} size = \textcolor{comment}{//... (dimensione calcolabile)}
+
+\textcolor{comment}{// A) Crea la memoria condivisa facendo scegliere al kernel la chiave}
+shmid = shmget(IPC\_PRIVATE, size, S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// B) Crea la memoria condivisa utilizzando la chiave key, solo se non esiste}
+shmid = shmget(key, size, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// C) Crea la memoria condivisa utilizzando la chiave key,}
+\textcolor{comment}{//    fallisce se la memoria e' gia' esistente}
+shmid = shmget(key, size, IPC\_CREAT | IPC\_EXCL | S\_IRUSR | S\_IWUSR);
+\end{DoxyCode}
+
+
+\subsection*{Collegamento alla memoria condivisa}
+
+Per usare la memoria condivisa bisogna aggiungerla allo spazio degli indirizzi del processo (in modo virtuale) con la system call\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/shm.h>}
+\textcolor{comment}{// Returns address at which shared memory is attached on success}
+\textcolor{comment}{// or (void *)-1 on error}
+\textcolor{keywordtype}{void} *shmat(\textcolor{keywordtype}{int} shmid, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *shmaddr, \textcolor{keywordtype}{int} shmflg);
+\end{DoxyCode}
+ \begin{quote}
+shmat sta per \char`\"{}shared memory attach\char`\"{} \end{quote}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily shmid}\+: e\textquotesingle{} l\textquotesingle{}identificativo ottenuto dalla chiave
+\item {\ttfamily shmaddr}\+:
+\begin{DoxyItemize}
+\item N\+U\+LL\+: il kernel sceglie l\textquotesingle{}indirizzo in cui \char`\"{}collegare\char`\"{} la memoria condivisa. $>$ Ignora le flag.
+\end{DoxyItemize}
+
+$>$ Questa opzione permette di rendere l\textquotesingle{}applicazione il piu\textquotesingle{} portatile possibile e riduce il rischio di collegare la memoria in zone gia\textquotesingle{} occupate (evitando cosi\textquotesingle{} di andare in errore)
+\begin{DoxyItemize}
+\item indirizzo\+: se {\ttfamily shmflg} e\textquotesingle{} {\ttfamily S\+H\+M\+\_\+\+R\+ND} verra\textquotesingle{} utilizzato indirizzo in cui \char`\"{}collegare\char`\"{} la memoria condivisa
+\end{DoxyItemize}
+\item {\ttfamily shmflg}\+:
+\begin{DoxyItemize}
+\item {\ttfamily S\+H\+M\+\_\+\+R\+ND}\+: permette di usare l\textquotesingle{}indirizzo {\ttfamily shmaddr} $>$ R\+ND sta per round ed ha a che fare con l\textquotesingle{}arrotondamento della dimensione delle pagine
+\item {\ttfamily S\+H\+M\+\_\+\+R\+D\+O\+N\+LY}\+: imposta la memoria condivisa in sola lettura
+\item 0\+: modalita\textquotesingle{} lettura e scrittura
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+I processi figlio ereditano le shared memory del padre.
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{comment}{// ottieni puntatore per gestire la memoria condivisa}
+\textcolor{comment}{// in modalita' lettura/scritura}
+\textcolor{keywordtype}{int} *ptr\_1 = (\textcolor{keywordtype}{int} *)shmat(shmid, NULL, 0);
+
+\textcolor{keywordflow}{if} (prt\_1 == -1) \{
+    \hyperlink{err__exit_8c_aa223b0ecfe538d130ece562646a37d27}{ErrExit}(\textcolor{stringliteral}{"shmat failed"});
+\}
+
+\textcolor{comment}{// ottieni puntatore per gestire la memoria condivisa in sola lettura}
+\textcolor{keywordtype}{int} *ptr\_2 = (\textcolor{keywordtype}{int} *)shmat(shmid, NULL, SHM\_RDONLY);
+
+\textcolor{keywordflow}{if} (prt\_2 == -1) \{
+    \hyperlink{err__exit_8c_aa223b0ecfe538d130ece562646a37d27}{ErrExit}(\textcolor{stringliteral}{"shmat failed"});
+\}
+
+\textcolor{comment}{// scrivi la memoria condivisa usando il puntatore mod. lettura/scrittura}
+\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; ++i)
+    ptr\_1[i] = i;
+
+\textcolor{comment}{// leggi la memoria condivisa con il puntatore in mod. lettura}
+\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; ++i)
+    printf(\textcolor{stringliteral}{"integer: %d\(\backslash\)n"}, ptr\_2[i]);
+\end{DoxyCode}
+
+
+\subsection*{Scollegamento della memoria condivisa}
+
+Quando un processo non necessita\textquotesingle{} piu\textquotesingle{} di una memoria condivisa puo\textquotesingle{} scollegarla eseguendo\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/shm.h>}
+\textcolor{comment}{// Returns 0 on success, or -1 on error}
+\textcolor{keywordtype}{int} shmdt(\textcolor{keyword}{const} \textcolor{keywordtype}{void} *shmaddr);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily shmaddr}\+: indirizzo della memoria da scollegare \begin{quote}
+Valore restituito da {\ttfamily shmat} \end{quote}
+
+\end{DoxyItemize}
+
+Le memorie condivise vengono scollegate automaticamente quando\+:
+\begin{DoxyItemize}
+\item viene eseguito una exec
+\item viene terminato il processo
+\end{DoxyItemize}
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{comment}{// collega la memoria condivisa in lettura/scrittura}
+\textcolor{keywordtype}{int} *ptr\_1 = (\textcolor{keywordtype}{int} *)shmat(shmid, NULL, 0);
+\textcolor{keywordflow}{if} (ptr\_1 == (\textcolor{keywordtype}{void} *)-1)
+    errExit(\textcolor{stringliteral}{"first shmat failed"});
+
+\textcolor{comment}{// scollega la memoria condivisa}
+\textcolor{keywordflow}{if} (shmdt(ptr\_1) == -1)
+    errExit(\textcolor{stringliteral}{"shmdt failed"});
+\end{DoxyCode}
+
+
+\subsection*{Operazioni di controllo}
+
+La system call {\ttfamily shmctl} permette di controllare la memoria condivisa.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/msg.h>}
+\textcolor{comment}{// Returns 0 on success, or -1 error}
+\textcolor{keywordtype}{int} shmctl(\textcolor{keywordtype}{int} shmid, \textcolor{keywordtype}{int} cmd, \textcolor{keyword}{struct} shmid\_ds *buf);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily shmid}\+: identificativo ottenuto dalla chiave
+\item {\ttfamily cmd}\+: comando da eseguire
+\begin{DoxyItemize}
+\item {\ttfamily I\+P\+C\+\_\+\+R\+M\+ID}\+: quando tutti i processi si saranno scollegati dalla memoria condivisa, questa verra\textquotesingle{} cancellata
+\item {\ttfamily I\+P\+C\+\_\+\+S\+T\+AT}\+: memorizza in {\ttfamily buf} le statistiche della memoria condivisa
+\item {\ttfamily I\+P\+C\+\_\+\+S\+ET}\+: usa {\ttfamily buf} per modificare le proprieta\textquotesingle{} della memoria condivisa $>$ L\textquotesingle{}unico campo modificabile e\textquotesingle{} {\ttfamily shm\+\_\+perm}
+\end{DoxyItemize}
+\item {\ttfamily buf}\+: puntatore a struttura dati usata per memorizzare/impostare proprieta\textquotesingle{} della memoria condivisa
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (shmctl(shmid, IPC\_RMID, NULL) == -1)
+    errExit(\textcolor{stringliteral}{"shmctl failed"});
+\textcolor{keywordflow}{else}
+    printf(\textcolor{stringliteral}{"shared memory segment removed successfully\(\backslash\)n"});
+\end{DoxyCode}
+
+
+Struttura shmid\+\_\+ds buf\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }shmid\_ds \{
+    \textcolor{keyword}{struct }ipc\_perm shm\_perm; \textcolor{comment}{// permessi e proprietario (kernel)}
+    \textcolor{keywordtype}{size\_t} shm\_segsz; \textcolor{comment}{// dimensione in byte}
+    time\_t shm\_atime; \textcolor{comment}{// tempo dell'ultima shmat()}
+    time\_t shm\_dtime; \textcolor{comment}{// tempo dell'ultimo shmdt()}
+    time\_t shm\_ctime; \textcolor{comment}{// tempo dell'ultima modifica}
+    pid\_t shm\_cpid; \textcolor{comment}{// PID del creatore}
+    pid\_t shm\_lpid; \textcolor{comment}{// PID dell'ultimo shmat() / shmdt()}
+    shmatt\_t shm\_nattch; \textcolor{comment}{// Numero di processi attualmente collegati}
+\};
+\end{DoxyCode}
+
+
+L\textquotesingle{}unico campo modificabile e\textquotesingle{} {\ttfamily shm\+\_\+perm} per gestire i permessi. 

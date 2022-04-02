@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SYSTEM_CALL: Pagine collegate</title>
+<title>SYSTEM_CALL: Teoria: generare chiavi per le IPC</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('pages.html','');});
+$(document).ready(function(){initNavTree('md_theory_generate_keys_generate_keys.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -89,21 +89,33 @@ $(document).ready(function(){initNavTree('pages.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Pagine collegate</div>  </div>
+<div class="title">Teoria: generare chiavi per le IPC </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Questo è l'elenco di tutte le pagine di documentazione collegate:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_theory_fifo_fifo.html" target="_self">Teoria: FIFO</a></td><td class="desc"></td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_theory_generate_keys_generate_keys.html" target="_self">Teoria: generare chiavi per le IPC</a></td><td class="desc"></td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_theory_message_queue_message_queue.html" target="_self">Teoria: coda dei messaggi</a></td><td class="desc"></td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_theory_shared_memory_shared_memory.html" target="_self">Teoria: memoria condivisa</a></td><td class="desc"></td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_theory_signals_signals.html" target="_self">Teoria: segnali</a></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="todo.html" target="_self">Elenco delle cose da fare</a></td><td class="desc"></td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="warning.html" target="_self">Warnings</a></td><td class="desc"></td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<div class="textblock"><p>Le chiavi sono dei numeri interi che servono ad alcune system call per creare una IPC (se non esiste gia') e restituire il suo identificatore che permette poi di utilizzarla per comunicare con altri processi. </p><blockquote class="doxtable">
+<p>Le IPC sono meccanismi di comunicazione tra processi. Puo' essere la memoria condivisa, la coda FIFO, la PIPE, i segnali, i semafori, le code di messaggi. </p>
+</blockquote>
+<p>Per fare un'analogia con i file di testo e' possibile vedere le chiavi come il percorso del file e l'identificatore come il file descriptor:</p><ul>
+<li>I primi servono per creare i secondi</li>
+<li>I secondi permettono di gestire il file/la IPC</li>
+</ul>
+<p>I processi che conoscono la chiave possono comunicare fra di loro creando ed utilizzando le IPC.</p>
+<p>Per creare le chiavi esistono piu' modi diversi.</p>
+<h2>Macro IPC_PRIVATE</h2>
+<p>La macro <code>IPC_PRIVATE</code> permette di generare una chiave che sara' sicuramente univoca perche' il kernel ce lo garantira'.</p>
+<p>Esempio di creazione di un semaforo utilizzando la macro: </p><div class="fragment"><div class="line"><span class="keywordtype">id</span> = semget(IPC_PRIVATE, 10, S_IRUSR | S_IWUSR);</div></div><!-- fragment --><p>E' comoda quando un processo padre crea la IPC prima di creare i processi figli con cui comunichera' in seguito.</p>
+<p>E' difficile utilizzarla quando i processi che devono comunicare non sono imparentati.</p>
+<h2>Funzione file to key</h2>
+<p>La funzione <code>ftok()</code> (file to key) converte il percorso di un file ed un identificativo di progetto in una chiave.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/ipc.h&gt;</span></div><div class="line"><span class="comment">// Returns integer key on succcess, or -1 on error (check errno)</span></div><div class="line">key_t ftok(<span class="keywordtype">char</span> *pathname, <span class="keywordtype">int</span> proj_id);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Vengono usati solo gli ultimi 8 bit di proj_id </p>
+</blockquote>
+<p>Il file nel percorso pathname deve essere esistente e accessibile (bisogna avere i permessi giusti)</p>
+<div class="fragment"><div class="line">Esempio:</div><div class="line">key_t key = ftok(<span class="stringliteral">&quot;/mydir/myfile&quot;</span>, <span class="charliteral">&#39;a&#39;</span>);</div><div class="line"><span class="keywordflow">if</span> (key == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;ftok failed&quot;</span>);</div><div class="line"></div><div class="line"><span class="keywordtype">int</span> <span class="keywordtype">id</span> = semget(key, 10, S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (<span class="keywordtype">id</span> == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semget failed&quot;</span>);</div></div><!-- fragment --><p>Questa opzione e' comoda per far comunicare processi non imparentati mantenendo un punto di riferimento fisso.</p>
+<h2>Inserimento manuale</h2>
+<p>Per progetti semplici posso scegliere di fissare un numero per gestire le IPC.</p>
+<p>Questa opzione e' comoda per far comunicare processi non imparentati in progetti piccoli. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
