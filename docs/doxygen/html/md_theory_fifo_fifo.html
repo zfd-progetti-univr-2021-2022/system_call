@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: FIFO</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_fifo_fifo.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: FIFO </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>Introduzione</h2>
+<p>Una FIFO permette di far scambiare a piu' processi un flusso di byte </p><blockquote class="doxtable">
+<p>Per farlo viene usato un buffer memorizzato nella memoria del kernel </p>
+</blockquote>
+<p>Una FIFO ha un nome all'interno del file system e quindi e' comoda per far comunicare processi che non sono imparentati. </p><blockquote class="doxtable">
+<p>Una FIFO puo' essere vista come una PIPE che ha un nome che la identifica. </p>
+</blockquote>
+<p>Una FIFO viene scritta da una parte e letta dall'altra.</p>
+<p>I dati vengono letti nello stesso ordine in cui sono stati scritti.</p>
+<p>Tipicamente una FIFO e' usata da solo 2 processi: un processo crea e apre una FIFO in lettura e attende che un altro processo apra e scriva sulla FIFO. </p><blockquote class="doxtable">
+<p>L'attesa e' automatica, l'apertura in lettura e' bloccante. Anche chi scrive attende che ci sia un processo pronto a leggere. </p>
+</blockquote>
+<h2>Creare una FIFO</h2>
+<p>Una FIFO si crea con la system call: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;sys/stat.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> mkfifo(<span class="keyword">const</span> <span class="keywordtype">char</span> *pathname, mode_t mode);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li>pathname: e' il percorso del file della FIFO</li>
+<li>mode: specifica i permessi</li>
+<li>restituisce: -1 in caso di errore, 0 in caso di successo</li>
+</ul>
+<h2>Aprire una FIFO</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;fcntl.h&gt;</span></div><div class="line"><span class="keywordtype">int</span> open(<span class="keyword">const</span> <span class="keywordtype">char</span> *pathname, <span class="keywordtype">int</span> flags);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><p class="startli">pathname: e' il percorso del file della FIFO.</p>
+<p class="startli">Lo stesso usato da <code>mkfifo()</code>.</p>
+</li>
+<li><p class="startli">flags: maschera che indica la modalita' di apertura della FIFO.</p>
+<p class="startli">Sola lettura (<code>O_RDONLY</code>) oppure sola scrittura(<code>O_WRONLY</code>).</p>
+</li>
+<li>restituisce: -1 in caso di errore, oppure il file descriptor della FIFO</li>
+</ul>
+<h2>Modalita' di utilizzo tipica</h2>
+<p>Tipicamente una FIFO viene usata da un processo che riceve e da un processo che trasmette.</p>
+<p>In questo esempio bisogna:</p><ol type="1">
+<li>eseguire il ricevitore</li>
+<li>eseguire il trasmettitore</li>
+<li>scrivere sul trasmettitore il messaggio da mandare e premere invio</li>
+</ol>
+<p>Il ricevitore visualizzera' a video il messaggio inviato dal trasmettitore.</p>
+<blockquote class="doxtable">
+<p>NOTA: Nella cartella <code>docs/doxygen/theory/fifo</code> e' possibile trovare i file sorgente dell'esempio qui sotto. </p>
+</blockquote>
+<h3>Ricevitore</h3>
+<div class="fragment"><div class="line"><span class="comment">// salvo il percorso del file che gestisce la FIFO</span></div><div class="line"><span class="comment">// &gt; stesso file usato dal trasmettitore</span></div><div class="line"><span class="keywordtype">char</span> *fname = <span class="stringliteral">&quot;/tmp/myfifo&quot;</span>;</div><div class="line"></div><div class="line"><span class="comment">// creo la FIFO passandogli il percorso e i permessi</span></div><div class="line"><span class="keywordtype">int</span> res = mkfifo(fname, S_IRUSR|S_IWUSR);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (res == -1) {</div><div class="line">    <span class="comment">// posso usare ErrExit()</span></div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a creare la FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Apro in lettura la FIFO</span></div><div class="line"><span class="keywordtype">int</span> fd = open(fname, O_RDONLY);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (fd == -1) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito ad aprire in lettura la FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// leggi byte dalla FIFO e memorizza nel buffer</span></div><div class="line"><span class="keywordtype">char</span> buffer[LEN];</div><div class="line"><span class="keywordflow">if</span> (read(fd, buffer, LEN) == -1) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a leggere la FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Visualizza cio&#39; che e&#39; stato letto</span></div><div class="line">printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buffer);</div><div class="line"></div><div class="line"><span class="comment">// chiudi la FIFO</span></div><div class="line"><span class="keywordflow">if</span> (close(fd) == -1) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a chiudere la FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// elimina file della FIFO (o togli symlink se e&#39; un collegamento)</span></div><div class="line"><span class="keywordflow">if</span> (unlink(fname)) {</div><div class="line">    printf(<span class="stringliteral">&quot;Elimina file della FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div></div><!-- fragment --><h3>Trasmettitore</h3>
+<div class="fragment"><div class="line"><span class="comment">// salvo il percorso del file che gestisce la FIFO</span></div><div class="line"><span class="comment">// &gt; stesso file usato dal ricevitore</span></div><div class="line"><span class="keywordtype">char</span> *fname = <span class="stringliteral">&quot;/tmp/myfifo&quot;</span>;</div><div class="line"></div><div class="line"><span class="comment">// Apri la FIFO in scrittura</span></div><div class="line"><span class="keywordtype">int</span> fd = open(fname, O_WRONLY);</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (fd == -1) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito ad aprire in scrittura la FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Leggi da terminale una stringa da mandare al ricevitore</span></div><div class="line"><span class="keywordtype">char</span> buffer[LEN];</div><div class="line">printf(<span class="stringliteral">&quot;Give me a string: &quot;</span>);</div><div class="line">fgets(buffer, LEN, stdin);</div><div class="line"></div><div class="line"><span class="comment">// scrivi la stringa sulla FIFO</span></div><div class="line">ssize_t written_bytes = write(fd, buffer, strlen(buffer));</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (written_bytes == -1) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a scrivere i byte sulla FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// chiudi la FIFO</span></div><div class="line"><span class="keywordflow">if</span> (close(fd) == -1) {</div><div class="line">    printf(<span class="stringliteral">&quot;Non sono riuscito a chiudere la FIFO\n&quot;</span>);</div><div class="line">    exit(1);</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

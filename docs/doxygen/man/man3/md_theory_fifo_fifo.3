@@ -1,0 +1,183 @@
+.TH "md_theory_fifo_fifo" 3 "Sab 2 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_fifo_fifoTeoria: FIFO 
+ \- 
+.SS "Introduzione"
+.PP
+Una FIFO permette di far scambiare a piu' processi un flusso di byte 
+.PP
+.RS 4
+Per farlo viene usato un buffer memorizzato nella memoria del kernel 
+.RE
+.PP
+.PP
+Una FIFO ha un nome all'interno del file system e quindi e' comoda per far comunicare processi che non sono imparentati\&. 
+.PP
+.RS 4
+Una FIFO puo' essere vista come una PIPE che ha un nome che la identifica\&. 
+.RE
+.PP
+.PP
+Una FIFO viene scritta da una parte e letta dall'altra\&.
+.PP
+I dati vengono letti nello stesso ordine in cui sono stati scritti\&.
+.PP
+Tipicamente una FIFO e' usata da solo 2 processi: un processo crea e apre una FIFO in lettura e attende che un altro processo apra e scriva sulla FIFO\&. 
+.PP
+.RS 4
+L'attesa e' automatica, l'apertura in lettura e' bloccante\&. Anche chi scrive attende che ci sia un processo pronto a leggere\&. 
+.RE
+.PP
+.PP
+.SS "Creare una FIFO"
+.PP
+Una FIFO si crea con la system call: 
+.PP
+.nf
+#include <unistd\&.h>
+#include <sys/stat\&.h>
+
+int mkfifo(const char *pathname, mode_t mode);
+
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+pathname: e' il percorso del file della FIFO
+.IP "\(bu" 2
+mode: specifica i permessi
+.IP "\(bu" 2
+restituisce: -1 in caso di errore, 0 in caso di successo
+.PP
+.PP
+.SS "Aprire una FIFO"
+.PP
+.PP
+.nf
+#include <fcntl\&.h>
+int open(const char *pathname, int flags);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+pathname: e' il percorso del file della FIFO\&.
+.PP
+Lo stesso usato da \fCmkfifo()\fP\&.
+.IP "\(bu" 2
+flags: maschera che indica la modalita' di apertura della FIFO\&.
+.PP
+Sola lettura (\fCO_RDONLY\fP) oppure sola scrittura(\fCO_WRONLY\fP)\&.
+.IP "\(bu" 2
+restituisce: -1 in caso di errore, oppure il file descriptor della FIFO
+.PP
+.PP
+.SS "Modalita' di utilizzo tipica"
+.PP
+Tipicamente una FIFO viene usata da un processo che riceve e da un processo che trasmette\&.
+.PP
+In questo esempio bisogna:
+.IP "1." 4
+eseguire il ricevitore
+.IP "2." 4
+eseguire il trasmettitore
+.IP "3." 4
+scrivere sul trasmettitore il messaggio da mandare e premere invio
+.PP
+.PP
+Il ricevitore visualizzera' a video il messaggio inviato dal trasmettitore\&.
+.PP
+.RS 4
+NOTA: Nella cartella \fCdocs/doxygen/theory/fifo\fP e' possibile trovare i file sorgente dell'esempio qui sotto\&. 
+.RE
+.PP
+.PP
+.SS "Ricevitore"
+.PP
+.PP
+.nf
+// salvo il percorso del file che gestisce la FIFO
+// > stesso file usato dal trasmettitore
+char *fname = "/tmp/myfifo";
+
+// creo la FIFO passandogli il percorso e i permessi
+int res = mkfifo(fname, S_IRUSR|S_IWUSR);
+
+if (res == -1) {
+    // posso usare ErrExit()
+    printf("Non sono riuscito a creare la FIFO\n");
+    exit(1);
+}
+
+// Apro in lettura la FIFO
+int fd = open(fname, O_RDONLY);
+
+if (fd == -1) {
+    printf("Non sono riuscito ad aprire in lettura la FIFO\n");
+    exit(1);
+}
+
+// leggi byte dalla FIFO e memorizza nel buffer
+char buffer[LEN];
+if (read(fd, buffer, LEN) == -1) {
+    printf("Non sono riuscito a leggere la FIFO\n");
+    exit(1);
+}
+
+// Visualizza cio' che e' stato letto
+printf("%s\n", buffer);
+
+// chiudi la FIFO
+if (close(fd) == -1) {
+    printf("Non sono riuscito a chiudere la FIFO\n");
+    exit(1);
+}
+
+// elimina file della FIFO (o togli symlink se e' un collegamento)
+if (unlink(fname)) {
+    printf("Elimina file della FIFO\n");
+    exit(1);
+}
+.fi
+.PP
+.PP
+.SS "Trasmettitore"
+.PP
+.PP
+.nf
+// salvo il percorso del file che gestisce la FIFO
+// > stesso file usato dal ricevitore
+char *fname = "/tmp/myfifo";
+
+// Apri la FIFO in scrittura
+int fd = open(fname, O_WRONLY);
+
+if (fd == -1) {
+    printf("Non sono riuscito ad aprire in scrittura la FIFO\n");
+    exit(1);
+}
+
+// Leggi da terminale una stringa da mandare al ricevitore
+char buffer[LEN];
+printf("Give me a string: ");
+fgets(buffer, LEN, stdin);
+
+// scrivi la stringa sulla FIFO
+ssize_t written_bytes = write(fd, buffer, strlen(buffer));
+
+if (written_bytes == -1) {
+    printf("Non sono riuscito a scrivere i byte sulla FIFO\n");
+    exit(1);
+}
+
+// chiudi la FIFO
+if (close(fd) == -1) {
+    printf("Non sono riuscito a chiudere la FIFO\n");
+    exit(1);
+}
+.fi
+.PP
+ 

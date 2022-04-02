@@ -1,6 +1,7 @@
 var NAVTREE =
 [
   [ "SYSTEM_CALL", "index.html", [
+    [ "Teoria: FIFO", "md_theory_fifo_fifo.html", null ],
     [ "Elenco delle cose da fare", "todo.html", null ],
     [ "Warnings", "warning.html", null ],
     [ "Strutture dati", "annotated.html", [
