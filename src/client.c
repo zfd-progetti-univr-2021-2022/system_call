@@ -5,6 +5,12 @@
  * @todo Completare l'implementazione delle funzioni.
  * @todo Rimuovere printf di debug o gestirle tramite flag di compilazione.
  * @todo Spostare la funzione dividi() ? (una opzione e' metterla in files.c)
+ *
+ * @warning La specifica non richiede la documentazione. E' richiesta?
+ *
+ * @warning I percorsi dei file hanno dimensione massima?
+ *
+ * @warning I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?
 */
 
 #include <stdio.h>
@@ -83,6 +89,8 @@ void SIGINTSignalHandler(int sig) {
 
     // si mette in attesa sulla MsgQueue di un messaggio da parte del server che lo
     // informa che tutti i file di output sono stati creati dal server stesso e che il server ha concluso le sue operazioni.
+
+    // ?? ATTENDI FINE DEI PROCESSI FIGLIO ??
 
     // libera lista dei file
     free_list(sendme_files);

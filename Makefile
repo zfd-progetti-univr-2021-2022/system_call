@@ -11,3 +11,5 @@ docs:
 clean:
 	rm -rf dist/
 	cd src && make clean
+
+.PHONY: build docs clean
