@@ -1,0 +1,188 @@
+.TH "md_theory_pipe_pipe" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_pipe_pipeTeoria: PIPE 
+ \- 
+.SS "Introduzione"
+.PP
+Una PIPE permette di far scambiare a piu' processi un flusso di byte 
+.PP
+.RS 4
+Per farlo viene usato un buffer memorizzato nella memoria del kernel 
+.RE
+.PP
+.PP
+La PIPE e' utile quando due processi imparentati devono scambiarsi informazioni\&. 
+.PP
+.RS 4
+Quindi, di solito, dopo aver creato la PIPE e' presente una fork\&. 
+.RE
+.PP
+.PP
+Una PIPE ha le seguenti caratteristiche:
+.IP "\(bu" 2
+e' UNIDIREZIONALE: i dati vanno in una direzione, entrano dalla parte della scrittura ed escono dalla parte della lettura
+.IP "\(bu" 2
+i dati viaggiano nella PIPE in modo SEQUENZIALE\&. I byte vengono letti nello stesso ordine in cui sono stati scritti
+.IP "\(bu" 2
+non usano il concetto di messaggi, e quindi non ci sono vincoli su come essi sono formati\&. La lettura puo' essere fatta di qualunque dimensione, senza necessariamente rispettare i vincoli della dimensione dei dati inseriti in scrittura\&.
+.IP "\(bu" 2
+La lettura di una PIPE vuota e' bloccante\&.
+.PP
+Per sbloccarsi deve essere scritto almeno un byte nella PIPE oppure deve arrivare un segnale (che non faccia terminare il processo)\&. > errno viene impostato a EINTR
+.IP "\(bu" 2
+Se viene chiuso il lato della scrittura il processo che legge vedra' l'end of file dopo aver letto il resto dei dati\&.
+.IP "\(bu" 2
+La scrittura e' bloccante\&.
+.PP
+Si sblocchera' se c'e' abbastanza spazio per eseguire la scrittura in modo atomico oppure se arriva un segnale (che non faccia terminare il processo)\&. > errno viene impostato a EINTR
+.PP
+> Su linux una PIPE ha 65536 byte di capacita'\&.
+.IP "\(bu" 2
+Se si scrivono blocchi di dati maggiori di \fCPIPE_BUF\fP (4096 bytes su linux) i dati potrebbero essere suddivisi in segmenti di dimensione arbitraria (piu' piccola di \fCPIPE_BUF\fP)
+.PP
+.PP
+.SS "Creare una PIPE"
+.PP
+.PP
+.nf
+#include <unistd\&.h>
+
+int pipe(int filedes[2]);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+filedes: e' un array da due interi\&. Se la chiamata ha successo gli interi sono i file descriptor della PIPE
+.IP "  \(bu" 4
+filedes[0] e' il lato di lettura
+.IP "  \(bu" 4
+filedes[1] e' il lato di scrittura
+.PP
+
+.IP "\(bu" 2
+Restituisce: 0 in caso di successo, -1 in caso di errore
+.PP
+.PP
+Esempio apertura PIPE: 
+.PP
+.nf
+int fd[2];
+// apri e controlla se la apertura ha avuto successo
+if (pipe(fd) == -1)
+    errExit("PIPE");
+
+.fi
+.PP
+.PP
+Tipicamente dopo aver creato una PIPE il processo crea un figlio con la \fCfork()\fP\&.
+.PP
+.SS "Leggere da una PIPE"
+.PP
+Dopo aver creato una PIPE, il processo che si occupa di leggere (o il padre o il figlio) puo' tranquillamente chiudere il lato di scrittura con la system call close:
+.PP
+.PP
+.nf
+if (close(fd[1]) == -1)
+    // visualizza child perche' in questo esempio il figlio legge
+    errExit("close - child");
+.fi
+.PP
+ 
+.PP
+.RS 4
+E' altamente consigliato farlo 
+.RE
+.PP
+.PP
+E poi puo' iniziare a leggere dalla PIPE con read: 
+.PP
+.nf
+char buf[SIZE];  // buffer in cui vengono letti i dati
+ssize_t nBys;    // numero byte letti
+
+// leggi dalla PIPE
+nBys = read(fd[0], buf, SIZE);
+
+// 0: end-of-file, -1: errore
+if (nBys > 0) {
+    buf[nBys] = '\0';
+    printf("%s\n", buf);
+}
+
+.fi
+.PP
+.PP
+.SS "Scrivere su una PIPE"
+.PP
+Dopo aver creato una PIPE, il processo che si occupa di scrivere (o il padre o il figlio) puo' chiudere il lato di lettura con la system call close:
+.PP
+.PP
+.nf
+if (close(fd[0]) == -1)
+    // visualizza parent perche' in questo esempio il padre scrive
+    errExit("close - parent");
+.fi
+.PP
+ 
+.PP
+.RS 4
+E' altamente consigliato farlo 
+.RE
+.PP
+.PP
+E poi puo' iniziare a scrivere nella PIPE con write: 
+.PP
+.nf
+char buf[] = "Ciao Mondo\n";
+ssize_t nBys;
+
+// scrivi sulla PIPE
+nBys = write(fd[1], buf, strlen(buf));
+
+// verifica se write ha avuto successo
+if (nBys != strlen(buf)) {
+    errExit("write - parent");
+}
+
+.fi
+.PP
+.PP
+.SS "Chiudere la PIPE"
+.PP
+Per chiudere la PIPE si usa la system call close su entrambe i lati della comunicazione (lettura e scrittura)\&.
+.PP
+In genere il processo che dovra' legge chiude immediatamente il lato di scrittura e viceversa il processo che dovra' scrive chiude il lato di lettura\&. 
+.PP
+.RS 4
+E' altamente consigliato farlo 
+.RE
+.PP
+.PP
+Per questo motivo a fine comunicazione i due processi si ritroveranno a chiudere soltanto il proprio lato del canale\&.
+.PP
+Chiudi lato di lettura: 
+.PP
+.nf
+if (close(fd[0]) == -1)
+    errExit("close");
+
+.fi
+.PP
+.PP
+Chiudi lato di scrittura: 
+.PP
+.nf
+if (close(fd[1]) == -1)
+    errExit("close");
+
+.fi
+.PP
+.PP
+.RS 4
+NOTA: queste system call sono identiche a quelle usate per chiudere il lato che non verra' usato dal proprio processo\&.
+.RE
+.PP
+

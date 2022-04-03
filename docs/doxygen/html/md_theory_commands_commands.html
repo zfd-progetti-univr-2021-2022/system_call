@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: comandi utili</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_commands_commands.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: comandi utili </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>Comandi debugger GDB</h2>
+<p>Per prima cosa bisogna compilare i file sorgente con le informazioni di debugging con la flag <code>-g</code>.</p>
+<p>Esempio: </p><div class="fragment"><div class="line"># Usa -g per permettere il debugging</div><div class="line">gcc -g &lt;nome&gt;.c -o &lt;output&gt;</div></div><!-- fragment --><p>Comandi GDB:</p><ul>
+<li><code>break &lt;nome funzione&gt;</code>: imposta un breakpoint su una funzione</li>
+<li><code>break &lt;riga codice&gt;</code>: imposta un breakpoint su una certa riga del codice</li>
+<li><code>clear &lt;riga codice&gt;</code>: toglie il breakpoint su quella riga di codice</li>
+<li><code>watch &lt;nome variabile&gt;</code>: aggiunge un watchpoint che blocca il codice quando la variabile cambia valore</li>
+<li><code>run</code>: esegue il programma</li>
+<li><code>print &lt;variabile&gt;</code>: visualizza il valore della variabile &gt; E' possibile anche scrivere print var_array[x] per visualizzare l'elemento di un array</li>
+<li><code>step</code>: esegue la riga di codice successiva seguendo il codice nelle funzioni</li>
+<li><code>next</code>: esegue la riga di codice successiva eseguendo le funzioni in un colpo solo</li>
+<li><code>continue</code>: esegue il codice finche' non viene raggiunto un breakpoint o watchpoint</li>
+<li><code>list</code>: visualizza la riga</li>
+<li><code>quit</code>: esce da gdb</li>
+</ul>
+<h2>Estensioni dell'interfaccia GDB e interfacce grafiche</h2>
+<h3>Interfacce CLI</h3>
+<p><a href="https://github.com/cyrus-and/gdb-dashboard">gdb-dashboard</a> estende l'interfaccia del terminale.</p>
+<div class="image">
+<img src="https://raw.githubusercontent.com/wiki/cyrus-and/gdb-dashboard/Screenshot.png"/>
+</div>
+<p>E' possibile scaricando il file <code>.gdbinit</code> nella cartella home: </p><div class="fragment"><div class="line">wget -P ~ https://git.io/.gdbinit</div></div><!-- fragment --><p>Per aggiungere il syntax highlight bisogna installare Pygments (libreria Python): </p><div class="fragment"><div class="line">pip install pygments</div></div><!-- fragment --><h3>Interfacce GUI</h3>
+<p><a href="https://github.com/cs01/gdbgui">gdbgui</a> e' una interfaccia grafica basata su tecnologie web.</p>
+<div class="image">
+<img src="https://raw.githubusercontent.com/cs01/gdbgui/799d34051419653cfda7d068806f853007d46fac/screenshots/gdbgui_animation.gif"/>
+</div>
+<h2>Visualizza informazioni IPC</h2>
+<p>Il comando <code>ipcs</code> permette di vedere una lista di:</p><ul>
+<li>code dei messaggi</li>
+<li>segmenti di memoria condivisa</li>
+<li>set di semafori</li>
+</ul>
+<p>Esempio di output: </p><div class="fragment"><div class="line">------ Message Queues --------</div><div class="line">key     msqid  owner    perms  used-bytes  messages</div><div class="line">0x1235  26     student  620    12          20</div><div class="line"></div><div class="line">------ Shared Memory Segments --------</div><div class="line">key     shmid  owner      perms  bytes  nattch  status</div><div class="line">0x1234  0      professor  600    8192   2</div><div class="line"></div><div class="line">------ Semaphore Arrays --------</div><div class="line">key     semid  owner      perms  nsems</div><div class="line">0x1111  102    professor  330    20</div></div><!-- fragment --><h2>Rimuovi IPC dal sistema:</h2>
+<p>Il comando <code>ipcrm</code> permette di rimuovere le IPC.</p>
+<p>Rimuovere una coda dei messaggi: </p><div class="fragment"><div class="line"># 0x1235 e&#39; la chiave della coda</div><div class="line">ipcrm -Q 0x1235</div><div class="line"></div><div class="line"># 25 e&#39; l&#39;identificatore della coda</div><div class="line">ipcrm -q 26</div></div><!-- fragment --><p>Rimuovere un segmento di memoria condivisa: </p><div class="fragment"><div class="line"># 0x1234 e&#39; la chiave della memoria condivisa</div><div class="line">ipcrm -M 0x1234</div><div class="line"></div><div class="line"># 0 e&#39; l&#39;identificatore della memoria condivisa</div><div class="line">ipcrm -m 0</div></div><!-- fragment --><p>Rimuovere un set di semafori: </p><div class="fragment"><div class="line"># 0x1111 e&#39; la chiave del set di semafori</div><div class="line">ipcrm -S 0x1111</div><div class="line"></div><div class="line"># 102 e&#39; l&#39;identificatore del set di semafori</div><div class="line">ipcrm -s 102</div></div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

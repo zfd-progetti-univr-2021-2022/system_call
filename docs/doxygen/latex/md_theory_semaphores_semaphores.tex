@@ -1,0 +1,441 @@
+I semafori vengono usati per sincronizzare piu\textquotesingle{} processi.
+
+La sincronizzazione puo\textquotesingle{} servire per gestire la comunicazione tra processi oppure per coordinarli. \begin{quote}
+N\+O\+TA\+: non tutti i mezzi di comunicazione necessitano di semafori. Un mezzo che li richiede e\textquotesingle{} la memoria condivisa. \end{quote}
+
+
+Le system call per i semafori lavorano sempre su insiemi (set) di semafori e N\+ON su semafori singoli.
+
+\subsection*{Creazione di un insieme di semafori}
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/sem.h>}
+
+\textcolor{comment}{// Returns semaphore set identifier on success, or -1 error}
+\textcolor{keywordtype}{int} semget(key\_t key, \textcolor{keywordtype}{int} nsems, \textcolor{keywordtype}{int} semflg);
+\end{DoxyCode}
+
+
+Dove.
+\begin{DoxyItemize}
+\item {\ttfamily key}\+: e\textquotesingle{} la chiave I\+PC
+\item {\ttfamily nsems}\+: e\textquotesingle{} il numero di semafori da creare e deve essere quindi maggiore di 0.
+\item {\ttfamily semflg}\+: specifica i permessi
+\begin{DoxyItemize}
+\item Sono validi tutti i permessi del parametro {\ttfamily mode} della system call {\ttfamily open()}
+\item {\ttfamily I\+P\+C\+\_\+\+C\+R\+E\+AT}\+: se non esiste un set di semafori legato alla chiave, lo crea
+\item {\ttfamily I\+P\+C\+\_\+\+E\+X\+CL}\+: se usato con {\ttfamily I\+P\+C\+\_\+\+C\+R\+E\+AT}, fa fallire la system call se esiste gia\textquotesingle{} un set di semafori legato alla chiave
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Per vedere come generare la chiave andare nella \href{md_theory_generate_keys_generate_keys.html}{\tt sezione relativa qui}
+
+Esempi\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semid;
+ket\_t key = \textcolor{comment}{// ... (genera la chiave in qualche modo)}
+
+\textcolor{comment}{// A) Delega al kernel la scelta della chiave}
+semid = semget(IPC\_PRIVATE, 10, S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// B) Se non esiste crea un set di 10 semafori con la chiave key}
+semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// C) crea un set di 10 semafori con la chiave key.}
+\textcolor{comment}{//    se esiste gia' fallisce}
+semid = semget(key, 10, IPC\_CREAT | IPC\_EXCL | S\_IRUSR | S\_IWUSR);
+\end{DoxyCode}
+
+
+\subsection*{Operazioni di controllo}
+
+La system call {\ttfamily semctl()} permette di eseguire operazioni su un set di semafori oppure su un semaforo appartenente al set.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/sem.h>}
+\textcolor{comment}{// Returns nonnegative integer on success, or -1 error}
+\textcolor{keywordtype}{int} semctl(\textcolor{keywordtype}{int} semid, \textcolor{keywordtype}{int} semnum, \textcolor{keywordtype}{int} cmd, ... \textcolor{comment}{/* union semun arg */});
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily semid}\+: identificativo ottenuto usando la chiave I\+PC
+\item {\ttfamily semnum}
+\item {\ttfamily cmd}\+: operazione da eseguire
+\item (opzionale) {\ttfamily arg}\+: argomento usato solo per certe operazioni
+\end{DoxyItemize}
+
+Dove {\ttfamily arg} e\textquotesingle{} la seguente union\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/sem.h>}
+
+\textcolor{keyword}{union }\hyperlink{unionsemun}{semun} \{
+    \textcolor{comment}{// usato se si lavora su un singolo semaforo.}
+    \textcolor{comment}{// usato dalla operazione SETVAL}
+    \textcolor{keywordtype}{int} \hyperlink{unionsemun_ac6121ecb6d04a024e07e12bd71b94031}{val};
+
+    \textcolor{comment}{// usato per lavorare sullo stato globale del semaforo.}
+    \textcolor{comment}{// usato dalle operazioni IPC\_STAT e IPC\_SET}
+    \textcolor{keyword}{struct }semid\_ds * \hyperlink{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}{buf};
+
+    \textcolor{comment}{// per eseguire operazioni su tutti i semafori.}
+    \textcolor{comment}{// usato dalle operazioni GETALL e SETALL}
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} * \hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array};
+\};
+\end{DoxyCode}
+ \begin{quote}
+Deve essere dichiarata prima di usare {\ttfamily semctl()}. \end{quote}
+
+
+\subsubsection*{Cancellare un set di semafori}
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, 0 \textcolor{comment}{/* semnum: ignored */}, cmd, 0 \textcolor{comment}{/* arg: ignored */});
+\end{DoxyCode}
+
+
+Se il parametro {\ttfamily cmd} vale {\ttfamily I\+P\+C\+\_\+\+R\+M\+ID} la system call rimuove immediatamente un set di semafori. \begin{quote}
+I processi bloccati vengono svegliati con errore {\ttfamily E\+I\+D\+RM}. \end{quote}
+
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (semctl(semid, 0\textcolor{comment}{/*ignored*/}, IPC\_RMID, 0\textcolor{comment}{/*ignored*/}) == -1)
+    errExit(\textcolor{stringliteral}{"semctl failed"});
+\textcolor{keywordflow}{else}
+    printf(\textcolor{stringliteral}{"semaphore set removed successfully\(\backslash\)n"});
+\end{DoxyCode}
+
+
+\subsubsection*{Reciperare statistiche}
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, 0 \textcolor{comment}{/* semnum: ignored */}, cmd, arg);
+\end{DoxyCode}
+
+
+Se {\ttfamily cmd} vale {\ttfamily I\+P\+C\+\_\+\+S\+T\+AT} la system call memorizza le statistiche del set di semafori in {\ttfamily arg.\+buf}.
+
+Dove {\ttfamily arg.\+buf} ha la seguente struttura\+:
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }semid\_ds \{
+    \textcolor{keyword}{struct }ipc\_perm sem\_perm; \textcolor{comment}{// proprietario e permessi}
+    time\_t sem\_otime; \textcolor{comment}{// Tempo dell'ultimo semop()}
+    time\_t sem\_ctime; \textcolor{comment}{// Tempo dell'ultima modifica}
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} sem\_nsems; \textcolor{comment}{// Numero di semafori nel set}
+\};
+\end{DoxyCode}
+
+
+\subsubsection*{Cambiare i permessi}
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, 0 \textcolor{comment}{/* semnum: ignored */}, cmd, arg);
+\end{DoxyCode}
+
+
+Se {\ttfamily cmd} vale {\ttfamily I\+P\+C\+\_\+\+S\+ET} la system call utilizza il campo {\ttfamily arg.\+buf} per impostare proprieta\textquotesingle{} sul set di semafori.
+
+Dove {\ttfamily arg.\+buf} ha la seguente struttura\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }semid\_ds \{
+    \textcolor{keyword}{struct }ipc\_perm sem\_perm; \textcolor{comment}{// proprietario e permessi}
+    time\_t sem\_otime; \textcolor{comment}{// Tempo dell'ultimo semop()}
+    time\_t sem\_ctime; \textcolor{comment}{// Tempo dell'ultima modifica}
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} sem\_nsems; \textcolor{comment}{// Numero di semafori nel set}
+\};
+\end{DoxyCode}
+
+
+Gli unici valori modificabili sono i permessi contenuti in {\ttfamily sem\+\_\+perm}\+: {\ttfamily uid}, {\ttfamily gid} e {\ttfamily mode}.
+
+Esempio\+: 
+\begin{DoxyCode}
+ket\_t key = \textcolor{comment}{// ... (genera la chiave IPC)}
+
+\textcolor{comment}{// Crea o ottieni un set di 10 semafori legato alla chiave}
+\textcolor{keywordtype}{int} semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// istanzia una struct semid\_ds}
+\textcolor{keyword}{struct }semid\_ds ds;
+
+\textcolor{comment}{// instanzia una union semun}
+\textcolor{comment}{// (che deve essere stata definita precedentemente nel codice)}
+\textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
+arg.\hyperlink{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}{buf} = &ds;  \textcolor{comment}{// si vuole una semid\_ds}
+
+\textcolor{comment}{// ottieni una copia di semid\_ds dal kernel}
+\textcolor{keywordflow}{if} (semctl(semid, 0 \textcolor{comment}{/*ignored*/}, IPC\_STAT, arg) == -1)
+    errExit(\textcolor{stringliteral}{"semctl IPC\_STAT failed"});
+
+\textcolor{comment}{// modifica i permessi sulla copia aggiungendo}
+\textcolor{comment}{// i permessi di lettura al gruppo}
+arg.buf->sem\_perms.mode |= S\_IRGRP;
+
+\textcolor{comment}{// aggiorna la struttura semid\_ds del kernel applicando le modifiche}
+\textcolor{keywordflow}{if} (semctl(semid, 0 \textcolor{comment}{/*ignored*/}, IPC\_SET, arg) == -1)
+    errExit(\textcolor{stringliteral}{"semctl IPC\_SET failed"});
+\end{DoxyCode}
+
+
+\subsubsection*{Inizializzare i semafori}
+
+Per inizializzare i semafori e\textquotesingle{} possibile inizializzare l\textquotesingle{}intero set oppure un singolo semaforo.
+
+Il valore dei semafori D\+E\+VE E\+S\+S\+E\+RE S\+E\+M\+P\+RE I\+N\+I\+Z\+I\+A\+L\+I\+Z\+Z\+A\+TO prima di utilizzarli.
+
+Per inizializzare un semaforo\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, semnum, SETVAL, arg);
+\end{DoxyCode}
+ \begin{quote}
+Dove {\ttfamily cmd} = {\ttfamily S\+E\+T\+V\+AL} \end{quote}
+
+
+Imposta il valore arg.\+val al semaforo semnum-\/esimo.
+
+Esempio\+: 
+\begin{DoxyCode}
+ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
+
+\textcolor{comment}{// ottieni o crea il set di 10 semafori}
+\textcolor{keywordtype}{int} semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// imposta il valore desiderato del semaforo a zero}
+\textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
+arg.\hyperlink{unionsemun_ac6121ecb6d04a024e07e12bd71b94031}{val} = 0;
+
+\textcolor{comment}{// inizializza il semaforo in posizione 5 a zero}
+\textcolor{keywordflow}{if} (semctl(semid, 5, SETVAL, arg) == -1)
+    errExit(\textcolor{stringliteral}{"semctl SETVAL"});
+\end{DoxyCode}
+
+
+Per inizializzare l\textquotesingle{}intero set\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, 0 \textcolor{comment}{/* semnum: ignored*/}, cmd, arg);
+\end{DoxyCode}
+ \begin{quote}
+Dove {\ttfamily cmd} = {\ttfamily S\+E\+T\+A\+LL}. {\ttfamily semnum} e\textquotesingle{} ignorato perche\textquotesingle{} si inizializzano tutti i semafori, non solo uno. \end{quote}
+
+
+Imposta i valori di arg.\+array al set di semafori.
+
+Esempio\+: 
+\begin{DoxyCode}
+ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
+
+\textcolor{comment}{// crea o ottieni il set di 10 semafori}
+\textcolor{keywordtype}{int} semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// Imposta 5 semafori a 1 e gli altri 5 a 0}
+\textcolor{keywordtype}{int} values[] = \{1,1,1,1,1,0,0,0,0,0\};
+\textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
+arg.\hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array} = values;
+
+\textcolor{comment}{// Inizializza il set di semafori}
+\textcolor{keywordflow}{if} (semctl(semid, 0\textcolor{comment}{/*ignored*/}, SETALL, arg) == -1)
+    errExit(\textcolor{stringliteral}{"semctl SETALL"});
+\end{DoxyCode}
+
+
+\subsubsection*{Recuperare il valore dei semafori}
+
+Per recuperare il valore dei semafori e\textquotesingle{} possibile leggere i valori dell\textquotesingle{}intero set oppure il valore di un singolo semaforo.
+
+\begin{quote}
+A\+T\+T\+E\+N\+Z\+I\+O\+NE\+: subito dopo aver letto il valore dei semafori questi potrebbero cambiare e quindi non bisogna dare per scontato che siano aggiornati.
+
+Il valore e\textquotesingle{} quindi attendibile solo all\textquotesingle{}inizio e dopo la fine dell\textquotesingle{}uso dei semafori, quando c\textquotesingle{}e\textquotesingle{} un solo processo e gli altri sono terminati. \end{quote}
+
+
+Per leggere il valore di un semaforo\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, semnum, GETVAL, 0 \textcolor{comment}{/*arg: ignored*/});
+\end{DoxyCode}
+ \begin{quote}
+Dove {\ttfamily cmd} = {\ttfamily G\+E\+T\+V\+AL} \end{quote}
+
+
+Restituisce il valore del semaforo semnum-\/esimo.
+
+Esempio\+: 
+\begin{DoxyCode}
+ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
+
+\textcolor{comment}{// ottieni o crea il set di 10 semafori}
+\textcolor{keywordtype}{int} semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// ottieno lo stato attuale del semaforo in posizione 5}
+\textcolor{keywordtype}{int} value = semctl(semid, 5, GETVAL, 0\textcolor{comment}{/*ignored*/});
+\textcolor{keywordflow}{if} (value == -1)
+    errExit(\textcolor{stringliteral}{"semctl GETVAL"});
+\end{DoxyCode}
+
+
+Per leggere il valore dell\textquotesingle{}intero set\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, 0 \textcolor{comment}{/*semnum:ignored*/}, GETALL, arg);
+\end{DoxyCode}
+ \begin{quote}
+Dove {\ttfamily cmd} = {\ttfamily G\+E\+T\+A\+LL} \end{quote}
+
+
+Imposta i valori dell\textquotesingle{}array {\ttfamily arg.\+array} con i valori dei semafori del set.
+
+Esempio\+: 
+\begin{DoxyCode}
+ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
+
+\textcolor{comment}{// ottieni o crea il set di 10 semafori}
+\textcolor{keywordtype}{int} semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// dichiara un array sufficientemente grande}
+\textcolor{comment}{// per memorizzare i valori dei semafori}
+\textcolor{keywordtype}{int} values[10];
+\textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
+arg.\hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array} = values;
+
+\textcolor{comment}{// ottieni lo stato attuale di tutti i semafori}
+\textcolor{keywordflow}{if} (semctl(semid, 0\textcolor{comment}{/*ignored*/}, GETALL, arg) == -1)
+    errExit(\textcolor{stringliteral}{"semctl GETALL"});
+\end{DoxyCode}
+
+
+\subsubsection*{Ottenere informazioni dai singoli semafori}
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} semctl(semid, semnum, cmd, 0);
+\end{DoxyCode}
+
+
+Dove {\ttfamily cmd} puo\textquotesingle{} essere\+:
+\begin{DoxyItemize}
+\item {\ttfamily G\+E\+T\+P\+ID}\+: restituisce il P\+ID dell\textquotesingle{}ultimo processo che ha eseguito la system call {\ttfamily semop} sul semaforo {\ttfamily semnum}-\/esimo
+\item {\ttfamily G\+E\+T\+N\+C\+NT}\+: restituisce il numero di processi attualmente in attesa che il valore del semaforo {\ttfamily semnum}-\/esimo diventi maggiore di 0
+\item {\ttfamily G\+E\+T\+Z\+C\+NT}\+: restituisce il numero di processi attualmente in attesa che il valore del semaforo {\ttfamily semnum}-\/esimo diventi uguale a 0.
+\end{DoxyItemize}
+
+Esempio\+: 
+\begin{DoxyCode}
+ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
+
+\textcolor{comment}{// ottieni o crea il set di 10 semafori}
+\textcolor{keywordtype}{int} semid = semget(key, 10, IPC\_CREAT | S\_IRUSR | S\_IWUSR);
+
+\textcolor{comment}{// ...}
+
+\textcolor{comment}{// ottieni informazioni sul primo semaforo del set}
+printf(
+    \textcolor{stringliteral}{"Sem:%d getpid:%d getncnt:%d getzcnt:%d\(\backslash\)n"},
+    semid,
+    semctl(semid, 0, GETPID, NULL),
+    semctl(semid, 0, GETNCNT, NULL),
+    semctl(semid, 0, GETZCNT, NULL)
+);
+\end{DoxyCode}
+
+
+\subsubsection*{Operazioni wait e signal}
+
+La system call permette di eseguire una o piu\textquotesingle{} operazioni (wait o signal) sui semafori.
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <sys/sem.h>}
+
+\textcolor{comment}{// Returns 0 on success, or -1 on error}
+\textcolor{keywordtype}{int} semop(\textcolor{keywordtype}{int} semid, \textcolor{keyword}{struct} sembuf *sops, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} nsops);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily semid}\+: identificativo ottenuto utilizzando la chiave I\+PC
+\item {\ttfamily sops}\+: puntatore ad un array che contiene una sequenza di operazioni da eseguire in modo atomico. \begin{quote}
+Le operazioni vengono eseguite in ordine da sinistra verso destra \end{quote}
+
+\item {\ttfamily nsops}\+: numero di operazioni contenute nell\textquotesingle{}array {\ttfamily sops}
+\end{DoxyItemize}
+
+La struttura {\ttfamily sembuf} usata nell\textquotesingle{}array {\ttfamily sops} ha la seguente forma\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }sembuf \{
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} sem\_num; \textcolor{comment}{// numero del semaforo}
+    \textcolor{keywordtype}{short} sem\_op;  \textcolor{comment}{// operazione da eseguire}
+    \textcolor{keywordtype}{short} sem\_flg; \textcolor{comment}{// flag della operazione}
+\};
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily sem\+\_\+num}\+: identifica il semaforo su cui eseguire l\textquotesingle{}operazione
+\item {\ttfamily sem\+\_\+op}\+: operazione da eseguire.
+\begin{DoxyItemize}
+\item se {\ttfamily sem\+\_\+op} e\textquotesingle{} maggiore di 0\+: il valore {\ttfamily sem\+\_\+op} viene aggiunto al valore del {\ttfamily sem\+\_\+num}-\/esimo semaforo
+\item se{\ttfamily sem\+\_\+op} e\textquotesingle{} uguale a 0\+: viene verificato se il semaforo {\ttfamily sem\+\_\+num}-\/esimo ha il valore 0.
+
+Se non e\textquotesingle{} 0, il processo viene bloccato.
+
+Verra\textquotesingle{} sbloccato quanto il valore del semaforo torna maggiore di 0.
+\item se {\ttfamily sem\+\_\+op} e\textquotesingle{} minore di 0\+: decrementa il valore del semaforo {\ttfamily sem\+\_\+num}-\/esimo di {\ttfamily sem\+\_\+op}.
+
+Blocca il processo.
+
+Il processo verra\textquotesingle{} sbloccato quando il valore del sesemaforo tornera\textquotesingle{} sufficientemente grande per permettere di eseguire l\textquotesingle{}operazione senza ottenere un risultato negativo.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+In generale le chiamate di {\ttfamily semop()} sono bloccanti. Il processo si sblocca quando\+:
+\begin{DoxyItemize}
+\item un altro processo modifica il valore del semaforo per permettere l\textquotesingle{}esecuzione della operazione richiesta
+\item un segnale interrompe la chiamata. La system call fallira\textquotesingle{} con l\textquotesingle{}errore E\+I\+N\+TR.
+\item un altro processo cancella il semaforo. La system call fallira\textquotesingle{} con l\textquotesingle{}errore E\+I\+D\+RM.
+\end{DoxyItemize}
+
+Se si vuole non avere operazioni bloccanti si puo\textquotesingle{} specificare la flag {\ttfamily I\+P\+C\+\_\+\+N\+O\+W\+A\+IT} in {\ttfamily sem\+\_\+flg}. \begin{quote}
+Se la chiamata fosse bloccante senza {\ttfamily I\+P\+C\+\_\+\+N\+O\+W\+A\+IT} la system call fallira\textquotesingle{} con errore {\ttfamily E\+A\+G\+A\+IN} \end{quote}
+
+
+Esempio\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{struct }sembuf sops[3];
+
+\textcolor{comment}{// sottrai 1 dal semaforo 0}
+sops[0].sem\_num = 0;
+sops[0].sem\_op = -1;
+sops[0].sem\_flg = 0;
+
+\textcolor{comment}{// aggiungi 2 al semaforo 1}
+sops[1].sem\_num = 1;
+sops[1].sem\_op = 2;
+sops[1].sem\_flg = 0;
+
+\textcolor{comment}{// aspetta che il semaforo 2 sia 0}
+\textcolor{comment}{// ma non bloccare immediatamente il processo}
+\textcolor{comment}{// se l'operazione non puo' essere svolta immediatamente}
+sops[2].sem\_num = 2;
+sops[2].sem\_op = 0;
+sops[2].sem\_flg = IPC\_NOWAIT;
+
+\textcolor{keywordflow}{if} (semop(semid, sops, 3) == -1) \{
+    \textcolor{keywordflow}{if} (errno == EAGAIN)
+        \textcolor{comment}{// il semaforo 2 avrebbe bloccato il processo}
+        printf(\textcolor{stringliteral}{"Operation would have blocked\(\backslash\)n"});
+    \textcolor{keywordflow}{else}
+        errExit(\textcolor{stringliteral}{"semop"}); \textcolor{comment}{// Some other error}
+\}
+\end{DoxyCode}
+ 

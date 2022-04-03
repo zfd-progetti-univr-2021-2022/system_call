@@ -1,0 +1,141 @@
+.TH "md_theory_commands_commands" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_commands_commandsTeoria: comandi utili 
+ \- 
+.SS "Comandi debugger GDB"
+.PP
+Per prima cosa bisogna compilare i file sorgente con le informazioni di debugging con la flag \fC-g\fP\&.
+.PP
+Esempio: 
+.PP
+.nf
+# Usa -g per permettere il debugging
+gcc -g <nome>\&.c -o <output>
+
+.fi
+.PP
+.PP
+Comandi GDB:
+.IP "\(bu" 2
+\fCbreak <nome funzione>\fP: imposta un breakpoint su una funzione
+.IP "\(bu" 2
+\fCbreak <riga codice>\fP: imposta un breakpoint su una certa riga del codice
+.IP "\(bu" 2
+\fCclear <riga codice>\fP: toglie il breakpoint su quella riga di codice
+.IP "\(bu" 2
+\fCwatch <nome variabile>\fP: aggiunge un watchpoint che blocca il codice quando la variabile cambia valore
+.IP "\(bu" 2
+\fCrun\fP: esegue il programma
+.IP "\(bu" 2
+\fCprint <variabile>\fP: visualizza il valore della variabile > E' possibile anche scrivere print var_array[x] per visualizzare l'elemento di un array
+.IP "\(bu" 2
+\fCstep\fP: esegue la riga di codice successiva seguendo il codice nelle funzioni
+.IP "\(bu" 2
+\fCnext\fP: esegue la riga di codice successiva eseguendo le funzioni in un colpo solo
+.IP "\(bu" 2
+\fCcontinue\fP: esegue il codice finche' non viene raggiunto un breakpoint o watchpoint
+.IP "\(bu" 2
+\fClist\fP: visualizza la riga
+.IP "\(bu" 2
+\fCquit\fP: esce da gdb
+.PP
+.PP
+.SS "Estensioni dell'interfaccia GDB e interfacce grafiche"
+.PP
+.SS "Interfacce CLI"
+.PP
+\fCgdb-dashboard\fP estende l'interfaccia del terminale\&.
+.PP
+.PP
+E' possibile scaricando il file \fC\&.gdbinit\fP nella cartella home: 
+.PP
+.nf
+wget -P ~ https://git\&.io/\&.gdbinit
+
+.fi
+.PP
+.PP
+Per aggiungere il syntax highlight bisogna installare Pygments (libreria Python): 
+.PP
+.nf
+pip install pygments
+
+.fi
+.PP
+.PP
+.SS "Interfacce GUI"
+.PP
+\fCgdbgui\fP e' una interfaccia grafica basata su tecnologie web\&.
+.PP
+.PP
+.SS "Visualizza informazioni IPC"
+.PP
+Il comando \fCipcs\fP permette di vedere una lista di:
+.IP "\(bu" 2
+code dei messaggi
+.IP "\(bu" 2
+segmenti di memoria condivisa
+.IP "\(bu" 2
+set di semafori
+.PP
+.PP
+Esempio di output: 
+.PP
+.nf
+------ Message Queues --------
+key     msqid  owner    perms  used-bytes  messages
+0x1235  26     student  620    12          20
+
+------ Shared Memory Segments --------
+key     shmid  owner      perms  bytes  nattch  status
+0x1234  0      professor  600    8192   2
+
+------ Semaphore Arrays --------
+key     semid  owner      perms  nsems
+0x1111  102    professor  330    20
+
+.fi
+.PP
+.PP
+.SS "Rimuovi IPC dal sistema:"
+.PP
+Il comando \fCipcrm\fP permette di rimuovere le IPC\&.
+.PP
+Rimuovere una coda dei messaggi: 
+.PP
+.nf
+# 0x1235 e' la chiave della coda
+ipcrm -Q 0x1235
+
+# 25 e' l'identificatore della coda
+ipcrm -q 26
+
+.fi
+.PP
+.PP
+Rimuovere un segmento di memoria condivisa: 
+.PP
+.nf
+# 0x1234 e' la chiave della memoria condivisa
+ipcrm -M 0x1234
+
+# 0 e' l'identificatore della memoria condivisa
+ipcrm -m 0
+
+.fi
+.PP
+.PP
+Rimuovere un set di semafori: 
+.PP
+.nf
+# 0x1111 e' la chiave del set di semafori
+ipcrm -S 0x1111
+
+# 102 e' l'identificatore del set di semafori
+ipcrm -s 102
+
+.fi
+.PP
+ 

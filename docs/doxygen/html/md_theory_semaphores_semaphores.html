@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: semafori</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_semaphores_semaphores.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: semafori </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>I semafori vengono usati per sincronizzare piu' processi.</p>
+<p>La sincronizzazione puo' servire per gestire la comunicazione tra processi oppure per coordinarli. </p><blockquote class="doxtable">
+<p>NOTA: non tutti i mezzi di comunicazione necessitano di semafori. Un mezzo che li richiede e' la memoria condivisa. </p>
+</blockquote>
+<p>Le system call per i semafori lavorano sempre su insiemi (set) di semafori e NON su semafori singoli.</p>
+<h2>Creazione di un insieme di semafori</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/sem.h&gt;</span></div><div class="line"></div><div class="line"><span class="comment">// Returns semaphore set identifier on success, or -1 error</span></div><div class="line"><span class="keywordtype">int</span> semget(key_t key, <span class="keywordtype">int</span> nsems, <span class="keywordtype">int</span> semflg);</div></div><!-- fragment --><p>Dove.</p><ul>
+<li><code>key</code>: e' la chiave IPC</li>
+<li><code>nsems</code>: e' il numero di semafori da creare e deve essere quindi maggiore di 0.</li>
+<li><code>semflg</code>: specifica i permessi<ul>
+<li>Sono validi tutti i permessi del parametro <code>mode</code> della system call <code>open()</code></li>
+<li><code>IPC_CREAT</code>: se non esiste un set di semafori legato alla chiave, lo crea</li>
+<li><code>IPC_EXCL</code>: se usato con <code>IPC_CREAT</code>, fa fallire la system call se esiste gia' un set di semafori legato alla chiave</li>
+</ul>
+</li>
+</ul>
+<p>Per vedere come generare la chiave andare nella <a href="md_theory_generate_keys_generate_keys.html">sezione relativa qui</a></p>
+<p>Esempi: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> semid;</div><div class="line">ket_t key = <span class="comment">// ... (genera la chiave in qualche modo)</span></div><div class="line"></div><div class="line"><span class="comment">// A) Delega al kernel la scelta della chiave</span></div><div class="line">semid = semget(IPC_PRIVATE, 10, S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// B) Se non esiste crea un set di 10 semafori con la chiave key</span></div><div class="line">semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// C) crea un set di 10 semafori con la chiave key.</span></div><div class="line"><span class="comment">//    se esiste gia&#39; fallisce</span></div><div class="line">semid = semget(key, 10, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);</div></div><!-- fragment --><h2>Operazioni di controllo</h2>
+<p>La system call <code>semctl()</code> permette di eseguire operazioni su un set di semafori oppure su un semaforo appartenente al set.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/sem.h&gt;</span></div><div class="line"><span class="comment">// Returns nonnegative integer on success, or -1 error</span></div><div class="line"><span class="keywordtype">int</span> semctl(<span class="keywordtype">int</span> semid, <span class="keywordtype">int</span> semnum, <span class="keywordtype">int</span> cmd, ... <span class="comment">/* union semun arg */</span>);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>semid</code>: identificativo ottenuto usando la chiave IPC</li>
+<li><code>semnum</code></li>
+<li><code>cmd</code>: operazione da eseguire</li>
+<li>(opzionale) <code>arg</code>: argomento usato solo per certe operazioni</li>
+</ul>
+<p>Dove <code>arg</code> e' la seguente union:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/sem.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">union </span><a class="code" href="unionsemun.html">semun</a> {</div><div class="line">    <span class="comment">// usato se si lavora su un singolo semaforo.</span></div><div class="line">    <span class="comment">// usato dalla operazione SETVAL</span></div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="unionsemun.html#ac6121ecb6d04a024e07e12bd71b94031">val</a>;</div><div class="line"></div><div class="line">    <span class="comment">// usato per lavorare sullo stato globale del semaforo.</span></div><div class="line">    <span class="comment">// usato dalle operazioni IPC_STAT e IPC_SET</span></div><div class="line">    <span class="keyword">struct </span>semid_ds * <a class="code" href="unionsemun.html#ac6b6428d07d4147fd2cc698b53555bed">buf</a>;</div><div class="line"></div><div class="line">    <span class="comment">// per eseguire operazioni su tutti i semafori.</span></div><div class="line">    <span class="comment">// usato dalle operazioni GETALL e SETALL</span></div><div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> * <a class="code" href="unionsemun.html#aca23b8e730a0553205813c0cb7692b54">array</a>;</div><div class="line">};</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Deve essere dichiarata prima di usare <code>semctl()</code>. </p>
+</blockquote>
+<h3>Cancellare un set di semafori</h3>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, 0 <span class="comment">/* semnum: ignored */</span>, cmd, 0 <span class="comment">/* arg: ignored */</span>);</div></div><!-- fragment --><p>Se il parametro <code>cmd</code> vale <code>IPC_RMID</code> la system call rimuove immediatamente un set di semafori. </p><blockquote class="doxtable">
+<p>I processi bloccati vengono svegliati con errore <code>EIDRM</code>. </p>
+</blockquote>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (semctl(semid, 0<span class="comment">/*ignored*/</span>, IPC_RMID, 0<span class="comment">/*ignored*/</span>) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl failed&quot;</span>);</div><div class="line"><span class="keywordflow">else</span></div><div class="line">    printf(<span class="stringliteral">&quot;semaphore set removed successfully\n&quot;</span>);</div></div><!-- fragment --><h3>Reciperare statistiche</h3>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, 0 <span class="comment">/* semnum: ignored */</span>, cmd, arg);</div></div><!-- fragment --><p>Se <code>cmd</code> vale <code>IPC_STAT</code> la system call memorizza le statistiche del set di semafori in <code>arg.buf</code>.</p>
+<p>Dove <code>arg.buf</code> ha la seguente struttura:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>semid_ds {</div><div class="line">    <span class="keyword">struct </span>ipc_perm sem_perm; <span class="comment">// proprietario e permessi</span></div><div class="line">    time_t sem_otime; <span class="comment">// Tempo dell&#39;ultimo semop()</span></div><div class="line">    time_t sem_ctime; <span class="comment">// Tempo dell&#39;ultima modifica</span></div><div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sem_nsems; <span class="comment">// Numero di semafori nel set</span></div><div class="line">};</div></div><!-- fragment --><h3>Cambiare i permessi</h3>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, 0 <span class="comment">/* semnum: ignored */</span>, cmd, arg);</div></div><!-- fragment --><p>Se <code>cmd</code> vale <code>IPC_SET</code> la system call utilizza il campo <code>arg.buf</code> per impostare proprieta' sul set di semafori.</p>
+<p>Dove <code>arg.buf</code> ha la seguente struttura: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>semid_ds {</div><div class="line">    <span class="keyword">struct </span>ipc_perm sem_perm; <span class="comment">// proprietario e permessi</span></div><div class="line">    time_t sem_otime; <span class="comment">// Tempo dell&#39;ultimo semop()</span></div><div class="line">    time_t sem_ctime; <span class="comment">// Tempo dell&#39;ultima modifica</span></div><div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> sem_nsems; <span class="comment">// Numero di semafori nel set</span></div><div class="line">};</div></div><!-- fragment --><p>Gli unici valori modificabili sono i permessi contenuti in <code>sem_perm</code>: <code>uid</code>, <code>gid</code> e <code>mode</code>.</p>
+<p>Esempio: </p><div class="fragment"><div class="line">ket_t key = <span class="comment">// ... (genera la chiave IPC)</span></div><div class="line"></div><div class="line"><span class="comment">// Crea o ottieni un set di 10 semafori legato alla chiave</span></div><div class="line"><span class="keywordtype">int</span> semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// istanzia una struct semid_ds</span></div><div class="line"><span class="keyword">struct </span>semid_ds ds;</div><div class="line"></div><div class="line"><span class="comment">// instanzia una union semun</span></div><div class="line"><span class="comment">// (che deve essere stata definita precedentemente nel codice)</span></div><div class="line"><span class="keyword">union </span><a class="code" href="unionsemun.html">semun</a> arg;</div><div class="line">arg.<a class="code" href="unionsemun.html#ac6b6428d07d4147fd2cc698b53555bed">buf</a> = &amp;ds;  <span class="comment">// si vuole una semid_ds</span></div><div class="line"></div><div class="line"><span class="comment">// ottieni una copia di semid_ds dal kernel</span></div><div class="line"><span class="keywordflow">if</span> (semctl(semid, 0 <span class="comment">/*ignored*/</span>, IPC_STAT, arg) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl IPC_STAT failed&quot;</span>);</div><div class="line"></div><div class="line"><span class="comment">// modifica i permessi sulla copia aggiungendo</span></div><div class="line"><span class="comment">// i permessi di lettura al gruppo</span></div><div class="line">arg.buf-&gt;sem_perms.mode |= S_IRGRP;</div><div class="line"></div><div class="line"><span class="comment">// aggiorna la struttura semid_ds del kernel applicando le modifiche</span></div><div class="line"><span class="keywordflow">if</span> (semctl(semid, 0 <span class="comment">/*ignored*/</span>, IPC_SET, arg) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl IPC_SET failed&quot;</span>);</div></div><!-- fragment --><h3>Inizializzare i semafori</h3>
+<p>Per inizializzare i semafori e' possibile inizializzare l'intero set oppure un singolo semaforo.</p>
+<p>Il valore dei semafori DEVE ESSERE SEMPRE INIZIALIZZATO prima di utilizzarli.</p>
+<p>Per inizializzare un semaforo: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, semnum, SETVAL, arg);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Dove <code>cmd</code> = <code>SETVAL</code> </p>
+</blockquote>
+<p>Imposta il valore arg.val al semaforo semnum-esimo.</p>
+<p>Esempio: </p><div class="fragment"><div class="line">ket_t key = <span class="comment">//... (genera la chiave IPC)</span></div><div class="line"></div><div class="line"><span class="comment">// ottieni o crea il set di 10 semafori</span></div><div class="line"><span class="keywordtype">int</span> semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// imposta il valore desiderato del semaforo a zero</span></div><div class="line"><span class="keyword">union </span><a class="code" href="unionsemun.html">semun</a> arg;</div><div class="line">arg.<a class="code" href="unionsemun.html#ac6121ecb6d04a024e07e12bd71b94031">val</a> = 0;</div><div class="line"></div><div class="line"><span class="comment">// inizializza il semaforo in posizione 5 a zero</span></div><div class="line"><span class="keywordflow">if</span> (semctl(semid, 5, SETVAL, arg) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl SETVAL&quot;</span>);</div></div><!-- fragment --><p>Per inizializzare l'intero set: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, 0 <span class="comment">/* semnum: ignored*/</span>, cmd, arg);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Dove <code>cmd</code> = <code>SETALL</code>. <code>semnum</code> e' ignorato perche' si inizializzano tutti i semafori, non solo uno. </p>
+</blockquote>
+<p>Imposta i valori di arg.array al set di semafori.</p>
+<p>Esempio: </p><div class="fragment"><div class="line">ket_t key = <span class="comment">//... (genera la chiave IPC)</span></div><div class="line"></div><div class="line"><span class="comment">// crea o ottieni il set di 10 semafori</span></div><div class="line"><span class="keywordtype">int</span> semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// Imposta 5 semafori a 1 e gli altri 5 a 0</span></div><div class="line"><span class="keywordtype">int</span> values[] = {1,1,1,1,1,0,0,0,0,0};</div><div class="line"><span class="keyword">union </span><a class="code" href="unionsemun.html">semun</a> arg;</div><div class="line">arg.<a class="code" href="unionsemun.html#aca23b8e730a0553205813c0cb7692b54">array</a> = values;</div><div class="line"></div><div class="line"><span class="comment">// Inizializza il set di semafori</span></div><div class="line"><span class="keywordflow">if</span> (semctl(semid, 0<span class="comment">/*ignored*/</span>, SETALL, arg) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl SETALL&quot;</span>);</div></div><!-- fragment --><h3>Recuperare il valore dei semafori</h3>
+<p>Per recuperare il valore dei semafori e' possibile leggere i valori dell'intero set oppure il valore di un singolo semaforo.</p>
+<blockquote class="doxtable">
+<p>ATTENZIONE: subito dopo aver letto il valore dei semafori questi potrebbero cambiare e quindi non bisogna dare per scontato che siano aggiornati.</p>
+<p>Il valore e' quindi attendibile solo all'inizio e dopo la fine dell'uso dei semafori, quando c'e' un solo processo e gli altri sono terminati. </p>
+</blockquote>
+<p>Per leggere il valore di un semaforo: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, semnum, GETVAL, 0 <span class="comment">/*arg: ignored*/</span>);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Dove <code>cmd</code> = <code>GETVAL</code> </p>
+</blockquote>
+<p>Restituisce il valore del semaforo semnum-esimo.</p>
+<p>Esempio: </p><div class="fragment"><div class="line">ket_t key = <span class="comment">//... (genera la chiave IPC)</span></div><div class="line"></div><div class="line"><span class="comment">// ottieni o crea il set di 10 semafori</span></div><div class="line"><span class="keywordtype">int</span> semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// ottieno lo stato attuale del semaforo in posizione 5</span></div><div class="line"><span class="keywordtype">int</span> value = semctl(semid, 5, GETVAL, 0<span class="comment">/*ignored*/</span>);</div><div class="line"><span class="keywordflow">if</span> (value == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl GETVAL&quot;</span>);</div></div><!-- fragment --><p>Per leggere il valore dell'intero set: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, 0 <span class="comment">/*semnum:ignored*/</span>, GETALL, arg);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Dove <code>cmd</code> = <code>GETALL</code> </p>
+</blockquote>
+<p>Imposta i valori dell'array <code>arg.array</code> con i valori dei semafori del set.</p>
+<p>Esempio: </p><div class="fragment"><div class="line">ket_t key = <span class="comment">//... (genera la chiave IPC)</span></div><div class="line"></div><div class="line"><span class="comment">// ottieni o crea il set di 10 semafori</span></div><div class="line"><span class="keywordtype">int</span> semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// dichiara un array sufficientemente grande</span></div><div class="line"><span class="comment">// per memorizzare i valori dei semafori</span></div><div class="line"><span class="keywordtype">int</span> values[10];</div><div class="line"><span class="keyword">union </span><a class="code" href="unionsemun.html">semun</a> arg;</div><div class="line">arg.<a class="code" href="unionsemun.html#aca23b8e730a0553205813c0cb7692b54">array</a> = values;</div><div class="line"></div><div class="line"><span class="comment">// ottieni lo stato attuale di tutti i semafori</span></div><div class="line"><span class="keywordflow">if</span> (semctl(semid, 0<span class="comment">/*ignored*/</span>, GETALL, arg) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;semctl GETALL&quot;</span>);</div></div><!-- fragment --><h3>Ottenere informazioni dai singoli semafori</h3>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> semctl(semid, semnum, cmd, 0);</div></div><!-- fragment --><p>Dove <code>cmd</code> puo' essere:</p><ul>
+<li><code>GETPID</code>: restituisce il PID dell'ultimo processo che ha eseguito la system call <code>semop</code> sul semaforo <code>semnum</code>-esimo</li>
+<li><code>GETNCNT</code>: restituisce il numero di processi attualmente in attesa che il valore del semaforo <code>semnum</code>-esimo diventi maggiore di 0</li>
+<li><code>GETZCNT</code>: restituisce il numero di processi attualmente in attesa che il valore del semaforo <code>semnum</code>-esimo diventi uguale a 0.</li>
+</ul>
+<p>Esempio: </p><div class="fragment"><div class="line">ket_t key = <span class="comment">//... (genera la chiave IPC)</span></div><div class="line"></div><div class="line"><span class="comment">// ottieni o crea il set di 10 semafori</span></div><div class="line"><span class="keywordtype">int</span> semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);</div><div class="line"></div><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line"><span class="comment">// ottieni informazioni sul primo semaforo del set</span></div><div class="line">printf(</div><div class="line">    <span class="stringliteral">&quot;Sem:%d getpid:%d getncnt:%d getzcnt:%d\n&quot;</span>,</div><div class="line">    semid,</div><div class="line">    semctl(semid, 0, GETPID, NULL),</div><div class="line">    semctl(semid, 0, GETNCNT, NULL),</div><div class="line">    semctl(semid, 0, GETZCNT, NULL)</div><div class="line">);</div></div><!-- fragment --><h3>Operazioni wait e signal</h3>
+<p>La system call permette di eseguire una o piu' operazioni (wait o signal) sui semafori.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;sys/sem.h&gt;</span></div><div class="line"></div><div class="line"><span class="comment">// Returns 0 on success, or -1 on error</span></div><div class="line"><span class="keywordtype">int</span> semop(<span class="keywordtype">int</span> semid, <span class="keyword">struct</span> sembuf *sops, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> nsops);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>semid</code>: identificativo ottenuto utilizzando la chiave IPC</li>
+<li><code>sops</code>: puntatore ad un array che contiene una sequenza di operazioni da eseguire in modo atomico. <blockquote class="doxtable">
+<p>Le operazioni vengono eseguite in ordine da sinistra verso destra </p>
+</blockquote>
+</li>
+<li><code>nsops</code>: numero di operazioni contenute nell'array <code>sops</code></li>
+</ul>
+<p>La struttura <code>sembuf</code> usata nell'array <code>sops</code> ha la seguente forma: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>sembuf {</div><div class="line">    <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> sem_num; <span class="comment">// numero del semaforo</span></div><div class="line">    <span class="keywordtype">short</span> sem_op;  <span class="comment">// operazione da eseguire</span></div><div class="line">    <span class="keywordtype">short</span> sem_flg; <span class="comment">// flag della operazione</span></div><div class="line">};</div></div><!-- fragment --><p>Dove:</p><ul>
+<li><code>sem_num</code>: identifica il semaforo su cui eseguire l'operazione</li>
+<li><code>sem_op</code>: operazione da eseguire.<ul>
+<li>se <code>sem_op</code> e' maggiore di 0: il valore <code>sem_op</code> viene aggiunto al valore del <code>sem_num</code>-esimo semaforo</li>
+<li><p class="startli">se<code>sem_op</code> e' uguale a 0: viene verificato se il semaforo <code>sem_num</code>-esimo ha il valore 0.</p>
+<p class="startli">Se non e' 0, il processo viene bloccato.</p>
+<p class="startli">Verra' sbloccato quanto il valore del semaforo torna maggiore di 0.</p>
+</li>
+<li><p class="startli">se <code>sem_op</code> e' minore di 0: decrementa il valore del semaforo <code>sem_num</code>-esimo di <code>sem_op</code>.</p>
+<p class="startli">Blocca il processo.</p>
+<p class="startli">Il processo verra' sbloccato quando il valore del sesemaforo tornera' sufficientemente grande per permettere di eseguire l'operazione senza ottenere un risultato negativo.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>In generale le chiamate di <code>semop()</code> sono bloccanti. Il processo si sblocca quando:</p><ul>
+<li>un altro processo modifica il valore del semaforo per permettere l'esecuzione della operazione richiesta</li>
+<li>un segnale interrompe la chiamata. La system call fallira' con l'errore EINTR.</li>
+<li>un altro processo cancella il semaforo. La system call fallira' con l'errore EIDRM.</li>
+</ul>
+<p>Se si vuole non avere operazioni bloccanti si puo' specificare la flag <code>IPC_NOWAIT</code> in <code>sem_flg</code>. </p><blockquote class="doxtable">
+<p>Se la chiamata fosse bloccante senza <code>IPC_NOWAIT</code> la system call fallira' con errore <code>EAGAIN</code> </p>
+</blockquote>
+<p>Esempio: </p><div class="fragment"><div class="line"><span class="keyword">struct </span>sembuf sops[3];</div><div class="line"></div><div class="line"><span class="comment">// sottrai 1 dal semaforo 0</span></div><div class="line">sops[0].sem_num = 0;</div><div class="line">sops[0].sem_op = -1;</div><div class="line">sops[0].sem_flg = 0;</div><div class="line"></div><div class="line"><span class="comment">// aggiungi 2 al semaforo 1</span></div><div class="line">sops[1].sem_num = 1;</div><div class="line">sops[1].sem_op = 2;</div><div class="line">sops[1].sem_flg = 0;</div><div class="line"></div><div class="line"><span class="comment">// aspetta che il semaforo 2 sia 0</span></div><div class="line"><span class="comment">// ma non bloccare immediatamente il processo</span></div><div class="line"><span class="comment">// se l&#39;operazione non puo&#39; essere svolta immediatamente</span></div><div class="line">sops[2].sem_num = 2;</div><div class="line">sops[2].sem_op = 0;</div><div class="line">sops[2].sem_flg = IPC_NOWAIT;</div><div class="line"></div><div class="line"><span class="keywordflow">if</span> (semop(semid, sops, 3) == -1) {</div><div class="line">    <span class="keywordflow">if</span> (errno == EAGAIN)</div><div class="line">        <span class="comment">// il semaforo 2 avrebbe bloccato il processo</span></div><div class="line">        printf(<span class="stringliteral">&quot;Operation would have blocked\n&quot;</span>);</div><div class="line">    <span class="keywordflow">else</span></div><div class="line">        errExit(<span class="stringliteral">&quot;semop&quot;</span>); <span class="comment">// Some other error</span></div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

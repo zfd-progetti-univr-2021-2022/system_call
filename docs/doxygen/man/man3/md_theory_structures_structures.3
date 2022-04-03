@@ -1,0 +1,33 @@
+.TH "md_theory_structures_structures" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_structures_structuresTeoria: strutture 
+ \- 
+.SS "Struttura dei permessi delle IPC"
+.PP
+Tutte le IPC permettono di ottenere o impostare una struttura che contiene il campo di tipo \fCstruct ipc_perm\fP che contiene i permessi e il proprietario della IPC\&.
+.PP
+.PP
+.nf
+struct ipc_perm {
+    key_t __key; /* chiave IPC */
+    uid_t uid; /* ID utente proprietario */
+    gid_t gid; /* ID gruppo del proprietario */
+    uid_t cuid; /* ID dell'utente creatore */
+    gid_t cgid; /* ID del gruppo del creatore */
+    unsigned short mode; /* Permessi */
+    unsigned short __seq; /* Numero di sequenza */
+};
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fC__key\fP puo' essere utile per leggere la chiave di IPC_PRIVATE
+.IP "\(bu" 2
+\fCciod\fP e \fCcgid\fP sono immutabili
+.IP "\(bu" 2
+Impostare i permessi di esecuzione in \fCmode\fP non serve a niente: contano soltanto i permessi di lettura e di scrittura 
+.PP
+

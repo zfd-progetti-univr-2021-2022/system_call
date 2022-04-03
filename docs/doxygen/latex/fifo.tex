@@ -1,0 +1,158 @@
+\subsection*{Introduzione}
+
+Una F\+I\+FO permette di far scambiare a piu\textquotesingle{} processi un flusso di byte \begin{quote}
+Per farlo viene usato un buffer memorizzato nella memoria del kernel \end{quote}
+
+
+Una F\+I\+FO ha un nome all\textquotesingle{}interno del file system e quindi e\textquotesingle{} comoda per far comunicare processi che non sono imparentati. \begin{quote}
+Una F\+I\+FO puo\textquotesingle{} essere vista come una P\+I\+PE che ha un nome che la identifica. \end{quote}
+
+
+Una F\+I\+FO viene scritta da una parte e letta dall\textquotesingle{}altra.
+
+I dati vengono letti nello stesso ordine in cui sono stati scritti.
+
+Tipicamente una F\+I\+FO e\textquotesingle{} usata da solo 2 processi\+: un processo crea e apre una F\+I\+FO in lettura e attende che un altro processo apra e scriva sulla F\+I\+FO. \begin{quote}
+L\textquotesingle{}attesa e\textquotesingle{} automatica, l\textquotesingle{}apertura in lettura e\textquotesingle{} bloccante. Anche chi scrive attende che ci sia un processo pronto a leggere. \end{quote}
+
+
+\subsection*{Creare una F\+I\+FO}
+
+Una F\+I\+FO si crea con la system call\+: 
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <unistd.h>}
+\textcolor{preprocessor}{#include <sys/stat.h>}
+
+\textcolor{keywordtype}{int} mkfifo(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *pathname, mode\_t mode);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item pathname\+: e\textquotesingle{} il percorso del file della F\+I\+FO
+\item mode\+: specifica i permessi
+\item restituisce\+: -\/1 in caso di errore, 0 in caso di successo
+\end{DoxyItemize}
+
+\subsection*{Aprire una F\+I\+FO}
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <fcntl.h>}
+\textcolor{keywordtype}{int} open(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *pathname, \textcolor{keywordtype}{int} flags);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item pathname\+: e\textquotesingle{} il percorso del file della F\+I\+FO.
+
+Lo stesso usato da {\ttfamily mkfifo()}.
+\item flags\+: maschera che indica la modalita\textquotesingle{} di apertura della F\+I\+FO.
+
+Sola lettura ({\ttfamily O\+\_\+\+R\+D\+O\+N\+LY}) oppure sola scrittura({\ttfamily O\+\_\+\+W\+R\+O\+N\+LY}).
+\item restituisce\+: -\/1 in caso di errore, oppure il file descriptor della F\+I\+FO
+\end{DoxyItemize}
+
+\subsection*{Modalita\textquotesingle{} di utilizzo tipica}
+
+Tipicamente una F\+I\+FO viene usata da un processo che riceve e da un processo che trasmette.
+
+In questo esempio bisogna\+:
+\begin{DoxyEnumerate}
+\item eseguire il ricevitore
+\item eseguire il trasmettitore
+\item scrivere sul trasmettitore il messaggio da mandare e premere invio
+\end{DoxyEnumerate}
+
+Il ricevitore visualizzera\textquotesingle{} a video il messaggio inviato dal trasmettitore.
+
+\begin{quote}
+N\+O\+TA\+: Nella cartella {\ttfamily docs/doxygen/theory/fifo} e\textquotesingle{} possibile trovare i file sorgente dell\textquotesingle{}esempio qui sotto. \end{quote}
+
+
+\subsubsection*{Ricevitore}
+
+
+\begin{DoxyCode}
+\textcolor{comment}{// salvo il percorso del file che gestisce la FIFO}
+\textcolor{comment}{// > stesso file usato dal trasmettitore}
+\textcolor{keywordtype}{char} *fname = \textcolor{stringliteral}{"/tmp/myfifo"};
+
+\textcolor{comment}{// creo la FIFO passandogli il percorso e i permessi}
+\textcolor{keywordtype}{int} res = mkfifo(fname, S\_IRUSR|S\_IWUSR);
+
+\textcolor{keywordflow}{if} (res == -1) \{
+    \textcolor{comment}{// posso usare ErrExit()}
+    printf(\textcolor{stringliteral}{"Non sono riuscito a creare la FIFO\(\backslash\)n"});
+    exit(1);
+\}
+
+\textcolor{comment}{// Apro in lettura la FIFO}
+\textcolor{keywordtype}{int} fd = open(fname, O\_RDONLY);
+
+\textcolor{keywordflow}{if} (fd == -1) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito ad aprire in lettura la FIFO\(\backslash\)n"});
+    exit(1);
+\}
+
+\textcolor{comment}{// leggi byte dalla FIFO e memorizza nel buffer}
+\textcolor{keywordtype}{char} buffer[LEN];
+\textcolor{keywordflow}{if} (read(fd, buffer, LEN) == -1) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito a leggere la FIFO\(\backslash\)n"});
+    exit(1);
+\}
+
+\textcolor{comment}{// Visualizza cio' che e' stato letto}
+printf(\textcolor{stringliteral}{"%s\(\backslash\)n"}, buffer);
+
+\textcolor{comment}{// chiudi la FIFO}
+\textcolor{keywordflow}{if} (close(fd) == -1) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito a chiudere la FIFO\(\backslash\)n"});
+    exit(1);
+\}
+
+\textcolor{comment}{// elimina file della FIFO (o togli symlink se e' un collegamento)}
+\textcolor{keywordflow}{if} (unlink(fname)) \{
+    printf(\textcolor{stringliteral}{"Elimina file della FIFO\(\backslash\)n"});
+    exit(1);
+\}
+\end{DoxyCode}
+
+
+\subsubsection*{Trasmettitore}
+
+
+\begin{DoxyCode}
+\textcolor{comment}{// salvo il percorso del file che gestisce la FIFO}
+\textcolor{comment}{// > stesso file usato dal ricevitore}
+\textcolor{keywordtype}{char} *fname = \textcolor{stringliteral}{"/tmp/myfifo"};
+
+\textcolor{comment}{// Apri la FIFO in scrittura}
+\textcolor{keywordtype}{int} fd = open(fname, O\_WRONLY);
+
+\textcolor{keywordflow}{if} (fd == -1) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito ad aprire in scrittura la FIFO\(\backslash\)n"});
+    exit(1);
+\}
+
+\textcolor{comment}{// Leggi da terminale una stringa da mandare al ricevitore}
+\textcolor{keywordtype}{char} buffer[LEN];
+printf(\textcolor{stringliteral}{"Give me a string: "});
+fgets(buffer, LEN, stdin);
+
+\textcolor{comment}{// scrivi la stringa sulla FIFO}
+ssize\_t written\_bytes = write(fd, buffer, strlen(buffer));
+
+\textcolor{keywordflow}{if} (written\_bytes == -1) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito a scrivere i byte sulla FIFO\(\backslash\)n"});
+    exit(1);
+\}
+
+\textcolor{comment}{// chiudi la FIFO}
+\textcolor{keywordflow}{if} (close(fd) == -1) \{
+    printf(\textcolor{stringliteral}{"Non sono riuscito a chiudere la FIFO\(\backslash\)n"});
+    exit(1);
+\}
+\end{DoxyCode}
+ 

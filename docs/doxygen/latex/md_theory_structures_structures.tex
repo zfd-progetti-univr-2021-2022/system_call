@@ -1,0 +1,24 @@
+\subsection*{Struttura dei permessi delle I\+PC}
+
+Tutte le I\+PC permettono di ottenere o impostare una struttura che contiene il campo di tipo {\ttfamily struct ipc\+\_\+perm} che contiene i permessi e il proprietario della I\+PC.
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{struct }ipc\_perm \{
+    key\_t \_\_key; \textcolor{comment}{/* chiave IPC */}
+    uid\_t uid; \textcolor{comment}{/* ID utente proprietario */}
+    gid\_t gid; \textcolor{comment}{/* ID gruppo del proprietario */}
+    uid\_t cuid; \textcolor{comment}{/* ID dell'utente creatore */}
+    gid\_t cgid; \textcolor{comment}{/* ID del gruppo del creatore */}
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} mode; \textcolor{comment}{/* Permessi */}
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_seq; \textcolor{comment}{/* Numero di sequenza */}
+\};
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+\+\_\+key} puo\textquotesingle{} essere utile per leggere la chiave di I\+P\+C\+\_\+\+P\+R\+I\+V\+A\+TE
+\item {\ttfamily ciod} e {\ttfamily cgid} sono immutabili
+\item Impostare i permessi di esecuzione in {\ttfamily mode} non serve a niente\+: contano soltanto i permessi di lettura e di scrittura 
+\end{DoxyItemize}

@@ -1,0 +1,110 @@
+\subsection*{Comandi debugger G\+DB}
+
+Per prima cosa bisogna compilare i file sorgente con le informazioni di debugging con la flag {\ttfamily -\/g}.
+
+Esempio\+: 
+\begin{DoxyCode}
+# Usa -g per permettere il debugging
+gcc -g <nome>.c -o <output>
+\end{DoxyCode}
+
+
+Comandi G\+DB\+:
+\begin{DoxyItemize}
+\item {\ttfamily break $<$nome funzione$>$}\+: imposta un breakpoint su una funzione
+\item {\ttfamily break $<$riga codice$>$}\+: imposta un breakpoint su una certa riga del codice
+\item {\ttfamily clear $<$riga codice$>$}\+: toglie il breakpoint su quella riga di codice
+\item {\ttfamily watch $<$nome variabile$>$}\+: aggiunge un watchpoint che blocca il codice quando la variabile cambia valore
+\item {\ttfamily run}\+: esegue il programma
+\item {\ttfamily print $<$variabile$>$}\+: visualizza il valore della variabile $>$ E\textquotesingle{} possibile anche scrivere print var\+\_\+array\mbox{[}x\mbox{]} per visualizzare l\textquotesingle{}elemento di un array
+\item {\ttfamily step}\+: esegue la riga di codice successiva seguendo il codice nelle funzioni
+\item {\ttfamily next}\+: esegue la riga di codice successiva eseguendo le funzioni in un colpo solo
+\item {\ttfamily continue}\+: esegue il codice finche\textquotesingle{} non viene raggiunto un breakpoint o watchpoint
+\item {\ttfamily list}\+: visualizza la riga
+\item {\ttfamily quit}\+: esce da gdb
+\end{DoxyItemize}
+
+\subsection*{Estensioni dell\textquotesingle{}interfaccia G\+DB e interfacce grafiche}
+
+\subsubsection*{Interfacce C\+LI}
+
+\href{https://github.com/cyrus-and/gdb-dashboard}{\tt gdb-\/dashboard} estende l\textquotesingle{}interfaccia del terminale.
+
+
+
+E\textquotesingle{} possibile scaricando il file {\ttfamily .gdbinit} nella cartella home\+: 
+\begin{DoxyCode}
+wget -P ~ https://git.io/.gdbinit
+\end{DoxyCode}
+
+
+Per aggiungere il syntax highlight bisogna installare Pygments (libreria Python)\+: 
+\begin{DoxyCode}
+pip install pygments
+\end{DoxyCode}
+
+
+\subsubsection*{Interfacce G\+UI}
+
+\href{https://github.com/cs01/gdbgui}{\tt gdbgui} e\textquotesingle{} una interfaccia grafica basata su tecnologie web.
+
+
+
+\subsection*{Visualizza informazioni I\+PC}
+
+Il comando {\ttfamily ipcs} permette di vedere una lista di\+:
+\begin{DoxyItemize}
+\item code dei messaggi
+\item segmenti di memoria condivisa
+\item set di semafori
+\end{DoxyItemize}
+
+Esempio di output\+: 
+\begin{DoxyCode}
+------ Message Queues --------
+key     msqid  owner    perms  used-bytes  messages
+0x1235  26     student  620    12          20
+
+------ Shared Memory Segments --------
+key     shmid  owner      perms  bytes  nattch  status
+0x1234  0      professor  600    8192   2
+
+------ Semaphore Arrays --------
+key     semid  owner      perms  nsems
+0x1111  102    professor  330    20
+\end{DoxyCode}
+
+
+\subsection*{Rimuovi I\+PC dal sistema\+:}
+
+Il comando {\ttfamily ipcrm} permette di rimuovere le I\+PC.
+
+Rimuovere una coda dei messaggi\+: 
+\begin{DoxyCode}
+# 0x1235 e' la chiave della coda
+ipcrm -Q 0x1235
+
+# 25 e' l'identificatore della coda
+ipcrm -q 26
+\end{DoxyCode}
+
+
+Rimuovere un segmento di memoria condivisa\+: 
+\begin{DoxyCode}
+# 0x1234 e' la chiave della memoria condivisa
+ipcrm -M 0x1234
+
+# 0 e' l'identificatore della memoria condivisa
+ipcrm -m 0
+\end{DoxyCode}
+
+
+Rimuovere un set di semafori\+: 
+\begin{DoxyCode}
+# 0x1111 e' la chiave del set di semafori
+ipcrm -S 0x1111
+
+# 102 e' l'identificatore del set di semafori
+ipcrm -s 102
+\end{DoxyCode}
+ 

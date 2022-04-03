@@ -1,0 +1,529 @@
+.TH "md_theory_semaphores_semaphores" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_theory_semaphores_semaphoresTeoria: semafori 
+ \- I semafori vengono usati per sincronizzare piu' processi\&.
+.PP
+La sincronizzazione puo' servire per gestire la comunicazione tra processi oppure per coordinarli\&. 
+.PP
+.RS 4
+NOTA: non tutti i mezzi di comunicazione necessitano di semafori\&. Un mezzo che li richiede e' la memoria condivisa\&. 
+.RE
+.PP
+.PP
+Le system call per i semafori lavorano sempre su insiemi (set) di semafori e NON su semafori singoli\&.
+.PP
+.SS "Creazione di un insieme di semafori"
+.PP
+.PP
+.nf
+#include <sys/sem\&.h>
+
+// Returns semaphore set identifier on success, or -1 error
+int semget(key_t key, int nsems, int semflg);
+.fi
+.PP
+.PP
+Dove\&.
+.IP "\(bu" 2
+\fCkey\fP: e' la chiave IPC
+.IP "\(bu" 2
+\fCnsems\fP: e' il numero di semafori da creare e deve essere quindi maggiore di 0\&.
+.IP "\(bu" 2
+\fCsemflg\fP: specifica i permessi
+.IP "  \(bu" 4
+Sono validi tutti i permessi del parametro \fCmode\fP della system call \fCopen()\fP
+.IP "  \(bu" 4
+\fCIPC_CREAT\fP: se non esiste un set di semafori legato alla chiave, lo crea
+.IP "  \(bu" 4
+\fCIPC_EXCL\fP: se usato con \fCIPC_CREAT\fP, fa fallire la system call se esiste gia' un set di semafori legato alla chiave
+.PP
+
+.PP
+.PP
+Per vedere come generare la chiave andare nella \fCsezione relativa qui\fP
+.PP
+Esempi: 
+.PP
+.nf
+int semid;
+ket_t key = // \&.\&.\&. (genera la chiave in qualche modo)
+
+// A) Delega al kernel la scelta della chiave
+semid = semget(IPC_PRIVATE, 10, S_IRUSR | S_IWUSR);
+
+// B) Se non esiste crea un set di 10 semafori con la chiave key
+semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// C) crea un set di 10 semafori con la chiave key\&.
+//    se esiste gia' fallisce
+semid = semget(key, 10, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);
+
+.fi
+.PP
+.PP
+.SS "Operazioni di controllo"
+.PP
+La system call \fCsemctl()\fP permette di eseguire operazioni su un set di semafori oppure su un semaforo appartenente al set\&.
+.PP
+.PP
+.nf
+#include <sys/sem\&.h>
+// Returns nonnegative integer on success, or -1 error
+int semctl(int semid, int semnum, int cmd, \&.\&.\&. /* union semun arg */);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCsemid\fP: identificativo ottenuto usando la chiave IPC
+.IP "\(bu" 2
+\fCsemnum\fP
+.IP "\(bu" 2
+\fCcmd\fP: operazione da eseguire
+.IP "\(bu" 2
+(opzionale) \fCarg\fP: argomento usato solo per certe operazioni
+.PP
+.PP
+Dove \fCarg\fP e' la seguente union:
+.PP
+.PP
+.nf
+#include <sys/sem\&.h>
+
+union semun {
+    // usato se si lavora su un singolo semaforo\&.
+    // usato dalla operazione SETVAL
+    int val;
+
+    // usato per lavorare sullo stato globale del semaforo\&.
+    // usato dalle operazioni IPC_STAT e IPC_SET
+    struct semid_ds * buf;
+
+    // per eseguire operazioni su tutti i semafori\&.
+    // usato dalle operazioni GETALL e SETALL
+    unsigned short * array;
+};
+.fi
+.PP
+ 
+.PP
+.RS 4
+Deve essere dichiarata prima di usare \fCsemctl()\fP\&. 
+.RE
+.PP
+.PP
+.SS "Cancellare un set di semafori"
+.PP
+.PP
+.nf
+int semctl(semid, 0 /* semnum: ignored */, cmd, 0 /* arg: ignored */);
+.fi
+.PP
+.PP
+Se il parametro \fCcmd\fP vale \fCIPC_RMID\fP la system call rimuove immediatamente un set di semafori\&. 
+.PP
+.RS 4
+I processi bloccati vengono svegliati con errore \fCEIDRM\fP\&. 
+.RE
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+if (semctl(semid, 0/*ignored*/, IPC_RMID, 0/*ignored*/) == -1)
+    errExit("semctl failed");
+else
+    printf("semaphore set removed successfully\n");
+
+.fi
+.PP
+.PP
+.SS "Reciperare statistiche"
+.PP
+.PP
+.nf
+int semctl(semid, 0 /* semnum: ignored */, cmd, arg);
+.fi
+.PP
+.PP
+Se \fCcmd\fP vale \fCIPC_STAT\fP la system call memorizza le statistiche del set di semafori in \fCarg\&.buf\fP\&.
+.PP
+Dove \fCarg\&.buf\fP ha la seguente struttura:
+.PP
+.PP
+.nf
+struct semid_ds {
+    struct ipc_perm sem_perm; // proprietario e permessi
+    time_t sem_otime; // Tempo dell'ultimo semop()
+    time_t sem_ctime; // Tempo dell'ultima modifica
+    unsigned long sem_nsems; // Numero di semafori nel set
+};
+.fi
+.PP
+.PP
+.SS "Cambiare i permessi"
+.PP
+.PP
+.nf
+int semctl(semid, 0 /* semnum: ignored */, cmd, arg);
+.fi
+.PP
+.PP
+Se \fCcmd\fP vale \fCIPC_SET\fP la system call utilizza il campo \fCarg\&.buf\fP per impostare proprieta' sul set di semafori\&.
+.PP
+Dove \fCarg\&.buf\fP ha la seguente struttura: 
+.PP
+.nf
+struct semid_ds {
+    struct ipc_perm sem_perm; // proprietario e permessi
+    time_t sem_otime; // Tempo dell'ultimo semop()
+    time_t sem_ctime; // Tempo dell'ultima modifica
+    unsigned long sem_nsems; // Numero di semafori nel set
+};
+
+.fi
+.PP
+.PP
+Gli unici valori modificabili sono i permessi contenuti in \fCsem_perm\fP: \fCuid\fP, \fCgid\fP e \fCmode\fP\&.
+.PP
+Esempio: 
+.PP
+.nf
+ket_t key = // \&.\&.\&. (genera la chiave IPC)
+
+// Crea o ottieni un set di 10 semafori legato alla chiave
+int semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// istanzia una struct semid_ds
+struct semid_ds ds;
+
+// instanzia una union semun
+// (che deve essere stata definita precedentemente nel codice)
+union semun arg;
+arg\&.buf = &ds;  // si vuole una semid_ds
+
+// ottieni una copia di semid_ds dal kernel
+if (semctl(semid, 0 /*ignored*/, IPC_STAT, arg) == -1)
+    errExit("semctl IPC_STAT failed");
+
+// modifica i permessi sulla copia aggiungendo
+// i permessi di lettura al gruppo
+arg\&.buf->sem_perms\&.mode |= S_IRGRP;
+
+// aggiorna la struttura semid_ds del kernel applicando le modifiche
+if (semctl(semid, 0 /*ignored*/, IPC_SET, arg) == -1)
+    errExit("semctl IPC_SET failed");
+
+.fi
+.PP
+.PP
+.SS "Inizializzare i semafori"
+.PP
+Per inizializzare i semafori e' possibile inizializzare l'intero set oppure un singolo semaforo\&.
+.PP
+Il valore dei semafori DEVE ESSERE SEMPRE INIZIALIZZATO prima di utilizzarli\&.
+.PP
+Per inizializzare un semaforo: 
+.PP
+.nf
+int semctl(semid, semnum, SETVAL, arg);
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Dove \fCcmd\fP = \fCSETVAL\fP 
+.RE
+.PP
+.PP
+Imposta il valore arg\&.val al semaforo semnum-esimo\&.
+.PP
+Esempio: 
+.PP
+.nf
+ket_t key = //\&.\&.\&. (genera la chiave IPC)
+
+// ottieni o crea il set di 10 semafori
+int semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// imposta il valore desiderato del semaforo a zero
+union semun arg;
+arg\&.val = 0;
+
+// inizializza il semaforo in posizione 5 a zero
+if (semctl(semid, 5, SETVAL, arg) == -1)
+    errExit("semctl SETVAL");
+
+.fi
+.PP
+.PP
+Per inizializzare l'intero set: 
+.PP
+.nf
+int semctl(semid, 0 /* semnum: ignored*/, cmd, arg);
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Dove \fCcmd\fP = \fCSETALL\fP\&. \fCsemnum\fP e' ignorato perche' si inizializzano tutti i semafori, non solo uno\&. 
+.RE
+.PP
+.PP
+Imposta i valori di arg\&.array al set di semafori\&.
+.PP
+Esempio: 
+.PP
+.nf
+ket_t key = //\&.\&.\&. (genera la chiave IPC)
+
+// crea o ottieni il set di 10 semafori
+int semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// Imposta 5 semafori a 1 e gli altri 5 a 0
+int values[] = {1,1,1,1,1,0,0,0,0,0};
+union semun arg;
+arg\&.array = values;
+
+// Inizializza il set di semafori
+if (semctl(semid, 0/*ignored*/, SETALL, arg) == -1)
+    errExit("semctl SETALL");
+
+.fi
+.PP
+.PP
+.SS "Recuperare il valore dei semafori"
+.PP
+Per recuperare il valore dei semafori e' possibile leggere i valori dell'intero set oppure il valore di un singolo semaforo\&.
+.PP
+.RS 4
+ATTENZIONE: subito dopo aver letto il valore dei semafori questi potrebbero cambiare e quindi non bisogna dare per scontato che siano aggiornati\&.
+.PP
+Il valore e' quindi attendibile solo all'inizio e dopo la fine dell'uso dei semafori, quando c'e' un solo processo e gli altri sono terminati\&. 
+.RE
+.PP
+.PP
+Per leggere il valore di un semaforo: 
+.PP
+.nf
+int semctl(semid, semnum, GETVAL, 0 /*arg: ignored*/);
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Dove \fCcmd\fP = \fCGETVAL\fP 
+.RE
+.PP
+.PP
+Restituisce il valore del semaforo semnum-esimo\&.
+.PP
+Esempio: 
+.PP
+.nf
+ket_t key = //\&.\&.\&. (genera la chiave IPC)
+
+// ottieni o crea il set di 10 semafori
+int semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// ottieno lo stato attuale del semaforo in posizione 5
+int value = semctl(semid, 5, GETVAL, 0/*ignored*/);
+if (value == -1)
+    errExit("semctl GETVAL");
+
+.fi
+.PP
+.PP
+Per leggere il valore dell'intero set: 
+.PP
+.nf
+int semctl(semid, 0 /*semnum:ignored*/, GETALL, arg);
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Dove \fCcmd\fP = \fCGETALL\fP 
+.RE
+.PP
+.PP
+Imposta i valori dell'array \fCarg\&.array\fP con i valori dei semafori del set\&.
+.PP
+Esempio: 
+.PP
+.nf
+ket_t key = //\&.\&.\&. (genera la chiave IPC)
+
+// ottieni o crea il set di 10 semafori
+int semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// dichiara un array sufficientemente grande
+// per memorizzare i valori dei semafori
+int values[10];
+union semun arg;
+arg\&.array = values;
+
+// ottieni lo stato attuale di tutti i semafori
+if (semctl(semid, 0/*ignored*/, GETALL, arg) == -1)
+    errExit("semctl GETALL");
+
+.fi
+.PP
+.PP
+.SS "Ottenere informazioni dai singoli semafori"
+.PP
+.PP
+.nf
+int semctl(semid, semnum, cmd, 0);
+.fi
+.PP
+.PP
+Dove \fCcmd\fP puo' essere:
+.IP "\(bu" 2
+\fCGETPID\fP: restituisce il PID dell'ultimo processo che ha eseguito la system call \fCsemop\fP sul semaforo \fCsemnum\fP-esimo
+.IP "\(bu" 2
+\fCGETNCNT\fP: restituisce il numero di processi attualmente in attesa che il valore del semaforo \fCsemnum\fP-esimo diventi maggiore di 0
+.IP "\(bu" 2
+\fCGETZCNT\fP: restituisce il numero di processi attualmente in attesa che il valore del semaforo \fCsemnum\fP-esimo diventi uguale a 0\&.
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+ket_t key = //\&.\&.\&. (genera la chiave IPC)
+
+// ottieni o crea il set di 10 semafori
+int semid = semget(key, 10, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+// \&.\&.\&.
+
+// ottieni informazioni sul primo semaforo del set
+printf(
+    "Sem:%d getpid:%d getncnt:%d getzcnt:%d\n",
+    semid,
+    semctl(semid, 0, GETPID, NULL),
+    semctl(semid, 0, GETNCNT, NULL),
+    semctl(semid, 0, GETZCNT, NULL)
+);
+
+.fi
+.PP
+.PP
+.SS "Operazioni wait e signal"
+.PP
+La system call permette di eseguire una o piu' operazioni (wait o signal) sui semafori\&.
+.PP
+.PP
+.nf
+#include <sys/sem\&.h>
+
+// Returns 0 on success, or -1 on error
+int semop(int semid, struct sembuf *sops, unsigned int nsops);
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCsemid\fP: identificativo ottenuto utilizzando la chiave IPC
+.IP "\(bu" 2
+\fCsops\fP: puntatore ad un array che contiene una sequenza di operazioni da eseguire in modo atomico\&. 
+.PP
+.RS 4
+Le operazioni vengono eseguite in ordine da sinistra verso destra 
+.RE
+.PP
+
+.IP "\(bu" 2
+\fCnsops\fP: numero di operazioni contenute nell'array \fCsops\fP
+.PP
+.PP
+La struttura \fCsembuf\fP usata nell'array \fCsops\fP ha la seguente forma: 
+.PP
+.nf
+struct sembuf {
+    unsigned short sem_num; // numero del semaforo
+    short sem_op;  // operazione da eseguire
+    short sem_flg; // flag della operazione
+};
+
+.fi
+.PP
+.PP
+Dove:
+.IP "\(bu" 2
+\fCsem_num\fP: identifica il semaforo su cui eseguire l'operazione
+.IP "\(bu" 2
+\fCsem_op\fP: operazione da eseguire\&.
+.IP "  \(bu" 4
+se \fCsem_op\fP e' maggiore di 0: il valore \fCsem_op\fP viene aggiunto al valore del \fCsem_num\fP-esimo semaforo
+.IP "  \(bu" 4
+se\fCsem_op\fP e' uguale a 0: viene verificato se il semaforo \fCsem_num\fP-esimo ha il valore 0\&.
+.PP
+Se non e' 0, il processo viene bloccato\&.
+.PP
+Verra' sbloccato quanto il valore del semaforo torna maggiore di 0\&.
+.IP "  \(bu" 4
+se \fCsem_op\fP e' minore di 0: decrementa il valore del semaforo \fCsem_num\fP-esimo di \fCsem_op\fP\&.
+.PP
+Blocca il processo\&.
+.PP
+Il processo verra' sbloccato quando il valore del sesemaforo tornera' sufficientemente grande per permettere di eseguire l'operazione senza ottenere un risultato negativo\&.
+.PP
+
+.PP
+.PP
+In generale le chiamate di \fCsemop()\fP sono bloccanti\&. Il processo si sblocca quando:
+.IP "\(bu" 2
+un altro processo modifica il valore del semaforo per permettere l'esecuzione della operazione richiesta
+.IP "\(bu" 2
+un segnale interrompe la chiamata\&. La system call fallira' con l'errore EINTR\&.
+.IP "\(bu" 2
+un altro processo cancella il semaforo\&. La system call fallira' con l'errore EIDRM\&.
+.PP
+.PP
+Se si vuole non avere operazioni bloccanti si puo' specificare la flag \fCIPC_NOWAIT\fP in \fCsem_flg\fP\&. 
+.PP
+.RS 4
+Se la chiamata fosse bloccante senza \fCIPC_NOWAIT\fP la system call fallira' con errore \fCEAGAIN\fP 
+.RE
+.PP
+.PP
+Esempio: 
+.PP
+.nf
+struct sembuf sops[3];
+
+// sottrai 1 dal semaforo 0
+sops[0]\&.sem_num = 0;
+sops[0]\&.sem_op = -1;
+sops[0]\&.sem_flg = 0;
+
+// aggiungi 2 al semaforo 1
+sops[1]\&.sem_num = 1;
+sops[1]\&.sem_op = 2;
+sops[1]\&.sem_flg = 0;
+
+// aspetta che il semaforo 2 sia 0
+// ma non bloccare immediatamente il processo
+// se l'operazione non puo' essere svolta immediatamente
+sops[2]\&.sem_num = 2;
+sops[2]\&.sem_op = 0;
+sops[2]\&.sem_flg = IPC_NOWAIT;
+
+if (semop(semid, sops, 3) == -1) {
+    if (errno == EAGAIN)
+        // il semaforo 2 avrebbe bloccato il processo
+        printf("Operation would have blocked\n");
+    else
+        errExit("semop"); // Some other error
+}
+
+.fi
+.PP
+ 

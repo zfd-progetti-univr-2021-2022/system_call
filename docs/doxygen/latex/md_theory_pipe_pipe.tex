@@ -1,0 +1,143 @@
+\subsection*{Introduzione}
+
+Una P\+I\+PE permette di far scambiare a piu\textquotesingle{} processi un flusso di byte \begin{quote}
+Per farlo viene usato un buffer memorizzato nella memoria del kernel \end{quote}
+
+
+La P\+I\+PE e\textquotesingle{} utile quando due processi imparentati devono scambiarsi informazioni. \begin{quote}
+Quindi, di solito, dopo aver creato la P\+I\+PE e\textquotesingle{} presente una fork. \end{quote}
+
+
+Una P\+I\+PE ha le seguenti caratteristiche\+:
+\begin{DoxyItemize}
+\item e\textquotesingle{} U\+N\+I\+D\+I\+R\+E\+Z\+I\+O\+N\+A\+LE\+: i dati vanno in una direzione, entrano dalla parte della scrittura ed escono dalla parte della lettura
+\item i dati viaggiano nella P\+I\+PE in modo S\+E\+Q\+U\+E\+N\+Z\+I\+A\+LE. I byte vengono letti nello stesso ordine in cui sono stati scritti
+\item non usano il concetto di messaggi, e quindi non ci sono vincoli su come essi sono formati. La lettura puo\textquotesingle{} essere fatta di qualunque dimensione, senza necessariamente rispettare i vincoli della dimensione dei dati inseriti in scrittura.
+\item La lettura di una P\+I\+PE vuota e\textquotesingle{} bloccante.
+
+Per sbloccarsi deve essere scritto almeno un byte nella P\+I\+PE oppure deve arrivare un segnale (che non faccia terminare il processo). $>$ errno viene impostato a E\+I\+N\+TR
+\item Se viene chiuso il lato della scrittura il processo che legge vedra\textquotesingle{} l\textquotesingle{}end of file dopo aver letto il resto dei dati.
+\item La scrittura e\textquotesingle{} bloccante.
+
+Si sblocchera\textquotesingle{} se c\textquotesingle{}e\textquotesingle{} abbastanza spazio per eseguire la scrittura in modo atomico oppure se arriva un segnale (che non faccia terminare il processo). $>$ errno viene impostato a E\+I\+N\+TR
+
+$>$ Su linux una P\+I\+PE ha 65536 byte di capacita\textquotesingle{}.
+\item Se si scrivono blocchi di dati maggiori di {\ttfamily P\+I\+P\+E\+\_\+\+B\+UF} (4096 bytes su linux) i dati potrebbero essere suddivisi in segmenti di dimensione arbitraria (piu\textquotesingle{} piccola di {\ttfamily P\+I\+P\+E\+\_\+\+B\+UF})
+\end{DoxyItemize}
+
+\subsection*{Creare una P\+I\+PE}
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <unistd.h>}
+
+\textcolor{keywordtype}{int} pipe(\textcolor{keywordtype}{int} filedes[2]);
+\end{DoxyCode}
+
+
+Dove\+:
+\begin{DoxyItemize}
+\item filedes\+: e\textquotesingle{} un array da due interi. Se la chiamata ha successo gli interi sono i file descriptor della P\+I\+PE
+\begin{DoxyItemize}
+\item filedes\mbox{[}0\mbox{]} e\textquotesingle{} il lato di lettura
+\item filedes\mbox{[}1\mbox{]} e\textquotesingle{} il lato di scrittura
+\end{DoxyItemize}
+\item Restituisce\+: 0 in caso di successo, -\/1 in caso di errore
+\end{DoxyItemize}
+
+Esempio apertura P\+I\+PE\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} fd[2];
+\textcolor{comment}{// apri e controlla se la apertura ha avuto successo}
+\textcolor{keywordflow}{if} (pipe(fd) == -1)
+    errExit(\textcolor{stringliteral}{"PIPE"});
+\end{DoxyCode}
+
+
+Tipicamente dopo aver creato una P\+I\+PE il processo crea un figlio con la {\ttfamily fork()}.
+
+\subsection*{Leggere da una P\+I\+PE}
+
+Dopo aver creato una P\+I\+PE, il processo che si occupa di leggere (o il padre o il figlio) puo\textquotesingle{} tranquillamente chiudere il lato di scrittura con la system call close\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (close(fd[1]) == -1)
+    \textcolor{comment}{// visualizza child perche' in questo esempio il figlio legge}
+    errExit(\textcolor{stringliteral}{"close - child"});
+\end{DoxyCode}
+ \begin{quote}
+E\textquotesingle{} altamente consigliato farlo \end{quote}
+
+
+E poi puo\textquotesingle{} iniziare a leggere dalla P\+I\+PE con read\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{char} buf[SIZE];  \textcolor{comment}{// buffer in cui vengono letti i dati}
+ssize\_t nBys;    \textcolor{comment}{// numero byte letti}
+
+\textcolor{comment}{// leggi dalla PIPE}
+nBys = read(fd[0], buf, SIZE);
+
+\textcolor{comment}{// 0: end-of-file, -1: errore}
+\textcolor{keywordflow}{if} (nBys > 0) \{
+    buf[nBys] = \textcolor{charliteral}{'\(\backslash\)0'};
+    printf(\textcolor{stringliteral}{"%s\(\backslash\)n"}, buf);
+\}
+\end{DoxyCode}
+
+
+\subsection*{Scrivere su una P\+I\+PE}
+
+Dopo aver creato una P\+I\+PE, il processo che si occupa di scrivere (o il padre o il figlio) puo\textquotesingle{} chiudere il lato di lettura con la system call close\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (close(fd[0]) == -1)
+    \textcolor{comment}{// visualizza parent perche' in questo esempio il padre scrive}
+    errExit(\textcolor{stringliteral}{"close - parent"});
+\end{DoxyCode}
+ \begin{quote}
+E\textquotesingle{} altamente consigliato farlo \end{quote}
+
+
+E poi puo\textquotesingle{} iniziare a scrivere nella P\+I\+PE con write\+: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{char} buf[] = \textcolor{stringliteral}{"Ciao Mondo\(\backslash\)n"};
+ssize\_t nBys;
+
+\textcolor{comment}{// scrivi sulla PIPE}
+nBys = write(fd[1], buf, strlen(buf));
+
+\textcolor{comment}{// verifica se write ha avuto successo}
+\textcolor{keywordflow}{if} (nBys != strlen(buf)) \{
+    errExit(\textcolor{stringliteral}{"write - parent"});
+\}
+\end{DoxyCode}
+
+
+\subsection*{Chiudere la P\+I\+PE}
+
+Per chiudere la P\+I\+PE si usa la system call close su entrambe i lati della comunicazione (lettura e scrittura).
+
+In genere il processo che dovra\textquotesingle{} legge chiude immediatamente il lato di scrittura e viceversa il processo che dovra\textquotesingle{} scrive chiude il lato di lettura. \begin{quote}
+E\textquotesingle{} altamente consigliato farlo \end{quote}
+
+
+Per questo motivo a fine comunicazione i due processi si ritroveranno a chiudere soltanto il proprio lato del canale.
+
+Chiudi lato di lettura\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (close(fd[0]) == -1)
+    errExit(\textcolor{stringliteral}{"close"});
+\end{DoxyCode}
+
+
+Chiudi lato di scrittura\+: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (close(fd[1]) == -1)
+    errExit(\textcolor{stringliteral}{"close"});
+\end{DoxyCode}
+
+
+\begin{quote}
+N\+O\+TA\+: queste system call sono identiche a quelle usate per chiudere il lato che non verra\textquotesingle{} usato dal proprio processo.\end{quote}

@@ -1,11 +1,15 @@
 var NAVTREE =
 [
   [ "SYSTEM_CALL", "index.html", [
+    [ "Teoria: comandi utili", "md_theory_commands_commands.html", null ],
     [ "Teoria: FIFO", "md_theory_fifo_fifo.html", null ],
     [ "Teoria: generare chiavi per le IPC", "md_theory_generate_keys_generate_keys.html", null ],
     [ "Teoria: coda dei messaggi", "md_theory_message_queue_message_queue.html", null ],
+    [ "Teoria: PIPE", "md_theory_pipe_pipe.html", null ],
+    [ "Teoria: semafori", "md_theory_semaphores_semaphores.html", null ],
     [ "Teoria: memoria condivisa", "md_theory_shared_memory_shared_memory.html", null ],
     [ "Teoria: segnali", "md_theory_signals_signals.html", null ],
+    [ "Teoria: strutture", "md_theory_structures_structures.html", null ],
     [ "Elenco delle cose da fare", "todo.html", null ],
     [ "Warnings", "warning.html", null ],
     [ "Strutture dati", "annotated.html", [

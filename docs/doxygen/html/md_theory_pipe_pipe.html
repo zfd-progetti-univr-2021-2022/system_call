@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SYSTEM_CALL: Teoria: PIPE</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/SVG"],
+});
+</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SYSTEM_CALL
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_theory_pipe_pipe.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Teoria: PIPE </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>Introduzione</h2>
+<p>Una PIPE permette di far scambiare a piu' processi un flusso di byte </p><blockquote class="doxtable">
+<p>Per farlo viene usato un buffer memorizzato nella memoria del kernel </p>
+</blockquote>
+<p>La PIPE e' utile quando due processi imparentati devono scambiarsi informazioni. </p><blockquote class="doxtable">
+<p>Quindi, di solito, dopo aver creato la PIPE e' presente una fork. </p>
+</blockquote>
+<p>Una PIPE ha le seguenti caratteristiche:</p><ul>
+<li>e' UNIDIREZIONALE: i dati vanno in una direzione, entrano dalla parte della scrittura ed escono dalla parte della lettura</li>
+<li>i dati viaggiano nella PIPE in modo SEQUENZIALE. I byte vengono letti nello stesso ordine in cui sono stati scritti</li>
+<li>non usano il concetto di messaggi, e quindi non ci sono vincoli su come essi sono formati. La lettura puo' essere fatta di qualunque dimensione, senza necessariamente rispettare i vincoli della dimensione dei dati inseriti in scrittura.</li>
+<li><p class="startli">La lettura di una PIPE vuota e' bloccante.</p>
+<p class="startli">Per sbloccarsi deve essere scritto almeno un byte nella PIPE oppure deve arrivare un segnale (che non faccia terminare il processo). &gt; errno viene impostato a EINTR</p>
+</li>
+<li>Se viene chiuso il lato della scrittura il processo che legge vedra' l'end of file dopo aver letto il resto dei dati.</li>
+<li><p class="startli">La scrittura e' bloccante.</p>
+<p class="startli">Si sblocchera' se c'e' abbastanza spazio per eseguire la scrittura in modo atomico oppure se arriva un segnale (che non faccia terminare il processo). &gt; errno viene impostato a EINTR</p>
+<p class="startli">&gt; Su linux una PIPE ha 65536 byte di capacita'.</p>
+</li>
+<li>Se si scrivono blocchi di dati maggiori di <code>PIPE_BUF</code> (4096 bytes su linux) i dati potrebbero essere suddivisi in segmenti di dimensione arbitraria (piu' piccola di <code>PIPE_BUF</code>)</li>
+</ul>
+<h2>Creare una PIPE</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div><div class="line"></div><div class="line"><span class="keywordtype">int</span> pipe(<span class="keywordtype">int</span> filedes[2]);</div></div><!-- fragment --><p>Dove:</p><ul>
+<li>filedes: e' un array da due interi. Se la chiamata ha successo gli interi sono i file descriptor della PIPE<ul>
+<li>filedes[0] e' il lato di lettura</li>
+<li>filedes[1] e' il lato di scrittura</li>
+</ul>
+</li>
+<li>Restituisce: 0 in caso di successo, -1 in caso di errore</li>
+</ul>
+<p>Esempio apertura PIPE: </p><div class="fragment"><div class="line"><span class="keywordtype">int</span> fd[2];</div><div class="line"><span class="comment">// apri e controlla se la apertura ha avuto successo</span></div><div class="line"><span class="keywordflow">if</span> (pipe(fd) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;PIPE&quot;</span>);</div></div><!-- fragment --><p>Tipicamente dopo aver creato una PIPE il processo crea un figlio con la <code>fork()</code>.</p>
+<h2>Leggere da una PIPE</h2>
+<p>Dopo aver creato una PIPE, il processo che si occupa di leggere (o il padre o il figlio) puo' tranquillamente chiudere il lato di scrittura con la system call close:</p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (close(fd[1]) == -1)</div><div class="line">    <span class="comment">// visualizza child perche&#39; in questo esempio il figlio legge</span></div><div class="line">    errExit(<span class="stringliteral">&quot;close - child&quot;</span>);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>E' altamente consigliato farlo </p>
+</blockquote>
+<p>E poi puo' iniziare a leggere dalla PIPE con read: </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> buf[SIZE];  <span class="comment">// buffer in cui vengono letti i dati</span></div><div class="line">ssize_t nBys;    <span class="comment">// numero byte letti</span></div><div class="line"></div><div class="line"><span class="comment">// leggi dalla PIPE</span></div><div class="line">nBys = read(fd[0], buf, SIZE);</div><div class="line"></div><div class="line"><span class="comment">// 0: end-of-file, -1: errore</span></div><div class="line"><span class="keywordflow">if</span> (nBys &gt; 0) {</div><div class="line">    buf[nBys] = <span class="charliteral">&#39;\0&#39;</span>;</div><div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div><div class="line">}</div></div><!-- fragment --><h2>Scrivere su una PIPE</h2>
+<p>Dopo aver creato una PIPE, il processo che si occupa di scrivere (o il padre o il figlio) puo' chiudere il lato di lettura con la system call close:</p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (close(fd[0]) == -1)</div><div class="line">    <span class="comment">// visualizza parent perche&#39; in questo esempio il padre scrive</span></div><div class="line">    errExit(<span class="stringliteral">&quot;close - parent&quot;</span>);</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>E' altamente consigliato farlo </p>
+</blockquote>
+<p>E poi puo' iniziare a scrivere nella PIPE con write: </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> buf[] = <span class="stringliteral">&quot;Ciao Mondo\n&quot;</span>;</div><div class="line">ssize_t nBys;</div><div class="line"></div><div class="line"><span class="comment">// scrivi sulla PIPE</span></div><div class="line">nBys = write(fd[1], buf, strlen(buf));</div><div class="line"></div><div class="line"><span class="comment">// verifica se write ha avuto successo</span></div><div class="line"><span class="keywordflow">if</span> (nBys != strlen(buf)) {</div><div class="line">    errExit(<span class="stringliteral">&quot;write - parent&quot;</span>);</div><div class="line">}</div></div><!-- fragment --><h2>Chiudere la PIPE</h2>
+<p>Per chiudere la PIPE si usa la system call close su entrambe i lati della comunicazione (lettura e scrittura).</p>
+<p>In genere il processo che dovra' legge chiude immediatamente il lato di scrittura e viceversa il processo che dovra' scrive chiude il lato di lettura. </p><blockquote class="doxtable">
+<p>E' altamente consigliato farlo </p>
+</blockquote>
+<p>Per questo motivo a fine comunicazione i due processi si ritroveranno a chiudere soltanto il proprio lato del canale.</p>
+<p>Chiudi lato di lettura: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (close(fd[0]) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;close&quot;</span>);</div></div><!-- fragment --><p>Chiudi lato di scrittura: </p><div class="fragment"><div class="line"><span class="keywordflow">if</span> (close(fd[1]) == -1)</div><div class="line">    errExit(<span class="stringliteral">&quot;close&quot;</span>);</div></div><!-- fragment --><blockquote class="doxtable">
+<p>NOTA: queste system call sono identiche a quelle usate per chiudere il lato che non verra' usato dal proprio processo.</p>
+</blockquote>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generato da
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>
