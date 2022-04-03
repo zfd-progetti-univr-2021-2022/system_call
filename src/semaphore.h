@@ -5,11 +5,19 @@
 #pragma once
 
 /**
- * @todo Commentare la union semun e i suoi attributi.
+ * Union usata dalla system call semctl().
 */
 union semun {
+    /// usato se si lavora su un singolo semaforo.
+    /// Usato dalla operazione SETVAL
     int val;
+
+    /// usato per lavorare sullo stato globale del semaforo.
+    /// Usato dalle operazioni IPC_STAT e IPC_SET
     struct semid_ds * buf;
+
+    /// per eseguire operazioni su tutti i semafori.
+    /// Usato dalle operazioni GETALL e SETALL
     unsigned short * array;
 };
 
