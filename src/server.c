@@ -2,6 +2,7 @@
 /// @brief Contiene l'implementazione del server.
 
 #include <signal.h>
+#include <stdlib.h>
 
 #include "err_exit.h"
 #include "defines.h"

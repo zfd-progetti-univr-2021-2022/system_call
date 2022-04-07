@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <sys/types.h>
 
 /**
  * @brief Ottiene l'id o crea una memoria condivisa.
