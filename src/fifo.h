@@ -3,3 +3,31 @@
 ///         funzioni specifiche per la gestione delle FIFO.
 
 #pragma once
+
+
+/**
+ * @brief Crea o ottiene una IPC FIFO usando mkfifo.
+ *
+ * @param path Percorso file usato dalla FIFO.
+*/
+void make_fifo(char * path);
+
+
+/**
+ * @brief Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita' lettura o scrittura.
+ *
+ * @param path Percorso file usato dalla FIFO.
+ * @param mode 'r' (read) oppure 'w' (write)
+ * @return int Descrittore della FIFO
+ */
+int create_fifo(char * path, char mode);
+
+
+/**
+ * @brief Garantisce la creazione di una nuova FIFO cancellando l'eventuale file della FIFO esistente.
+ *
+ * @param path Percorso file usato dalla FIFO.
+ * @param mode 'r' (read) oppure 'w' (write)
+ * @return int Descrittore della FIFO
+*/
+int create_new_fifo(char * path, char mode);

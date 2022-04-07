@@ -1,18 +1,39 @@
 /// @file server.c
 /// @brief Contiene l'implementazione del server.
 
+#include <signal.h>
+
 #include "err_exit.h"
 #include "defines.h"
 #include "shared_memory.h"
 #include "semaphore.h"
 #include "fifo.h"
 
+
+/**
+ * @brief Chiude tutte le IPC e termina
+ *
+ * @param sig
+ */
+void SIGINTSignalHandler(int sig) {
+    exit(0);
+}
+
+
 /**
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
- * 
+ *
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
 */
 int main(int argc, char * argv[]) {
+
+    // imposta signal handler per gestire la chiusura dei canali di comunicazione
+
+    if (signal(SIGINT, SIGINTSignalHandler) == SIG_ERR) {
+        ErrExit("change signal handler failed");
+    }
+
+    // -- APERTURA CANALI DI COMUNICAZIONE
 
     // genera due FIFO (FIFO1 e FIFO2), una coda di messaggi (MsgQueue), un
     // segmento di memoria condivisa (ShdMem) ed un set di semafori per gestire la concorrenza su

@@ -25,8 +25,80 @@ union semun {
 /**
  * @brief Funzione di supporto per manipolare i valori di un set di semafori.
  *
- * @param semid Identificatore del set di semagori
+ * @param semid Identificatore del set di semafori
  * @param sem_num Indice di un semaforo nel set
  * @param sem_op Operazione eseguita sul semaforo sem_num
 */
 void semOp (int semid, unsigned short sem_num, short sem_op);
+
+
+/**
+ * @brief Attende che il semaforo sem_num raggiunga il valore zero.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param sem_num Indice di un semaforo nel set
+*/
+void semWaitZero(int semid, int sem_num);
+
+
+/**
+ * @brief Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il processo.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param sem_num Indice di un semaforo nel set
+*/
+void semWait(int semid, int sem_num);
+
+
+/**
+ * @brief Esegue la signal sul semaforo sem_num: incrementa il valore di 1.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param sem_num Indice di un semaforo nel set
+*/
+void semSignal(int semid, int sem_num);
+
+
+/**
+ * @brief Inizializza il valore del semaforo sem_num al valore val.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param sem_num Indice di un semaforo nel set
+ * @param val Valore a cui impostare il semaforo sem_num
+*/
+void semSetVal(int semid, int sem_num, int val);
+
+
+/**
+ * @brief Inizializza i valori del set di semafori semid ai valori in values.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param values Array di valori a cui impostare ogni semaforo del set
+*/
+void semSetAll(int semid, short unsigned int values[]);
+
+
+/**
+ * @brief Cancella il set di semafori svegliando eventuali processi in attesa.
+ *
+ * @param semid Identificatore del set di semafori
+ */
+void semDelete(int semid);
+
+
+/**
+ * @brief Recupera statistiche di un set di semafori
+ *
+ * @param semid Identificatore del set di semafori
+ * @return struct semid_ds Statistiche del set di semafori
+*/
+struct semid_ds semGetStats(int semid);
+
+
+/**
+ * @brief Imposta i permessi su un set di semafori.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param arg Contiene i permessi da impostare
+*/
+void semSetPerm(int semid, struct semid_ds arg);

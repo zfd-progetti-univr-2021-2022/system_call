@@ -79,7 +79,18 @@ void SIGINTSignalHandler(int sig) {
             ErrExit("fork failed");
         }
         else if (pid == 0) {
-            operazioni_figlio(sendme_file->path);
+            // copio il percorso in una nuova variabile per liberare la lista del figlio
+            char * path = malloc(strlen(sendme_file->path)+1);
+            strcpy(path, sendme_file->path);
+
+            // libero lista dei file del figlio
+            free_list(sendme_files);
+
+            // esegui operazioni del figlio
+            operazioni_figlio(path);
+
+            // libera la memoria della variabile con il percorso e termina
+            free(path);
             exit(0);
         }
 
