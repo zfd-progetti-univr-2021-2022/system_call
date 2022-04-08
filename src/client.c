@@ -34,6 +34,9 @@
 #include "fifo.h"
 #include "debug.h"
 
+/// Percorso cartella eseguibile
+char EXECUTABLE_DIR[BUFFER_SZ];
+
 /// contiene percorso passato come parametro
 char * searchPath = NULL;
 
@@ -258,6 +261,10 @@ void operazioni_figlio(char * filePath){
 
 
 int main(int argc, char * argv[]) {
+
+    if (getcwd(EXECUTABLE_DIR, sizeof(EXECUTABLE_DIR)) == NULL) {
+        ErrExit("getcwd");
+    }
 
     // assicurati che sia stato passato un percorso come parametro e memorizzalo
     if (argc != 2) {

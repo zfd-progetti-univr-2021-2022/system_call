@@ -14,6 +14,9 @@
 #include "fifo.h"
 #include "debug.h"
 
+/// Percorso cartella eseguibile
+char EXECUTABLE_DIR[BUFFER_SZ];
+
 int fifo1_fd;
 
 /**
@@ -32,6 +35,10 @@ void SIGINTSignalHandler(int sig) {
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
 */
 int main(int argc, char * argv[]) {
+
+    if (getcwd(EXECUTABLE_DIR, sizeof(EXECUTABLE_DIR)) == NULL) {
+        ErrExit("getcwd");
+    }
 
     // imposta signal handler per gestire la chiusura dei canali di comunicazione
 

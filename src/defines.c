@@ -9,7 +9,7 @@
 
 
 key_t get_ipc_key() {
-    key_t key = ftok(".", 'b');
+    key_t key = ftok(EXECUTABLE_DIR, 'b');
 
     if (key == -1)
         ErrExit("ftok failed");

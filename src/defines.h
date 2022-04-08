@@ -10,6 +10,7 @@
 /// Buffer usato da getcwd()
 #define BUFFER_SZ 255
 
+extern char EXECUTABLE_DIR[BUFFER_SZ];
 #define FIFO1_PATH "/tmp/fifo1_file.txt"
 #define CONTAINS_N 0
 #define CONTAINS_FIFO1_FILE_PART 1
