@@ -1,7 +1,8 @@
 
 build:
 	mkdir -p dist
-	cd src && $(MAKE)
+	cd src && rm -rf obj/
+	cd src && $(MAKE) CFLAGS="-Wall -std=gnu99 -g -D_GLIBCXX_DEBUG"
 	cp src/client_0 dist/.
 	cp src/server dist/.
 

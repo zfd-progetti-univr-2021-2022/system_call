@@ -2,10 +2,28 @@
 /// @brief Contiene l'implementazione delle funzioni
 ///         specifiche per la gestione dei SEMAFORI.
 
+#include <sys/stat.h>
 #include <sys/sem.h>
 
 #include "err_exit.h"
 #include "semaphore.h"
+
+
+int createSemaphores(key_t key, int n_sem) {
+    int semid = semget(key, n_sem, IPC_CREAT | S_IRUSR | S_IWUSR);
+
+    if (semid == -1)
+        ErrExit("semget failed");
+    return semid;
+}
+
+int getSemaphores(key_t key, int n_sem) {
+    int semid = semget(key, n_sem, S_IRUSR | S_IWUSR);
+
+    if (semid == -1)
+        ErrExit("semget failed");
+    return semid;
+}
 
 
 void semOp (int semid, unsigned short sem_num, short sem_op) {

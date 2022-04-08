@@ -23,6 +23,23 @@ union semun {
 
 
 /**
+ * @brief Ottiene un insieme di semafori gia' creato
+ *
+ * @param key Chiave IPC
+ * @param n_sem Numero semafori da ottenere/creare
+*/
+int getSemaphores(key_t key, int n_sem);
+
+/**
+ * @brief Crea un insieme di semafori
+ *
+ * @param key Chiave IPC
+ * @param n_sem Numero semafori da ottenere/creare
+*/
+int createSemaphores(key_t key, int n_sem);
+
+
+/**
  * @brief Funzione di supporto per manipolare i valori di un set di semafori.
  *
  * @param semid Identificatore del set di semafori

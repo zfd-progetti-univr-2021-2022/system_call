@@ -29,9 +29,27 @@
 #include "signals.h"
 #include "files.h"
 #include "client.h"
+#include "semaphore.h"
+#include "shared_memory.h"
+#include "fifo.h"
+#include "debug.h"
 
 /// contiene percorso passato come parametro
 char * searchPath = NULL;
+
+
+char * int_to_string(int value){
+    int needed = snprintf(NULL, 0, "%d", value);
+
+    char * string = (char *) malloc(needed+1);
+    snprintf(string, needed+1, "%d", value);
+    return string;
+}
+
+
+bool strEquals(char *a, char *b){
+    return strcmp(a, b) == 0;
+}
 
 
 void SIGINTSignalHandler(int sig) {
@@ -59,16 +77,56 @@ void SIGINTSignalHandler(int sig) {
     // e la dimensione e' inferiore a 4KByte e memorizzali
     files_list * sendme_files = NULL;
     sendme_files = find_sendme_files(searchPath, sendme_files);
-    printf("trovati i seguenti file:\n");
+    DEBUG_PRINT("trovati i seguenti file:\n");
     print_list(sendme_files);
 
     // determina il numero <n> di questi file
     int n = count_files(sendme_files);
-    printf("ci sono %d file 'sendme_'\n", n);
+    DEBUG_PRINT("ci sono %d file 'sendme_'\n", n);
 
     // invia il numero di file tramite FIFO1 al server
+    char * n_string = int_to_string(n);
+    msg_t n_msg = {.mtype = CONTAINS_N, .sender_pid = getpid()};
+    strcpy(n_msg.msg_body, n_string);
+    DEBUG_PRINT("msg body '%s' \n", n_msg.msg_body);
+    DEBUG_PRINT("n string '%s' \n", n_string);
+
+    int fifo1_fd = open(FIFO1_PATH, O_WRONLY);
+    if (fifo1_fd == -1) {
+        printf("errno: %d\n", errno);
+        ErrExit("[fifo.c:create_fifo] open FIFO1 failed (write mode)");
+    }
+    DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
+
+    if (write(fifo1_fd, &n_msg, sizeof(n_msg)) == -1)
+        ErrExit("write FIFO 1 failed");
+
+    DEBUG_PRINT("Ho inviato al server tramite FIFO1 il numero di file\n");
+
+    DEBUG_PRINT("Recuperata la chiave IPC: %x\n", get_ipc_key());
 
     // si mette in attesa di conferma dal server su ShrMem
+    int shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
+    msg_t * shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
+
+    int semid = getSemaphores(get_ipc_key(), 50);
+    bool n_received = false;
+    while (!n_received) {
+
+        semWait(semid, 0);
+        // zona mutex
+        if (shm_ptr[0].mtype == CONTAINS_N) {
+            if (strEquals(shm_ptr[0].msg_body, "OK")) {
+                n_received = true;
+            }
+        }
+        // fine zona mutex
+        semSignal(semid, 0);
+    }
+
+    free(n_string);  // libera memoria occupata da <n> in formato stringa
+
+    DEBUG_PRINT("Il server ha confermato di aver ricevuto l'informazione");
 
     // genera <n> processi figlio Client_i (uno per ogni file "sendme_")
     files_list * sendme_file = sendme_files;
