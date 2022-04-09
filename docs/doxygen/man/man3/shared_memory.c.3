@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/shared_memory.c" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/shared_memory.c" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,15 +7,103 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <sys/shm\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <sys/ipc\&.h>\fP
+.br
 \fC#include 'err_exit\&.h'\fP
 .br
 \fC#include 'shared_memory\&.h'\fP
 .br
 
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "int \fBalloc_shared_memory\fP (key_t shmKey, size_t size)"
+.br
+.RI "Ottiene l'id o crea una memoria condivisa\&. "
+.ti -1c
+.RI "void * \fBget_shared_memory\fP (int shmid, int shmflg)"
+.br
+.RI "Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi\&. "
+.ti -1c
+.RI "void \fBfree_shared_memory\fP (void *ptr_sh)"
+.br
+.RI "Scollega la memoria condivisa dallo spazio degli indirizzi\&. "
+.ti -1c
+.RI "void \fBremove_shared_memory\fP (int shmid)"
+.br
+.RI "Elimina la memoria condivisa\&. "
+.in -1c
 .SH "Descrizione dettagliata"
 .PP 
 Contiene l'implementazione delle funzioni specifiche per la gestione della MEMORIA CONDIVISA\&. 
 
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "int alloc_shared_memory (key_t shmKey, size_t size)"
+
+.PP
+Ottiene l'id o crea una memoria condivisa\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIshmKey\fP Chiave IPC della memoria condivisa 
+.br
+\fIsize\fP Dimensione della memoria condivisa 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Identificativo della memoria condivisa 
+.RE
+.PP
+
+.SS "void free_shared_memory (void * ptr_sh)"
+
+.PP
+Scollega la memoria condivisa dallo spazio degli indirizzi\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIptr_sh\fP Puntatore per accedere alla memoria condivisa 
+.RE
+.PP
+
+.SS "void* get_shared_memory (int shmid, int shmflg)"
+
+.PP
+Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIshmid\fP Identificativo della memoria condivisa 
+.br
+\fIshmflg\fP Flag 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+void* Puntatore per accedere alla memoria condivisa 
+.RE
+.PP
+
+.SS "void remove_shared_memory (int shmid)"
+
+.PP
+Elimina la memoria condivisa\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIshmid\fP Identificativo della memoria condivisa 
+.RE
+.PP
 
 .SH "Autore"
 .PP 

@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.h" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.h" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,6 +7,18 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/ipc\&.h>\fP
+.br
+
+.SS "Strutture dati"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmsg_t\fP"
+.br
+.in -1c
 .SS "Definizioni"
 
 .in +1c
@@ -14,6 +26,24 @@
 .RI "#define \fBBUFFER_SZ\fP   255"
 .br
 .RI "Buffer usato da getcwd() "
+.ti -1c
+.RI "#define \fBFIFO1_PATH\fP   '/tmp/fifo1_file\&.txt'"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_N\fP   0"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_FIFO1_FILE_PART\fP   1"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_FIFO2_FILE_PART\fP   2"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_MSGQUEUE_FILE_PART\fP   3"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_SHM_FILE_PART\fP   4"
+.br
 .ti -1c
 .RI "#define \fBMSG_MAX_SZ\fP   4096"
 .br
@@ -27,10 +57,47 @@
 .br
 .RI "dimensione massima di una porzione di messaggio "
 .in -1c
+.SS "Ridefinizioni di tipo (typedef)"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBmsg_t\fP \fBmsg_t\fP"
+.br
+.in -1c
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "key_t \fBget_ipc_key\fP ()"
+.br
+.in -1c
+.SS "Variabili"
+
+.in +1c
+.ti -1c
+.RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP]"
+.br
+.RI "Percorso cartella eseguibile\&. "
+.in -1c
 .SH "Descrizione dettagliata"
 .PP 
 Contiene la definizioni di variabili e funzioni specifiche del progetto\&. 
 
+
+.SH "Documentazione delle ridefinizioni di tipo (typedef)"
+.PP 
+.SS "typedef struct \fBmsg_t\fP  \fBmsg_t\fP"
+Rappresenta un messaggio contenente una porzione del contenuto di un file, il numero di file inviati dal client oppure il messaggio 'ok' quando il server ha ricevuto il numero di file\&. 
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "key_t get_ipc_key ()"
+Restituisce la chiave IPC ottenuta con ftok sull'eseguibile del server\&.
+.PP
+\fBRestituisce:\fP
+.RS 4
+key_t Chiave IPC 
+.RE
+.PP
 
 .SH "Autore"
 .PP 

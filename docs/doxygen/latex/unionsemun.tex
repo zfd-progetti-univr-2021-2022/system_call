@@ -9,9 +9,9 @@
 \item 
 int \hyperlink{unionsemun_ac6121ecb6d04a024e07e12bd71b94031}{val}
 \item 
-struct semid\+\_\+ds $\ast$ \hyperlink{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}{buf}
+struct semid\+\_\+ds $\ast$ \hyperlink{unionsemun_abe0ba6ad77214cee618027739e992503}{buf}
 \item 
-unsigned short $\ast$ \hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array}
+unsigned short $\ast$ \hyperlink{unionsemun_a1c74eb9326763d3854dc90167e1f4460}{array}
 \end{DoxyCompactItemize}
 
 
@@ -19,17 +19,17 @@ unsigned short $\ast$ \hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{a
 Union usata dalla system call semctl(). 
 
 \subsection{Documentazione dei campi}
-\mbox{\Hypertarget{unionsemun_aca23b8e730a0553205813c0cb7692b54}\label{unionsemun_aca23b8e730a0553205813c0cb7692b54}} 
+\mbox{\Hypertarget{unionsemun_a1c74eb9326763d3854dc90167e1f4460}\label{unionsemun_a1c74eb9326763d3854dc90167e1f4460}} 
 \index{semun@{semun}!array@{array}}
 \index{array@{array}!semun@{semun}}
 \subsubsection{\texorpdfstring{array}{array}}
-{\footnotesize\ttfamily unsigned short$\ast$ semun\+::array}
+{\footnotesize\ttfamily unsigned short $\ast$ semun\+::array}
 
-per eseguire operazioni su tutti i semafori. Usato dalle operazioni G\+E\+T\+A\+LL e S\+E\+T\+A\+LL \mbox{\Hypertarget{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}\label{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}} 
+per eseguire operazioni su tutti i semafori. Usato dalle operazioni G\+E\+T\+A\+LL e S\+E\+T\+A\+LL \mbox{\Hypertarget{unionsemun_abe0ba6ad77214cee618027739e992503}\label{unionsemun_abe0ba6ad77214cee618027739e992503}} 
 \index{semun@{semun}!buf@{buf}}
 \index{buf@{buf}!semun@{semun}}
 \subsubsection{\texorpdfstring{buf}{buf}}
-{\footnotesize\ttfamily struct semid\+\_\+ds$\ast$ semun\+::buf}
+{\footnotesize\ttfamily struct semid\+\_\+ds $\ast$ semun\+::buf}
 
 usato per lavorare sullo stato globale del semaforo. Usato dalle operazioni I\+P\+C\+\_\+\+S\+T\+AT e I\+P\+C\+\_\+\+S\+ET \mbox{\Hypertarget{unionsemun_ac6121ecb6d04a024e07e12bd71b94031}\label{unionsemun_ac6121ecb6d04a024e07e12bd71b94031}} 
 \index{semun@{semun}!val@{val}}
@@ -39,6 +39,7 @@ usato per lavorare sullo stato globale del semaforo. Usato dalle operazioni I\+P
 
 usato se si lavora su un singolo semaforo. Usato dalla operazione S\+E\+T\+V\+AL 
 
-La documentazione per questa union è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+La documentazione per questa union è stata generata a partire dai seguenti file\+:\begin{DoxyCompactItemize}
 \item 
+theory/semaphores/common.\+c\item 
 /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/\hyperlink{semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}

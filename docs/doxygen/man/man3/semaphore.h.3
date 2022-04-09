@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.h" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.h" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,9 +18,49 @@
 
 .in +1c
 .ti -1c
+.RI "int \fBgetSemaphores\fP (key_t key, int n_sem)"
+.br
+.RI "Ottiene un insieme di semafori gia' creato\&. "
+.ti -1c
+.RI "int \fBcreateSemaphores\fP (key_t key, int n_sem)"
+.br
+.RI "Crea un insieme di semafori\&. "
+.ti -1c
 .RI "void \fBsemOp\fP (int semid, unsigned short sem_num, short sem_op)"
 .br
 .RI "Funzione di supporto per manipolare i valori di un set di semafori\&. "
+.ti -1c
+.RI "void \fBsemWaitZero\fP (int semid, int sem_num)"
+.br
+.RI "Attende che il semaforo sem_num raggiunga il valore zero\&. "
+.ti -1c
+.RI "void \fBsemWait\fP (int semid, int sem_num)"
+.br
+.RI "Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il processo\&. "
+.ti -1c
+.RI "void \fBsemSignal\fP (int semid, int sem_num)"
+.br
+.RI "Esegue la signal sul semaforo sem_num: incrementa il valore di 1\&. "
+.ti -1c
+.RI "void \fBsemSetVal\fP (int semid, int sem_num, int val)"
+.br
+.RI "Inizializza il valore del semaforo sem_num al valore val\&. "
+.ti -1c
+.RI "void \fBsemSetAll\fP (int semid, short unsigned int values[])"
+.br
+.RI "Inizializza i valori del set di semafori semid ai valori in values\&. "
+.ti -1c
+.RI "void \fBsemDelete\fP (int semid)"
+.br
+.RI "Cancella il set di semafori svegliando eventuali processi in attesa\&. "
+.ti -1c
+.RI "struct semid_ds \fBsemGetStats\fP (int semid)"
+.br
+.RI "Recupera statistiche di un set di semafori\&. "
+.ti -1c
+.RI "void \fBsemSetPerm\fP (int semid, struct semid_ds arg)"
+.br
+.RI "Imposta i permessi su un set di semafori\&. "
 .in -1c
 .SH "Descrizione dettagliata"
 .PP 
@@ -29,6 +69,59 @@ Contiene la definizioni di variabili e funzioni specifiche per la gestione dei S
 
 .SH "Documentazione delle funzioni"
 .PP 
+.SS "int createSemaphores (key_t key, int n_sem)"
+
+.PP
+Crea un insieme di semafori\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIkey\fP Chiave IPC 
+.br
+\fIn_sem\fP Numero semafori da ottenere/creare 
+.RE
+.PP
+
+.SS "int getSemaphores (key_t key, int n_sem)"
+
+.PP
+Ottiene un insieme di semafori gia' creato\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIkey\fP Chiave IPC 
+.br
+\fIn_sem\fP Numero semafori da ottenere/creare 
+.RE
+.PP
+
+.SS "void semDelete (int semid)"
+
+.PP
+Cancella il set di semafori svegliando eventuali processi in attesa\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.RE
+.PP
+
+.SS "struct semid_ds semGetStats (int semid)"
+
+.PP
+Recupera statistiche di un set di semafori\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+struct semid_ds Statistiche del set di semafori 
+.RE
+.PP
+
 .SS "void semOp (int semid, unsigned short sem_num, short sem_op)"
 
 .PP
@@ -36,11 +129,91 @@ Funzione di supporto per manipolare i valori di un set di semafori\&.
 .PP
 \fBParametri:\fP
 .RS 4
-\fIsemid\fP Identificatore del set di semagori 
+\fIsemid\fP Identificatore del set di semafori 
 .br
 \fIsem_num\fP Indice di un semaforo nel set 
 .br
 \fIsem_op\fP Operazione eseguita sul semaforo sem_num 
+.RE
+.PP
+
+.SS "void semSetAll (int semid, short unsigned int values[])"
+
+.PP
+Inizializza i valori del set di semafori semid ai valori in values\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIvalues\fP Array di valori a cui impostare ogni semaforo del set 
+.RE
+.PP
+
+.SS "void semSetPerm (int semid, struct semid_ds arg)"
+
+.PP
+Imposta i permessi su un set di semafori\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIarg\fP Contiene i permessi da impostare 
+.RE
+.PP
+
+.SS "void semSetVal (int semid, int sem_num, int val)"
+
+.PP
+Inizializza il valore del semaforo sem_num al valore val\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
+.br
+\fIval\fP Valore a cui impostare il semaforo sem_num 
+.RE
+.PP
+
+.SS "void semSignal (int semid, int sem_num)"
+
+.PP
+Esegue la signal sul semaforo sem_num: incrementa il valore di 1\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
+.RE
+.PP
+
+.SS "void semWait (int semid, int sem_num)"
+
+.PP
+Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il processo\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
+.RE
+.PP
+
+.SS "void semWaitZero (int semid, int sem_num)"
+
+.PP
+Attende che il semaforo sem_num raggiunga il valore zero\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
 .RE
 .PP
 

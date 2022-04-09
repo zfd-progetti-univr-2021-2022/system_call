@@ -21,6 +21,7 @@ var menudata={children:[
 {text:"m",url:"globals.html#index_m"},
 {text:"o",url:"globals.html#index_o"},
 {text:"p",url:"globals.html#index_p"},
+{text:"r",url:"globals.html#index_r"},
 {text:"s",url:"globals.html#index_s"}]},
 {text:"Funzioni",url:"globals_func.html",children:[
 {text:"a",url:"globals_func.html#index_a"},
@@ -33,6 +34,7 @@ var menudata={children:[
 {text:"m",url:"globals_func.html#index_m"},
 {text:"o",url:"globals_func.html#index_o"},
 {text:"p",url:"globals_func.html#index_p"},
+{text:"r",url:"globals_func.html#index_r"},
 {text:"s",url:"globals_func.html#index_s"}]},
 {text:"Variabili",url:"globals_vars.html"},
 {text:"Ridefinizioni di tipo (typedef)",url:"globals_type.html"},

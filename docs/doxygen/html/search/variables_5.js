@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['val',['val',['../unionsemun.html#ac6121ecb6d04a024e07e12bd71b94031',1,'semun']]]
+  ['next',['next',['../structfiles__list.html#a3cdd0098b7fb9589480f8a9facad90ce',1,'files_list']]]
 ];

@@ -1,0 +1,42 @@
+\hypertarget{debug_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/debug.h}
+\label{debug_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/debug.\+h@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/debug.\+h}}
+
+
+Contiene la definizioni di variabili e funzioni per il debugging.  
+
+
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{debug_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Definizioni}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{debug_8h_ad72dbcf6d0153db1b8d8a58001feed83}\label{debug_8h_ad72dbcf6d0153db1b8d8a58001feed83}} 
+\#define {\bfseries D\+E\+B\+UG}~3
+\item 
+\#define {\bfseries D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT}(fmt,  args...)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrizione dettagliata}
+Contiene la definizioni di variabili e funzioni per il debugging. 
+
+
+
+\subsection{Documentazione delle definizioni}
+\mbox{\Hypertarget{debug_8h_a5f50bfe761aec48e94d11aa3a64e58a4}\label{debug_8h_a5f50bfe761aec48e94d11aa3a64e58a4}} 
+\index{debug.\+h@{debug.\+h}!D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT@{D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT}}
+\index{D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT@{D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT}!debug.\+h@{debug.\+h}}
+\subsubsection{\texorpdfstring{D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT}{DEBUG\_PRINT}}
+{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{args... }\end{DoxyParamCaption})}
+
+{\bfseries Valore\+:}
+\begin{DoxyCode}
+fprintf(stderr, \textcolor{stringliteral}{"DEBUG: %s:%d:%s(): "} fmt, \(\backslash\)
+    \_\_FILE\_\_, \_\_LINE\_\_, \_\_func\_\_, ##args)
+\end{DoxyCode}

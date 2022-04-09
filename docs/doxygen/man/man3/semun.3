@@ -1,4 +1,4 @@
-.TH "semun" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "semun" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,9 +26,9 @@ semun
 Union usata dalla system call semctl()\&. 
 .SH "Documentazione dei campi"
 .PP 
-.SS "unsigned short* semun::array"
+.SS "unsigned short * semun::array"
 per eseguire operazioni su tutti i semafori\&. Usato dalle operazioni GETALL e SETALL 
-.SS "struct semid_ds* semun::buf"
+.SS "struct semid_ds * semun::buf"
 usato per lavorare sullo stato globale del semaforo\&. Usato dalle operazioni IPC_STAT e IPC_SET 
 .SS "int semun::val"
 usato se si lavora su un singolo semaforo\&. Usato dalla operazione SETVAL 

@@ -1,0 +1,7 @@
+<map id="/mnt/c/Users/stefa/Desktop/system_call/src/debug.h" name="/mnt/c/Users/stefa/Desktop/system_call/src/debug.h">
+<area shape="rect" id="node2" href="$client_8c.html" title="Contiene l&#39;implementazione del client. " alt="" coords="5,109,168,165"/>
+<area shape="rect" id="node3" href="$debug_8c.html" title="Contiene l&#39;implementazione delle funzioni per il debugging. " alt="" coords="192,109,355,165"/>
+<area shape="rect" id="node4" href="$fifo_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione delle FIFO. " alt="" coords="379,109,541,165"/>
+<area shape="rect" id="node5" href="$files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. " alt="" coords="565,109,728,165"/>
+<area shape="rect" id="node6" href="$server_8c.html" title="Contiene l&#39;implementazione del server. " alt="" coords="752,109,915,165"/>
+</map>

@@ -5,12 +5,22 @@
 Contiene l\textquotesingle{}implementazione del server.  
 
 
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}shared\+\_\+memory.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}semaphore.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}fifo.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per server.\+c\+:\nopagebreak
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per server.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +30,30 @@ Grafo delle dipendenze di inclusione per server.\+c\+:\nopagebreak
 \subsection*{Funzioni}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{server_8c_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
+\begin{DoxyCompactList}\small\item\em Chiude tutte le I\+PC e termina. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{server_8c_ab53aa0eb44ad55d2e189f18d3bd6017b}\label{server_8c_ab53aa0eb44ad55d2e189f18d3bd6017b}} 
+int {\bfseries string\+\_\+to\+\_\+int} (char $\ast$string)
+\item 
 int \hyperlink{server_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variabili}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8c_a709c4fcdc1217a8f8785cb59e85beee5}\label{server_8c_a709c4fcdc1217a8f8785cb59e85beee5}} 
+char \hyperlink{server_8c_a709c4fcdc1217a8f8785cb59e85beee5}{E\+X\+E\+C\+U\+T\+A\+B\+L\+E\+\_\+\+D\+IR} \mbox{[}\hyperlink{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}{B\+U\+F\+F\+E\+R\+\_\+\+SZ}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Percorso cartella eseguibile. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{server_8c_a0e51f6e74ef591eef5a08e4a5a2d5ea8}\label{server_8c_a0e51f6e74ef591eef5a08e4a5a2d5ea8}} 
+int {\bfseries fifo1\+\_\+fd}
+\item 
+\mbox{\Hypertarget{server_8c_a7c35ac5305085cf7360645b8d52988b5}\label{server_8c_a7c35ac5305085cf7360645b8d52988b5}} 
+int {\bfseries semid}
+\item 
+\mbox{\Hypertarget{server_8c_ac8807d215d2ee6d9779d76aeb1147430}\label{server_8c_ac8807d215d2ee6d9779d76aeb1147430}} 
+int {\bfseries shmid}
+\item 
+\mbox{\Hypertarget{server_8c_a0b268ec51e0860874f687d0d1ffcd0e2}\label{server_8c_a0b268ec51e0860874f687d0d1ffcd0e2}} 
+\hyperlink{structmsg__t}{msg\+\_\+t} $\ast$ {\bfseries shm\+\_\+ptr}
 \end{DoxyCompactItemize}
 
 
@@ -38,4 +71,44 @@ Contiene l\textquotesingle{}implementazione del server.
 
 A\+N\+N\+O\+T\+A\+Z\+I\+O\+NE\+: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
 
-terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC. 
+terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC. Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8c_a48d605ff689f470746c858648f0a98c2}\label{server_8c_a48d605ff689f470746c858648f0a98c2}} 
+\index{server.\+c@{server.\+c}!S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}}
+\index{S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}!server.\+c@{server.\+c}}
+\subsubsection{\texorpdfstring{S\+I\+G\+I\+N\+T\+Signal\+Handler()}{SIGINTSignalHandler()}}
+{\footnotesize\ttfamily void S\+I\+G\+I\+N\+T\+Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Chiude tutte le I\+PC e termina. 
+
+Handler del segnale S\+I\+G\+I\+NT.
+
+
+\begin{DoxyParams}{Parametri}
+{\em sig} & \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{server_8c_a48d605ff689f470746c858648f0a98c2_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{server_8c_a48d605ff689f470746c858648f0a98c2_icgraph}
+\end{center}
+\end{figure}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['semun',['semun',['../unionsemun.html',1,'']]]
+  ['msg_5ft',['msg_t',['../structmsg__t.html',1,'']]]
 ];

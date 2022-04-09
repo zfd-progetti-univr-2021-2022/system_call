@@ -108,19 +108,31 @@ $(document).ready(function(){initNavTree('client_8c.html','');});
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="defines_8h_source.html">defines.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="err__exit_8h_source.html">err_exit.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="signals_8h_source.html">signals.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="files_8h_source.html">files.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="client_8h_source.html">client.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="semaphore_8h_source.html">semaphore.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">shared_memory.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fifo_8h_source.html">fifo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="debug_8h_source.html">debug.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Grafo delle dipendenze di inclusione per client.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c__incl.svg" width="100%" height="406"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c__incl.svg" width="100%" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funzioni</h2></td></tr>
+<tr class="memitem:a748983b7ce27515a3ad116ada4334c4e"><td class="memItemLeft" align="right" valign="top"><a id="a748983b7ce27515a3ad116ada4334c4e"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>int_to_string</b> (int value)</td></tr>
+<tr class="separator:a748983b7ce27515a3ad116ada4334c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac129a55ffa08a55addb9ea1afbd709f8"><td class="memItemLeft" align="right" valign="top"><a id="ac129a55ffa08a55addb9ea1afbd709f8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>strEquals</b> (char *a, char *b)</td></tr>
+<tr class="separator:ac129a55ffa08a55addb9ea1afbd709f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48d605ff689f470746c858648f0a98c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a> (int sig)</td></tr>
 <tr class="memdesc:a48d605ff689f470746c858648f0a98c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler del segnale SIGINT.  <a href="#a48d605ff689f470746c858648f0a98c2">Continua...</a><br /></td></tr>
 <tr class="separator:a48d605ff689f470746c858648f0a98c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +150,10 @@ Funzioni</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variabili</h2></td></tr>
+<tr class="memitem:a709c4fcdc1217a8f8785cb59e85beee5"><td class="memItemLeft" align="right" valign="top"><a id="a709c4fcdc1217a8f8785cb59e85beee5"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a709c4fcdc1217a8f8785cb59e85beee5">EXECUTABLE_DIR</a> [<a class="el" href="defines_8h.html#a22ad48d95fdd6689ea92e17ca5bbfccb">BUFFER_SZ</a>]</td></tr>
+<tr class="memdesc:a709c4fcdc1217a8f8785cb59e85beee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percorso cartella eseguibile. <br /></td></tr>
+<tr class="separator:a709c4fcdc1217a8f8785cb59e85beee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68195a262278b18e5dc84f677ad434d"><td class="memItemLeft" align="right" valign="top"><a id="ab68195a262278b18e5dc84f677ad434d"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ab68195a262278b18e5dc84f677ad434d">searchPath</a> = NULL</td></tr>
 <tr class="memdesc:ab68195a262278b18e5dc84f677ad434d"><td class="mdescLeft">&#160;</td><td class="mdescRight">contiene percorso passato come parametro <br /></td></tr>
@@ -208,11 +224,6 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Questo è il grafo dei chiamanti di questa funzione:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph.svg" width="555" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 
 </div>
 </div>
@@ -253,7 +264,8 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="284" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -290,16 +302,6 @@ Questo è il grafo delle chiamate per questa funzione:</div>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Questo è il grafo delle chiamate per questa funzione:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="280" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Questo è il grafo dei chiamanti di questa funzione:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_icgraph.svg" width="448" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
 
 </div>
 </div>
@@ -335,14 +337,10 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
   </dd>
 </dl>
 <div class="dynheader">
-Questo è il grafo delle chiamate per questa funzione:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -375,7 +373,8 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
