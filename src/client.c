@@ -70,6 +70,8 @@ void SIGINTSignalHandler(int sig) {
 
     int fifo1_fd = create_fifo(FIFO1_PATH, 'w');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
+    
+    int fifo2_fd = create_fifo(FIFO2_PATH, 'w');//collegamento a fifo2
 
     // imposta la sua directory corrente ad un path passato da linea di comando all’avvio del programma
     if (chdir(searchPath) == -1) {
@@ -190,7 +192,7 @@ void dividi(int fd, char *buf, size_t count, char *filePath, int parte) {
     if (bR > 0) {
         // add the character '\0' to let printf know where a string ends
         buf[bR] = '\0';
-        DEBUG_PRINT("Parte 1 file %s: '%s'\n", filePath, buf);
+        DEBUG_PRINT("Parte %d file %s: '%s'\n",parte,filePath, buf);
     }
     else {
         DEBUG_PRINT("Non sono riuscito a leggere la parte %d\n",parte);
@@ -245,15 +247,37 @@ void operazioni_figlio(char * filePath){
 
     // invia il primo messaggio a FIFO1
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+    int fifo1 = open(filePath, O_WRONLY);
+    msg_t supporto;
+    supporto.mtype = CONTAINS_FIFO1_FILE_PART;
+    supporto.sender_pid = getpid();
+    strcpy(supporto.file_path,filePath);
+    strcpy(supporto.msg_body,msg_buffer[0]);
+    if (write(fifo1,&supporto,sizeof(supporto)) == -1)
+        ErrExit("write FIFO 1 failed");
+    printf("invia messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
 
     // invia il secondo messaggio a FIFO2
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+    int fifo2 = open(filePath, O_WRONLY);
+    supporto.mtype = CONTAINS_FIFO2_FILE_PART;
+    supporto.sender_pid = getpid();
+    strcpy(supporto.file_path,filePath);
+    strcpy(supporto.msg_body,msg_buffer[1]);
+    if (write(fifo2,&supporto,sizeof(supporto)) == -1)
+        ErrExit("write FIFO 1 failed");
+    printf("invia messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+    
+    
 
     // invia il terzo a MsgQueue (coda dei messaggi)
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+    //supporto={.mtype = 1, .sender_pid = getpid(),.file_path=filepath,.msg_body=msg_buffer[2]};
+    //msgsnd(get_ipc_key(),&suppoorto,sizeof(struct msg_t)-sizeof(long),0);
 
     // invia il quarto a ShdMem (memoria condivisa)
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+    //supporto={.mtype = CONTAINS_N, .sender_pid = getpid(),.file_path=filepath,.msg_body=msg_buffer[3]};
 
     // chiude il file
     if (close(fd) == -1) {
