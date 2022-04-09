@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/fifo.h" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/fifo.h" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,10 +7,75 @@
 .SH SYNOPSIS
 .br
 .PP
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "void \fBmake_fifo\fP (char *path)"
+.br
+.RI "Crea o ottiene una IPC FIFO usando mkfifo\&. "
+.ti -1c
+.RI "int \fBcreate_fifo\fP (char *path, char mode)"
+.br
+.RI "Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita' lettura o scrittura\&. "
+.ti -1c
+.RI "int \fBcreate_new_fifo\fP (char *path, char mode)"
+.br
+.RI "Garantisce la creazione di una nuova FIFO cancellando l'eventuale file della FIFO esistente\&. "
+.in -1c
 .SH "Descrizione dettagliata"
 .PP 
 Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO\&. 
 
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "int create_fifo (char * path, char mode)"
+
+.PP
+Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita' lettura o scrittura\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIpath\fP Percorso file usato dalla FIFO\&. 
+.br
+\fImode\fP 'r' (read) oppure 'w' (write) 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Descrittore della FIFO 
+.RE
+.PP
+
+.SS "int create_new_fifo (char * path, char mode)"
+
+.PP
+Garantisce la creazione di una nuova FIFO cancellando l'eventuale file della FIFO esistente\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIpath\fP Percorso file usato dalla FIFO\&. 
+.br
+\fImode\fP 'r' (read) oppure 'w' (write) 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Descrittore della FIFO 
+.RE
+.PP
+
+.SS "void make_fifo (char * path)"
+
+.PP
+Crea o ottiene una IPC FIFO usando mkfifo\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIpath\fP Percorso file usato dalla FIFO\&. 
+.RE
+.PP
 
 .SH "Autore"
 .PP 

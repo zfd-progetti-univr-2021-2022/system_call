@@ -88,6 +88,8 @@ $(document).ready(function(){initNavTree('shared__memory_8h.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Funzioni</a>  </div>
   <div class="headertitle">
 <div class="title">Riferimenti per il file shared_memory.h</div>  </div>
 </div><!--header-->
@@ -95,16 +97,175 @@ $(document).ready(function(){initNavTree('shared__memory_8h.html','');});
 
 <p>Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA.  
 <a href="#details">Continua...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;sys/types.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Grafo delle dipendenze di inclusione per shared_memory.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="shared__memory_8h__incl.svg" width="176" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
 Questo grafo mostra quali altri file includono direttamente o indirettamente questo file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="shared__memory_8h__dep__incl.svg" width="363" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="shared__memory_8h__dep__incl.svg" width="550" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="shared__memory_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:a660a60242a5174977ab2debcdbd0e587"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__memory_8h.html#a660a60242a5174977ab2debcdbd0e587">alloc_shared_memory</a> (key_t shmKey, size_t size)</td></tr>
+<tr class="memdesc:a660a60242a5174977ab2debcdbd0e587"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ottiene l'id o crea una memoria condivisa.  <a href="#a660a60242a5174977ab2debcdbd0e587">Continua...</a><br /></td></tr>
+<tr class="separator:a660a60242a5174977ab2debcdbd0e587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ffe00ec7425a3a4229cd0d53ed901c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__memory_8h.html#ab2ffe00ec7425a3a4229cd0d53ed901c">get_shared_memory</a> (int shmid, int shmflg)</td></tr>
+<tr class="memdesc:ab2ffe00ec7425a3a4229cd0d53ed901c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi.  <a href="#ab2ffe00ec7425a3a4229cd0d53ed901c">Continua...</a><br /></td></tr>
+<tr class="separator:ab2ffe00ec7425a3a4229cd0d53ed901c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6530d61365abd3e580722ed907ea5f5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__memory_8h.html#a6530d61365abd3e580722ed907ea5f5b">free_shared_memory</a> (void *ptr_sh)</td></tr>
+<tr class="memdesc:a6530d61365abd3e580722ed907ea5f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scollega la memoria condivisa dallo spazio degli indirizzi.  <a href="#a6530d61365abd3e580722ed907ea5f5b">Continua...</a><br /></td></tr>
+<tr class="separator:a6530d61365abd3e580722ed907ea5f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fd9943e1b39a1f286977096e0a50d7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__memory_8h.html#a8fd9943e1b39a1f286977096e0a50d7b">remove_shared_memory</a> (int shmid)</td></tr>
+<tr class="memdesc:a8fd9943e1b39a1f286977096e0a50d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elimina la memoria condivisa.  <a href="#a8fd9943e1b39a1f286977096e0a50d7b">Continua...</a><br /></td></tr>
+<tr class="separator:a8fd9943e1b39a1f286977096e0a50d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a660a60242a5174977ab2debcdbd0e587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a660a60242a5174977ab2debcdbd0e587">&#9670;&nbsp;</a></span>alloc_shared_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int alloc_shared_memory </td>
+          <td>(</td>
+          <td class="paramtype">key_t&#160;</td>
+          <td class="paramname"><em>shmKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ottiene l'id o crea una memoria condivisa. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shmKey</td><td>Chiave IPC della memoria condivisa </td></tr>
+    <tr><td class="paramname">size</td><td>Dimensione della memoria condivisa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>int Identificativo della memoria condivisa </dd></dl>
+
+</div>
+</div>
+<a id="a6530d61365abd3e580722ed907ea5f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6530d61365abd3e580722ed907ea5f5b">&#9670;&nbsp;</a></span>free_shared_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_shared_memory </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>ptr_sh</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scollega la memoria condivisa dallo spazio degli indirizzi. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr_sh</td><td>Puntatore per accedere alla memoria condivisa </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="shared__memory_8h_a6530d61365abd3e580722ed907ea5f5b_cgraph.svg" width="286" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ab2ffe00ec7425a3a4229cd0d53ed901c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2ffe00ec7425a3a4229cd0d53ed901c">&#9670;&nbsp;</a></span>get_shared_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* get_shared_memory </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>shmid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>shmflg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shmid</td><td>Identificativo della memoria condivisa </td></tr>
+    <tr><td class="paramname">shmflg</td><td>Flag </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>void* Puntatore per accedere alla memoria condivisa </dd></dl>
+
+</div>
+</div>
+<a id="a8fd9943e1b39a1f286977096e0a50d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fd9943e1b39a1f286977096e0a50d7b">&#9670;&nbsp;</a></span>remove_shared_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void remove_shared_memory </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>shmid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Elimina la memoria condivisa. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shmid</td><td>Identificativo della memoria condivisa </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

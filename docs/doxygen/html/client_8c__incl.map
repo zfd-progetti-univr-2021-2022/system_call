@@ -1,7 +1,11 @@
 <map id="/mnt/c/Users/stefa/Desktop/system_call/src/client.c" name="/mnt/c/Users/stefa/Desktop/system_call/src/client.c">
-<area shape="rect" id="node12" href="$defines_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del progetto. " alt="" coords="975,109,1057,136"/>
-<area shape="rect" id="node13" href="$err__exit_8h.html" title="Contiene la definizione della funzione di stampa degli errori. " alt="" coords="1081,109,1165,136"/>
-<area shape="rect" id="node14" href="$signals_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEGNALI. " alt="" coords="1189,109,1269,136"/>
-<area shape="rect" id="node15" href="$files_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei FILE. " alt="" coords="1293,109,1355,136"/>
-<area shape="rect" id="node16" href="$client_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del CLIENT. " alt="" coords="1379,109,1450,136"/>
+<area shape="rect" id="node13" href="$defines_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del progetto. " alt="" coords="1087,109,1169,136"/>
+<area shape="rect" id="node16" href="$err__exit_8h.html" title="Contiene la definizione della funzione di stampa degli errori. " alt="" coords="1193,109,1277,136"/>
+<area shape="rect" id="node17" href="$signals_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEGNALI. " alt="" coords="1301,109,1381,136"/>
+<area shape="rect" id="node18" href="$files_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei FILE. " alt="" coords="1405,109,1467,136"/>
+<area shape="rect" id="node19" href="$client_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del CLIENT. " alt="" coords="1491,109,1562,136"/>
+<area shape="rect" id="node20" href="$semaphore_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="1587,109,1693,136"/>
+<area shape="rect" id="node21" href="$shared__memory_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="1717,109,1856,136"/>
+<area shape="rect" id="node22" href="$fifo_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO. " alt="" coords="1881,109,1935,136"/>
+<area shape="rect" id="node23" href="$debug_8h.html" title="Contiene la definizioni di variabili e funzioni per il debugging. " alt="" coords="1960,109,2035,136"/>
 </map>

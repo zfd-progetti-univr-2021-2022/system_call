@@ -15,12 +15,18 @@ Contiene l\textquotesingle{}implementazione del client.
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$fcntl.\+h$>$}\newline
 {\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}signals.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}files.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per client.\+c\+:\nopagebreak
+{\ttfamily \#include \char`\"{}semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}shared\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fifo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per client.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -29,6 +35,12 @@ Grafo delle dipendenze di inclusione per client.\+c\+:\nopagebreak
 \end{figure}
 \subsection*{Funzioni}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8c_a748983b7ce27515a3ad116ada4334c4e}\label{client_8c_a748983b7ce27515a3ad116ada4334c4e}} 
+char $\ast$ {\bfseries int\+\_\+to\+\_\+string} (int value)
+\item 
+\mbox{\Hypertarget{client_8c_ac129a55ffa08a55addb9ea1afbd709f8}\label{client_8c_ac129a55ffa08a55addb9ea1afbd709f8}} 
+bool {\bfseries str\+Equals} (char $\ast$a, char $\ast$b)
 \item 
 void \hyperlink{client_8c_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
 \begin{DoxyCompactList}\small\item\em Handler del segnale S\+I\+G\+I\+NT. \end{DoxyCompactList}\item 
@@ -43,6 +55,9 @@ int \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, cha
 \subsection*{Variabili}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{client_8c_a709c4fcdc1217a8f8785cb59e85beee5}\label{client_8c_a709c4fcdc1217a8f8785cb59e85beee5}} 
+char \hyperlink{client_8c_a709c4fcdc1217a8f8785cb59e85beee5}{E\+X\+E\+C\+U\+T\+A\+B\+L\+E\+\_\+\+D\+IR} \mbox{[}\hyperlink{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}{B\+U\+F\+F\+E\+R\+\_\+\+SZ}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Percorso cartella eseguibile. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{client_8c_ab68195a262278b18e5dc84f677ad434d}\label{client_8c_ab68195a262278b18e5dc84f677ad434d}} 
 char $\ast$ \hyperlink{client_8c_ab68195a262278b18e5dc84f677ad434d}{search\+Path} = N\+U\+LL
 \begin{DoxyCompactList}\small\item\em contiene percorso passato come parametro \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -95,13 +110,6 @@ Divide in 4 parti il contenuto del file da inviare al server.
 {\em parte} & Numero identificativo della porzione di messaggio \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{client_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{client_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
 \index{client.\+c@{client.\+c}!main@{main}}
 \index{main@{main}!client.\+c@{client.\+c}}
@@ -120,11 +128,12 @@ Memorizza il percorso passato come parametro, gestisce segnali e handler, attend
 \begin{DoxyReturn}{Restituisce}
 int Exit code dell\textquotesingle{}intero programma 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{client_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\includegraphics[width=285pt]{client_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{client_8c_a54b47b58f228d7bc9827d2919687e25a}\label{client_8c_a54b47b58f228d7bc9827d2919687e25a}} 
@@ -160,20 +169,6 @@ Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al ser
 {\em file\+Path} & Percorso del file che il client deve suddividere e mandare al server. \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=282pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph}
-\end{center}
-\end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{client_8c_a48d605ff689f470746c858648f0a98c2}\label{client_8c_a48d605ff689f470746c858648f0a98c2}} 
 \index{client.\+c@{client.\+c}!S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}}
 \index{S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}!client.\+c@{client.\+c}}
@@ -213,14 +208,8 @@ Esegue tutte le funzionalita\textquotesingle{} principali del client.
 {\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{client_8c_a48d605ff689f470746c858648f0a98c2_cgraph}
-\end{center}
-\end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -248,7 +237,8 @@ Termina il processo del client 0.
 {\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

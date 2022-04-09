@@ -23,20 +23,53 @@
 #include <string.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 
 #include "defines.h"
 #include "err_exit.h"
 #include "signals.h"
 #include "files.h"
 #include "client.h"
+#include "semaphore.h"
+#include "shared_memory.h"
+#include "fifo.h"
+#include "debug.h"
+
+/// Percorso cartella eseguibile
+char EXECUTABLE_DIR[BUFFER_SZ];
 
 /// contiene percorso passato come parametro
 char * searchPath = NULL;
 
 
+char * int_to_string(int value){
+    int needed = snprintf(NULL, 0, "%d", value);
+
+    char * string = (char *) malloc(needed+1);
+    snprintf(string, needed+1, "%d", value);
+    return string;
+}
+
+
+bool strEquals(char *a, char *b){
+    return strcmp(a, b) == 0;
+}
+
+
 void SIGINTSignalHandler(int sig) {
     // blocca tutti i segnali (compresi SIGUSR1 e SIGINT) modificando la maschera
     block_all_signals();
+
+    // Connettiti alle IPC e alle FIFO
+    int shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
+    msg_t * shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
+    DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
+
+    int semid = getSemaphores(get_ipc_key(), 50);
+    DEBUG_PRINT("Semafori: ottenuto il set di semafori\n");
+
+    int fifo1_fd = create_fifo(FIFO1_PATH, 'w');
+    DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
 
     // imposta la sua directory corrente ad un path passato da linea di comando all’avvio del programma
     if (chdir(searchPath) == -1) {
@@ -59,21 +92,49 @@ void SIGINTSignalHandler(int sig) {
     // e la dimensione e' inferiore a 4KByte e memorizzali
     files_list * sendme_files = NULL;
     sendme_files = find_sendme_files(searchPath, sendme_files);
-    printf("trovati i seguenti file:\n");
+    DEBUG_PRINT("trovati i seguenti file:\n");
     print_list(sendme_files);
 
     // determina il numero <n> di questi file
     int n = count_files(sendme_files);
-    printf("ci sono %d file 'sendme_'\n", n);
+    DEBUG_PRINT("ci sono %d file 'sendme_'\n", n);
 
     // invia il numero di file tramite FIFO1 al server
+    char * n_string = int_to_string(n);
+    msg_t n_msg = {.mtype = CONTAINS_N, .sender_pid = getpid()};
+    strcpy(n_msg.msg_body, n_string);
+    DEBUG_PRINT("msg body '%s' \n", n_msg.msg_body);
+    DEBUG_PRINT("n string '%s' \n", n_string);
+    free(n_string);  // libera memoria occupata da <n> in formato stringa
+
+    if (write(fifo1_fd, &n_msg, sizeof(n_msg)) == -1)
+        ErrExit("write FIFO 1 failed");
+
+    DEBUG_PRINT("Ho inviato al server tramite FIFO1 il numero di file\n");
+
+    DEBUG_PRINT("Recuperata la chiave IPC: %x\n", get_ipc_key());
 
     // si mette in attesa di conferma dal server su ShrMem
+    bool n_received = false;
+    while (!n_received) {
+
+        semWait(semid, 0);
+        // zona mutex
+        if (shm_ptr[0].mtype == CONTAINS_N) {
+            if (strEquals(shm_ptr[0].msg_body, "OK")) {
+                n_received = true;
+            }
+        }
+        // fine zona mutex
+        semSignal(semid, 0);
+    }
+
+    DEBUG_PRINT("Il server ha confermato di aver ricevuto l'informazione\n");
 
     // genera <n> processi figlio Client_i (uno per ogni file "sendme_")
     files_list * sendme_file = sendme_files;
     while (sendme_file != NULL) {
-        printf("Creo figlio e gli ordino di gestire il file: %s\n", sendme_file->path);
+        DEBUG_PRINT("Creo figlio e gli ordino di gestire il file: %s\n", sendme_file->path);
         pid_t pid = fork();
         if (pid == -1) {
             ErrExit("fork failed");
@@ -101,10 +162,14 @@ void SIGINTSignalHandler(int sig) {
     // si mette in attesa sulla MsgQueue di un messaggio da parte del server che lo
     // informa che tutti i file di output sono stati creati dal server stesso e che il server ha concluso le sue operazioni.
 
-    // ?? ATTENDI FINE DEI PROCESSI FIGLIO ??
+    // attendi fine dei processi figlio
+    while(wait(NULL) > 0);
 
     // libera lista dei file
     free_list(sendme_files);
+
+    // chiudi le IPC e le FIFO
+    // > senza eliminarle, quello e' compito del server
 
     // sblocca i segnali SIGINT e SIGUSR1
     block_sig_no_SIGINT_SIGUSR1();
@@ -125,16 +190,16 @@ void dividi(int fd, char *buf, size_t count, char *filePath, int parte) {
     if (bR > 0) {
         // add the character '\0' to let printf know where a string ends
         buf[bR] = '\0';
-        printf("Parte 1 file %s: '%s'\n", filePath, buf);
+        DEBUG_PRINT("Parte 1 file %s: '%s'\n", filePath, buf);
     }
     else {
-        printf("Non sono riuscito a leggere la parte %d\n",parte);
+        DEBUG_PRINT("Non sono riuscito a leggere la parte %d\n",parte);
     }
 }
 
 
 void operazioni_figlio(char * filePath){
-    printf("Sono il figlio %d e sto lavorando sul file %s\n", getpid(), filePath);
+    DEBUG_PRINT("Sono il figlio %d e sto lavorando sul file %s\n", getpid(), filePath);
 
     // apre il file
     int fd = open(filePath, O_RDONLY);
@@ -148,7 +213,7 @@ void operazioni_figlio(char * filePath){
     long numChar;
     numChar = lseek(fd, 0, SEEK_END);
 
-    printf("Il file %s contiene %ld caratteri (dimensione %ld)\n", filePath, numChar, getFileSize(filePath));
+    DEBUG_PRINT("Il file %s contiene %ld caratteri (dimensione %ld)\n", filePath, numChar, getFileSize(filePath));
 
     // divide il file in quattro parti contenenti lo stesso numero di caratteri (l'ultimo file puo' avere meno caratteri)
     long msg_lengths[MSG_PARTS_NUM];
@@ -161,7 +226,7 @@ void operazioni_figlio(char * filePath){
         msg_lengths[i] += 1;
     }
 
-    printf("Il file %s contiene verra' diviso in parti con questi caratteri: %ld %ld %ld %ld\n", filePath, msg_lengths[0], msg_lengths[1], msg_lengths[2], msg_lengths[3]);
+    DEBUG_PRINT("Il file %s contiene verra' diviso in parti con questi caratteri: %ld %ld %ld %ld\n", filePath, msg_lengths[0], msg_lengths[1], msg_lengths[2], msg_lengths[3]);
 
     // prepara i quattro messaggi (4 porzioni del contenuto del file) per l’invio
     // > NOTA: questo codice sarebbe da sistemare: forse si puo' creare una matrice 4 x (MSG_BUFFER_SZ+1) e usare un for?
@@ -201,6 +266,11 @@ void operazioni_figlio(char * filePath){
 
 int main(int argc, char * argv[]) {
 
+    // memorizza il percorso dell'eseguibile per ftok()
+    if (getcwd(EXECUTABLE_DIR, sizeof(EXECUTABLE_DIR)) == NULL) {
+        ErrExit("getcwd");
+    }
+
     // assicurati che sia stato passato un percorso come parametro e memorizzalo
     if (argc != 2) {
         printf("Please, execute this program passing the directory with the send_me files as a parameter\n");
@@ -221,8 +291,12 @@ int main(int argc, char * argv[]) {
     // sospendi processo fino all'esecuzione di un signal handler.
     // dopo la gestione del segnale, torna in sospensione.
     // > Il processo terminera' con il segnale SIGUSR1
-    while (true)
+    while (true) {
         pause();
+        DEBUG_PRINT("\n");
+        DEBUG_PRINT("==========================================================\n");
+        DEBUG_PRINT("\n");
+    }
 
     return 0;
 }

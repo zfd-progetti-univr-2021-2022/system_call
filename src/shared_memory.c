@@ -15,6 +15,9 @@
 int alloc_shared_memory(key_t shmKey, size_t size) {
     // get, or create, a shared memory segment
     int shmid = shmget(shmKey, size, IPC_CREAT | S_IRUSR | S_IWUSR);
+    if (shmid == -1) {
+        ErrExit("shmget failed");
+    }
 
     return shmid;
 }
@@ -23,6 +26,10 @@ int alloc_shared_memory(key_t shmKey, size_t size) {
 void *get_shared_memory(int shmid, int shmflg) {
     // attach the shared memory
     int *ptr_sh = (int *) shmat(shmid, NULL, shmflg);
+
+    if (ptr_sh == (int *) -1){
+        ErrExit("shmat failed");
+    }
 
     return ptr_sh;
 }

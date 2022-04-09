@@ -1,0 +1,37 @@
+.TH "msg_t" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+msg_t
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <defines\&.h>\fP
+.SS "Campi"
+
+.in +1c
+.ti -1c
+.RI "long \fBmtype\fP"
+.br
+.RI "tipo del messaggio: campo usato dalla coda dei messaggi "
+.ti -1c
+.RI "pid_t \fBsender_pid\fP"
+.br
+.RI "PID del mittente del messaggio\&. "
+.ti -1c
+.RI "char \fBfile_path\fP [\fBBUFFER_SZ\fP+1]"
+.br
+.RI "Percorso file\&. "
+.ti -1c
+.RI "char \fBmsg_body\fP [\fBMSG_BUFFER_SZ\fP+1]"
+.br
+.RI "Contenuto messaggio\&. "
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Rappresenta un messaggio contenente una porzione del contenuto di un file, il numero di file inviati dal client oppure il messaggio 'ok' quando il server ha ricevuto il numero di file\&. 
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

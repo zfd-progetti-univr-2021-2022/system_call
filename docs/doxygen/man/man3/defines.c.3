@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.c" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.c" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,13 +7,35 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <sys/ipc\&.h>\fP
+.br
 \fC#include 'defines\&.h'\fP
 .br
+\fC#include 'err_exit\&.h'\fP
+.br
 
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "key_t \fBget_ipc_key\fP ()"
+.br
+.in -1c
 .SH "Descrizione dettagliata"
 .PP 
 Contiene l'implementazione delle funzioni specifiche del progetto\&. 
 
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "key_t get_ipc_key ()"
+Restituisce la chiave IPC ottenuta con ftok sull'eseguibile del server\&.
+.PP
+\fBRestituisce:\fP
+.RS 4
+key_t Chiave IPC 
+.RE
+.PP
 
 .SH "Autore"
 .PP 

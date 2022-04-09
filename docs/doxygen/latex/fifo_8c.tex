@@ -5,17 +5,117 @@
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la gestione delle F\+I\+FO.  
 
 
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}fifo.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per fifo.\+c\+:\nopagebreak
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per fifo.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=208pt]{fifo_8c__incl}
+\includegraphics[width=350pt]{fifo_8c__incl}
 \end{center}
 \end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{fifo_8c_ab83de0eb3bc3947e3c031685d5c2474b}{make\+\_\+fifo} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Crea o ottiene una I\+PC F\+I\+FO usando mkfifo. \end{DoxyCompactList}\item 
+int \hyperlink{fifo_8c_a54a1ae8162825128cf02f95692402c18}{create\+\_\+fifo} (char $\ast$path, char mode)
+\begin{DoxyCompactList}\small\item\em Facilita la creazione di una F\+I\+FO (o ne ottiene una esistente) in modalita\textquotesingle{} lettura o scrittura. \end{DoxyCompactList}\item 
+int \hyperlink{fifo_8c_ae4a1d7aadbfb8d041fccec7ebf8ab431}{create\+\_\+new\+\_\+fifo} (char $\ast$path, char mode)
+\begin{DoxyCompactList}\small\item\em Garantisce la creazione di una nuova F\+I\+FO cancellando l\textquotesingle{}eventuale file della F\+I\+FO esistente. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la gestione delle F\+I\+FO. 
 
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{fifo_8c_a54a1ae8162825128cf02f95692402c18}\label{fifo_8c_a54a1ae8162825128cf02f95692402c18}} 
+\index{fifo.\+c@{fifo.\+c}!create\+\_\+fifo@{create\+\_\+fifo}}
+\index{create\+\_\+fifo@{create\+\_\+fifo}!fifo.\+c@{fifo.\+c}}
+\subsubsection{\texorpdfstring{create\+\_\+fifo()}{create\_fifo()}}
+{\footnotesize\ttfamily int create\+\_\+fifo (\begin{DoxyParamCaption}\item[{char $\ast$}]{path,  }\item[{char}]{mode }\end{DoxyParamCaption})}
+
+
+
+Facilita la creazione di una F\+I\+FO (o ne ottiene una esistente) in modalita\textquotesingle{} lettura o scrittura. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em path} & Percorso file usato dalla F\+I\+FO. \\
+\hline
+{\em mode} & \textquotesingle{}r\textquotesingle{} (read) oppure \textquotesingle{}w\textquotesingle{} (write) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Descrittore della F\+I\+FO 
+\end{DoxyReturn}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{fifo_8c_a54a1ae8162825128cf02f95692402c18_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fifo_8c_ae4a1d7aadbfb8d041fccec7ebf8ab431}\label{fifo_8c_ae4a1d7aadbfb8d041fccec7ebf8ab431}} 
+\index{fifo.\+c@{fifo.\+c}!create\+\_\+new\+\_\+fifo@{create\+\_\+new\+\_\+fifo}}
+\index{create\+\_\+new\+\_\+fifo@{create\+\_\+new\+\_\+fifo}!fifo.\+c@{fifo.\+c}}
+\subsubsection{\texorpdfstring{create\+\_\+new\+\_\+fifo()}{create\_new\_fifo()}}
+{\footnotesize\ttfamily int create\+\_\+new\+\_\+fifo (\begin{DoxyParamCaption}\item[{char $\ast$}]{path,  }\item[{char}]{mode }\end{DoxyParamCaption})}
+
+
+
+Garantisce la creazione di una nuova F\+I\+FO cancellando l\textquotesingle{}eventuale file della F\+I\+FO esistente. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em path} & Percorso file usato dalla F\+I\+FO. \\
+\hline
+{\em mode} & \textquotesingle{}r\textquotesingle{} (read) oppure \textquotesingle{}w\textquotesingle{} (write) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Descrittore della F\+I\+FO 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{fifo_8c_ae4a1d7aadbfb8d041fccec7ebf8ab431_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fifo_8c_ab83de0eb3bc3947e3c031685d5c2474b}\label{fifo_8c_ab83de0eb3bc3947e3c031685d5c2474b}} 
+\index{fifo.\+c@{fifo.\+c}!make\+\_\+fifo@{make\+\_\+fifo}}
+\index{make\+\_\+fifo@{make\+\_\+fifo}!fifo.\+c@{fifo.\+c}}
+\subsubsection{\texorpdfstring{make\+\_\+fifo()}{make\_fifo()}}
+{\footnotesize\ttfamily void make\+\_\+fifo (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Crea o ottiene una I\+PC F\+I\+FO usando mkfifo. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em path} & Percorso file usato dalla F\+I\+FO. \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{fifo_8c_ab83de0eb3bc3947e3c031685d5c2474b_cgraph}
+\end{center}
+\end{figure}

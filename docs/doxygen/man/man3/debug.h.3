@@ -1,0 +1,36 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/debug.h" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/debug.h \- Contiene la definizioni di variabili e funzioni per il debugging\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Definizioni"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEBUG\fP   3"
+.br
+.ti -1c
+.RI "#define \fBDEBUG_PRINT\fP(fmt,  args\&.\&.\&.)"
+.br
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene la definizioni di variabili e funzioni per il debugging\&. 
+
+
+.SH "Documentazione delle definizioni"
+.PP 
+.SS "#define DEBUG_PRINT(fmt, args\&.\&.\&.)"
+\fBValore:\fP
+.PP
+.nf
+fprintf(stderr, "DEBUG: %s:%d:%s(): " fmt, \
+    __FILE__, __LINE__, __func__, ##args)
+.fi
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

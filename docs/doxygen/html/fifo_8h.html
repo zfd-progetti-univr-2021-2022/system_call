@@ -88,6 +88,8 @@ $(document).ready(function(){initNavTree('fifo_8h.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Funzioni</a>  </div>
   <div class="headertitle">
 <div class="title">Riferimenti per il file fifo.h</div>  </div>
 </div><!--header-->
@@ -98,13 +100,148 @@ $(document).ready(function(){initNavTree('fifo_8h.html','');});
 <div class="textblock"><div class="dynheader">
 Questo grafo mostra quali altri file includono direttamente o indirettamente questo file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="fifo_8h__dep__incl.svg" width="360" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="fifo_8h__dep__incl.svg" width="547" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="fifo_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:ab83de0eb3bc3947e3c031685d5c2474b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fifo_8h.html#ab83de0eb3bc3947e3c031685d5c2474b">make_fifo</a> (char *path)</td></tr>
+<tr class="memdesc:ab83de0eb3bc3947e3c031685d5c2474b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea o ottiene una IPC FIFO usando mkfifo.  <a href="#ab83de0eb3bc3947e3c031685d5c2474b">Continua...</a><br /></td></tr>
+<tr class="separator:ab83de0eb3bc3947e3c031685d5c2474b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a1ae8162825128cf02f95692402c18"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fifo_8h.html#a54a1ae8162825128cf02f95692402c18">create_fifo</a> (char *path, char mode)</td></tr>
+<tr class="memdesc:a54a1ae8162825128cf02f95692402c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita' lettura o scrittura.  <a href="#a54a1ae8162825128cf02f95692402c18">Continua...</a><br /></td></tr>
+<tr class="separator:a54a1ae8162825128cf02f95692402c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a1d7aadbfb8d041fccec7ebf8ab431"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fifo_8h.html#ae4a1d7aadbfb8d041fccec7ebf8ab431">create_new_fifo</a> (char *path, char mode)</td></tr>
+<tr class="memdesc:ae4a1d7aadbfb8d041fccec7ebf8ab431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Garantisce la creazione di una nuova FIFO cancellando l'eventuale file della FIFO esistente.  <a href="#ae4a1d7aadbfb8d041fccec7ebf8ab431">Continua...</a><br /></td></tr>
+<tr class="separator:ae4a1d7aadbfb8d041fccec7ebf8ab431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a54a1ae8162825128cf02f95692402c18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54a1ae8162825128cf02f95692402c18">&#9670;&nbsp;</a></span>create_fifo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int create_fifo </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita' lettura o scrittura. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Percorso file usato dalla FIFO. </td></tr>
+    <tr><td class="paramname">mode</td><td>'r' (read) oppure 'w' (write) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>int Descrittore della FIFO </dd></dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="fifo_8h_a54a1ae8162825128cf02f95692402c18_icgraph.svg" width="275" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ae4a1d7aadbfb8d041fccec7ebf8ab431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4a1d7aadbfb8d041fccec7ebf8ab431">&#9670;&nbsp;</a></span>create_new_fifo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int create_new_fifo </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Garantisce la creazione di una nuova FIFO cancellando l'eventuale file della FIFO esistente. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Percorso file usato dalla FIFO. </td></tr>
+    <tr><td class="paramname">mode</td><td>'r' (read) oppure 'w' (write) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>int Descrittore della FIFO </dd></dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="fifo_8h_ae4a1d7aadbfb8d041fccec7ebf8ab431_cgraph.svg" width="275" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ab83de0eb3bc3947e3c031685d5c2474b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab83de0eb3bc3947e3c031685d5c2474b">&#9670;&nbsp;</a></span>make_fifo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void make_fifo </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea o ottiene una IPC FIFO usando mkfifo. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Percorso file usato dalla FIFO. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="fifo_8h_ab83de0eb3bc3947e3c031685d5c2474b_cgraph.svg" width="211" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

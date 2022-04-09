@@ -81,11 +81,11 @@ Dove {\ttfamily arg} e\textquotesingle{} la seguente union\+:
 
     \textcolor{comment}{// usato per lavorare sullo stato globale del semaforo.}
     \textcolor{comment}{// usato dalle operazioni IPC\_STAT e IPC\_SET}
-    \textcolor{keyword}{struct }semid\_ds * \hyperlink{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}{buf};
+    \textcolor{keyword}{struct }semid\_ds * \hyperlink{unionsemun_abe0ba6ad77214cee618027739e992503}{buf};
 
     \textcolor{comment}{// per eseguire operazioni su tutti i semafori.}
     \textcolor{comment}{// usato dalle operazioni GETALL e SETALL}
-    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} * \hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array};
+    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} * \hyperlink{unionsemun_a1c74eb9326763d3854dc90167e1f4460}{array};
 \};
 \end{DoxyCode}
  \begin{quote}
@@ -172,7 +172,7 @@ ket\_t key = \textcolor{comment}{// ... (genera la chiave IPC)}
 \textcolor{comment}{// instanzia una union semun}
 \textcolor{comment}{// (che deve essere stata definita precedentemente nel codice)}
 \textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
-arg.\hyperlink{unionsemun_ac6b6428d07d4147fd2cc698b53555bed}{buf} = &ds;  \textcolor{comment}{// si vuole una semid\_ds}
+arg.\hyperlink{unionsemun_abe0ba6ad77214cee618027739e992503}{buf} = &ds;  \textcolor{comment}{// si vuole una semid\_ds}
 
 \textcolor{comment}{// ottieni una copia di semid\_ds dal kernel}
 \textcolor{keywordflow}{if} (semctl(semid, 0 \textcolor{comment}{/*ignored*/}, IPC\_STAT, arg) == -1)
@@ -241,7 +241,7 @@ ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
 \textcolor{comment}{// Imposta 5 semafori a 1 e gli altri 5 a 0}
 \textcolor{keywordtype}{int} values[] = \{1,1,1,1,1,0,0,0,0,0\};
 \textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
-arg.\hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array} = values;
+arg.\hyperlink{unionsemun_a1c74eb9326763d3854dc90167e1f4460}{array} = values;
 
 \textcolor{comment}{// Inizializza il set di semafori}
 \textcolor{keywordflow}{if} (semctl(semid, 0\textcolor{comment}{/*ignored*/}, SETALL, arg) == -1)
@@ -304,7 +304,7 @@ ket\_t key = \textcolor{comment}{//... (genera la chiave IPC)}
 \textcolor{comment}{// per memorizzare i valori dei semafori}
 \textcolor{keywordtype}{int} values[10];
 \textcolor{keyword}{union }\hyperlink{unionsemun}{semun} arg;
-arg.\hyperlink{unionsemun_aca23b8e730a0553205813c0cb7692b54}{array} = values;
+arg.\hyperlink{unionsemun_a1c74eb9326763d3854dc90167e1f4460}{array} = values;
 
 \textcolor{comment}{// ottieni lo stato attuale di tutti i semafori}
 \textcolor{keywordflow}{if} (semctl(semid, 0\textcolor{comment}{/*ignored*/}, GETALL, arg) == -1)

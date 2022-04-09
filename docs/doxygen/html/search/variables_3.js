@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['path',['path',['../structfiles__list.html#a986ecc1174faf39b15c1ef655c2ed966',1,'files_list']]]
+  ['file_5fpath',['file_path',['../structmsg__t.html#a217b6c7575ef559187625792d56be1cc',1,'msg_t']]]
 ];

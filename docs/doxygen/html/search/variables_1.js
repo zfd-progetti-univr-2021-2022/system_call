@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buf',['buf',['../unionsemun.html#ac6b6428d07d4147fd2cc698b53555bed',1,'semun']]]
+  ['buf',['buf',['../unionsemun.html#abe0ba6ad77214cee618027739e992503',1,'semun']]]
 ];

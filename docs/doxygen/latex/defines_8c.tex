@@ -5,16 +5,46 @@
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche del progetto.  
 
 
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per defines.\+c\+:\nopagebreak
+{\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per defines.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=202pt]{defines_8c__incl}
+\includegraphics[width=280pt]{defines_8c__incl}
 \end{center}
 \end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+key\+\_\+t \hyperlink{defines_8c_a2d341373a96ffea0944553e5452cdbca}{get\+\_\+ipc\+\_\+key} ()
+\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche del progetto. 
 
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{defines_8c_a2d341373a96ffea0944553e5452cdbca}\label{defines_8c_a2d341373a96ffea0944553e5452cdbca}} 
+\index{defines.\+c@{defines.\+c}!get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}}
+\index{get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}!defines.\+c@{defines.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+ipc\+\_\+key()}{get\_ipc\_key()}}
+{\footnotesize\ttfamily key\+\_\+t get\+\_\+ipc\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Restituisce la chiave I\+PC ottenuta con ftok sull\textquotesingle{}eseguibile del server.
+
+\begin{DoxyReturn}{Restituisce}
+key\+\_\+t Chiave I\+PC 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{defines_8c_a2d341373a96ffea0944553e5452cdbca_cgraph}
+\end{center}
+\end{figure}

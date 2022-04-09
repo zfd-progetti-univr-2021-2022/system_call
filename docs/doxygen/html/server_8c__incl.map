@@ -1,7 +1,8 @@
 <map id="/mnt/c/Users/stefa/Desktop/system_call/src/server.c" name="/mnt/c/Users/stefa/Desktop/system_call/src/server.c">
-<area shape="rect" id="node2" href="$err__exit_8h.html" title="Contiene la definizione della funzione di stampa degli errori. " alt="" coords="5,109,89,136"/>
-<area shape="rect" id="node3" href="$defines_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del progetto. " alt="" coords="113,109,195,136"/>
-<area shape="rect" id="node4" href="$shared__memory_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="219,109,358,136"/>
-<area shape="rect" id="node5" href="$semaphore_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="382,109,489,136"/>
-<area shape="rect" id="node6" href="$fifo_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO. " alt="" coords="513,109,568,136"/>
+<area shape="rect" id="node10" href="$err__exit_8h.html" title="Contiene la definizione della funzione di stampa degli errori. " alt="" coords="808,109,892,136"/>
+<area shape="rect" id="node11" href="$defines_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del progetto. " alt="" coords="1080,109,1161,136"/>
+<area shape="rect" id="node14" href="$shared__memory_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="917,109,1055,136"/>
+<area shape="rect" id="node15" href="$semaphore_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="1186,109,1293,136"/>
+<area shape="rect" id="node16" href="$fifo_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO. " alt="" coords="1317,109,1372,136"/>
+<area shape="rect" id="node17" href="$debug_8h.html" title="Contiene la definizioni di variabili e funzioni per il debugging. " alt="" coords="1397,109,1471,136"/>
 </map>

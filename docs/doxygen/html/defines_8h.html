@@ -89,7 +89,11 @@ $(document).ready(function(){initNavTree('defines_8h.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Definizioni</a>  </div>
+<a href="#nested-classes">Strutture dati</a> &#124;
+<a href="#define-members">Definizioni</a> &#124;
+<a href="#typedef-members">Ridefinizioni di tipo (typedef)</a> &#124;
+<a href="#func-members">Funzioni</a> &#124;
+<a href="#var-members">Variabili</a>  </div>
   <div class="headertitle">
 <div class="title">Riferimenti per il file defines.h</div>  </div>
 </div><!--header-->
@@ -97,20 +101,52 @@ $(document).ready(function(){initNavTree('defines_8h.html','');});
 
 <p>Contiene la definizioni di variabili e funzioni specifiche del progetto.  
 <a href="#details">Continua...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/ipc.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Grafo delle dipendenze di inclusione per defines.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h__incl.svg" width="211" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
 Questo grafo mostra quali altri file includono direttamente o indirettamente questo file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h__dep__incl.svg" width="547" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h__dep__incl.svg" width="547" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div>
 <p><a href="defines_8h_source.html">Vai al codice sorgente di questo file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Strutture dati</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmsg__t.html">msg_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Definizioni</h2></td></tr>
 <tr class="memitem:a22ad48d95fdd6689ea92e17ca5bbfccb"><td class="memItemLeft" align="right" valign="top"><a id="a22ad48d95fdd6689ea92e17ca5bbfccb"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a22ad48d95fdd6689ea92e17ca5bbfccb">BUFFER_SZ</a>&#160;&#160;&#160;255</td></tr>
 <tr class="memdesc:a22ad48d95fdd6689ea92e17ca5bbfccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer usato da getcwd() <br /></td></tr>
 <tr class="separator:a22ad48d95fdd6689ea92e17ca5bbfccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e79a43e6110ccf4b3e3fcacc6e1a07e"><td class="memItemLeft" align="right" valign="top"><a id="a1e79a43e6110ccf4b3e3fcacc6e1a07e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FIFO1_PATH</b>&#160;&#160;&#160;&quot;/tmp/fifo1_file.txt&quot;</td></tr>
+<tr class="separator:a1e79a43e6110ccf4b3e3fcacc6e1a07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9f14b9a62477e207da30db724187294"><td class="memItemLeft" align="right" valign="top"><a id="ac9f14b9a62477e207da30db724187294"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_N</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ac9f14b9a62477e207da30db724187294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6667eab3262329122470b05145907db8"><td class="memItemLeft" align="right" valign="top"><a id="a6667eab3262329122470b05145907db8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_FIFO1_FILE_PART</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a6667eab3262329122470b05145907db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44b818300821c405cc58f8d0ad2da72b"><td class="memItemLeft" align="right" valign="top"><a id="a44b818300821c405cc58f8d0ad2da72b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_FIFO2_FILE_PART</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a44b818300821c405cc58f8d0ad2da72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052160aa252d749598359d1908d1953d"><td class="memItemLeft" align="right" valign="top"><a id="a052160aa252d749598359d1908d1953d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_MSGQUEUE_FILE_PART</b>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a052160aa252d749598359d1908d1953d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a170b91835f52208153fabe5086780cc1"><td class="memItemLeft" align="right" valign="top"><a id="a170b91835f52208153fabe5086780cc1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTAINS_SHM_FILE_PART</b>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a170b91835f52208153fabe5086780cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b8b71c287c99c2bd2e36f6bc95a005e"><td class="memItemLeft" align="right" valign="top"><a id="a0b8b71c287c99c2bd2e36f6bc95a005e"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a0b8b71c287c99c2bd2e36f6bc95a005e">MSG_MAX_SZ</a>&#160;&#160;&#160;4096</td></tr>
 <tr class="memdesc:a0b8b71c287c99c2bd2e36f6bc95a005e"><td class="mdescLeft">&#160;</td><td class="mdescRight">dimensione massima del messaggio/file da inviare <br /></td></tr>
@@ -123,10 +159,69 @@ Definizioni</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a46b84a677ff2bcf693b89247e39d75f7">MSG_BUFFER_SZ</a>&#160;&#160;&#160;(<a class="el" href="defines_8h.html#a0b8b71c287c99c2bd2e36f6bc95a005e">MSG_MAX_SZ</a> / <a class="el" href="defines_8h.html#a2f72e71f34fb7e6074d029377ab31918">MSG_PARTS_NUM</a>)</td></tr>
 <tr class="memdesc:a46b84a677ff2bcf693b89247e39d75f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">dimensione massima di una porzione di messaggio <br /></td></tr>
 <tr class="separator:a46b84a677ff2bcf693b89247e39d75f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Ridefinizioni di tipo (typedef)</h2></td></tr>
+<tr class="memitem:a928de39fa56d656f7c6c92d030b36638"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structmsg__t.html">msg_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a928de39fa56d656f7c6c92d030b36638">msg_t</a></td></tr>
+<tr class="separator:a928de39fa56d656f7c6c92d030b36638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:a2d341373a96ffea0944553e5452cdbca"><td class="memItemLeft" align="right" valign="top">key_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a2d341373a96ffea0944553e5452cdbca">get_ipc_key</a> ()</td></tr>
+<tr class="separator:a2d341373a96ffea0944553e5452cdbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variabili</h2></td></tr>
+<tr class="memitem:a709c4fcdc1217a8f8785cb59e85beee5"><td class="memItemLeft" align="right" valign="top"><a id="a709c4fcdc1217a8f8785cb59e85beee5"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a709c4fcdc1217a8f8785cb59e85beee5">EXECUTABLE_DIR</a> [<a class="el" href="defines_8h.html#a22ad48d95fdd6689ea92e17ca5bbfccb">BUFFER_SZ</a>]</td></tr>
+<tr class="memdesc:a709c4fcdc1217a8f8785cb59e85beee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percorso cartella eseguibile. <br /></td></tr>
+<tr class="separator:a709c4fcdc1217a8f8785cb59e85beee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene la definizioni di variabili e funzioni specifiche del progetto. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Documentazione delle ridefinizioni di tipo (typedef)</h2>
+<a id="a928de39fa56d656f7c6c92d030b36638"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a928de39fa56d656f7c6c92d030b36638">&#9670;&nbsp;</a></span>msg_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structmsg__t.html">msg_t</a>  <a class="el" href="structmsg__t.html">msg_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Rappresenta un messaggio contenente una porzione del contenuto di un file, il numero di file inviati dal client oppure il messaggio "ok" quando il server ha ricevuto il numero di file. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a2d341373a96ffea0944553e5452cdbca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d341373a96ffea0944553e5452cdbca">&#9670;&nbsp;</a></span>get_ipc_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">key_t get_ipc_key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Restituisce la chiave IPC ottenuta con ftok sull'eseguibile del server.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>key_t Chiave IPC </dd></dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h_a2d341373a96ffea0944553e5452cdbca_cgraph.svg" width="224" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

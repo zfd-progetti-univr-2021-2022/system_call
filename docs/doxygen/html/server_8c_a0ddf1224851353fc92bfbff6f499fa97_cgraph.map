@@ -1,0 +1,5 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="154,5,219,32"/>
+<area shape="rect" id="node3" href="$server_8c.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. " alt="" coords="108,56,265,83"/>
+<area shape="rect" id="node4" href="$signals_8c.html#a6e96709c7c3ecbcde283f4a2a09e4baf" title="block_all_signals" alt="" coords="313,56,447,83"/>
+</map>

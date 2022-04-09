@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Dom 3 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -27,6 +27,8 @@
 .br
 \fC#include <sys/stat\&.h>\fP
 .br
+\fC#include <sys/wait\&.h>\fP
+.br
 \fC#include 'defines\&.h'\fP
 .br
 \fC#include 'err_exit\&.h'\fP
@@ -37,10 +39,24 @@
 .br
 \fC#include 'client\&.h'\fP
 .br
+\fC#include 'semaphore\&.h'\fP
+.br
+\fC#include 'shared_memory\&.h'\fP
+.br
+\fC#include 'fifo\&.h'\fP
+.br
+\fC#include 'debug\&.h'\fP
+.br
 
 .SS "Funzioni"
 
 .in +1c
+.ti -1c
+.RI "char * \fBint_to_string\fP (int value)"
+.br
+.ti -1c
+.RI "bool \fBstrEquals\fP (char *a, char *b)"
+.br
 .ti -1c
 .RI "void \fBSIGINTSignalHandler\fP (int sig)"
 .br
@@ -64,6 +80,10 @@
 .SS "Variabili"
 
 .in +1c
+.ti -1c
+.RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP]"
+.br
+.RI "Percorso cartella eseguibile\&. "
 .ti -1c
 .RI "char * \fBsearchPath\fP = NULL"
 .br

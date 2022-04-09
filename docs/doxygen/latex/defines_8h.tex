@@ -5,19 +5,53 @@
 Contiene la definizioni di variabili e funzioni specifiche del progetto.  
 
 
-Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:\nopagebreak
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+Grafo delle dipendenze di inclusione per defines.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{defines_8h__incl}
+\end{center}
+\end{figure}
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{defines_8h__dep__incl}
 \end{center}
 \end{figure}
+\subsection*{Strutture dati}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmsg__t}{msg\+\_\+t}
+\end{DoxyCompactItemize}
 \subsection*{Definizioni}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}\label{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}} 
 \#define \hyperlink{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}{B\+U\+F\+F\+E\+R\+\_\+\+SZ}~255
 \begin{DoxyCompactList}\small\item\em Buffer usato da getcwd() \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{defines_8h_a1e79a43e6110ccf4b3e3fcacc6e1a07e}\label{defines_8h_a1e79a43e6110ccf4b3e3fcacc6e1a07e}} 
+\#define {\bfseries F\+I\+F\+O1\+\_\+\+P\+A\+TH}~\char`\"{}/tmp/fifo1\+\_\+file.\+txt\char`\"{}
+\item 
+\mbox{\Hypertarget{defines_8h_ac9f14b9a62477e207da30db724187294}\label{defines_8h_ac9f14b9a62477e207da30db724187294}} 
+\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+N}~0
+\item 
+\mbox{\Hypertarget{defines_8h_a6667eab3262329122470b05145907db8}\label{defines_8h_a6667eab3262329122470b05145907db8}} 
+\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+F\+I\+F\+O1\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~1
+\item 
+\mbox{\Hypertarget{defines_8h_a44b818300821c405cc58f8d0ad2da72b}\label{defines_8h_a44b818300821c405cc58f8d0ad2da72b}} 
+\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+F\+I\+F\+O2\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~2
+\item 
+\mbox{\Hypertarget{defines_8h_a052160aa252d749598359d1908d1953d}\label{defines_8h_a052160aa252d749598359d1908d1953d}} 
+\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+M\+S\+G\+Q\+U\+E\+U\+E\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~3
+\item 
+\mbox{\Hypertarget{defines_8h_a170b91835f52208153fabe5086780cc1}\label{defines_8h_a170b91835f52208153fabe5086780cc1}} 
+\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+S\+H\+M\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~4
+\item 
 \mbox{\Hypertarget{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}\label{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}} 
 \#define \hyperlink{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}{M\+S\+G\+\_\+\+M\+A\+X\+\_\+\+SZ}~4096
 \begin{DoxyCompactList}\small\item\em dimensione massima del messaggio/file da inviare \end{DoxyCompactList}\item 
@@ -27,8 +61,55 @@ Questo grafo mostra quali altri file includono direttamente o indirettamente que
 \mbox{\Hypertarget{defines_8h_a46b84a677ff2bcf693b89247e39d75f7}\label{defines_8h_a46b84a677ff2bcf693b89247e39d75f7}} 
 \#define \hyperlink{defines_8h_a46b84a677ff2bcf693b89247e39d75f7}{M\+S\+G\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+SZ}~(\hyperlink{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}{M\+S\+G\+\_\+\+M\+A\+X\+\_\+\+SZ} / \hyperlink{defines_8h_a2f72e71f34fb7e6074d029377ab31918}{M\+S\+G\+\_\+\+P\+A\+R\+T\+S\+\_\+\+N\+UM})
 \begin{DoxyCompactList}\small\item\em dimensione massima di una porzione di messaggio \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Ridefinizioni di tipo (typedef)}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structmsg__t}{msg\+\_\+t} \hyperlink{defines_8h_a928de39fa56d656f7c6c92d030b36638}{msg\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+key\+\_\+t \hyperlink{defines_8h_a2d341373a96ffea0944553e5452cdbca}{get\+\_\+ipc\+\_\+key} ()
+\end{DoxyCompactItemize}
+\subsection*{Variabili}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{defines_8h_a709c4fcdc1217a8f8785cb59e85beee5}\label{defines_8h_a709c4fcdc1217a8f8785cb59e85beee5}} 
+char \hyperlink{defines_8h_a709c4fcdc1217a8f8785cb59e85beee5}{E\+X\+E\+C\+U\+T\+A\+B\+L\+E\+\_\+\+D\+IR} \mbox{[}\hyperlink{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}{B\+U\+F\+F\+E\+R\+\_\+\+SZ}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Percorso cartella eseguibile. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
 Contiene la definizioni di variabili e funzioni specifiche del progetto. 
 
+
+
+\subsection{Documentazione delle ridefinizioni di tipo (typedef)}
+\mbox{\Hypertarget{defines_8h_a928de39fa56d656f7c6c92d030b36638}\label{defines_8h_a928de39fa56d656f7c6c92d030b36638}} 
+\index{defines.\+h@{defines.\+h}!msg\+\_\+t@{msg\+\_\+t}}
+\index{msg\+\_\+t@{msg\+\_\+t}!defines.\+h@{defines.\+h}}
+\subsubsection{\texorpdfstring{msg\+\_\+t}{msg\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structmsg__t}{msg\+\_\+t}  \hyperlink{structmsg__t}{msg\+\_\+t}}
+
+Rappresenta un messaggio contenente una porzione del contenuto di un file, il numero di file inviati dal client oppure il messaggio \char`\"{}ok\char`\"{} quando il server ha ricevuto il numero di file. 
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{defines_8h_a2d341373a96ffea0944553e5452cdbca}\label{defines_8h_a2d341373a96ffea0944553e5452cdbca}} 
+\index{defines.\+h@{defines.\+h}!get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}}
+\index{get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}!defines.\+h@{defines.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+ipc\+\_\+key()}{get\_ipc\_key()}}
+{\footnotesize\ttfamily key\+\_\+t get\+\_\+ipc\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Restituisce la chiave I\+PC ottenuta con ftok sull\textquotesingle{}eseguibile del server.
+
+\begin{DoxyReturn}{Restituisce}
+key\+\_\+t Chiave I\+PC 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{defines_8h_a2d341373a96ffea0944553e5452cdbca_cgraph}
+\end{center}
+\end{figure}
