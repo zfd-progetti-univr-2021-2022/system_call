@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <stdbool.h>
+#include <inttypes.h>
+#include <errno.h>
 
 #include "err_exit.h"
 #include "defines.h"
@@ -18,6 +21,10 @@
 char EXECUTABLE_DIR[BUFFER_SZ];
 
 int fifo1_fd;
+int semid;
+int shmid;
+msg_t * shm_ptr;
+
 
 /**
  * @brief Chiude tutte le IPC e termina
@@ -25,7 +32,34 @@ int fifo1_fd;
  * @param sig
  */
 void SIGINTSignalHandler(int sig) {
+
+    // chiudi FIFO1
+    if (close(fifo1_fd) == -1) {
+        ErrExit("[server.c:SIGINTSignalHandler] close failed");
+    }
+
+    if (unlink(FIFO1_PATH) == -1) {
+        ErrExit("[server.c:SIGINTSignalHandler] unlink failed");
+    }
+
+    // chiudi e dealloca memoria condivisa
+    free_shared_memory(shm_ptr);
+    remove_shared_memory(shmid);
+
+    // chiudi semafori
+    semDelete(semid);
+
     exit(0);
+}
+
+
+int string_to_int(char * string) {
+
+    uintmax_t num = strtoumax(string, NULL, 10);
+    if (num == UINTMAX_MAX && errno == ERANGE) {
+        ErrExit("strtoumax failed");
+    }
+    return num;
 }
 
 
@@ -36,6 +70,7 @@ void SIGINTSignalHandler(int sig) {
 */
 int main(int argc, char * argv[]) {
 
+    // memorizza il percorso dell'eseguibile per ftok()
     if (getcwd(EXECUTABLE_DIR, sizeof(EXECUTABLE_DIR)) == NULL) {
         ErrExit("getcwd");
     }
@@ -54,43 +89,42 @@ int main(int argc, char * argv[]) {
     // segmento di memoria condivisa (ShdMem) ed un set di semafori per gestire la concorrenza su
     // alcuni di questi strumenti di comunicazione.
 
-    unlink(FIFO1_PATH);
-    make_fifo(FIFO1_PATH);
-    fifo1_fd = create_fifo(FIFO1_PATH, 'r');
-    DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
-
-    msg_t n_msg;
-    if (read(fifo1_fd, &n_msg, sizeof(msg_t)) == -1) {
-        ErrExit("read failed");
-    }
-
-    DEBUG_PRINT("Il client mi ha inviato un messaggio che dice che ci sono %s file da ricevere\n", n_msg.msg_body);
-
     DEBUG_PRINT("Recuperata la chiave IPC: %x\n", get_ipc_key());
 
-    int shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
-    msg_t * shm_ptr = (msg_t *) get_shared_memory(shmid, IPC_CREAT | S_IRUSR | S_IWUSR);
+    shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
+    shm_ptr = (msg_t *) get_shared_memory(shmid, IPC_CREAT | S_IRUSR | S_IWUSR);
+    DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    int semid = createSemaphores(get_ipc_key(), 50);
+    semid = createSemaphores(get_ipc_key(), 50);
     short unsigned int semValues[50] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
+    DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
-    msg_t received_msg = {.msg_body = "OK", .mtype = CONTAINS_N, .sender_pid = getpid()};
+    fifo1_fd = create_new_fifo(FIFO1_PATH, 'r');
+    DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
 
-    semWait(semid, 0);
-    // zona mutex
-    shm_ptr[0] = received_msg;
-    // fine zona mutex
-    semSignal(semid, 0);
-
-    DEBUG_PRINT("Ho mandato al client il messaggio di conferma.\n");
-
-    /*
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
+        msg_t n_msg;
+        if (read(fifo1_fd, &n_msg, sizeof(msg_t)) == -1) {
+            ErrExit("read failed");
+        }
+
+        DEBUG_PRINT("Il client mi ha inviato un messaggio che dice che ci sono %s file da ricevere\n", n_msg.msg_body);
+        int n = string_to_int(n_msg.msg_body);
+        DEBUG_PRINT("Tradotto in numero e' %d (teoricamente lo stesso valore su terminale)\n", n);
 
         // scrive un messaggio di conferma su ShdMem
+        msg_t received_msg = {.msg_body = "OK", .mtype = CONTAINS_N, .sender_pid = getpid()};
 
+        semWait(semid, 0);
+        // zona mutex
+        shm_ptr[0] = received_msg;
+        // fine zona mutex
+        semSignal(semid, 0);
+        DEBUG_PRINT("Ho mandato al client il messaggio di conferma.\n");
+
+        /*
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
         int finished_files = 0;
 
@@ -113,10 +147,13 @@ int main(int argc, char * argv[]) {
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
+        */
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
+        DEBUG_PRINT("\n");
+        DEBUG_PRINT("==========================================================\n");
+        DEBUG_PRINT("\n");
     }
-    */
 
     return 0;
 }

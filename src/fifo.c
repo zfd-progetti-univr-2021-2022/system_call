@@ -17,7 +17,9 @@
 
 void make_fifo(char * path) {
     if (mkfifo(path, S_IRUSR | S_IWUSR) == -1) {
-        ErrExit("[fifo.c:make_fifo] mkfifo failed");
+        if (errno != EEXIST) {
+            ErrExit("[fifo.c:make_fifo] mkfifo failed");
+        }
     }
 }
 
@@ -25,7 +27,7 @@ void make_fifo(char * path) {
 int create_fifo(char * path, char mode) {
     int fifo1_fd = -1;
 
-    //make_fifo(path);
+    make_fifo(path);
     DEBUG_PRINT("Ho creato/ottenuto la FIFO\n");
 
     if (mode == 'r') {

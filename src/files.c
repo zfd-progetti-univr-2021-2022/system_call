@@ -11,17 +11,19 @@
 #include "strings.h"
 #include "files.h"
 #include "err_exit.h"
+#include "debug.h"
 
 
 void print_list(files_list * head) {
     files_list * current = head;
 
+    DEBUG_PRINT("File nella lista:\n");
+    int i = 0;
     while (current != NULL) {
-        printf("%s -> ", current->path);
+        DEBUG_PRINT("%d. '%s'\n", i, current->path);
         current = current->next;
+        i++;
     }
-
-    printf("\n");
 }
 
 
@@ -84,9 +86,9 @@ int count_files(files_list * head) {
 
 /**
  * @brief Restituisce dimensione del file in byte
- * 
- * @param filePath 
- * @return long 
+ *
+ * @param filePath
+ * @return long
  */
 long getFileSize(char * filePath) {
     if (filePath == NULL)
@@ -117,7 +119,7 @@ int checkFileName(char * fileName) {
 files_list * find_sendme_files(char *searchPath, files_list * head) {
     // open the current searchPath
     DIR *dirp = opendir(searchPath);
-    if (dirp == NULL) 
+    if (dirp == NULL)
         return head;
 
     // readdir returns NULL when end-of-directory is reached.
@@ -129,8 +131,8 @@ files_list * find_sendme_files(char *searchPath, files_list * head) {
     struct dirent *dentry;
     while ( (dentry = readdir(dirp)) != NULL) {
         // Skip . and ..
-        if (strcmp(dentry->d_name, ".") == 0 || strcmp(dentry->d_name, "..") == 0) {  
-            continue;  
+        if (strcmp(dentry->d_name, ".") == 0 || strcmp(dentry->d_name, "..") == 0) {
+            continue;
         }
 
         // is the current dentry a regular file?
@@ -147,12 +149,12 @@ files_list * find_sendme_files(char *searchPath, files_list * head) {
                 // printf("Trovato nuovo file, lo aggiungo alla lista: %s\n", searchPath);
                 head = append(head, searchPath);
             }
-            
+
             // reset current searchPath
             searchPath[lastPath] = '\0';
 
         // is the current dentry a directory
-        } 
+        }
         else if (dentry->d_type == DT_DIR) {
             // exetend current searchPath with the directory name
             size_t lastPath = append2Path(searchPath, dentry->d_name);
@@ -169,6 +171,6 @@ files_list * find_sendme_files(char *searchPath, files_list * head) {
 
     if (closedir(dirp) == -1)
         ErrExit("closedir failed");
-    
+
     return head;
 }
