@@ -21,6 +21,7 @@
 char EXECUTABLE_DIR[BUFFER_SZ];
 
 int fifo1_fd;
+int fifo2_fd;
 int semid;
 int shmid;
 msg_t * shm_ptr;
@@ -102,6 +103,9 @@ int main(int argc, char * argv[]) {
 
     fifo1_fd = create_new_fifo(FIFO1_PATH, 'r');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
+    
+    int fifo2_fd = create_fifo(FIFO2_PATH, 'r');//collegamento a fifo2
+    
 
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
@@ -124,31 +128,35 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 0);
         DEBUG_PRINT("Ho mandato al client il messaggio di conferma.\n");
 
-        /*
+        
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
         int finished_files = 0;
 
         // NOTA: non so come gestire questa parte di sincronizzazione e attesa di tutti i file e per ogni file di ogni parte...
         // > bisogna trovare il modo di riconoscere e memorizzare quali messaggi corrispondono a quali file
-        while (finished_files < n) {
-            while (true) {
+        //while (finished_files < n) {
+            //while (true) {
                 // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
                 // di file trasmesso
+                msg_t supporto1,supporto2;
+                read(fifo1_fd,&supporto1,sizeof(supporto1));
+                printf("[Parte1,del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                read(fifo2_fd,&supporto2,sizeof(supporto2));
+                printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
 
                 // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e l
 
                 // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
                 // bianca (carattere newline) ed ha l’intestazione
                 // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
-            }
+            //}
 
-            finished_files++;
-        }
+            //finished_files++;
+        //}
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
-        */
-
+        
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");
         DEBUG_PRINT("==========================================================\n");
