@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <inttypes.h>
 #include <errno.h>
+#include <sys/msg.h>
 
 #include "err_exit.h"
 #include "defines.h"
@@ -104,10 +105,10 @@ int main(int argc, char * argv[]) {
 
     fifo1_fd = create_new_fifo(FIFO1_PATH, 'r');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
-    
-    fifo2_fd = create_fifo(FIFO2_PATH, 'r');//collegamento a fifo2
+
+    fifo2_fd = create_fifo(FIFO2_PATH, 'r');  // collegamento a fifo2
     msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);
-    
+
 
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
@@ -130,7 +131,7 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 0);
         DEBUG_PRINT("Ho mandato al client il messaggio di conferma.\n");
 
-        
+
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
         int finished_files = 0;
 
@@ -148,9 +149,9 @@ int main(int argc, char * argv[]) {
                 read(fifo2_fd,&supporto2,sizeof(supporto2));
                 printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
                 //leggo dalla coda di messaggi la terza parte del file
-                msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),1,0);
-		        printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueuw]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
-		
+                msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART,0);
+		        printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+
                 // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e l
 
                 // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
@@ -163,7 +164,7 @@ int main(int argc, char * argv[]) {
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
-        
+
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");

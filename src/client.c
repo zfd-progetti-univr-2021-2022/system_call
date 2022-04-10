@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <sys/msg.h>
 
 #include "defines.h"
 #include "err_exit.h"
@@ -61,6 +62,7 @@ bool strEquals(char *a, char *b){
 void SIGINTSignalHandler(int sig) {
     // blocca tutti i segnali (compresi SIGUSR1 e SIGINT) modificando la maschera
     block_all_signals();
+    DEBUG_PRINT("Ho bloccato tutti i segnali\n");
 
     // Connettiti alle IPC e alle FIFO
     int shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
@@ -72,10 +74,12 @@ void SIGINTSignalHandler(int sig) {
 
     fifo1_fd = create_fifo(FIFO1_PATH, 'w');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
-    
-    fifo2_fd = create_fifo(FIFO2_PATH, 'w');//collegamento a fifo2
-    
-    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);//creo la coda dei messaggi
+
+    fifo2_fd = create_fifo(FIFO2_PATH, 'w');
+    DEBUG_PRINT("Mi sono collegato alla FIFO 2\n");  // collegamento a fifo2
+
+    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);  // creo la coda dei messaggi
+    DEBUG_PRINT("Mi sono collegato alla coda dei messaggi\n");
 
     // imposta la sua directory corrente ad un path passato da linea di comando all’avvio del programma
     if (chdir(searchPath) == -1) {
@@ -259,8 +263,8 @@ void operazioni_figlio(char * filePath){
     if (write(fifo1_fd,&supporto,sizeof(supporto)) == -1)
         ErrExit("write FIFO 1 failed");
     printf("invia messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-    
-    
+
+
 
     // invia il secondo messaggio a FIFO2
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
@@ -271,7 +275,7 @@ void operazioni_figlio(char * filePath){
     if (write(fifo2_fd,&supporto,sizeof(supporto)) == -1)
         ErrExit("write FIFO 1 failed");
     printf("invia messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-    
+
     // invia il terzo a MsgQueue (coda dei messaggi)
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
     supporto.mtype = CONTAINS_MSGQUEUE_FILE_PART;
