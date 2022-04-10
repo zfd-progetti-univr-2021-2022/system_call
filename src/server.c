@@ -70,6 +70,8 @@ int string_to_int(char * string) {
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
+ *
+ * @todo La ricezione dei messaggi dai vari canali dovra' essere asincrona.
 */
 int main(int argc, char * argv[]) {
 
