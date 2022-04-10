@@ -134,7 +134,7 @@ int main(int argc, char * argv[]) {
 
         // NOTA: non so come gestire questa parte di sincronizzazione e attesa di tutti i file e per ogni file di ogni parte...
         // > bisogna trovare il modo di riconoscere e memorizzare quali messaggi corrispondono a quali file
-        //while (finished_files < n) {
+        while (finished_files < n) {
             //while (true) {
                 // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
                 // di file trasmesso
@@ -151,12 +151,13 @@ int main(int argc, char * argv[]) {
                 // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
             //}
 
-            //finished_files++;
-        //}
+            finished_files++;
+        }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
         
+
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");
         DEBUG_PRINT("==========================================================\n");
