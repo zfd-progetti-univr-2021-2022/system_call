@@ -34,7 +34,9 @@
 #include "shared_memory.h"
 #include "fifo.h"
 #include "debug.h"
-
+//fifo che verranno utilizzate
+int fifo1_fd;
+int fifo2_fd;
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
 
@@ -68,10 +70,10 @@ void SIGINTSignalHandler(int sig) {
     int semid = getSemaphores(get_ipc_key(), 50);
     DEBUG_PRINT("Semafori: ottenuto il set di semafori\n");
 
-    int fifo1_fd = create_fifo(FIFO1_PATH, 'w');
+    fifo1_fd = create_fifo(FIFO1_PATH, 'w');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
     
-    int fifo2_fd = create_fifo(FIFO2_PATH, 'w');//collegamento a fifo2
+    fifo2_fd = create_fifo(FIFO2_PATH, 'w');//collegamento a fifo2
 
     // imposta la sua directory corrente ad un path passato da linea di comando all’avvio del programma
     if (chdir(searchPath) == -1) {
@@ -247,24 +249,24 @@ void operazioni_figlio(char * filePath){
 
     // invia il primo messaggio a FIFO1
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    int fifo1 = open(filePath, O_WRONLY);
     msg_t supporto;
     supporto.mtype = CONTAINS_FIFO1_FILE_PART;
     supporto.sender_pid = getpid();
     strcpy(supporto.file_path,filePath);
     strcpy(supporto.msg_body,msg_buffer[0]);
-    if (write(fifo1,&supporto,sizeof(supporto)) == -1)
+    if (write(fifo1_fd,&supporto,sizeof(supporto)) == -1)
         ErrExit("write FIFO 1 failed");
     printf("invia messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+    
+    
 
     // invia il secondo messaggio a FIFO2
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    int fifo2 = open(filePath, O_WRONLY);
     supporto.mtype = CONTAINS_FIFO2_FILE_PART;
     supporto.sender_pid = getpid();
     strcpy(supporto.file_path,filePath);
     strcpy(supporto.msg_body,msg_buffer[1]);
-    if (write(fifo2,&supporto,sizeof(supporto)) == -1)
+    if (write(fifo2_fd,&supporto,sizeof(supporto)) == -1)
         ErrExit("write FIFO 1 failed");
     printf("invia messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
     
