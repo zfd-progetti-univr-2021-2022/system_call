@@ -34,9 +34,9 @@
 #include "shared_memory.h"
 #include "fifo.h"
 #include "debug.h"
-//fifo che verranno utilizzate
-int fifo1_fd;
-int fifo2_fd;
+int fifo1_fd;//prima fifo
+int fifo2_fd;//seconda fifo
+int msqid;//coda dei messaggi
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
 
@@ -74,6 +74,8 @@ void SIGINTSignalHandler(int sig) {
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
     
     fifo2_fd = create_fifo(FIFO2_PATH, 'w');//collegamento a fifo2
+    
+    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);//creo la coda dei messaggi
 
     // imposta la sua directory corrente ad un path passato da linea di comando all’avvio del programma
     if (chdir(searchPath) == -1) {
@@ -270,16 +272,17 @@ void operazioni_figlio(char * filePath){
         ErrExit("write FIFO 1 failed");
     printf("invia messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
     
-    
-
     // invia il terzo a MsgQueue (coda dei messaggi)
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    //supporto={.mtype = 1, .sender_pid = getpid(),.file_path=filepath,.msg_body=msg_buffer[2]};
-    //msgsnd(get_ipc_key(),&suppoorto,sizeof(struct msg_t)-sizeof(long),0);
+    supporto.mtype = CONTAINS_MSGQUEUE_FILE_PART;
+    supporto.sender_pid = getpid();
+    strcpy(supporto.file_path,filePath);
+    strcpy(supporto.msg_body,msg_buffer[2]);
+    msgsnd(msqid,&supporto,sizeof(struct msg_t)-sizeof(long),0);
+    printf("invia messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
 
     // invia il quarto a ShdMem (memoria condivisa)
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    //supporto={.mtype = CONTAINS_N, .sender_pid = getpid(),.file_path=filepath,.msg_body=msg_buffer[3]};
 
     // chiude il file
     if (close(fd) == -1) {
