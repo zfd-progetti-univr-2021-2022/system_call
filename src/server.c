@@ -22,6 +22,7 @@ char EXECUTABLE_DIR[BUFFER_SZ];
 
 int fifo1_fd;
 int fifo2_fd;
+int msqid;
 int semid;
 int shmid;
 msg_t * shm_ptr;
@@ -104,7 +105,8 @@ int main(int argc, char * argv[]) {
     fifo1_fd = create_new_fifo(FIFO1_PATH, 'r');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
     
-    int fifo2_fd = create_fifo(FIFO2_PATH, 'r');//collegamento a fifo2
+    fifo2_fd = create_fifo(FIFO2_PATH, 'r');//collegamento a fifo2
+    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);
     
 
     while (true) {
@@ -138,12 +140,17 @@ int main(int argc, char * argv[]) {
             //while (true) {
                 // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
                 // di file trasmesso
-                msg_t supporto1,supporto2;
+                msg_t supporto1,supporto2,supporto3,supporto4;
+                //leggo da fifo1 la prima parte del file
                 read(fifo1_fd,&supporto1,sizeof(supporto1));
                 printf("[Parte1,del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                //leggo da fifo2 la seconda parte del file
                 read(fifo2_fd,&supporto2,sizeof(supporto2));
                 printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
-
+                //leggo dalla coda di messaggi la terza parte del file
+                msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),1,0);
+		        printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueuw]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+		
                 // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e l
 
                 // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
