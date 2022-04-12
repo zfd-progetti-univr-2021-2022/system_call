@@ -38,6 +38,10 @@
 int fifo1_fd;//prima fifo
 int fifo2_fd;//seconda fifo
 int msqid;//coda dei messaggi
+int shmid;//memoria condivisa
+msg_t * shm_ptr;//puntatore per la memoria condivisa
+int semid;//semaforo
+
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
 
@@ -65,11 +69,11 @@ void SIGINTSignalHandler(int sig) {
     DEBUG_PRINT("Ho bloccato tutti i segnali\n");
 
     // Connettiti alle IPC e alle FIFO
-    int shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
-    msg_t * shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
+    shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
+    shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    int semid = getSemaphores(get_ipc_key(), 50);
+    semid = getSemaphores(get_ipc_key(), 50);
     DEBUG_PRINT("Semafori: ottenuto il set di semafori\n");
 
     fifo1_fd = create_fifo(FIFO1_PATH, 'w');
@@ -255,7 +259,7 @@ void operazioni_figlio(char * filePath){
 
     // invia il primo messaggio a FIFO1
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    msg_t supporto;
+    msg_t supporto;//
     supporto.mtype = CONTAINS_FIFO1_FILE_PART;
     supporto.sender_pid = getpid();
     strcpy(supporto.file_path,filePath);
@@ -263,7 +267,6 @@ void operazioni_figlio(char * filePath){
     if (write(fifo1_fd,&supporto,sizeof(supporto)) == -1)
         ErrExit("write FIFO 1 failed");
     printf("invia messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-
 
 
     // invia il secondo messaggio a FIFO2
@@ -287,7 +290,21 @@ void operazioni_figlio(char * filePath){
 
     // invia il quarto a ShdMem (memoria condivisa)
     // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-
+    supporto.mtype = CONTAINS_SHM_FILE_PART;
+    supporto.sender_pid = getpid();
+    strcpy(supporto.file_path,filePath);
+    strcpy(supporto.msg_body,msg_buffer[3]);
+    for(int i=0; i<50; i++){
+    	semWait(semid, 0);//zona protetta
+    	if(arrayShared[i]==0){//se la cella dell'array non è "prenotata" vuol dire che anche la corrispondente cella della memoria condivisa è vuota
+    		shm_ptr[i] = supporto;
+    		arrayShared[i]=getpid();//cella occupata
+    		break;   		
+    	}
+    	semSignal(semid, 0);//zona protetta
+    }
+    printf("invia messaggio [ %s, %d, %s] su ShdMem\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+    
     // chiude il file
     if (close(fd) == -1) {
         ErrExit("close failed");
