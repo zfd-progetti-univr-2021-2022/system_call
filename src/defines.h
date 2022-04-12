@@ -12,6 +12,7 @@
 
 extern char EXECUTABLE_DIR[BUFFER_SZ];
 #define FIFO1_PATH "/tmp/fifo1_file.txt"
+#define FIFO2_PATH "/tmp/fifo2_file.txt"
 #define CONTAINS_N 0
 #define CONTAINS_FIFO1_FILE_PART 1
 #define CONTAINS_FIFO2_FILE_PART 2

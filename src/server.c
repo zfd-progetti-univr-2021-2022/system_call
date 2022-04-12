@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <inttypes.h>
 #include <errno.h>
+#include <sys/msg.h>
 
 #include "err_exit.h"
 #include "defines.h"
@@ -21,6 +22,8 @@
 char EXECUTABLE_DIR[BUFFER_SZ];
 
 int fifo1_fd;
+int fifo2_fd;
+int msqid;
 int semid;
 int shmid;
 msg_t * shm_ptr;
@@ -67,6 +70,8 @@ int string_to_int(char * string) {
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
+ *
+ * @todo La ricezione dei messaggi dai vari canali dovra' essere asincrona.
 */
 int main(int argc, char * argv[]) {
 
@@ -103,6 +108,10 @@ int main(int argc, char * argv[]) {
     fifo1_fd = create_new_fifo(FIFO1_PATH, 'r');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
 
+    fifo2_fd = create_fifo(FIFO2_PATH, 'r');  // collegamento a fifo2
+    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);
+
+
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
         msg_t n_msg;
@@ -124,30 +133,40 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 0);
         DEBUG_PRINT("Ho mandato al client il messaggio di conferma.\n");
 
-        /*
+
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
         int finished_files = 0;
 
         // NOTA: non so come gestire questa parte di sincronizzazione e attesa di tutti i file e per ogni file di ogni parte...
         // > bisogna trovare il modo di riconoscere e memorizzare quali messaggi corrispondono a quali file
         while (finished_files < n) {
-            while (true) {
+            //while (true) {
                 // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
                 // di file trasmesso
+                msg_t supporto1,supporto2,supporto3,supporto4;
+                //leggo da fifo1 la prima parte del file
+                read(fifo1_fd,&supporto1,sizeof(supporto1));
+                printf("[Parte1,del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                //leggo da fifo2 la seconda parte del file
+                read(fifo2_fd,&supporto2,sizeof(supporto2));
+                printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                //leggo dalla coda di messaggi la terza parte del file
+                msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART,0);
+		        printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
 
                 // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e l
 
                 // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
                 // bianca (carattere newline) ed ha l’intestazione
                 // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
-            }
+            //}
 
             finished_files++;
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
-        */
+
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");
