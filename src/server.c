@@ -26,6 +26,7 @@ int fifo2_fd;
 int msqid;
 int shmid;
 int semid;
+
 msg_t * shm_ptr;
 
 
@@ -146,28 +147,21 @@ int main(int argc, char * argv[]) {
                 msg_t supporto1,supporto2,supporto3,supporto4;
                 //leggo da fifo1 la prima parte del file
                 read(fifo1_fd,&supporto1,sizeof(supporto1));
-                printf("[Parte1,del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                printf("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
                 //leggo da fifo2 la seconda parte del file
                 read(fifo2_fd,&supporto2,sizeof(supporto2));
-                printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                printf("[Parte2, del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
                 //leggo dalla coda di messaggi la terza parte del file
                 msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART,0);
-		        printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+		        printf("[Parte3, del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
 		        //leggo dalla memoria condivisa
 		        for(int i=0; i<50; i++){
-			        semWait(semid, 0);//inizio zona protetta
-			        if(arrayShared[i]!=0){
-				        for(int j=0; j<50; j++){
-					        if(shm_ptr[j].sender_pid==arrayShared[i]){//se trovo corrispondenza vuol dire che si tratta del processo client giusto
-						        supporto4=shm_ptr[j];
-						        break;
-					        }
-				        }
-			        }
-			        semSignal(semid, 0);//fine zona protetta						
+			        if(shm_ptr[i].sender_pid==supporto1.sender_pid){//se trovo corrispondenza
+				    supporto4=shm_ptr[i];
+				    break;
+			        }							
 		        }
- 
-    		    printf("[Parte4,del file %s spedita dal processo %d tramite ShdMem]\n%s\n",supporto4.file_path,supporto4.sender_pid,supporto4.msg_body);
+    		    printf("[Parte4, del file %s spedita dal processo %d tramite ShdMem]\n%s\n",supporto4.file_path,supporto4.sender_pid,supporto4.msg_body);
 
                 // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e l
 
@@ -181,6 +175,7 @@ int main(int argc, char * argv[]) {
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
+
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");
