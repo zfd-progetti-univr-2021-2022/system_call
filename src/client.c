@@ -39,8 +39,9 @@ int fifo1_fd;//prima fifo
 int fifo2_fd;//seconda fifo
 int msqid;//coda dei messaggi
 int shmid;//memoria condivisa
-msg_t * shm_ptr;//puntatore per la memoria condivisa
+msg_t * shm_ptr;//puntatore per la mamoria condivisa
 int semid;//semaforo
+int arraySharedClient[50]={0};//array che mi dice quali celle della memoria sono occupate
 
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
@@ -198,7 +199,6 @@ void SIGUSR1SignalHandler(int sig) {
     exit(0);
 }
 
-
 void dividi(int fd, char *buf, size_t count, char *filePath, int parte) {
     ssize_t bR = read(fd, buf, count);
     if (bR > 0) {
@@ -210,7 +210,6 @@ void dividi(int fd, char *buf, size_t count, char *filePath, int parte) {
         DEBUG_PRINT("Non sono riuscito a leggere la parte %d\n",parte);
     }
 }
-
 
 void operazioni_figlio(char * filePath){
     DEBUG_PRINT("Sono il figlio %d e sto lavorando sul file %s\n", getpid(), filePath);
@@ -295,13 +294,13 @@ void operazioni_figlio(char * filePath){
     strcpy(supporto.file_path,filePath);
     strcpy(supporto.msg_body,msg_buffer[3]);
     for(int i=0; i<50; i++){
-    	semWait(semid, 0);//zona protetta
-    	if(arrayShared[i]==0){//se la cella dell'array non è "prenotata" vuol dire che anche la corrispondente cella della memoria condivisa è vuota
+    	//semWait(semid, 1);
+    	if(arraySharedClient[i]==0){//se la cella della memoria non è occupata
     		shm_ptr[i] = supporto;
-    		arrayShared[i]=getpid();//cella occupata
+    		arraySharedClient[i]=1;//occupo il posto
     		break;   		
     	}
-    	semSignal(semid, 0);//zona protetta
+    	//semSignal(semid, 1);
     }
     printf("invia messaggio [ %s, %d, %s] su ShdMem\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
     
