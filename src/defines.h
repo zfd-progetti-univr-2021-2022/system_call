@@ -13,11 +13,12 @@
 extern char EXECUTABLE_DIR[BUFFER_SZ];
 #define FIFO1_PATH "/tmp/fifo1_file.txt"
 #define FIFO2_PATH "/tmp/fifo2_file.txt"
-#define CONTAINS_N 0
-#define CONTAINS_FIFO1_FILE_PART 1
-#define CONTAINS_FIFO2_FILE_PART 2
-#define CONTAINS_MSGQUEUE_FILE_PART 3
-#define CONTAINS_SHM_FILE_PART 4
+#define CONTAINS_N 1
+#define CONTAINS_FIFO1_FILE_PART 2
+#define CONTAINS_FIFO2_FILE_PART 3
+#define CONTAINS_MSGQUEUE_FILE_PART 4
+#define CONTAINS_SHM_FILE_PART 5
+#define CONTAINS_DONE 6
 
 // -- Macro suddivisione messaggi
 
@@ -60,3 +61,24 @@ typedef struct msg_t {
  * @return key_t Chiave IPC
 */
 key_t get_ipc_key();
+
+
+/**
+ * @brief Restituisce vero se l'array contiene tutti true
+ *
+ * @param arr array di booleani
+ * @param len lunghezza array
+ * @return true arr contiene tutti true
+ * @return false arr contiene almeno un false
+*/
+bool arrayContainsAllTrue(bool arr[], int len);
+
+
+/**
+ * @brief Rende bloccante oppure non bloccante un file descriptor.
+ *
+ * @param fd file descriptor
+ * @param blocking 0: non bloccante, 1: bloccante
+ * @return int Vale 0 se fallisce
+ */
+int blockFD(int fd, int blocking);

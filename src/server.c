@@ -29,6 +29,8 @@ int semid;
 
 msg_t * shm_ptr;
 
+int shm_check_id;
+int * shm_check_ptr;
 
 /**
  * @brief Chiude tutte le IPC e termina
@@ -97,12 +99,16 @@ int main(int argc, char * argv[]) {
 
     DEBUG_PRINT("Recuperata la chiave IPC: %x\n", get_ipc_key());
 
-    shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
+    shmid = alloc_shared_memory(get_ipc_key(), 53 * sizeof(msg_t));
     shm_ptr = (msg_t *) get_shared_memory(shmid, IPC_CREAT | S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    semid = createSemaphores(get_ipc_key(), 50);
-    short unsigned int semValues[50] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    shm_check_id = alloc_shared_memory(get_ipc_key()+1, 53 * sizeof(int));
+    shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
+    DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
+
+    semid = createSemaphores(get_ipc_key(), 53);
+    short unsigned int semValues[53] = {1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -110,7 +116,10 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
 
     fifo2_fd = create_fifo(FIFO2_PATH, 'r');  // collegamento a fifo2
+    DEBUG_PRINT("Mi sono collegato alla FIFO 2\n");
+
     msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);
+    DEBUG_PRINT("Mi sono collegato alla coda dei messaggi\n");
 
 
     while (true) {
@@ -120,7 +129,7 @@ int main(int argc, char * argv[]) {
             ErrExit("read failed");
         }
 
-        DEBUG_PRINT("Il client mi ha inviato un messaggio che dice che ci sono %s file da ricevere\n", n_msg.msg_body);
+        DEBUG_PRINT("Il client mi ha inviato un messaggio che dice che ci sono '%s' file da ricevere\n", n_msg.msg_body);
         int n = string_to_int(n_msg.msg_body);
         DEBUG_PRINT("Tradotto in numero e' %d (teoricamente lo stesso valore su terminale)\n", n);
 
@@ -134,47 +143,79 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 0);
         DEBUG_PRINT("Ho mandato al client il messaggio di conferma.\n");
 
+        // rendi fifo non bloccanti
+        DEBUG_PRINT("Rendi fifo non bloccanti\n");
+        blockFD(fifo1_fd, 0);
+        blockFD(fifo2_fd, 0);
+        semSignal(semid, 2);
+        semWait(semid, 1);
+        DEBUG_PRINT("Rese fifo non bloccanti\n");
 
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
-        int finished_files = 0;
+        int arrived_parts_counter = 0;
+        int n_tries = 0;
+        while (arrived_parts_counter < n * 4) {
 
-        // NOTA: non so come gestire questa parte di sincronizzazione e attesa di tutti i file e per ogni file di ogni parte...
-        // > bisogna trovare il modo di riconoscere e memorizzare quali messaggi corrispondono a quali file
-        while (finished_files < n) {
-            //while (true) {
-                // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo di file trasmesso
-                msg_t supporto1,supporto2,supporto3,supporto4;
-                //leggo da fifo1 la prima parte del file
-                read(fifo1_fd,&supporto1,sizeof(supporto1));
+            // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
+            // di file trasmesso
+            msg_t supporto1,supporto2,supporto3,supporto4;
+
+            //leggo da fifo1 la prima parte del file
+            if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {
                 printf("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
-                //leggo da fifo2 la seconda parte del file
-                read(fifo2_fd,&supporto2,sizeof(supporto2));
-                printf("[Parte2, del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
-                //leggo dalla coda di messaggi la terza parte del file
-                msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART,0);
-		        printf("[Parte3, del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
-		        //leggo dalla memoria condivisa
-		        for(int i=0; i<50; i++){
-			        if(shm_ptr[i].sender_pid!=0){//se la cella non è vuota
-				        supporto4=shm_ptr[i];
-				        break;
-			        }							
-		        }
-    		    printf("[Parte4, del file %s spedita dal processo %d tramite ShdMem]\n%s\n",supporto4.file_path,supporto4.sender_pid,supporto4.msg_body);
+                arrived_parts_counter++;
+            }
 
-                // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e l
+            //leggo da fifo2 la seconda parte del file
+            if (read(fifo2_fd,&supporto2,sizeof(supporto2)) != -1) {
+                printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                arrived_parts_counter++;
+            }
 
-                // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
-                // bianca (carattere newline) ed ha l’intestazione
-                // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
-            //}
+            //leggo dalla coda di messaggi la terza parte del file
 
-            finished_files++;
+            if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
+                printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+                arrived_parts_counter++;
+            }
+
+            // leggi dalla memoria condivisa
+            semWait(semid, 3);
+            for (int i = 0; i < 50; i++) {
+                if (shm_check_ptr[i] == 1) {
+                    DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
+                    shm_check_ptr[i] = 0;
+                    arrived_parts_counter++;
+                }
+            }
+            semSignal(semid, 3);
+
+            // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e
+            // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
+            // bianca (carattere newline) ed ha l’intestazione
+            // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
+
+
+            if (n_tries % 5000 == 0) {
+                DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
+            }
+            n_tries++;
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
         // messaggi, in modo che possa essere riconosciuto da Client_0 come messaggio
+        DEBUG_PRINT("Invio messaggio di fine al client\n");
+        msg_t end_msg = {.msg_body = "DONE", .mtype = CONTAINS_DONE, .sender_pid=getpid()};
+        msgsnd(msqid, &end_msg, sizeof(struct msg_t)-sizeof(long), 0);
+        DEBUG_PRINT("Inviato messaggio di fine al client\n");
 
+        // rendi fifo bloccanti
+        DEBUG_PRINT("Rendi fifo bloccanti\n");
+        blockFD(fifo1_fd, 1);
+        blockFD(fifo2_fd, 1);
+        semSignal(semid, 2);
+        semWait(semid, 1);
+        DEBUG_PRINT("Rese fifo bloccanti\n");
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");
