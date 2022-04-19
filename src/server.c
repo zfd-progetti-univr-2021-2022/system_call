@@ -142,8 +142,7 @@ int main(int argc, char * argv[]) {
         // > bisogna trovare il modo di riconoscere e memorizzare quali messaggi corrispondono a quali file
         while (finished_files < n) {
             //while (true) {
-                // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
-                // di file trasmesso
+                // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo di file trasmesso
                 msg_t supporto1,supporto2,supporto3,supporto4;
                 //leggo da fifo1 la prima parte del file
                 read(fifo1_fd,&supporto1,sizeof(supporto1));
@@ -156,9 +155,9 @@ int main(int argc, char * argv[]) {
 		        printf("[Parte3, del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
 		        //leggo dalla memoria condivisa
 		        for(int i=0; i<50; i++){
-			        if(shm_ptr[i].sender_pid==supporto1.sender_pid){//se trovo corrispondenza
-				    supporto4=shm_ptr[i];
-				    break;
+			        if(shm_ptr[i].sender_pid!=0){//se la cella non è vuota
+				        supporto4=shm_ptr[i];
+				        break;
 			        }							
 		        }
     		    printf("[Parte4, del file %s spedita dal processo %d tramite ShdMem]\n%s\n",supporto4.file_path,supporto4.sender_pid,supporto4.msg_body);
