@@ -1,12 +1,5 @@
 
 \begin{DoxyRefList}
-\item[\label{warning__warning000001}%
-\Hypertarget{warning__warning000001}%
-File \hyperlink{client_8c}{client.c} ]La specifica non richiede la documentazione. E\textquotesingle{} richiesta?
-
-I percorsi dei file hanno dimensione massima?
-
-I caratteri nei file di testo in input ai client sono A\+S\+C\+II? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?  
 \item[\label{warning__warning000007}%
 \Hypertarget{warning__warning000007}%
 Globale \hyperlink{client_8h_a54b47b58f228d7bc9827d2919687e25a}{operazioni\+\_\+figlio} (char $\ast$file\+Path)]siccome l\textquotesingle{}ultima parte del messaggio e\textquotesingle{} l\textquotesingle{}unica che puo\textquotesingle{} essere piu\textquotesingle{} corta per specifica... Cosa bisogna fare in casi in cui non e\textquotesingle{} possibile garantire questo vincolo? Esempio\+: 2 caratteri possono essere divisi in\+:
@@ -18,7 +11,7 @@ Globale \hyperlink{client_8h_a54b47b58f228d7bc9827d2919687e25a}{operazioni\+\_\+
 \end{DoxyItemize}
 \item[\label{warning__warning000004}%
 \Hypertarget{warning__warning000004}%
-Globale \hyperlink{server_8c_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)]Per ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send\+\_\+me si puo\textquotesingle{} creare il processo figlio per inviare il file. Per fare questo B\+I\+S\+O\+G\+NA sapere se il numero di file puo\textquotesingle{} cambiare durante l\textquotesingle{}esecuzione del programma\+: se trovo 3 file e dopo un file viene cancellato cosa succede? ~\newline
+Globale \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)]Per ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send\+\_\+me si puo\textquotesingle{} creare il processo figlio per inviare il file. Per fare questo B\+I\+S\+O\+G\+NA sapere se il numero di file puo\textquotesingle{} cambiare durante l\textquotesingle{}esecuzione del programma\+: se trovo 3 file e dopo un file viene cancellato cosa succede? ~\newline
  N\+O\+TA\+: questo problema puo\textquotesingle{} esserci anche nella situazione attuale...
 
 Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Probabilmente prima bisogna attendere il messaggio di fine e poi aspettare che tutti i figlio terminino (prima di liberare la lista dei file e).

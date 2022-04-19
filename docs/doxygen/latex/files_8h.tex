@@ -1,15 +1,16 @@
-\hypertarget{files_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/files.h}
-\label{files_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/files.\+h@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/files.\+h}}
+\hypertarget{files_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/files.h}
+\label{files_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/files.\+h@{/mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/files.\+h}}
 
 
 Contiene la definizioni di variabili e funzioni specifiche per la gestione dei F\+I\+LE.  
 
 
-Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:\nopagebreak
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=342pt]{files_8h__dep__incl}
+\includegraphics[width=202pt]{files_8h__dep__incl}
 \end{center}
 \end{figure}
 \subsection*{Strutture dati}
@@ -39,7 +40,7 @@ int \hyperlink{files_8h_a5ac4517096592013308a3252f3226f60}{check\+File\+Size} (c
 \begin{DoxyCompactList}\small\item\em Restituisce 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti. \end{DoxyCompactList}\item 
 int \hyperlink{files_8h_a675d61c6bfe0d9ddd1be59233dfd7d5c}{check\+File\+Name} (char $\ast$file\+Name)
 \begin{DoxyCompactList}\small\item\em Restituisce 1 se il percorso inizia con \char`\"{}sendme\+\_\+\char`\"{}, 0 altrimenti. \end{DoxyCompactList}\item 
-\hyperlink{structfiles__list}{files\+\_\+list} $\ast$ \hyperlink{files_8h_a627e4b202ea71f3bd241ccf562449bd6}{find\+\_\+sendme\+\_\+files} (char $\ast$\hyperlink{client_8c_ab68195a262278b18e5dc84f677ad434d}{search\+Path}, \hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
+\hyperlink{structfiles__list}{files\+\_\+list} $\ast$ \hyperlink{files_8h_a627e4b202ea71f3bd241ccf562449bd6}{find\+\_\+sendme\+\_\+files} (char $\ast$search\+Path, \hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
 \end{DoxyCompactItemize}
 
 
@@ -78,8 +79,7 @@ Aggiunge in fondo alla coda un nuovo file\+Path.
 \begin{DoxyReturn}{Restituisce}
 files\+\_\+list$\ast$ Nodo di testa della coda (se head == N\+U\+LL verra\textquotesingle{} creato il primo nodo) 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -104,16 +104,14 @@ Restituisce 1 se il percorso inizia con \char`\"{}sendme\+\_\+\char`\"{}, 0 altr
 \begin{DoxyReturn}{Restituisce}
 int Vale 1 se il percorso inizia con \char`\"{}sendme\+\_\+\char`\"{}, 0 altrimenti 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=275pt]{files_8h_a675d61c6bfe0d9ddd1be59233dfd7d5c_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -138,16 +136,14 @@ Restituisce 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti.
 \begin{DoxyReturn}{Restituisce}
 int Vale 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=267pt]{files_8h_a5ac4517096592013308a3252f3226f60_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -190,16 +186,14 @@ Ricerca ricorsivamente nel percorso search\+Path i file che inizianano con \char
 \begin{DoxyReturn}{Restituisce}
 files\+\_\+list$\ast$ Testa della lista concatenata con i percorsi dei file che hanno i requisiti richiesti 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{files_8h_a627e4b202ea71f3bd241ccf562449bd6_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -249,8 +243,7 @@ Restituisce la dimensione in byte del file con percorso file\+Path.
 \begin{DoxyReturn}{Restituisce}
 long 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
