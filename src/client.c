@@ -39,7 +39,7 @@ int fifo1_fd;//prima fifo
 int fifo2_fd;//seconda fifo
 int msqid;//coda dei messaggi
 int shmid;//memoria condivisa
-msg_t * shm_ptr;//puntatore per la mamoria condivisa
+msg_t * shm_ptr;//puntatore per la memoria condivisa
 int semid;//semaforo
 int arraySharedClient[50]={0};//array che mi dice quali celle della memoria sono occupate
 
@@ -293,14 +293,14 @@ void operazioni_figlio(char * filePath){
     supporto.sender_pid = getpid();
     strcpy(supporto.file_path,filePath);
     strcpy(supporto.msg_body,msg_buffer[3]);
-    for(int i=0; i<50; i++){
-    	//semWait(semid, 1);
+    for(int i=0; i<50; i++){	
     	if(arraySharedClient[i]==0){//se la cella della memoria non è occupata
+            semWait(semid, 1);//inizio sezione critica
     		shm_ptr[i] = supporto;
+            semSignal(semid, 1);//fine sezione critica
     		arraySharedClient[i]=1;//occupo il posto
     		break;   		
     	}
-    	//semSignal(semid, 1);
     }
     printf("invia messaggio [ %s, %d, %s] su ShdMem\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
     
