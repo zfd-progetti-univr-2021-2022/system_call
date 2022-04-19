@@ -3,6 +3,7 @@
 
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -26,6 +27,7 @@ int fifo2_fd;
 int msqid;
 int shmid;
 int semid;
+msg_t **matriceFile;//è una matrice che per ogni riga contiene le 4 parti di un file
 
 msg_t * shm_ptr;
 
@@ -66,6 +68,25 @@ int string_to_int(char * string) {
         ErrExit("strtoumax failed");
     }
     return num;
+}
+
+void aggiungiAMatrice(msg_t a,int righe){
+    bool aggiunto=false;
+    for(int i=0; i<righe && aggiunto==false; i++)
+        for(int j=0; j<4 && aggiunto==false; j++){
+            if(strcmp(matriceFile[i][j].file_path,a.file_path)==0){
+                matriceFile[i][a.mtype-2]=a;
+                aggiunto=true;
+            }
+        }
+
+    for(int i=0; i<righe && aggiunto==false; i++){
+        //cerco la prima riga vuota
+        if(matriceFile[i][0].mtype==666 && matriceFile[i][1].mtype==666 && matriceFile[i][2].mtype==666 && matriceFile[i][3].mtype==666){
+            matriceFile[i][a.mtype-2]=a;
+            aggiunto=true;
+        }
+    }         
 }
 
 
@@ -131,6 +152,18 @@ int main(int argc, char * argv[]) {
 
         DEBUG_PRINT("Il client mi ha inviato un messaggio che dice che ci sono '%s' file da ricevere\n", n_msg.msg_body);
         int n = string_to_int(n_msg.msg_body);
+        //inizializzo la matrice contenente i pezzi di file
+        matriceFile=(msg_t **)malloc(n*sizeof(msg_t *));
+        for(int i=0; i<n;i++)
+            matriceFile[i]=(msg_t *)malloc(4*sizeof(msg_t));
+
+        msg_t vuoto;
+        vuoto.mtype = 666;//Stefano, io sono il diavolo!!!
+        //riempio la matrice con una struttura che mi dice se le celle sono vuote
+        for(int i=0;i<n;i++)
+            for(int j=0; j<4;j++)
+                matriceFile[i][j]=vuoto;
+
         DEBUG_PRINT("Tradotto in numero e' %d (teoricamente lo stesso valore su terminale)\n", n);
 
         // scrive un messaggio di conferma su ShdMem
@@ -163,12 +196,14 @@ int main(int argc, char * argv[]) {
             //leggo da fifo1 la prima parte del file
             if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {
                 printf("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                aggiungiAMatrice(supporto1,n);
                 arrived_parts_counter++;
             }
 
             //leggo da fifo2 la seconda parte del file
             if (read(fifo2_fd,&supporto2,sizeof(supporto2)) != -1) {
                 printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                aggiungiAMatrice(supporto2,n);
                 arrived_parts_counter++;
             }
 
@@ -176,6 +211,7 @@ int main(int argc, char * argv[]) {
 
             if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
                 printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+                aggiungiAMatrice(supporto3,n);
                 arrived_parts_counter++;
             }
 
@@ -200,6 +236,13 @@ int main(int argc, char * argv[]) {
                 DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
             }
             n_tries++;
+        }
+
+        printf("STAMPO LA MATRICE\n");
+        for(int i=0;i<n;i++){
+            for(int j=0; j<4;j++)
+                printf("%s ",matriceFile[i][j].msg_body);
+            printf("\n");
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
