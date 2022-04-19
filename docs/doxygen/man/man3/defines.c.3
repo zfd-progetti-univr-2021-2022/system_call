@@ -1,13 +1,17 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.c" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/new/system_call/src/defines.c" 3 "Mar 19 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/mnt/c/Users/stefa/Desktop/system_call/src/defines.c \- Contiene l'implementazione delle funzioni specifiche del progetto\&.  
+/mnt/c/Users/stefa/Desktop/new/system_call/src/defines.c \- Contiene l'implementazione delle funzioni specifiche del progetto\&.  
 
 .SH SYNOPSIS
 .br
 .PP
 \fC#include <sys/ipc\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
 .br
 \fC#include 'defines\&.h'\fP
 .br
@@ -20,6 +24,14 @@
 .ti -1c
 .RI "key_t \fBget_ipc_key\fP ()"
 .br
+.ti -1c
+.RI "bool \fBarrayContainsAllTrue\fP (bool arr[], int len)"
+.br
+.RI "Restituisce vero se l'array contiene tutti true\&. "
+.ti -1c
+.RI "int \fBblockFD\fP (int fd, int blocking)"
+.br
+.RI "Rende bloccante oppure non bloccante un file descriptor\&. "
 .in -1c
 .SH "Descrizione dettagliata"
 .PP 
@@ -28,6 +40,44 @@ Contiene l'implementazione delle funzioni specifiche del progetto\&.
 
 .SH "Documentazione delle funzioni"
 .PP 
+.SS "bool arrayContainsAllTrue (bool arr[], int len)"
+
+.PP
+Restituisce vero se l'array contiene tutti true\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIarr\fP array di booleani 
+.br
+\fIlen\fP lunghezza array 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+true arr contiene tutti true 
+.PP
+false arr contiene almeno un false 
+.RE
+.PP
+
+.SS "int blockFD (int fd, int blocking)"
+
+.PP
+Rende bloccante oppure non bloccante un file descriptor\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfd\fP file descriptor 
+.br
+\fIblocking\fP 0: non bloccante, 1: bloccante 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Vale 0 se fallisce 
+.RE
+.PP
+
 .SS "key_t get_ipc_key ()"
 Restituisce la chiave IPC ottenuta con ftok sull'eseguibile del server\&.
 .PP

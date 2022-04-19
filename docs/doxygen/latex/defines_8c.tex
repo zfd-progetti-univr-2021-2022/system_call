@@ -1,11 +1,13 @@
-\hypertarget{defines_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/defines.c}
-\label{defines_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/defines.\+c@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/defines.\+c}}
+\hypertarget{defines_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/defines.c}
+\label{defines_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/defines.\+c@{/mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/defines.\+c}}
 
 
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche del progetto.  
 
 
 {\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 Grafo delle dipendenze di inclusione per defines.\+c\+:
@@ -13,14 +15,18 @@ Grafo delle dipendenze di inclusione per defines.\+c\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=280pt]{defines_8c__incl}
+\includegraphics[width=350pt]{defines_8c__incl}
 \end{center}
 \end{figure}
 \subsection*{Funzioni}
 \begin{DoxyCompactItemize}
 \item 
 key\+\_\+t \hyperlink{defines_8c_a2d341373a96ffea0944553e5452cdbca}{get\+\_\+ipc\+\_\+key} ()
-\end{DoxyCompactItemize}
+\item 
+bool \hyperlink{defines_8c_ac281b05b7a90ba292f5748cbfe3c389d}{array\+Contains\+All\+True} (bool arr\mbox{[}$\,$\mbox{]}, int len)
+\begin{DoxyCompactList}\small\item\em Restituisce vero se l\textquotesingle{}array contiene tutti true. \end{DoxyCompactList}\item 
+int \hyperlink{defines_8c_aea9b93cad897755a46cb9e3373ba8cc2}{block\+FD} (int fd, int blocking)
+\begin{DoxyCompactList}\small\item\em Rende bloccante oppure non bloccante un file descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrizione dettagliata}
@@ -29,6 +35,48 @@ Contiene l\textquotesingle{}implementazione delle funzioni specifiche del proget
 
 
 \subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{defines_8c_ac281b05b7a90ba292f5748cbfe3c389d}\label{defines_8c_ac281b05b7a90ba292f5748cbfe3c389d}} 
+\index{defines.\+c@{defines.\+c}!array\+Contains\+All\+True@{array\+Contains\+All\+True}}
+\index{array\+Contains\+All\+True@{array\+Contains\+All\+True}!defines.\+c@{defines.\+c}}
+\subsubsection{\texorpdfstring{array\+Contains\+All\+True()}{arrayContainsAllTrue()}}
+{\footnotesize\ttfamily bool array\+Contains\+All\+True (\begin{DoxyParamCaption}\item[{bool}]{arr\mbox{[}$\,$\mbox{]},  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Restituisce vero se l\textquotesingle{}array contiene tutti true. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em arr} & array di booleani \\
+\hline
+{\em len} & lunghezza array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+true arr contiene tutti true 
+
+false arr contiene almeno un false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{defines_8c_aea9b93cad897755a46cb9e3373ba8cc2}\label{defines_8c_aea9b93cad897755a46cb9e3373ba8cc2}} 
+\index{defines.\+c@{defines.\+c}!block\+FD@{block\+FD}}
+\index{block\+FD@{block\+FD}!defines.\+c@{defines.\+c}}
+\subsubsection{\texorpdfstring{block\+F\+D()}{blockFD()}}
+{\footnotesize\ttfamily int block\+FD (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{blocking }\end{DoxyParamCaption})}
+
+
+
+Rende bloccante oppure non bloccante un file descriptor. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em fd} & file descriptor \\
+\hline
+{\em blocking} & 0\+: non bloccante, 1\+: bloccante \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Vale 0 se fallisce 
+\end{DoxyReturn}
 \mbox{\Hypertarget{defines_8c_a2d341373a96ffea0944553e5452cdbca}\label{defines_8c_a2d341373a96ffea0944553e5452cdbca}} 
 \index{defines.\+c@{defines.\+c}!get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}}
 \index{get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}!defines.\+c@{defines.\+c}}

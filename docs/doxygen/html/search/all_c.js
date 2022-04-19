@@ -1,7 +1,6 @@
 var searchData=
 [
   ['system_5fcall',['system_call',['../index.html',1,'']]],
-  ['searchpath',['searchPath',['../client_8c.html#ab68195a262278b18e5dc84f677ad434d',1,'client.c']]],
   ['semaphore_2ec',['semaphore.c',['../semaphore_8c.html',1,'']]],
   ['semaphore_2eh',['semaphore.h',['../semaphore_8h.html',1,'']]],
   ['semdelete',['semDelete',['../semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f',1,'semDelete(int semid):&#160;semaphore.c'],['../semaphore_8h.html#a530566146b6e3cc8415d8ae4259fd68f',1,'semDelete(int semid):&#160;common.c']]],
@@ -13,15 +12,14 @@ var searchData=
   ['semsignal',['semSignal',['../semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf',1,'semSignal(int semid, int sem_num):&#160;semaphore.c'],['../semaphore_8h.html#a7bad0eb0b0c6ac701b59c36b8b7837bf',1,'semSignal(int semid, int sem_num):&#160;common.c']]],
   ['semun',['semun',['../unionsemun.html',1,'']]],
   ['semwait',['semWait',['../semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21',1,'semWait(int semid, int sem_num):&#160;semaphore.c'],['../semaphore_8h.html#a2581efba6a0833e3f289de94c779cc21',1,'semWait(int semid, int sem_num):&#160;common.c']]],
-  ['semwaitzero',['semWaitZero',['../semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe',1,'semWaitZero(int semid, int sem_num):&#160;semaphore.c'],['../semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe',1,'semWaitZero(int semid, int sem_num):&#160;semaphore.c']]],
+  ['semwaitzero',['semWaitZero',['../semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe',1,'semWaitZero(int semid, int sem_num):&#160;semaphore.c'],['../semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe',1,'semWaitZero(int semid, int sem_num):&#160;common.c']]],
   ['sender_5fpid',['sender_pid',['../structmsg__t.html#ae79f37d3dc8230fd465f68f694bbc059',1,'msg_t']]],
-  ['server_2ec',['server.c',['../server_8c.html',1,'']]],
   ['shared_5fmemory_2ec',['shared_memory.c',['../shared__memory_8c.html',1,'']]],
   ['shared_5fmemory_2eh',['shared_memory.h',['../shared__memory_8h.html',1,'']]],
-  ['sigintsignalhandler',['SIGINTSignalHandler',['../client_8c.html#a48d605ff689f470746c858648f0a98c2',1,'SIGINTSignalHandler(int sig):&#160;client.c'],['../client_8h.html#a48d605ff689f470746c858648f0a98c2',1,'SIGINTSignalHandler(int sig):&#160;client.c'],['../server_8c.html#a48d605ff689f470746c858648f0a98c2',1,'SIGINTSignalHandler(int sig):&#160;server.c']]],
+  ['sigintsignalhandler',['SIGINTSignalHandler',['../client_8h.html#a48d605ff689f470746c858648f0a98c2',1,'client.c']]],
   ['signals_2ec',['signals.c',['../signals_8c.html',1,'']]],
   ['signals_2eh',['signals.h',['../signals_8h.html',1,'']]],
-  ['sigusr1signalhandler',['SIGUSR1SignalHandler',['../client_8c.html#a50b22adcb76198fcd9402a97ff4711bf',1,'SIGUSR1SignalHandler(int sig):&#160;client.c'],['../client_8h.html#a50b22adcb76198fcd9402a97ff4711bf',1,'SIGUSR1SignalHandler(int sig):&#160;client.c']]],
+  ['sigusr1signalhandler',['SIGUSR1SignalHandler',['../client_8h.html#a50b22adcb76198fcd9402a97ff4711bf',1,'client.c']]],
   ['startswith',['StartsWith',['../strings_8c.html#ab6b8529148710caedf063c1de6b0db16',1,'StartsWith(const char *a, const char *b):&#160;strings.c'],['../strings_8h.html#ab6b8529148710caedf063c1de6b0db16',1,'StartsWith(const char *a, const char *b):&#160;strings.c']]],
   ['strings_2ec',['strings.c',['../strings_8c.html',1,'']]],
   ['strings_2eh',['strings.h',['../strings_8h.html',1,'']]]

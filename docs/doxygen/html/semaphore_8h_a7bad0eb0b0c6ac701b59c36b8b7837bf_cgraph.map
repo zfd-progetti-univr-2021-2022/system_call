@@ -1,0 +1,4 @@
+<map id="semSignal" name="semSignal">
+<area shape="rect" id="node2" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="144,5,212,32"/>
+<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="260,5,325,32"/>
+</map>

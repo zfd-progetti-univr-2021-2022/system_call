@@ -35,9 +35,24 @@
 #include "shared_memory.h"
 #include "fifo.h"
 #include "debug.h"
-int fifo1_fd;//prima fifo
-int fifo2_fd;//seconda fifo
-int msqid;//coda dei messaggi
+
+/// file descriptor prima fifo
+int fifo1_fd;
+/// file descriptor seconda fifo
+int fifo2_fd;
+/// id coda dei messaggi
+int msqid;
+/// id set di semafori
+int semid;
+/// id memoria condivisa messaggi
+int shmid;
+/// puntatore memoria condivisa messaggi
+msg_t * shm_ptr;
+/// id memoria condivisa flag lettura/scrittura messaggi
+int shm_check_id;
+/// puntatore memoria condivisa flag lettura/scrittura messaggi
+int * shm_check_ptr;
+
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
 
@@ -65,11 +80,15 @@ void SIGINTSignalHandler(int sig) {
     DEBUG_PRINT("Ho bloccato tutti i segnali\n");
 
     // Connettiti alle IPC e alle FIFO
-    int shmid = alloc_shared_memory(get_ipc_key(), 50 * sizeof(msg_t));
-    msg_t * shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
+    shmid = alloc_shared_memory(get_ipc_key(), 53 * sizeof(msg_t));
+    shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    int semid = getSemaphores(get_ipc_key(), 50);
+    shm_check_id = alloc_shared_memory(get_ipc_key()+1, 53 * sizeof(int));
+    shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
+    DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
+
+    semid = getSemaphores(get_ipc_key(), 53);
     DEBUG_PRINT("Semafori: ottenuto il set di semafori\n");
 
     fifo1_fd = create_fifo(FIFO1_PATH, 'w');
@@ -141,6 +160,14 @@ void SIGINTSignalHandler(int sig) {
 
     DEBUG_PRINT("Il server ha confermato di aver ricevuto l'informazione\n");
 
+    // rendi fifo non bloccanti
+    DEBUG_PRINT("rendi fifo non bloccanti\n");
+    blockFD(fifo1_fd, 0);
+    blockFD(fifo2_fd, 0);
+    semSignal(semid, 1);
+    semWait(semid, 2);
+    DEBUG_PRINT("Rese fifo non bloccanti\n");
+
     // genera <n> processi figlio Client_i (uno per ogni file "sendme_")
     files_list * sendme_file = sendme_files;
     while (sendme_file != NULL) {
@@ -171,6 +198,10 @@ void SIGINTSignalHandler(int sig) {
 
     // si mette in attesa sulla MsgQueue di un messaggio da parte del server che lo
     // informa che tutti i file di output sono stati creati dal server stesso e che il server ha concluso le sue operazioni.
+    DEBUG_PRINT("Attendo di ricevere messaggio di fine.\n");
+    msg_t end_msg;
+    while (msgrcv(msqid, &end_msg, sizeof(struct msg_t)-sizeof(long), CONTAINS_DONE, 0) == -1);
+    DEBUG_PRINT("Ricevuto messaggio di fine: '%s'\n", end_msg.msg_body);
 
     // attendi fine dei processi figlio
     while(wait(NULL) > 0);
@@ -180,6 +211,15 @@ void SIGINTSignalHandler(int sig) {
 
     // chiudi le IPC e le FIFO
     // > senza eliminarle, quello e' compito del server
+
+    // rendi fifo bloccanti
+    DEBUG_PRINT("rendi fifo bloccanti\n");
+    blockFD(fifo1_fd, 1);
+    blockFD(fifo2_fd, 1);
+    semSignal(semid, 1);
+    semWait(semid, 2);
+    DEBUG_PRINT("rese fifo bloccanti\n");
+
 
     // sblocca i segnali SIGINT e SIGUSR1
     block_sig_no_SIGINT_SIGUSR1();
@@ -253,47 +293,95 @@ void operazioni_figlio(char * filePath){
     // -- INVIO 4 MESSAGGI
     // > NOTA: servono meccanismi di sincronizzazione tra i client. Il server gestira' il riordino dei messaggi.
 
-    // invia il primo messaggio a FIFO1
-    // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    msg_t supporto;
-    supporto.mtype = CONTAINS_FIFO1_FILE_PART;
-    supporto.sender_pid = getpid();
-    strcpy(supporto.file_path,filePath);
-    strcpy(supporto.msg_body,msg_buffer[0]);
-    if (write(fifo1_fd,&supporto,sizeof(supporto)) == -1)
-        ErrExit("write FIFO 1 failed");
-    printf("invia messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+    bool sent[MSG_PARTS_NUM] = {false};
 
+    while (!arrayContainsAllTrue(sent, MSG_PARTS_NUM)) {
 
+        msg_t supporto;
 
-    // invia il secondo messaggio a FIFO2
-    // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    supporto.mtype = CONTAINS_FIFO2_FILE_PART;
-    supporto.sender_pid = getpid();
-    strcpy(supporto.file_path,filePath);
-    strcpy(supporto.msg_body,msg_buffer[1]);
-    if (write(fifo2_fd,&supporto,sizeof(supporto)) == -1)
-        ErrExit("write FIFO 1 failed");
-    printf("invia messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+        if (sent[0] == false) {
+            // invia il primo messaggio a FIFO1
+            // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+            supporto.mtype = CONTAINS_FIFO1_FILE_PART;
+            supporto.sender_pid = getpid();
+            strcpy(supporto.file_path,filePath);
+            strcpy(supporto.msg_body,msg_buffer[0]);
 
-    // invia il terzo a MsgQueue (coda dei messaggi)
-    // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
-    supporto.mtype = CONTAINS_MSGQUEUE_FILE_PART;
-    supporto.sender_pid = getpid();
-    strcpy(supporto.file_path,filePath);
-    strcpy(supporto.msg_body,msg_buffer[2]);
-    msgsnd(msqid,&supporto,sizeof(struct msg_t)-sizeof(long),0);
-    printf("invia messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+            printf("Tenta invio messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
 
-    // invia il quarto a ShdMem (memoria condivisa)
-    // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+            if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
+                // la scrittura ha avuto successo
+                sent[0] = true;
+            }
+        }
+
+        if (sent[1] == false) {
+            // invia il secondo messaggio a FIFO2
+            // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+            supporto.mtype = CONTAINS_FIFO2_FILE_PART;
+            supporto.sender_pid = getpid();
+            strcpy(supporto.file_path,filePath);
+            strcpy(supporto.msg_body,msg_buffer[1]);
+
+            printf("Tenta invio messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+
+            if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
+                // la scrittura ha avuto successo
+                sent[1] = true;
+            }
+        }
+
+        if (sent[2] == false) {
+            // invia il terzo a MsgQueue (coda dei messaggi)
+            // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+            supporto.mtype = CONTAINS_MSGQUEUE_FILE_PART;
+            supporto.sender_pid = getpid();
+            strcpy(supporto.file_path,filePath);
+            strcpy(supporto.msg_body,msg_buffer[2]);
+
+            printf("Tenta invio messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+
+            if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
+                // la scrittura ha avuto successo
+                sent[2] = true;
+            }
+            else{
+                perror("msgsnd failed");
+            }
+        }
+
+        if (sent[3] == false) {
+            // invia il quarto a ShdMem (memoria condivisa)
+            // > invia anche il proprio PID ed il nome del file "sendme_" (con percorso completo)
+
+            supporto.mtype = CONTAINS_SHM_FILE_PART;
+            supporto.sender_pid = getpid();
+            strcpy(supporto.file_path,filePath);
+            strcpy(supporto.msg_body,msg_buffer[3]);
+
+            DEBUG_PRINT("Tento di entrare nella zona critica (figlio %d)\n", getpid());
+            semWait(semid, 3);
+            DEBUG_PRINT("Sono dentro la zona critica (figlio %d)\n", getpid());
+            for (int i = 0; i < 50; i++) {
+                if (shm_check_ptr[i] == 0) {
+                    DEBUG_PRINT("Trovata posizione libera %d per inviare: %s\n", i, supporto.msg_body);
+                    shm_check_ptr[i] = 1;
+                    sent[3] = true;
+                    shm_ptr[i] = supporto;
+                    break;
+                }
+            }
+            semSignal(semid, 3);
+            DEBUG_PRINT("Sono fuori la zona critica (figlio %d)\n", getpid());
+        }
+    }
 
     // chiude il file
     if (close(fd) == -1) {
         ErrExit("close failed");
     }
 
-    // termina
+    // termina: gestito fuori dalla funzione
 }
 
 

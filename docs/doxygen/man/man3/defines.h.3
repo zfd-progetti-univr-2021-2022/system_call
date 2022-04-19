@@ -1,8 +1,8 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.h" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/new/system_call/src/defines.h" 3 "Mar 19 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/mnt/c/Users/stefa/Desktop/system_call/src/defines.h \- Contiene la definizioni di variabili e funzioni specifiche del progetto\&.  
+/mnt/c/Users/stefa/Desktop/new/system_call/src/defines.h \- Contiene la definizioni di variabili e funzioni specifiche del progetto\&.  
 
 .SH SYNOPSIS
 .br
@@ -30,19 +30,25 @@
 .RI "#define \fBFIFO1_PATH\fP   '/tmp/fifo1_file\&.txt'"
 .br
 .ti -1c
-.RI "#define \fBCONTAINS_N\fP   0"
+.RI "#define \fBFIFO2_PATH\fP   '/tmp/fifo2_file\&.txt'"
 .br
 .ti -1c
-.RI "#define \fBCONTAINS_FIFO1_FILE_PART\fP   1"
+.RI "#define \fBCONTAINS_N\fP   1"
 .br
 .ti -1c
-.RI "#define \fBCONTAINS_FIFO2_FILE_PART\fP   2"
+.RI "#define \fBCONTAINS_FIFO1_FILE_PART\fP   2"
 .br
 .ti -1c
-.RI "#define \fBCONTAINS_MSGQUEUE_FILE_PART\fP   3"
+.RI "#define \fBCONTAINS_FIFO2_FILE_PART\fP   3"
 .br
 .ti -1c
-.RI "#define \fBCONTAINS_SHM_FILE_PART\fP   4"
+.RI "#define \fBCONTAINS_MSGQUEUE_FILE_PART\fP   4"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_SHM_FILE_PART\fP   5"
+.br
+.ti -1c
+.RI "#define \fBCONTAINS_DONE\fP   6"
 .br
 .ti -1c
 .RI "#define \fBMSG_MAX_SZ\fP   4096"
@@ -70,6 +76,14 @@
 .ti -1c
 .RI "key_t \fBget_ipc_key\fP ()"
 .br
+.ti -1c
+.RI "bool \fBarrayContainsAllTrue\fP (bool arr[], int len)"
+.br
+.RI "Restituisce vero se l'array contiene tutti true\&. "
+.ti -1c
+.RI "int \fBblockFD\fP (int fd, int blocking)"
+.br
+.RI "Rende bloccante oppure non bloccante un file descriptor\&. "
 .in -1c
 .SS "Variabili"
 
@@ -90,6 +104,44 @@ Contiene la definizioni di variabili e funzioni specifiche del progetto\&.
 Rappresenta un messaggio contenente una porzione del contenuto di un file, il numero di file inviati dal client oppure il messaggio 'ok' quando il server ha ricevuto il numero di file\&. 
 .SH "Documentazione delle funzioni"
 .PP 
+.SS "bool arrayContainsAllTrue (bool arr[], int len)"
+
+.PP
+Restituisce vero se l'array contiene tutti true\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIarr\fP array di booleani 
+.br
+\fIlen\fP lunghezza array 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+true arr contiene tutti true 
+.PP
+false arr contiene almeno un false 
+.RE
+.PP
+
+.SS "int blockFD (int fd, int blocking)"
+
+.PP
+Rende bloccante oppure non bloccante un file descriptor\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIfd\fP file descriptor 
+.br
+\fIblocking\fP 0: non bloccante, 1: bloccante 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Vale 0 se fallisce 
+.RE
+.PP
+
 .SS "key_t get_ipc_key ()"
 Restituisce la chiave IPC ottenuta con ftok sull'eseguibile del server\&.
 .PP

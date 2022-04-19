@@ -1,8 +1,8 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.h" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/new/system_call/src/client.h" 3 "Mar 19 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/mnt/c/Users/stefa/Desktop/system_call/src/client.h \- Contiene la definizioni di variabili e funzioni specifiche del CLIENT\&.  
+/mnt/c/Users/stefa/Desktop/new/system_call/src/client.h \- Contiene la definizioni di variabili e funzioni specifiche del CLIENT\&.  
 
 .SH SYNOPSIS
 .br
@@ -73,7 +73,14 @@ int Exit code dell'intero programma
 .PP
 ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file\&. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine\&.
 .PP
-terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&. 
+terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
+.PP
+\fBDa fare\fP
+.RS 4
+La ricezione dei messaggi dai vari canali dovra' essere asincrona\&. 
+.RE
+.PP
+
 .SS "void operazioni_figlio (char * filePath)"
 
 .PP
