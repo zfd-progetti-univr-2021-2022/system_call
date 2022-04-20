@@ -221,6 +221,7 @@ int main(int argc, char * argv[]) {
                 if (shm_check_ptr[i] == 1) {
                     DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
                     shm_check_ptr[i] = 0;
+                    aggiungiAMatrice(shm_ptr[i],n);
                     arrived_parts_counter++;
                 }
             }
