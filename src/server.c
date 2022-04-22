@@ -11,6 +11,8 @@
 #include <inttypes.h>
 #include <errno.h>
 #include <sys/msg.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 #include "err_exit.h"
 #include "defines.h"
@@ -60,7 +62,6 @@ void SIGINTSignalHandler(int sig) {
     exit(0);
 }
 
-
 int string_to_int(char * string) {
 
     uintmax_t num = strtoumax(string, NULL, 10);
@@ -88,8 +89,42 @@ void aggiungiAMatrice(msg_t a,int righe){
         }
     }         
 }
-
-
+//costruisce la stringa da scrivere nel file di output
+void costruisciStringa(msg_t a, char *stringa,int parte){
+	char buffer[20];//serve per convertire il pid
+	sprintf(buffer, "%d", a.sender_pid);
+	stringa=(char *)malloc((strlen(a.msg_body)+strlen(a.file_path)+strlen(buffer)+61)*sizeof(char));
+	strcpy(stringa,"[Parte ");
+	if(parte==0)
+		strcat(stringa,"1, del file ");
+	if(parte==1)
+		strcat(stringa,"2, del file ");
+	if(parte==2)
+		strcat(stringa,"3, del file ");
+	if(parte==3)
+		strcat(stringa,"4, del file ");
+		
+	strcat(stringa,a.file_path);
+	strcat(stringa," spedita dal processo ");	
+	strcat(stringa,buffer);
+	strcat(stringa," tramite ");
+	if(a.mtype==2)
+        strcat(stringa,"FIFO1]\n");
+	if(a.mtype==3)
+		strcat(stringa,"FIFO2]\n%");
+	if(a.mtype==4)
+		strcat(stringa,"MsgQueue]\n");
+	if(a.mtype==5)
+		strcat(stringa,"ShdMem]\n");
+		
+	strcat(stringa,a.msg_body);
+	printf("SASSA%s",stringa);
+	//elimino il terminatore di stringa e lo sostituisco con \n
+	for(int i=0; i<strlen(stringa); i++)
+		if(stringa[i]=='\0')
+			stringa[i]='\n';
+	
+}
 /**
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
@@ -234,16 +269,26 @@ int main(int argc, char * argv[]) {
 
 
             if (n_tries % 5000 == 0) {
-                DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
+		DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
             }
             n_tries++;
         }
-
-        printf("STAMPO LA MATRICE\n");
+        
+        int file;
+        char *temp;//supporto che identifica il percorso dei file da creare
+        char *stampa;//supporto che andrà scritto sul file
         for(int i=0;i<n;i++){
-            for(int j=0; j<4;j++)
-                printf("%s ",matriceFile[i][j].msg_body);
-            printf("\n");
+            temp=(char *)malloc((strlen(matriceFile[i][0].file_path)+4)*sizeof(char));//aggiungo lo spazio per _out
+            strcpy(temp,matriceFile[i][0].file_path);
+            strcat(temp,"_out");//aggiungo -out
+            file=open(temp,O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+            for(int j=0; j<4;j++){
+                costruisciStringa(matriceFile[i][j],stampa,j);
+                write(file,stampa,sizeof(stampa));
+            }
+            close(file);
+            free(temp);
+            free(stampa);   
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
