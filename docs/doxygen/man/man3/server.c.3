@@ -72,35 +72,35 @@
 .br
 .RI "Percorso cartella eseguibile\&. "
 .ti -1c
-.RI "int \fBfifo1_fd\fP"
+.RI "int \fBfifo1_fd\fP = \-1"
 .br
 .RI "file descriptor della FIFO 1 "
 .ti -1c
-.RI "int \fBfifo2_fd\fP"
+.RI "int \fBfifo2_fd\fP = \-1"
 .br
 .RI "file descriptor della FIFO 2 "
 .ti -1c
-.RI "int \fBmsqid\fP"
+.RI "int \fBmsqid\fP = \-1"
 .br
 .RI "identifier della message queue "
 .ti -1c
-.RI "int \fBsemid\fP"
+.RI "int \fBsemid\fP = \-1"
 .br
 .RI "identifier del set di semafori "
 .ti -1c
-.RI "int \fBshmid\fP"
+.RI "int \fBshmid\fP = \-1"
 .br
 .RI "identifier della memoria condivisa contenente i messaggi "
 .ti -1c
-.RI "\fBmsg_t\fP * \fBshm_ptr\fP"
+.RI "\fBmsg_t\fP * \fBshm_ptr\fP = NULL"
 .br
 .RI "puntatore alla memoria condivisa contenente i messaggi "
 .ti -1c
-.RI "int \fBshm_check_id\fP"
+.RI "int \fBshm_check_id\fP = \-1"
 .br
 .RI "identifier della memoria condivisa contenente le flag cella libera/occupata "
 .ti -1c
-.RI "int * \fBshm_check_ptr\fP"
+.RI "int * \fBshm_check_ptr\fP = NULL"
 .br
 .RI "puntatore alla memoria condivisa contenente le flag cella libera/occupata "
 .ti -1c
@@ -184,11 +184,11 @@ int Valore intero ottenuto convertendo la stringa in input
 
 .SH "Documentazione delle variabili"
 .PP 
-.SS "int semid"
+.SS "int semid = \-1"
 
 .PP
 identifier del set di semafori id set di semafori 
-.SS "int shmid"
+.SS "int shmid = \-1"
 
 .PP
 identifier della memoria condivisa contenente i messaggi id memoria condivisa messaggi 

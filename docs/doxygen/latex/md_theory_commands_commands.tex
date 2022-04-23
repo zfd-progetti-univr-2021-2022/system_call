@@ -79,6 +79,28 @@ valgrind --leak-check=full \(\backslash\)
 Sostituire {\ttfamily $<$percorso cartella file$>$} con l\textquotesingle{}input corretto \end{quote}
 
 
+\subsection*{Visualizza file aperti}
+
+Per visualizzare file aperti dai processi (tra cui le F\+I\+FO) e\textquotesingle{} possibile utilizzare il programma {\ttfamily lsof}.
+
+Per installarlo su debian\+: 
+\begin{DoxyCode}
+sudo apt install lsof
+\end{DoxyCode}
+
+
+Per visualizzare tutti i file aperti eseguire il comando\+: 
+\begin{DoxyCode}
+lsof
+\end{DoxyCode}
+
+
+Per visualizzare i file aperti di un solo processo conoscendo il suo P\+ID\+: 
+\begin{DoxyCode}
+lsof -p <PID>
+\end{DoxyCode}
+
+
 \subsection*{Visualizza informazioni I\+PC}
 
 Il comando {\ttfamily ipcs} permette di vedere una lista di\+:
