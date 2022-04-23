@@ -11,13 +11,22 @@
 #define BUFFER_SZ 255
 
 extern char EXECUTABLE_DIR[BUFFER_SZ];
+
+/// Percorso file FIFO 1
 #define FIFO1_PATH "/tmp/fifo1_file.txt"
+/// Percorso file FIFO 2
 #define FIFO2_PATH "/tmp/fifo2_file.txt"
+/// mtype messaggio che contiene numero di file "sendme_"
 #define CONTAINS_N 1
+/// mtype messaggio che contiene prima parte del contenuto del file "sendme_"
 #define CONTAINS_FIFO1_FILE_PART 2
+/// mtype messaggio che contiene seconda parte del contenuto del file "sendme_"
 #define CONTAINS_FIFO2_FILE_PART 3
+/// mtype messaggio che contiene terza parte del contenuto del file "sendme_"
 #define CONTAINS_MSGQUEUE_FILE_PART 4
+/// mtype messaggio che contiene quarta parte del contenuto del file "sendme_"
 #define CONTAINS_SHM_FILE_PART 5
+/// mtype messaggio che contiene il messaggio di fine proveniente dal server
 #define CONTAINS_DONE 6
 
 // -- Macro suddivisione messaggi

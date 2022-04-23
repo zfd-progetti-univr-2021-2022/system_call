@@ -1,13 +1,13 @@
 
-build: clean build/client build/server
+build: clean build/client_shm build/server_shm
 
-build/client:
+build/client_shm:
 	mkdir -p build/
-	gcc client.c common.c -o build/client
+	gcc client_shm.c common.c -o build/client_shm
 
-build/server:
+build/server_shm:
 	mkdir -p build/
-	gcc server.c common.c -o build/server
+	gcc server_shm.c common.c -o build/server_shm
 
 clean:
 	rm -rf build/

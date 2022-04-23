@@ -24,22 +24,31 @@
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
 
+/// file descriptor della FIFO 1
 int fifo1_fd;
+/// file descriptor della FIFO 2
 int fifo2_fd;
+/// identifier della message queue
 int msqid;
-int shmid;
+/// identifier del set di semafori
 int semid;
-msg_t **matriceFile;//è una matrice che per ogni riga contiene le 4 parti di un file
-
+/// identifier della memoria condivisa contenente i messaggi
+int shmid;
+/// puntatore alla memoria condivisa contenente i messaggi
 msg_t * shm_ptr;
-
+/// identifier della memoria condivisa contenente le flag cella libera/occupata
 int shm_check_id;
+/// puntatore alla memoria condivisa contenente le flag cella libera/occupata
 int * shm_check_ptr;
+
+/// e' una matrice che per ogni riga contiene le 4 parti di un file
+msg_t **matriceFile;
+
 
 /**
  * @brief Chiude tutte le IPC e termina
  *
- * @param sig
+ * @param sig Intero che rappresenta il segnale catturato dalla funzione
  */
 void SIGINTSignalHandler(int sig) {
 
@@ -62,6 +71,13 @@ void SIGINTSignalHandler(int sig) {
     exit(0);
 }
 
+
+/**
+ * Converte stringa in intero.
+ *
+ * @param string Stringa da convertire in intero
+ * @return int Valore intero ottenuto convertendo la stringa in input
+*/
 int string_to_int(char * string) {
 
     uintmax_t num = strtoumax(string, NULL, 10);
@@ -71,6 +87,15 @@ int string_to_int(char * string) {
     return num;
 }
 
+
+/**
+ * Aggiunge un messaggio alla matrice buffer.
+ * Il buffer verra' usato per recuperare i pezzi di file
+ * quando verra' ricostruito il file di output.
+ *
+ * @param a Messaggio da inserire nel buffer
+ * @param righe Numero di righe nella matrice
+*/
 void aggiungiAMatrice(msg_t a,int righe){
     bool aggiunto=false;
     for(int i=0; i<righe && aggiunto==false; i++)
@@ -91,7 +116,12 @@ void aggiungiAMatrice(msg_t a,int righe){
 }
 
 
-//costruisce la stringa da scrivere nel file di output
+/**
+ * Costruisce la stringa da scrivere nel file di output.
+ *
+ * @param a Messaggio contenente il pezzo di file arrivato dal client
+ * @return char* Stringa pronta per essere scritta su file
+*/
 char * costruisciStringa(msg_t a){
 	char buffer[20]; // serve per convertire il pid
 	sprintf(buffer, "%d", a.sender_pid);
@@ -155,6 +185,8 @@ char * costruisciStringa(msg_t a){
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
  *
  * @todo La ricezione dei messaggi dai vari canali dovra' essere asincrona.
+ *
+ * @warning I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine?
 */
 int main(int argc, char * argv[]) {
 

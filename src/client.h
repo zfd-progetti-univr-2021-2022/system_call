@@ -91,3 +91,25 @@ void operazioni_figlio(char * filePath);
  * @return int Exit code dell'intero programma
 */
 int main(int argc, char * argv[]);
+
+
+/**
+ * Converte un intero in stringa.
+ *
+ * @param value Valore intero da convertire in stringa
+ * @return char* Stringa contenente il valore <value>
+ * > E' necessaria la free() dopo aver terminato l'uso della stringa.
+*/
+char * int_to_string(int value);
+
+
+/**
+ * Restituisce vero se due stringhe sono uguali
+ *
+ * @param a Stringa da confrontare
+ * @param b Stringa da confrontare
+ * @return true a e b sono uguali
+ * @return false a e b sono diverse
+ *
+*/
+bool strEquals(char *a, char *b);
