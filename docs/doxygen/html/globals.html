@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <div class="textblock">Questo è un elenco delle funzioni, delle variabili, delle define, dei tipi enumerati e delle ridefinizioni dei tipi (typedef) documentate con collegamenti alla documentazione:</div>
 
 <h3><a id="index_a"></a>- a -</h3><ul>
+<li>aggiungiAMatrice()
+: <a class="el" href="server_8c.html#ac94aa68fd5fccbf448cfe8788bd46225">server.c</a>
+</li>
 <li>alloc_shared_memory()
 : <a class="el" href="shared__memory_8c.html#a660a60242a5174977ab2debcdbd0e587">shared_memory.c</a>
 , <a class="el" href="shared__memory_8h.html#a660a60242a5174977ab2debcdbd0e587">shared_memory.h</a>
@@ -100,12 +103,12 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="files_8h.html#a6a46f37bcdbf048db0fba5bb3e0e6342">files.h</a>
 </li>
 <li>append2Path()
-: <a class="el" href="strings_8c.html#a21b51584b636c81767ed74b8a527ffd3">strings.c</a>
-, <a class="el" href="strings_8h.html#a21b51584b636c81767ed74b8a527ffd3">strings.h</a>
+: <a class="el" href="strings_8h.html#a21b51584b636c81767ed74b8a527ffd3">strings.h</a>
+, <a class="el" href="strings_8c.html#a21b51584b636c81767ed74b8a527ffd3">strings.c</a>
 </li>
 <li>arrayContainsAllTrue()
-: <a class="el" href="defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d">defines.c</a>
-, <a class="el" href="defines_8h.html#ac281b05b7a90ba292f5748cbfe3c389d">defines.h</a>
+: <a class="el" href="defines_8h.html#ac281b05b7a90ba292f5748cbfe3c389d">defines.h</a>
+, <a class="el" href="defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d">defines.c</a>
 </li>
 </ul>
 
@@ -116,12 +119,12 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="signals_8h.html#a6e96709c7c3ecbcde283f4a2a09e4baf">signals.h</a>
 </li>
 <li>block_sig_no_SIGINT_SIGUSR1()
-: <a class="el" href="signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4">signals.c</a>
-, <a class="el" href="signals_8h.html#a6060ad9cb62b184abfe113560b29f3c4">signals.h</a>
+: <a class="el" href="signals_8h.html#a6060ad9cb62b184abfe113560b29f3c4">signals.h</a>
+, <a class="el" href="signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4">signals.c</a>
 </li>
 <li>blockFD()
-: <a class="el" href="defines_8c.html#aea9b93cad897755a46cb9e3373ba8cc2">defines.c</a>
-, <a class="el" href="defines_8h.html#aea9b93cad897755a46cb9e3373ba8cc2">defines.h</a>
+: <a class="el" href="defines_8h.html#aea9b93cad897755a46cb9e3373ba8cc2">defines.h</a>
+, <a class="el" href="defines_8c.html#aea9b93cad897755a46cb9e3373ba8cc2">defines.c</a>
 </li>
 <li>BUFFER_SZ
 : <a class="el" href="defines_8h.html#a22ad48d95fdd6689ea92e17ca5bbfccb">defines.h</a>
@@ -135,8 +138,29 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="files_8h.html#a675d61c6bfe0d9ddd1be59233dfd7d5c">files.h</a>
 </li>
 <li>checkFileSize()
-: <a class="el" href="files_8c.html#a5ac4517096592013308a3252f3226f60">files.c</a>
-, <a class="el" href="files_8h.html#a5ac4517096592013308a3252f3226f60">files.h</a>
+: <a class="el" href="files_8h.html#a5ac4517096592013308a3252f3226f60">files.h</a>
+, <a class="el" href="files_8c.html#a5ac4517096592013308a3252f3226f60">files.c</a>
+</li>
+<li>CONTAINS_DONE
+: <a class="el" href="defines_8h.html#a59b31ddb1f82961547749ce17239ada0">defines.h</a>
+</li>
+<li>CONTAINS_FIFO1_FILE_PART
+: <a class="el" href="defines_8h.html#a6667eab3262329122470b05145907db8">defines.h</a>
+</li>
+<li>CONTAINS_FIFO2_FILE_PART
+: <a class="el" href="defines_8h.html#a44b818300821c405cc58f8d0ad2da72b">defines.h</a>
+</li>
+<li>CONTAINS_MSGQUEUE_FILE_PART
+: <a class="el" href="defines_8h.html#a052160aa252d749598359d1908d1953d">defines.h</a>
+</li>
+<li>CONTAINS_N
+: <a class="el" href="defines_8h.html#ac9f14b9a62477e207da30db724187294">defines.h</a>
+</li>
+<li>CONTAINS_SHM_FILE_PART
+: <a class="el" href="defines_8h.html#a170b91835f52208153fabe5086780cc1">defines.h</a>
+</li>
+<li>costruisciStringa()
+: <a class="el" href="server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa">server.c</a>
 </li>
 <li>count_files()
 : <a class="el" href="files_8c.html#a3ba19f05c37434e7f20facff3445651a">files.c</a>
@@ -147,19 +171,26 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="fifo_8h.html#a54a1ae8162825128cf02f95692402c18">fifo.h</a>
 </li>
 <li>create_new_fifo()
-: <a class="el" href="fifo_8c.html#ae4a1d7aadbfb8d041fccec7ebf8ab431">fifo.c</a>
-, <a class="el" href="fifo_8h.html#ae4a1d7aadbfb8d041fccec7ebf8ab431">fifo.h</a>
+: <a class="el" href="fifo_8h.html#ae4a1d7aadbfb8d041fccec7ebf8ab431">fifo.h</a>
+, <a class="el" href="fifo_8c.html#ae4a1d7aadbfb8d041fccec7ebf8ab431">fifo.c</a>
 </li>
 <li>createSemaphores()
-: <a class="el" href="semaphore_8c.html#a2081de3d1c08dbacaf10ca46a717fabb">semaphore.c</a>
-, <a class="el" href="semaphore_8h.html#a2081de3d1c08dbacaf10ca46a717fabb">semaphore.h</a>
+: <a class="el" href="semaphore_8h.html#a2081de3d1c08dbacaf10ca46a717fabb">semaphore.h</a>
+, <a class="el" href="semaphore_8c.html#a2081de3d1c08dbacaf10ca46a717fabb">semaphore.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>DEBUG
+: <a class="el" href="debug_8h.html#ad72dbcf6d0153db1b8d8a58001feed83">debug.h</a>
+</li>
+<li>DEBUG_PRINT
+: <a class="el" href="debug_8h.html#a5f50bfe761aec48e94d11aa3a64e58a4">debug.h</a>
+</li>
 <li>dividi()
-: <a class="el" href="client_8h.html#a55586f2b7e9b3620294cf78cda8abdad">client.h</a>
+: <a class="el" href="client_8c.html#a55586f2b7e9b3620294cf78cda8abdad">client.c</a>
+, <a class="el" href="client_8h.html#a55586f2b7e9b3620294cf78cda8abdad">client.h</a>
 </li>
 </ul>
 
@@ -171,11 +202,27 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </li>
 <li>EXECUTABLE_DIR
 : <a class="el" href="defines_8h.html#a709c4fcdc1217a8f8785cb59e85beee5">defines.h</a>
+, <a class="el" href="client_8c.html#a709c4fcdc1217a8f8785cb59e85beee5">client.c</a>
+, <a class="el" href="server_8c.html#a709c4fcdc1217a8f8785cb59e85beee5">server.c</a>
 </li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
+<li>fifo1_fd
+: <a class="el" href="client_8c.html#a0e51f6e74ef591eef5a08e4a5a2d5ea8">client.c</a>
+, <a class="el" href="server_8c.html#a0e51f6e74ef591eef5a08e4a5a2d5ea8">server.c</a>
+</li>
+<li>FIFO1_PATH
+: <a class="el" href="defines_8h.html#a1e79a43e6110ccf4b3e3fcacc6e1a07e">defines.h</a>
+</li>
+<li>fifo2_fd
+: <a class="el" href="client_8c.html#a4a1b7b9ae118e79117db0755b4588077">client.c</a>
+, <a class="el" href="server_8c.html#a4a1b7b9ae118e79117db0755b4588077">server.c</a>
+</li>
+<li>FIFO2_PATH
+: <a class="el" href="defines_8h.html#a04902929b62d6decfed3e7ef544a5cdb">defines.h</a>
+</li>
 <li>files_list
 : <a class="el" href="files_8h.html#a3f6241808ea8d0846cdb77a688f7b82f">files.h</a>
 </li>
@@ -184,12 +231,12 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="files_8h.html#a627e4b202ea71f3bd241ccf562449bd6">files.h</a>
 </li>
 <li>free_list()
-: <a class="el" href="files_8c.html#a786a7b6f9c01e8489d7196a79f5f3862">files.c</a>
-, <a class="el" href="files_8h.html#a786a7b6f9c01e8489d7196a79f5f3862">files.h</a>
+: <a class="el" href="files_8h.html#a786a7b6f9c01e8489d7196a79f5f3862">files.h</a>
+, <a class="el" href="files_8c.html#a786a7b6f9c01e8489d7196a79f5f3862">files.c</a>
 </li>
 <li>free_shared_memory()
-: <a class="el" href="shared__memory_8c.html#a6530d61365abd3e580722ed907ea5f5b">shared_memory.c</a>
-, <a class="el" href="shared__memory_8h.html#a6530d61365abd3e580722ed907ea5f5b">shared_memory.h</a>
+: <a class="el" href="shared__memory_8h.html#a6530d61365abd3e580722ed907ea5f5b">shared_memory.h</a>
+, <a class="el" href="shared__memory_8c.html#a6530d61365abd3e580722ed907ea5f5b">shared_memory.c</a>
 </li>
 </ul>
 
@@ -200,27 +247,40 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="defines_8h.html#a2d341373a96ffea0944553e5452cdbca">defines.h</a>
 </li>
 <li>get_shared_memory()
-: <a class="el" href="shared__memory_8c.html#ab2ffe00ec7425a3a4229cd0d53ed901c">shared_memory.c</a>
-, <a class="el" href="shared__memory_8h.html#ab2ffe00ec7425a3a4229cd0d53ed901c">shared_memory.h</a>
+: <a class="el" href="shared__memory_8h.html#ab2ffe00ec7425a3a4229cd0d53ed901c">shared_memory.h</a>
+, <a class="el" href="shared__memory_8c.html#ab2ffe00ec7425a3a4229cd0d53ed901c">shared_memory.c</a>
 </li>
 <li>getFileSize()
 : <a class="el" href="files_8c.html#a096f8e9259afb2839ebe6822364f9928">files.c</a>
 , <a class="el" href="files_8h.html#a096f8e9259afb2839ebe6822364f9928">files.h</a>
 </li>
 <li>getSemaphores()
-: <a class="el" href="semaphore_8c.html#afee4d9b0eb613bf632622e9244204d51">semaphore.c</a>
-, <a class="el" href="semaphore_8h.html#afee4d9b0eb613bf632622e9244204d51">semaphore.h</a>
+: <a class="el" href="semaphore_8h.html#afee4d9b0eb613bf632622e9244204d51">semaphore.h</a>
+, <a class="el" href="semaphore_8c.html#afee4d9b0eb613bf632622e9244204d51">semaphore.c</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>int_to_string()
+: <a class="el" href="client_8c.html#a748983b7ce27515a3ad116ada4334c4e">client.c</a>
+, <a class="el" href="client_8h.html#a748983b7ce27515a3ad116ada4334c4e">client.h</a>
 </li>
 </ul>
 
 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>main()
-: <a class="el" href="client_8h.html#a0ddf1224851353fc92bfbff6f499fa97">client.h</a>
+: <a class="el" href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97">client.c</a>
+, <a class="el" href="client_8h.html#a0ddf1224851353fc92bfbff6f499fa97">client.h</a>
+, <a class="el" href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97">server.c</a>
 </li>
 <li>make_fifo()
 : <a class="el" href="fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b">fifo.c</a>
 , <a class="el" href="fifo_8h.html#ab83de0eb3bc3947e3c031685d5c2474b">fifo.h</a>
+</li>
+<li>matriceFile
+: <a class="el" href="server_8c.html#a1aaec567099944b97df11e662b3b4611">server.c</a>
 </li>
 <li>MSG_BUFFER_SZ
 : <a class="el" href="defines_8h.html#a46b84a677ff2bcf693b89247e39d75f7">defines.h</a>
@@ -234,12 +294,17 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>msg_t
 : <a class="el" href="defines_8h.html#a928de39fa56d656f7c6c92d030b36638">defines.h</a>
 </li>
+<li>msqid
+: <a class="el" href="server_8c.html#ae73e6a837794db6e63f23db2d64a8130">server.c</a>
+, <a class="el" href="client_8c.html#ae73e6a837794db6e63f23db2d64a8130">client.c</a>
+</li>
 </ul>
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
 <li>operazioni_figlio()
-: <a class="el" href="client_8h.html#a54b47b58f228d7bc9827d2919687e25a">client.h</a>
+: <a class="el" href="client_8c.html#a54b47b58f228d7bc9827d2919687e25a">client.c</a>
+, <a class="el" href="client_8h.html#a54b47b58f228d7bc9827d2919687e25a">client.h</a>
 </li>
 </ul>
 
@@ -261,6 +326,9 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>searchPath
+: <a class="el" href="client_8c.html#ab68195a262278b18e5dc84f677ad434d">client.c</a>
+</li>
 <li>semDelete()
 : <a class="el" href="semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f">semaphore.c</a>
 , <a class="el" href="semaphore_8h.html#a530566146b6e3cc8415d8ae4259fd68f">semaphore.h</a>
@@ -268,6 +336,10 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>semGetStats()
 : <a class="el" href="semaphore_8c.html#a7d80413e893e7d9ae3d153e23c2df2e4">semaphore.c</a>
 , <a class="el" href="semaphore_8h.html#a7d80413e893e7d9ae3d153e23c2df2e4">semaphore.h</a>
+</li>
+<li>semid
+: <a class="el" href="client_8c.html#a7c35ac5305085cf7360645b8d52988b5">client.c</a>
+, <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">server.c</a>
 </li>
 <li>semOp()
 : <a class="el" href="semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da">semaphore.c</a>
@@ -297,15 +369,41 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe">semaphore.c</a>
 , <a class="el" href="semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe">semaphore.h</a>
 </li>
+<li>shm_check_id
+: <a class="el" href="server_8c.html#aef99f0b2f4ff9b59d2e02bf8e9349d04">server.c</a>
+, <a class="el" href="client_8c.html#aef99f0b2f4ff9b59d2e02bf8e9349d04">client.c</a>
+</li>
+<li>shm_check_ptr
+: <a class="el" href="client_8c.html#a687e40faeef71a19cdd81e1bb787ca77">client.c</a>
+, <a class="el" href="server_8c.html#a687e40faeef71a19cdd81e1bb787ca77">server.c</a>
+</li>
+<li>shm_ptr
+: <a class="el" href="client_8c.html#a0b268ec51e0860874f687d0d1ffcd0e2">client.c</a>
+, <a class="el" href="server_8c.html#a0b268ec51e0860874f687d0d1ffcd0e2">server.c</a>
+</li>
+<li>shmid
+: <a class="el" href="server_8c.html#ac8807d215d2ee6d9779d76aeb1147430">server.c</a>
+, <a class="el" href="client_8c.html#ac8807d215d2ee6d9779d76aeb1147430">client.c</a>
+</li>
 <li>SIGINTSignalHandler()
-: <a class="el" href="client_8h.html#a48d605ff689f470746c858648f0a98c2">client.h</a>
+: <a class="el" href="client_8c.html#a48d605ff689f470746c858648f0a98c2">client.c</a>
+, <a class="el" href="server_8c.html#a48d605ff689f470746c858648f0a98c2">server.c</a>
+, <a class="el" href="client_8h.html#a48d605ff689f470746c858648f0a98c2">client.h</a>
 </li>
 <li>SIGUSR1SignalHandler()
 : <a class="el" href="client_8h.html#a50b22adcb76198fcd9402a97ff4711bf">client.h</a>
+, <a class="el" href="client_8c.html#a50b22adcb76198fcd9402a97ff4711bf">client.c</a>
 </li>
 <li>StartsWith()
-: <a class="el" href="strings_8c.html#ab6b8529148710caedf063c1de6b0db16">strings.c</a>
-, <a class="el" href="strings_8h.html#ab6b8529148710caedf063c1de6b0db16">strings.h</a>
+: <a class="el" href="strings_8h.html#ab6b8529148710caedf063c1de6b0db16">strings.h</a>
+, <a class="el" href="strings_8c.html#ab6b8529148710caedf063c1de6b0db16">strings.c</a>
+</li>
+<li>strEquals()
+: <a class="el" href="client_8c.html#ac129a55ffa08a55addb9ea1afbd709f8">client.c</a>
+, <a class="el" href="client_8h.html#ac129a55ffa08a55addb9ea1afbd709f8">client.h</a>
+</li>
+<li>string_to_int()
+: <a class="el" href="server_8c.html#ab53aa0eb44ad55d2e189f18d3bd6017b">server.c</a>
 </li>
 </ul>
 </div><!-- contents -->

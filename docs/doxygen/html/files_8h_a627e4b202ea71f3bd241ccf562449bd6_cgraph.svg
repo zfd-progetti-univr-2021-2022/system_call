@@ -8,165 +8,165 @@
  viewBox="0.00 0.00 484.00 198.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 194)">
 <title>find_sendme_files</title>
-<!-- Node13 -->
+<!-- Node21 -->
 <g id="node1" class="node">
-<title>Node13</title>
+<title>Node21</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-76.5 0,-95.5 104,-95.5 104,-76.5 0,-76.5"/>
 <text text-anchor="middle" x="52" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">find_sendme_files</text>
 </g>
-<!-- Node14 -->
+<!-- Node22 -->
 <g id="node2" class="node">
-<title>Node14</title>
+<title>Node22</title>
 <g id="a_node2"><a xlink:href="strings_8c.html#a21b51584b636c81767ed74b8a527ffd3" target="_top" xlink:title="Concatena la cartella directory al percorso path. ">
 <polygon fill="none" stroke="#000000" points="285.5,-170.5 285.5,-189.5 365.5,-189.5 365.5,-170.5 285.5,-170.5"/>
 <text text-anchor="middle" x="325.5" y="-177.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">append2Path</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node14 -->
+<!-- Node21&#45;&gt;Node22 -->
 <g id="edge1" class="edge">
-<title>Node13&#45;&gt;Node14</title>
+<title>Node21&#45;&gt;Node22</title>
 <path fill="none" stroke="#191970" d="M60.0609,-95.6205C74.3009,-111.8626 105.6656,-144.3778 140,-159 183.0652,-177.3405 236.5779,-181.671 275.0441,-181.9618"/>
 <polygon fill="#191970" stroke="#191970" points="275.4791,-185.4612 285.4734,-181.945 275.4678,-178.4612 275.4791,-185.4612"/>
 </g>
-<!-- Node15 -->
+<!-- Node23 -->
 <g id="node3" class="node">
-<title>Node15</title>
+<title>Node23</title>
 <g id="a_node3"><a xlink:href="files_8c.html#a675d61c6bfe0d9ddd1be59233dfd7d5c" target="_top" xlink:title="Restituisce 1 se il percorso inizia con &quot;sendme_&quot;, 0 altrimenti. ">
 <polygon fill="none" stroke="#000000" points="280,-114.5 280,-133.5 371,-133.5 371,-114.5 280,-114.5"/>
 <text text-anchor="middle" x="325.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">checkFileName</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node15 -->
+<!-- Node21&#45;&gt;Node23 -->
 <g id="edge2" class="edge">
-<title>Node13&#45;&gt;Node15</title>
+<title>Node21&#45;&gt;Node23</title>
 <path fill="none" stroke="#191970" d="M62.6479,-95.6914C78.2542,-109.1694 108.8778,-132.9372 140,-142 189.0499,-156.2834 248.1587,-146.1008 286.2603,-136.1983"/>
 <polygon fill="#191970" stroke="#191970" points="287.2156,-139.5657 295.9493,-133.5679 285.3816,-132.8102 287.2156,-139.5657"/>
 </g>
-<!-- Node17 -->
+<!-- Node25 -->
 <g id="node5" class="node">
-<title>Node17</title>
+<title>Node25</title>
 <g id="a_node5"><a xlink:href="files_8c.html#a5ac4517096592013308a3252f3226f60" target="_top" xlink:title="Restituisce 1 se il percorso ha la dimensione &lt;= 4 KB, 0 altrimenti. ">
 <polygon fill="none" stroke="#000000" points="284.5,-76.5 284.5,-95.5 366.5,-95.5 366.5,-76.5 284.5,-76.5"/>
 <text text-anchor="middle" x="325.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">checkFileSize</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node17 -->
+<!-- Node21&#45;&gt;Node25 -->
 <g id="edge4" class="edge">
-<title>Node13&#45;&gt;Node17</title>
+<title>Node21&#45;&gt;Node25</title>
 <path fill="none" stroke="#191970" d="M104.087,-86C152.8917,-86 225.4155,-86 274.0217,-86"/>
 <polygon fill="#191970" stroke="#191970" points="274.3161,-89.5001 284.3161,-86 274.316,-82.5001 274.3161,-89.5001"/>
 </g>
-<!-- Node19 -->
+<!-- Node27 -->
 <g id="node7" class="node">
-<title>Node19</title>
+<title>Node27</title>
 <g id="a_node7"><a xlink:href="files_8c.html#a6a46f37bcdbf048db0fba5bb3e0e6342" target="_top" xlink:title="Aggiunge in fondo alla coda un nuovo filePath. ">
 <polygon fill="none" stroke="#000000" points="299,-38.5 299,-57.5 352,-57.5 352,-38.5 299,-38.5"/>
 <text text-anchor="middle" x="325.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">append</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node19 -->
+<!-- Node21&#45;&gt;Node27 -->
 <g id="edge6" class="edge">
-<title>Node13&#45;&gt;Node19</title>
+<title>Node21&#45;&gt;Node27</title>
 <path fill="none" stroke="#191970" d="M104.087,-78.763C158.1207,-71.2556 241.2284,-59.7087 288.7627,-53.1043"/>
 <polygon fill="#191970" stroke="#191970" points="289.4862,-56.5375 298.9094,-51.6945 288.5228,-49.6041 289.4862,-56.5375"/>
 </g>
-<!-- Node20 -->
+<!-- Node28 -->
 <g id="node8" class="node">
-<title>Node20</title>
+<title>Node28</title>
 <g id="a_node8"><a xlink:href="files_8c.html#a627e4b202ea71f3bd241ccf562449bd6" target="_top" xlink:title="find_sendme_files">
 <polygon fill="none" stroke="#000000" points="140,-95.5 140,-114.5 244,-114.5 244,-95.5 140,-95.5"/>
 <text text-anchor="middle" x="192" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">find_sendme_files</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node20 -->
+<!-- Node21&#45;&gt;Node28 -->
 <g id="edge7" class="edge">
-<title>Node13&#45;&gt;Node20</title>
+<title>Node21&#45;&gt;Node28</title>
 <path fill="none" stroke="#191970" d="M104.1308,-93.0749C112.5124,-94.2124 121.2603,-95.3996 129.8486,-96.5652"/>
 <polygon fill="#191970" stroke="#191970" points="129.4458,-100.0425 139.8256,-97.9192 130.3872,-93.1061 129.4458,-100.0425"/>
 </g>
-<!-- Node21 -->
+<!-- Node29 -->
 <g id="node9" class="node">
-<title>Node21</title>
+<title>Node29</title>
 <g id="a_node9"><a xlink:href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" target="_top" xlink:title="Prints the error message of the last failed system call and terminates the calling process...">
 <polygon fill="none" stroke="#000000" points="301,-.5 301,-19.5 350,-19.5 350,-.5 301,-.5"/>
 <text text-anchor="middle" x="325.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">ErrExit</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node21 -->
+<!-- Node21&#45;&gt;Node29 -->
 <g id="edge14" class="edge">
-<title>Node13&#45;&gt;Node21</title>
+<title>Node21&#45;&gt;Node29</title>
 <path fill="none" stroke="#191970" d="M79.1969,-76.49C96.5082,-70.573 119.4581,-62.9791 140,-57 192.1918,-41.8086 253.4432,-26.8369 290.8541,-18.0095"/>
 <polygon fill="#191970" stroke="#191970" points="291.8107,-21.3802 300.7463,-15.6876 290.2111,-14.5654 291.8107,-21.3802"/>
 </g>
-<!-- Node16 -->
+<!-- Node24 -->
 <g id="node4" class="node">
-<title>Node16</title>
+<title>Node24</title>
 <g id="a_node4"><a xlink:href="strings_8c.html#ab6b8529148710caedf063c1de6b0db16" target="_top" xlink:title="Restituisce vero se la stringa a inizia con la sotto stringa b. ">
 <polygon fill="none" stroke="#000000" points="407.5,-114.5 407.5,-133.5 475.5,-133.5 475.5,-114.5 407.5,-114.5"/>
 <text text-anchor="middle" x="441.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">StartsWith</text>
 </a>
 </g>
 </g>
-<!-- Node15&#45;&gt;Node16 -->
+<!-- Node23&#45;&gt;Node24 -->
 <g id="edge3" class="edge">
-<title>Node15&#45;&gt;Node16</title>
+<title>Node23&#45;&gt;Node24</title>
 <path fill="none" stroke="#191970" d="M371.0133,-124C379.5871,-124 388.5431,-124 397.0828,-124"/>
 <polygon fill="#191970" stroke="#191970" points="397.2392,-127.5001 407.2392,-124 397.2392,-120.5001 397.2392,-127.5001"/>
 </g>
-<!-- Node18 -->
+<!-- Node26 -->
 <g id="node6" class="node">
-<title>Node18</title>
+<title>Node26</title>
 <g id="a_node6"><a xlink:href="files_8c.html#a096f8e9259afb2839ebe6822364f9928" target="_top" xlink:title="Restituisce dimensione del file in byte. ">
 <polygon fill="none" stroke="#000000" points="407,-76.5 407,-95.5 476,-95.5 476,-76.5 407,-76.5"/>
 <text text-anchor="middle" x="441.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">getFileSize</text>
 </a>
 </g>
 </g>
-<!-- Node17&#45;&gt;Node18 -->
+<!-- Node25&#45;&gt;Node26 -->
 <g id="edge5" class="edge">
-<title>Node17&#45;&gt;Node18</title>
+<title>Node25&#45;&gt;Node26</title>
 <path fill="none" stroke="#191970" d="M366.7239,-86C376.4869,-86 386.9438,-86 396.8511,-86"/>
 <polygon fill="#191970" stroke="#191970" points="396.9245,-89.5001 406.9244,-86 396.9244,-82.5001 396.9245,-89.5001"/>
 </g>
-<!-- Node20&#45;&gt;Node14 -->
+<!-- Node28&#45;&gt;Node22 -->
 <g id="edge8" class="edge">
-<title>Node20&#45;&gt;Node14</title>
+<title>Node28&#45;&gt;Node22</title>
 <path fill="none" stroke="#191970" d="M209.1795,-114.6514C232.1097,-127.5335 272.9193,-150.4603 299.5935,-165.4458"/>
 <polygon fill="#191970" stroke="#191970" points="297.9538,-168.5391 308.3864,-170.3856 301.3824,-162.4362 297.9538,-168.5391"/>
 </g>
-<!-- Node20&#45;&gt;Node15 -->
+<!-- Node28&#45;&gt;Node23 -->
 <g id="edge9" class="edge">
-<title>Node20&#45;&gt;Node15</title>
+<title>Node28&#45;&gt;Node23</title>
 <path fill="none" stroke="#191970" d="M244.3796,-112.4548C252.6888,-113.6374 261.31,-114.8643 269.6943,-116.0576"/>
 <polygon fill="#191970" stroke="#191970" points="269.3736,-119.5472 279.767,-117.4912 270.3599,-112.617 269.3736,-119.5472"/>
 </g>
-<!-- Node20&#45;&gt;Node17 -->
+<!-- Node28&#45;&gt;Node25 -->
 <g id="edge10" class="edge">
-<title>Node20&#45;&gt;Node17</title>
+<title>Node28&#45;&gt;Node25</title>
 <path fill="none" stroke="#191970" d="M244.3796,-97.5452C254.2468,-96.1409 264.5539,-94.674 274.3819,-93.2752"/>
 <polygon fill="#191970" stroke="#191970" points="275.0047,-96.722 284.4118,-91.8478 274.0183,-89.7918 275.0047,-96.722"/>
 </g>
-<!-- Node20&#45;&gt;Node19 -->
+<!-- Node28&#45;&gt;Node27 -->
 <g id="edge11" class="edge">
-<title>Node20&#45;&gt;Node19</title>
+<title>Node28&#45;&gt;Node27</title>
 <path fill="none" stroke="#191970" d="M214.0291,-95.4C231.8099,-87.6725 257.4836,-76.5623 280,-67 284.1908,-65.2202 288.6042,-63.3599 292.9669,-61.5292"/>
 <polygon fill="#191970" stroke="#191970" points="294.4559,-64.7003 302.3303,-57.6119 291.7542,-58.2426 294.4559,-64.7003"/>
 </g>
-<!-- Node20&#45;&gt;Node20 -->
+<!-- Node28&#45;&gt;Node28 -->
 <g id="edge12" class="edge">
-<title>Node20&#45;&gt;Node20</title>
+<title>Node28&#45;&gt;Node28</title>
 <path fill="none" stroke="#191970" d="M171.655,-114.7571C161.7574,-123.5653 168.5391,-133 192,-133 207.0297,-133 215.2142,-129.128 216.5535,-124.0292"/>
 <polygon fill="#191970" stroke="#191970" points="219.6652,-122.4164 212.345,-114.7571 213.291,-125.3096 219.6652,-122.4164"/>
 </g>
-<!-- Node20&#45;&gt;Node21 -->
+<!-- Node28&#45;&gt;Node29 -->
 <g id="edge13" class="edge">
-<title>Node20&#45;&gt;Node21</title>
+<title>Node28&#45;&gt;Node29</title>
 <path fill="none" stroke="#191970" d="M200.9781,-95.4909C216.0826,-79.9219 248.0681,-48.7522 280,-29 283.6037,-26.7709 287.5149,-24.6934 291.48,-22.7923"/>
 <polygon fill="#191970" stroke="#191970" points="292.9948,-25.9492 300.7102,-18.6881 290.1508,-19.553 292.9948,-25.9492"/>
 </g>

@@ -1,5 +1,6 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
+    [ "client.c", "client_8c.html", "client_8c" ],
     [ "client.h", "client_8h.html", "client_8h" ],
     [ "debug.c", "debug_8c.html", null ],
     [ "debug.h", "debug_8h.html", "debug_8h" ],
@@ -13,6 +14,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "files.h", "files_8h.html", "files_8h" ],
     [ "semaphore.c", "semaphore_8c.html", "semaphore_8c" ],
     [ "semaphore.h", "semaphore_8h.html", "semaphore_8h" ],
+    [ "server.c", "server_8c.html", "server_8c" ],
     [ "shared_memory.c", "shared__memory_8c.html", "shared__memory_8c" ],
     [ "shared_memory.h", "shared__memory_8h.html", "shared__memory_8h" ],
     [ "signals.c", "signals_8c.html", "signals_8c" ],

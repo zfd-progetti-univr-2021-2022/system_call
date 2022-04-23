@@ -9,8 +9,7 @@ Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la ges
 {\ttfamily \#include $<$sys/sem.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}semaphore.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per semaphore.\+c\+:
-\nopagebreak
+Grafo delle dipendenze di inclusione per semaphore.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -24,23 +23,23 @@ int \hyperlink{semaphore_8c_a2081de3d1c08dbacaf10ca46a717fabb}{create\+Semaphore
 \begin{DoxyCompactList}\small\item\em Crea un insieme di semafori. \end{DoxyCompactList}\item 
 int \hyperlink{semaphore_8c_afee4d9b0eb613bf632622e9244204d51}{get\+Semaphores} (key\+\_\+t key, int n\+\_\+sem)
 \begin{DoxyCompactList}\small\item\em Ottiene un insieme di semafori gia\textquotesingle{} creato. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a77c6570406059144bb6a8ecf04f481da}{sem\+Op} (int semid, unsigned short sem\+\_\+num, short sem\+\_\+op)
+void \hyperlink{semaphore_8c_a77c6570406059144bb6a8ecf04f481da}{sem\+Op} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, unsigned short sem\+\_\+num, short sem\+\_\+op)
 \begin{DoxyCompactList}\small\item\em Funzione di supporto per manipolare i valori di un set di semafori. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe}{sem\+Wait\+Zero} (int semid, int sem\+\_\+num)
+void \hyperlink{semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe}{sem\+Wait\+Zero} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
 \begin{DoxyCompactList}\small\item\em Attende che il semaforo sem\+\_\+num raggiunga il valore zero. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a2581efba6a0833e3f289de94c779cc21}{sem\+Wait} (int semid, int sem\+\_\+num)
+void \hyperlink{semaphore_8c_a2581efba6a0833e3f289de94c779cc21}{sem\+Wait} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
 \begin{DoxyCompactList}\small\item\em Esegue la wait sul semaforo sem\+\_\+num\+: decrementa il valore di 1 ed eventualmente mette in attesa il processo. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf}{sem\+Signal} (int semid, int sem\+\_\+num)
+void \hyperlink{semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf}{sem\+Signal} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
 \begin{DoxyCompactList}\small\item\em Esegue la signal sul semaforo sem\+\_\+num\+: incrementa il valore di 1. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_aad78dc4ccefb184a74dd9ef808df8db6}{sem\+Set\+Val} (int semid, int sem\+\_\+num, int val)
+void \hyperlink{semaphore_8c_aad78dc4ccefb184a74dd9ef808df8db6}{sem\+Set\+Val} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num, int val)
 \begin{DoxyCompactList}\small\item\em Inizializza il valore del semaforo sem\+\_\+num al valore val. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a8df9b8ea63eaf93d09f437b356a4a1eb}{sem\+Set\+All} (int semid, short unsigned int values\mbox{[}$\,$\mbox{]})
+void \hyperlink{semaphore_8c_a8df9b8ea63eaf93d09f437b356a4a1eb}{sem\+Set\+All} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, short unsigned int values\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Inizializza i valori del set di semafori semid ai valori in values. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f}{sem\+Delete} (int semid)
+void \hyperlink{semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f}{sem\+Delete} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid})
 \begin{DoxyCompactList}\small\item\em Cancella il set di semafori svegliando eventuali processi in attesa. \end{DoxyCompactList}\item 
-struct semid\+\_\+ds \hyperlink{semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4}{sem\+Get\+Stats} (int semid)
+struct semid\+\_\+ds \hyperlink{semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4}{sem\+Get\+Stats} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid})
 \begin{DoxyCompactList}\small\item\em Recupera statistiche di un set di semafori. \end{DoxyCompactList}\item 
-void \hyperlink{semaphore_8c_a34a010b0a39236a7261d7d5103426491}{sem\+Set\+Perm} (int semid, struct semid\+\_\+ds arg)
+void \hyperlink{semaphore_8c_a34a010b0a39236a7261d7d5103426491}{sem\+Set\+Perm} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, struct semid\+\_\+ds arg)
 \begin{DoxyCompactList}\small\item\em Imposta i permessi su un set di semafori. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -74,6 +73,13 @@ Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \includegraphics[width=273pt]{semaphore_8c_a2081de3d1c08dbacaf10ca46a717fabb_cgraph}
 \end{center}
 \end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{semaphore_8c_a2081de3d1c08dbacaf10ca46a717fabb_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{semaphore_8c_afee4d9b0eb613bf632622e9244204d51}\label{semaphore_8c_afee4d9b0eb613bf632622e9244204d51}} 
 \index{semaphore.\+c@{semaphore.\+c}!get\+Semaphores@{get\+Semaphores}}
 \index{get\+Semaphores@{get\+Semaphores}!semaphore.\+c@{semaphore.\+c}}
@@ -96,6 +102,13 @@ Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=345pt]{semaphore_8c_afee4d9b0eb613bf632622e9244204d51_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{semaphore_8c_afee4d9b0eb613bf632622e9244204d51_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f}\label{semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f}} 
@@ -124,7 +137,7 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=268pt]{semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f_icgraph}
+\includegraphics[width=350pt]{semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4}\label{semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4}} 
@@ -315,7 +328,7 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=266pt]{semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf_icgraph}
+\includegraphics[width=350pt]{semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{semaphore_8c_a2581efba6a0833e3f289de94c779cc21}\label{semaphore_8c_a2581efba6a0833e3f289de94c779cc21}} 
@@ -346,7 +359,7 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=257pt]{semaphore_8c_a2581efba6a0833e3f289de94c779cc21_icgraph}
+\includegraphics[width=350pt]{semaphore_8c_a2581efba6a0833e3f289de94c779cc21_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe}\label{semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe}} 

@@ -93,6 +93,13 @@ $(document).ready(function(){initNavTree('warning.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
+<dt><a class="anchor" id="_warning000001"></a>File <a class="el" href="client_8c.html">client.c</a>  </dt>
+<dd><p class="startdd">La specifica non richiede la documentazione. E' richiesta?</p>
+<p>I percorsi dei file hanno dimensione massima?</p>
+<p class="enddd">I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?  </p>
+</dd>
+<dt><a class="anchor" id="_warning000008"></a>Globale <a class="el" href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>  (int argc, char *argv[])</dt>
+<dd>I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine?  </dd>
 <dt><a class="anchor" id="_warning000007"></a>Globale <a class="el" href="client_8h.html#a54b47b58f228d7bc9827d2919687e25a">operazioni_figlio</a>  (char *filePath)</dt>
 <dd>siccome l'ultima parte del messaggio e' l'unica che puo' essere piu' corta per specifica... Cosa bisogna fare in casi in cui non e' possibile garantire questo vincolo? Esempio: 2 caratteri possono essere divisi in:<ul>
 <li>caratteri per parte: 1 1 0 0</li>
@@ -101,7 +108,7 @@ $(document).ready(function(){initNavTree('warning.html','');});
  Non posso garantire come ad esempio nel caso di 3 caratteri che sono l'ultimo numero sia inferiore: Esempio di suddivisione di 3 caratteri: 1 1 1 0. L'ultimo, come per specifica, e' l'unico di dimensione inferiore </li>
 </ul>
 </dd>
-<dt><a class="anchor" id="_warning000004"></a>Globale <a class="el" href="client_8h.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a>  (int sig)</dt>
+<dt><a class="anchor" id="_warning000004"></a>Globale <a class="el" href="server_8c.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a>  (int sig)</dt>
 <dd><p class="startdd">Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send_me si puo' creare il processo figlio per inviare il file. Per fare questo BISOGNA sapere se il numero di file puo' cambiare durante l'esecuzione del programma: se trovo 3 file e dopo un file viene cancellato cosa succede? <br />
  NOTA: questo problema puo' esserci anche nella situazione attuale...</p>
 <p>Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Probabilmente prima bisogna attendere il messaggio di fine e poi aspettare che tutti i figlio terminino (prima di liberare la lista dei file e).</p>

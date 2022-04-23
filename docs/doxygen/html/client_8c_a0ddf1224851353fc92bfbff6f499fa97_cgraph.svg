@@ -8,30 +8,30 @@
  viewBox="0.00 0.00 213.00 154.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 150)">
 <title>main</title>
-<!-- Node2 -->
+<!-- Node9 -->
 <g id="node1" class="node">
-<title>Node2</title>
+<title>Node9</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-60.5 0,-79.5 41,-79.5 41,-60.5 0,-60.5"/>
 <text text-anchor="middle" x="20.5" y="-67.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </g>
-<!-- Node3 -->
+<!-- Node10 -->
 <g id="node2" class="node">
-<title>Node3</title>
+<title>Node10</title>
 <g id="a_node2"><a xlink:href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" target="_top" xlink:title="Prints the error message of the last failed system call and terminates the calling process...">
 <polygon fill="none" stroke="#000000" points="116.5,-126.5 116.5,-145.5 165.5,-145.5 165.5,-126.5 116.5,-126.5"/>
 <text text-anchor="middle" x="141" y="-133.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">ErrExit</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node3 -->
+<!-- Node9&#45;&gt;Node10 -->
 <g id="edge1" class="edge">
-<title>Node2&#45;&gt;Node3</title>
+<title>Node9&#45;&gt;Node10</title>
 <path fill="none" stroke="#191970" d="M29.6147,-79.6381C40.1119,-90.213 58.3241,-107.0091 77,-117 86.1021,-121.8693 96.6172,-125.6502 106.4604,-128.5107"/>
 <polygon fill="#191970" stroke="#191970" points="105.8227,-131.9631 116.3875,-131.1654 107.6312,-125.2007 105.8227,-131.9631"/>
 </g>
-<!-- Node4 -->
+<!-- Node11 -->
 <g id="node3" class="node">
-<title>Node4</title>
+<title>Node11</title>
 <g id="a_node3"><a xlink:href="signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4" target="_top" xlink:title="block_sig_no_SIGINT\l_SIGUSR1">
 <polygon fill="none" stroke="#000000" points="82,-77 82,-107 200,-107 200,-77 82,-77"/>
 <text text-anchor="start" x="90" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">block_sig_no_SIGINT</text>
@@ -39,39 +39,39 @@
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node4 -->
+<!-- Node9&#45;&gt;Node11 -->
 <g id="edge2" class="edge">
-<title>Node2&#45;&gt;Node4</title>
+<title>Node9&#45;&gt;Node11</title>
 <path fill="none" stroke="#191970" d="M41.2147,-73.7819C50.0103,-75.3878 60.8185,-77.3611 72.0384,-79.4095"/>
 <polygon fill="#191970" stroke="#191970" points="71.4981,-82.8686 81.9641,-81.2217 72.7554,-75.9825 71.4981,-82.8686"/>
 </g>
-<!-- Node5 -->
+<!-- Node12 -->
 <g id="node4" class="node">
-<title>Node5</title>
+<title>Node12</title>
 <g id="a_node4"><a xlink:href="client_8c.html#a48d605ff689f470746c858648f0a98c2" target="_top" xlink:title="Handler del segnale SIGINT. ">
 <polygon fill="none" stroke="#000000" points="82,-38.5 82,-57.5 200,-57.5 200,-38.5 82,-38.5"/>
 <text text-anchor="middle" x="141" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">SIGINTSignalHandler</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node5 -->
+<!-- Node9&#45;&gt;Node12 -->
 <g id="edge3" class="edge">
-<title>Node2&#45;&gt;Node5</title>
+<title>Node9&#45;&gt;Node12</title>
 <path fill="none" stroke="#191970" d="M41.2147,-66.2181C51.8277,-64.2804 65.3709,-61.8078 79.0319,-59.3137"/>
 <polygon fill="#191970" stroke="#191970" points="79.7512,-62.7403 88.9599,-57.5011 78.4939,-55.8541 79.7512,-62.7403"/>
 </g>
-<!-- Node6 -->
+<!-- Node13 -->
 <g id="node5" class="node">
-<title>Node6</title>
+<title>Node13</title>
 <g id="a_node5"><a xlink:href="client_8c.html#a50b22adcb76198fcd9402a97ff4711bf" target="_top" xlink:title="Handler del segnale SIGUSR1. ">
 <polygon fill="none" stroke="#000000" points="77,-.5 77,-19.5 205,-19.5 205,-.5 77,-.5"/>
 <text text-anchor="middle" x="141" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">SIGUSR1SignalHandler</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node6 -->
+<!-- Node9&#45;&gt;Node13 -->
 <g id="edge4" class="edge">
-<title>Node2&#45;&gt;Node6</title>
+<title>Node9&#45;&gt;Node13</title>
 <path fill="none" stroke="#191970" d="M31.4499,-60.2986C42.3292,-51.1023 59.826,-37.4696 77,-29 81.6242,-26.7195 86.5738,-24.6579 91.5961,-22.8079"/>
 <polygon fill="#191970" stroke="#191970" points="92.9406,-26.0474 101.2774,-19.5092 90.6829,-19.4215 92.9406,-26.0474"/>
 </g>

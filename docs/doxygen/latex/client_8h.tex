@@ -5,6 +5,13 @@
 Contiene la definizioni di variabili e funzioni specifiche del C\+L\+I\+E\+NT.  
 
 
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{client_8h__dep__incl}
+\end{center}
+\end{figure}
 \subsection*{Funzioni}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,6 +24,10 @@ void \hyperlink{client_8h_a55586f2b7e9b3620294cf78cda8abdad}{dividi} (int fd, ch
 void \hyperlink{client_8h_a54b47b58f228d7bc9827d2919687e25a}{operazioni\+\_\+figlio} (char $\ast$file\+Path)
 \begin{DoxyCompactList}\small\item\em Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. \end{DoxyCompactList}\item 
 int \hyperlink{client_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+char $\ast$ \hyperlink{client_8h_a748983b7ce27515a3ad116ada4334c4e}{int\+\_\+to\+\_\+string} (int value)
+\item 
+bool \hyperlink{client_8h_ac129a55ffa08a55addb9ea1afbd709f8}{str\+Equals} (char $\ast$a, char $\ast$b)
 \end{DoxyCompactItemize}
 
 
@@ -49,6 +60,38 @@ Divide in 4 parti il contenuto del file da inviare al server.
 {\em parte} & Numero identificativo della porzione di messaggio \\
 \hline
 \end{DoxyParams}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h_a55586f2b7e9b3620294cf78cda8abdad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_a748983b7ce27515a3ad116ada4334c4e}\label{client_8h_a748983b7ce27515a3ad116ada4334c4e}} 
+\index{client.\+h@{client.\+h}!int\+\_\+to\+\_\+string@{int\+\_\+to\+\_\+string}}
+\index{int\+\_\+to\+\_\+string@{int\+\_\+to\+\_\+string}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{int\+\_\+to\+\_\+string()}{int\_to\_string()}}
+{\footnotesize\ttfamily char$\ast$ int\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})}
+
+Converte un intero in stringa.
+
+
+\begin{DoxyParams}{Parametri}
+{\em value} & Valore intero da convertire in stringa \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+char$\ast$ Stringa contenente il valore 
+\end{DoxyReturn}
+\begin{quote}
+E\textquotesingle{} necessaria la free() dopo aver terminato l\textquotesingle{}uso della stringa.\end{quote}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h_a748983b7ce27515a3ad116ada4334c4e_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{client_8h_a0ddf1224851353fc92bfbff6f499fa97}\label{client_8h_a0ddf1224851353fc92bfbff6f499fa97}} 
 \index{client.\+h@{client.\+h}!main@{main}}
 \index{main@{main}!client.\+h@{client.\+h}}
@@ -72,7 +115,18 @@ A\+N\+N\+O\+T\+A\+Z\+I\+O\+NE\+: Probabilmente bisogna fare un ciclo per aspetta
 terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC.
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000007}{Da fare}]La ricezione dei messaggi dai vari canali dovra\textquotesingle{} essere asincrona. \end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000007}{Da fare}]La ricezione dei messaggi dai vari canali dovra\textquotesingle{} essere asincrona.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Warnings}
+\item[\hyperlink{warning__warning000008}{Warnings}]I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? \end{DoxyRefDesc}
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{client_8h_a54b47b58f228d7bc9827d2919687e25a}\label{client_8h_a54b47b58f228d7bc9827d2919687e25a}} 
 \index{client.\+h@{client.\+h}!operazioni\+\_\+figlio@{operazioni\+\_\+figlio}}
 \index{operazioni\+\_\+figlio@{operazioni\+\_\+figlio}!client.\+h@{client.\+h}}
@@ -106,6 +160,20 @@ Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al ser
 {\em file\+Path} & Percorso del file che il client deve suddividere e mandare al server. \\
 \hline
 \end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h_a54b47b58f228d7bc9827d2919687e25a_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h_a54b47b58f228d7bc9827d2919687e25a_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{client_8h_a48d605ff689f470746c858648f0a98c2}\label{client_8h_a48d605ff689f470746c858648f0a98c2}} 
 \index{client.\+h@{client.\+h}!S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}}
 \index{S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}!client.\+h@{client.\+h}}
@@ -149,14 +217,21 @@ Handler del segnale S\+I\+G\+I\+NT.
 
 
 \begin{DoxyParams}{Parametri}
-{\em sig} & \\
+{\em sig} & Intero che rappresenta il segnale catturato dalla funzione \\
 \hline
 \end{DoxyParams}
 Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=334pt]{client_8h_a48d605ff689f470746c858648f0a98c2_cgraph}
+\includegraphics[width=350pt]{client_8h_a48d605ff689f470746c858648f0a98c2_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{client_8h_a48d605ff689f470746c858648f0a98c2_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{client_8h_a50b22adcb76198fcd9402a97ff4711bf}\label{client_8h_a50b22adcb76198fcd9402a97ff4711bf}} 
@@ -180,3 +255,37 @@ Termina il processo del client 0.
 {\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
 \hline
 \end{DoxyParams}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{client_8h_a50b22adcb76198fcd9402a97ff4711bf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_ac129a55ffa08a55addb9ea1afbd709f8}\label{client_8h_ac129a55ffa08a55addb9ea1afbd709f8}} 
+\index{client.\+h@{client.\+h}!str\+Equals@{str\+Equals}}
+\index{str\+Equals@{str\+Equals}!client.\+h@{client.\+h}}
+\subsubsection{\texorpdfstring{str\+Equals()}{strEquals()}}
+{\footnotesize\ttfamily bool str\+Equals (\begin{DoxyParamCaption}\item[{char $\ast$}]{a,  }\item[{char $\ast$}]{b }\end{DoxyParamCaption})}
+
+Restituisce vero se due stringhe sono uguali
+
+
+\begin{DoxyParams}{Parametri}
+{\em a} & Stringa da confrontare \\
+\hline
+{\em b} & Stringa da confrontare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+true a e b sono uguali 
+
+false a e b sono diverse 
+\end{DoxyReturn}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h_ac129a55ffa08a55addb9ea1afbd709f8_icgraph}
+\end{center}
+\end{figure}

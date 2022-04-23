@@ -8,24 +8,24 @@
  viewBox="0.00 0.00 194.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>semSetVal</title>
-<!-- Node32 -->
+<!-- Node42 -->
 <g id="node1" class="node">
-<title>Node32</title>
+<title>Node42</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-19.5 68,-19.5 68,-.5 0,-.5"/>
 <text text-anchor="middle" x="34" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semSetVal</text>
 </g>
-<!-- Node33 -->
+<!-- Node43 -->
 <g id="node2" class="node">
-<title>Node33</title>
+<title>Node43</title>
 <g id="a_node2"><a xlink:href="semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" target="_top" xlink:title="Attende che il semaforo sem_num raggiunga il valore zero. ">
 <polygon fill="none" stroke="#000000" points="104,-.5 104,-19.5 186,-19.5 186,-.5 104,-.5"/>
 <text text-anchor="middle" x="145" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semWaitZero</text>
 </a>
 </g>
 </g>
-<!-- Node32&#45;&gt;Node33 -->
+<!-- Node42&#45;&gt;Node43 -->
 <g id="edge1" class="edge">
-<title>Node32&#45;&gt;Node33</title>
+<title>Node42&#45;&gt;Node43</title>
 <path fill="none" stroke="#191970" d="M78.2194,-10C86.6169,-10 95.3741,-10 103.6776,-10"/>
 <polygon fill="#191970" stroke="#191970" points="78.2094,-6.5001 68.2094,-10 78.2093,-13.5001 78.2094,-6.5001"/>
 </g>

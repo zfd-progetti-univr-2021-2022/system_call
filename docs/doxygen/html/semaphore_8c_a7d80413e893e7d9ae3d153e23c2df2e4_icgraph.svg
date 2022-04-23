@@ -8,24 +8,24 @@
  viewBox="0.00 0.00 206.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>semGetStats</title>
-<!-- Node13 -->
+<!-- Node18 -->
 <g id="node1" class="node">
-<title>Node13</title>
+<title>Node18</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-19.5 80,-19.5 80,-.5 0,-.5"/>
 <text text-anchor="middle" x="40" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semGetStats</text>
 </g>
-<!-- Node14 -->
+<!-- Node19 -->
 <g id="node2" class="node">
-<title>Node14</title>
+<title>Node19</title>
 <g id="a_node2"><a xlink:href="semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" target="_top" xlink:title="Attende che il semaforo sem_num raggiunga il valore zero. ">
 <polygon fill="none" stroke="#000000" points="116,-.5 116,-19.5 198,-19.5 198,-.5 116,-.5"/>
 <text text-anchor="middle" x="157" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semWaitZero</text>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node14 -->
+<!-- Node18&#45;&gt;Node19 -->
 <g id="edge1" class="edge">
-<title>Node13&#45;&gt;Node14</title>
+<title>Node18&#45;&gt;Node19</title>
 <path fill="none" stroke="#191970" d="M90.4515,-10C98.9369,-10 107.6525,-10 115.8659,-10"/>
 <polygon fill="#191970" stroke="#191970" points="90.2648,-6.5001 80.2648,-10 90.2647,-13.5001 90.2648,-6.5001"/>
 </g>

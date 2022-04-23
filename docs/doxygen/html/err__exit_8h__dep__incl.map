@@ -1,8 +1,10 @@
 <map id="/mnt/c/Users/stefa/Desktop/system_call/src/err_exit.h" name="/mnt/c/Users/stefa/Desktop/system_call/src/err_exit.h">
-<area shape="rect" id="node2" href="$defines_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche del progetto. " alt="" coords="5,109,168,165"/>
-<area shape="rect" id="node3" href="$err__exit_8c.html" title="Contiene l&#39;implementazione della funzione di stampa degli errori. " alt="" coords="192,109,355,165"/>
-<area shape="rect" id="node4" href="$fifo_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione delle FIFO. " alt="" coords="379,109,541,165"/>
-<area shape="rect" id="node5" href="$files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. " alt="" coords="565,109,728,165"/>
-<area shape="rect" id="node6" href="$semaphore_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="752,109,915,165"/>
-<area shape="rect" id="node7" href="$shared__memory_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="939,109,1103,165"/>
+<area shape="rect" id="node2" href="$client_8c.html" title="Contiene l&#39;implementazione del client. " alt="" coords="5,109,168,165"/>
+<area shape="rect" id="node3" href="$defines_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche del progetto. " alt="" coords="192,109,355,165"/>
+<area shape="rect" id="node4" href="$err__exit_8c.html" title="Contiene l&#39;implementazione della funzione di stampa degli errori. " alt="" coords="379,109,541,165"/>
+<area shape="rect" id="node5" href="$fifo_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione delle FIFO. " alt="" coords="565,109,728,165"/>
+<area shape="rect" id="node6" href="$files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. " alt="" coords="752,109,915,165"/>
+<area shape="rect" id="node7" href="$semaphore_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="939,109,1101,165"/>
+<area shape="rect" id="node8" href="$server_8c.html" title="Contiene l&#39;implementazione del server. " alt="" coords="1125,109,1288,165"/>
+<area shape="rect" id="node9" href="$shared__memory_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="1313,109,1477,165"/>
 </map>

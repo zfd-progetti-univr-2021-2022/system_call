@@ -7,20 +7,18 @@ Contiene la definizioni di variabili e funzioni specifiche del progetto.
 
 {\ttfamily \#include $<$sys/types.\+h$>$}\newline
 {\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
-Grafo delle dipendenze di inclusione per defines.\+h\+:
-\nopagebreak
+Grafo delle dipendenze di inclusione per defines.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=230pt]{defines_8h__incl}
 \end{center}
 \end{figure}
-Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
-\nopagebreak
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=202pt]{defines_8h__dep__incl}
+\includegraphics[width=350pt]{defines_8h__dep__incl}
 \end{center}
 \end{figure}
 \subsection*{Strutture dati}
@@ -35,29 +33,29 @@ struct \hyperlink{structmsg__t}{msg\+\_\+t}
 \#define \hyperlink{defines_8h_a22ad48d95fdd6689ea92e17ca5bbfccb}{B\+U\+F\+F\+E\+R\+\_\+\+SZ}~255
 \begin{DoxyCompactList}\small\item\em Buffer usato da getcwd() \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a1e79a43e6110ccf4b3e3fcacc6e1a07e}\label{defines_8h_a1e79a43e6110ccf4b3e3fcacc6e1a07e}} 
-\#define {\bfseries F\+I\+F\+O1\+\_\+\+P\+A\+TH}~\char`\"{}/tmp/fifo1\+\_\+file.\+txt\char`\"{}
-\item 
+\#define \hyperlink{defines_8h_a1e79a43e6110ccf4b3e3fcacc6e1a07e}{F\+I\+F\+O1\+\_\+\+P\+A\+TH}~\char`\"{}/tmp/fifo1\+\_\+file.\+txt\char`\"{}
+\begin{DoxyCompactList}\small\item\em Percorso file F\+I\+FO 1. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a04902929b62d6decfed3e7ef544a5cdb}\label{defines_8h_a04902929b62d6decfed3e7ef544a5cdb}} 
-\#define {\bfseries F\+I\+F\+O2\+\_\+\+P\+A\+TH}~\char`\"{}/tmp/fifo2\+\_\+file.\+txt\char`\"{}
-\item 
+\#define \hyperlink{defines_8h_a04902929b62d6decfed3e7ef544a5cdb}{F\+I\+F\+O2\+\_\+\+P\+A\+TH}~\char`\"{}/tmp/fifo2\+\_\+file.\+txt\char`\"{}
+\begin{DoxyCompactList}\small\item\em Percorso file F\+I\+FO 2. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_ac9f14b9a62477e207da30db724187294}\label{defines_8h_ac9f14b9a62477e207da30db724187294}} 
-\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+N}~1
-\item 
+\#define \hyperlink{defines_8h_ac9f14b9a62477e207da30db724187294}{C\+O\+N\+T\+A\+I\+N\+S\+\_\+N}~1
+\begin{DoxyCompactList}\small\item\em mtype messaggio che contiene numero di file \char`\"{}sendme\+\_\+\char`\"{} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a6667eab3262329122470b05145907db8}\label{defines_8h_a6667eab3262329122470b05145907db8}} 
-\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+F\+I\+F\+O1\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~2
-\item 
+\#define \hyperlink{defines_8h_a6667eab3262329122470b05145907db8}{C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+F\+I\+F\+O1\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~2
+\begin{DoxyCompactList}\small\item\em mtype messaggio che contiene prima parte del contenuto del file \char`\"{}sendme\+\_\+\char`\"{} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a44b818300821c405cc58f8d0ad2da72b}\label{defines_8h_a44b818300821c405cc58f8d0ad2da72b}} 
-\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+F\+I\+F\+O2\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~3
-\item 
+\#define \hyperlink{defines_8h_a44b818300821c405cc58f8d0ad2da72b}{C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+F\+I\+F\+O2\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~3
+\begin{DoxyCompactList}\small\item\em mtype messaggio che contiene seconda parte del contenuto del file \char`\"{}sendme\+\_\+\char`\"{} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a052160aa252d749598359d1908d1953d}\label{defines_8h_a052160aa252d749598359d1908d1953d}} 
-\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+M\+S\+G\+Q\+U\+E\+U\+E\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~4
-\item 
+\#define \hyperlink{defines_8h_a052160aa252d749598359d1908d1953d}{C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+M\+S\+G\+Q\+U\+E\+U\+E\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~4
+\begin{DoxyCompactList}\small\item\em mtype messaggio che contiene terza parte del contenuto del file \char`\"{}sendme\+\_\+\char`\"{} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a170b91835f52208153fabe5086780cc1}\label{defines_8h_a170b91835f52208153fabe5086780cc1}} 
-\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+S\+H\+M\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~5
-\item 
+\#define \hyperlink{defines_8h_a170b91835f52208153fabe5086780cc1}{C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+S\+H\+M\+\_\+\+F\+I\+L\+E\+\_\+\+P\+A\+RT}~5
+\begin{DoxyCompactList}\small\item\em mtype messaggio che contiene quarta parte del contenuto del file \char`\"{}sendme\+\_\+\char`\"{} \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a59b31ddb1f82961547749ce17239ada0}\label{defines_8h_a59b31ddb1f82961547749ce17239ada0}} 
-\#define {\bfseries C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+D\+O\+NE}~6
-\item 
+\#define \hyperlink{defines_8h_a59b31ddb1f82961547749ce17239ada0}{C\+O\+N\+T\+A\+I\+N\+S\+\_\+\+D\+O\+NE}~6
+\begin{DoxyCompactList}\small\item\em mtype messaggio che contiene il messaggio di fine proveniente dal server \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}\label{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}} 
 \#define \hyperlink{defines_8h_a0b8b71c287c99c2bd2e36f6bc95a005e}{M\+S\+G\+\_\+\+M\+A\+X\+\_\+\+SZ}~4096
 \begin{DoxyCompactList}\small\item\em dimensione massima del messaggio/file da inviare \end{DoxyCompactList}\item 
@@ -126,6 +124,13 @@ true arr contiene tutti true
 
 false arr contiene almeno un false 
 \end{DoxyReturn}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_ac281b05b7a90ba292f5748cbfe3c389d_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{defines_8h_aea9b93cad897755a46cb9e3373ba8cc2}\label{defines_8h_aea9b93cad897755a46cb9e3373ba8cc2}} 
 \index{defines.\+h@{defines.\+h}!block\+FD@{block\+FD}}
 \index{block\+FD@{block\+FD}!defines.\+h@{defines.\+h}}
@@ -146,6 +151,13 @@ Rende bloccante oppure non bloccante un file descriptor.
 \begin{DoxyReturn}{Restituisce}
 int Vale 0 se fallisce 
 \end{DoxyReturn}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_aea9b93cad897755a46cb9e3373ba8cc2_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{defines_8h_a2d341373a96ffea0944553e5452cdbca}\label{defines_8h_a2d341373a96ffea0944553e5452cdbca}} 
 \index{defines.\+h@{defines.\+h}!get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}}
 \index{get\+\_\+ipc\+\_\+key@{get\+\_\+ipc\+\_\+key}!defines.\+h@{defines.\+h}}
@@ -162,5 +174,12 @@ Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=240pt]{defines_8h_a2d341373a96ffea0944553e5452cdbca_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_a2d341373a96ffea0944553e5452cdbca_icgraph}
 \end{center}
 \end{figure}

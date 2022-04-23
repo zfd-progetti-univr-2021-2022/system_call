@@ -1,5 +1,9 @@
 <map id="operazioni_figlio" name="operazioni_figlio">
-<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="196,5,261,32"/>
-<area shape="rect" id="node3" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce dimensione del file in byte. " alt="" coords="183,56,275,83"/>
-<area shape="rect" id="node4" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="199,107,258,133"/>
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="504,83,569,109"/>
+<area shape="rect" id="node3" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce dimensione del file in byte. " alt="" coords="215,32,307,59"/>
+<area shape="rect" id="node4" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="232,83,291,109"/>
+<area shape="rect" id="node5" href="$defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d" title="Restituisce vero se l&#39;array contiene tutti true. " alt="" coords="183,133,340,160"/>
+<area shape="rect" id="node6" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="222,184,301,211"/>
+<area shape="rect" id="node8" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="216,235,307,261"/>
+<area shape="rect" id="node7" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="388,184,456,211"/>
 </map>

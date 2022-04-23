@@ -29,6 +29,12 @@
 .ti -1c
 .RI "int \fBmain\fP (int argc, char *argv[])"
 .br
+.ti -1c
+.RI "char * \fBint_to_string\fP (int value)"
+.br
+.ti -1c
+.RI "bool \fBstrEquals\fP (char *a, char *b)"
+.br
 .in -1c
 .SH "Descrizione dettagliata"
 .PP 
@@ -56,6 +62,24 @@ Divide in 4 parti il contenuto del file da inviare al server\&.
 .RE
 .PP
 
+.SS "char* int_to_string (int value)"
+Converte un intero in stringa\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIvalue\fP Valore intero da convertire in stringa 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+char* Stringa contenente il valore 
+.RE
+.PP
+.RS 4
+E' necessaria la free() dopo aver terminato l'uso della stringa\&.
+.RE
+.PP
+
 .SS "int main (int argc, char * argv[])"
 Memorizza il percorso passato come parametro, gestisce segnali e handler, attende i segnali SIGINT o SIGUSR1\&.
 .PP
@@ -77,7 +101,13 @@ terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
 .PP
 \fBDa fare\fP
 .RS 4
-La ricezione dei messaggi dai vari canali dovra' essere asincrona\&. 
+La ricezione dei messaggi dai vari canali dovra' essere asincrona\&.
+.RE
+.PP
+.PP
+\fBWarnings\fP
+.RS 4
+I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? 
 .RE
 .PP
 
@@ -169,7 +199,7 @@ Handler del segnale SIGINT\&.
 .PP
 \fBParametri:\fP
 .RS 4
-\fIsig\fP 
+\fIsig\fP Intero che rappresenta il segnale catturato dalla funzione 
 .RE
 .PP
 
@@ -189,6 +219,24 @@ Termina il processo del client 0\&.
 \fBParametri:\fP
 .RS 4
 \fIsig\fP Valore intero corrispondente a SIGUSR1 
+.RE
+.PP
+
+.SS "bool strEquals (char * a, char * b)"
+Restituisce vero se due stringhe sono uguali
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP Stringa da confrontare 
+.br
+\fIb\fP Stringa da confrontare 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+true a e b sono uguali 
+.PP
+false a e b sono diverse 
 .RE
 .PP
 
