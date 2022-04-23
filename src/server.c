@@ -87,44 +87,68 @@ void aggiungiAMatrice(msg_t a,int righe){
             matriceFile[i][a.mtype-2]=a;
             aggiunto=true;
         }
-    }         
+    }
 }
+
+
 //costruisce la stringa da scrivere nel file di output
-void costruisciStringa(msg_t a, char *stringa,int parte){
-	char buffer[20];//serve per convertire il pid
+char * costruisciStringa(msg_t a){
+	char buffer[20]; // serve per convertire il pid
 	sprintf(buffer, "%d", a.sender_pid);
-	stringa=(char *)malloc((strlen(a.msg_body)+strlen(a.file_path)+strlen(buffer)+61)*sizeof(char));
+
+	char * stringa = (char *)malloc((strlen(a.msg_body) + strlen(a.file_path) + strlen(buffer)+61)*sizeof(char));
+
 	strcpy(stringa,"[Parte ");
-	if(parte==0)
-		strcat(stringa,"1, del file ");
-	if(parte==1)
-		strcat(stringa,"2, del file ");
-	if(parte==2)
-		strcat(stringa,"3, del file ");
-	if(parte==3)
-		strcat(stringa,"4, del file ");
-		
+
+    switch (a.mtype) {
+        case CONTAINS_FIFO1_FILE_PART:
+            strcat(stringa,"1, del file ");
+            break;
+
+        case CONTAINS_FIFO2_FILE_PART:
+            strcat(stringa,"2, del file ");
+            break;
+
+        case CONTAINS_MSGQUEUE_FILE_PART:
+            strcat(stringa,"3, del file ");
+            break;
+
+        case CONTAINS_SHM_FILE_PART:
+            strcat(stringa,"4, del file ");
+            break;
+
+        default:
+            break;
+    }
+
 	strcat(stringa,a.file_path);
-	strcat(stringa," spedita dal processo ");	
+	strcat(stringa," spedita dal processo ");
 	strcat(stringa,buffer);
 	strcat(stringa," tramite ");
-	if(a.mtype==2)
-        strcat(stringa,"FIFO1]\n");
-	if(a.mtype==3)
-		strcat(stringa,"FIFO2]\n%");
-	if(a.mtype==4)
-		strcat(stringa,"MsgQueue]\n");
-	if(a.mtype==5)
-		strcat(stringa,"ShdMem]\n");
-		
-	strcat(stringa,a.msg_body);
-	printf("SASSA%s",stringa);
-	//elimino il terminatore di stringa e lo sostituisco con \n
-	for(int i=0; i<strlen(stringa); i++)
-		if(stringa[i]=='\0')
-			stringa[i]='\n';
-	
+
+    switch (a.mtype) {
+        case CONTAINS_FIFO1_FILE_PART:
+            strcat(stringa, "FIFO1]\n");
+            break;
+        case CONTAINS_FIFO2_FILE_PART:
+            strcat(stringa, "FIFO2]\n");
+            break;
+        case CONTAINS_MSGQUEUE_FILE_PART:
+            strcat(stringa, "MsgQueue]\n");
+            break;
+        case CONTAINS_SHM_FILE_PART:
+            strcat(stringa, "ShdMem]\n");
+            break;
+        default:
+            break;
+    }
+
+	strcat(stringa, a.msg_body);
+
+    return stringa;
 }
+
+
 /**
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
@@ -194,6 +218,8 @@ int main(int argc, char * argv[]) {
 
         msg_t vuoto;
         vuoto.mtype = 666;//Stefano, io sono il diavolo!!!
+        for (int i = 0; i < BUFFER_SZ+1; i++)
+            vuoto.file_path[i] = '\0';
         //riempio la matrice con una struttura che mi dice se le celle sono vuote
         for(int i=0;i<n;i++)
             for(int j=0; j<4;j++)
@@ -269,26 +295,38 @@ int main(int argc, char * argv[]) {
 
 
             if (n_tries % 5000 == 0) {
-		DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
+		        DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
             }
             n_tries++;
         }
-        
-        int file;
-        char *temp;//supporto che identifica il percorso dei file da creare
-        char *stampa;//supporto che andrà scritto sul file
+
         for(int i=0;i<n;i++){
-            temp=(char *)malloc((strlen(matriceFile[i][0].file_path)+4)*sizeof(char));//aggiungo lo spazio per _out
-            strcpy(temp,matriceFile[i][0].file_path);
-            strcat(temp,"_out");//aggiungo -out
-            file=open(temp,O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
-            for(int j=0; j<4;j++){
-                costruisciStringa(matriceFile[i][j],stampa,j);
-                write(file,stampa,sizeof(stampa));
+            char *temp = (char *)malloc((strlen(matriceFile[i][0].file_path)+5)*sizeof(char)); // aggiungo lo spazio per _out
+            if (temp == NULL){
+                DEBUG_PRINT("temp is NULL!\n");
             }
+            strcpy(temp, matriceFile[i][0].file_path);
+            strcat(temp, "_out"); // aggiungo -out
+            int file = open(temp, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+
+            if (file == -1) {
+                ErrExit("open failed");
+            }
+
+            for(int j=0; j<4;j++){
+                char * stampa = costruisciStringa(matriceFile[i][j]);
+                if (write(file, stampa, strlen(stampa) * sizeof(char)) == -1){
+                    ErrExit("write output file failed");
+                }
+
+                if (write(file, "\n", 1) == -1){
+                    ErrExit("write newline to output file failed");
+                }
+                free(stampa);
+            }
+
             close(file);
             free(temp);
-            free(stampa);   
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
@@ -305,6 +343,12 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 2);
         semWait(semid, 1);
         DEBUG_PRINT("Rese fifo bloccanti\n");
+
+        // libera memoria della matrice buffer
+        for(int i = 0; i < n; i++){
+            free(matriceFile[i]);
+        }
+        free(matriceFile);
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");
