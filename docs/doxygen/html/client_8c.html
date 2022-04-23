@@ -109,6 +109,7 @@ $(document).ready(function(){initNavTree('client_8c.html','');});
 <code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;sys/msg.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="defines_8h_source.html">defines.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="err__exit_8h_source.html">err_exit.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="signals_8h_source.html">signals.h</a>&quot;</code><br />
@@ -121,17 +122,14 @@ $(document).ready(function(){initNavTree('client_8c.html','');});
 </div><div class="textblock"><div class="dynheader">
 Grafo delle dipendenze di inclusione per client.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c__incl.svg" width="100%" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8c__incl.svg" width="100%" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funzioni</h2></td></tr>
-<tr class="memitem:a748983b7ce27515a3ad116ada4334c4e"><td class="memItemLeft" align="right" valign="top"><a id="a748983b7ce27515a3ad116ada4334c4e"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>int_to_string</b> (int value)</td></tr>
+<tr class="memitem:a748983b7ce27515a3ad116ada4334c4e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a748983b7ce27515a3ad116ada4334c4e">int_to_string</a> (int value)</td></tr>
 <tr class="separator:a748983b7ce27515a3ad116ada4334c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac129a55ffa08a55addb9ea1afbd709f8"><td class="memItemLeft" align="right" valign="top"><a id="ac129a55ffa08a55addb9ea1afbd709f8"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>strEquals</b> (char *a, char *b)</td></tr>
+<tr class="memitem:ac129a55ffa08a55addb9ea1afbd709f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ac129a55ffa08a55addb9ea1afbd709f8">strEquals</a> (char *a, char *b)</td></tr>
 <tr class="separator:ac129a55ffa08a55addb9ea1afbd709f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48d605ff689f470746c858648f0a98c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a> (int sig)</td></tr>
 <tr class="memdesc:a48d605ff689f470746c858648f0a98c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler del segnale SIGINT.  <a href="#a48d605ff689f470746c858648f0a98c2">Continua...</a><br /></td></tr>
@@ -150,6 +148,38 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>strEquals</b> (char *
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variabili</h2></td></tr>
+<tr class="memitem:a0e51f6e74ef591eef5a08e4a5a2d5ea8"><td class="memItemLeft" align="right" valign="top"><a id="a0e51f6e74ef591eef5a08e4a5a2d5ea8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a0e51f6e74ef591eef5a08e4a5a2d5ea8">fifo1_fd</a></td></tr>
+<tr class="memdesc:a0e51f6e74ef591eef5a08e4a5a2d5ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">file descriptor prima fifo <br /></td></tr>
+<tr class="separator:a0e51f6e74ef591eef5a08e4a5a2d5ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a1b7b9ae118e79117db0755b4588077"><td class="memItemLeft" align="right" valign="top"><a id="a4a1b7b9ae118e79117db0755b4588077"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a4a1b7b9ae118e79117db0755b4588077">fifo2_fd</a></td></tr>
+<tr class="memdesc:a4a1b7b9ae118e79117db0755b4588077"><td class="mdescLeft">&#160;</td><td class="mdescRight">file descriptor seconda fifo <br /></td></tr>
+<tr class="separator:a4a1b7b9ae118e79117db0755b4588077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73e6a837794db6e63f23db2d64a8130"><td class="memItemLeft" align="right" valign="top"><a id="ae73e6a837794db6e63f23db2d64a8130"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ae73e6a837794db6e63f23db2d64a8130">msqid</a></td></tr>
+<tr class="memdesc:ae73e6a837794db6e63f23db2d64a8130"><td class="mdescLeft">&#160;</td><td class="mdescRight">id coda dei messaggi <br /></td></tr>
+<tr class="separator:ae73e6a837794db6e63f23db2d64a8130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c35ac5305085cf7360645b8d52988b5"><td class="memItemLeft" align="right" valign="top"><a id="a7c35ac5305085cf7360645b8d52988b5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a></td></tr>
+<tr class="memdesc:a7c35ac5305085cf7360645b8d52988b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">id set di semafori <br /></td></tr>
+<tr class="separator:a7c35ac5305085cf7360645b8d52988b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8807d215d2ee6d9779d76aeb1147430"><td class="memItemLeft" align="right" valign="top"><a id="ac8807d215d2ee6d9779d76aeb1147430"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#ac8807d215d2ee6d9779d76aeb1147430">shmid</a></td></tr>
+<tr class="memdesc:ac8807d215d2ee6d9779d76aeb1147430"><td class="mdescLeft">&#160;</td><td class="mdescRight">id memoria condivisa messaggi <br /></td></tr>
+<tr class="separator:ac8807d215d2ee6d9779d76aeb1147430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b268ec51e0860874f687d0d1ffcd0e2"><td class="memItemLeft" align="right" valign="top"><a id="a0b268ec51e0860874f687d0d1ffcd0e2"></a>
+<a class="el" href="structmsg__t.html">msg_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a0b268ec51e0860874f687d0d1ffcd0e2">shm_ptr</a></td></tr>
+<tr class="memdesc:a0b268ec51e0860874f687d0d1ffcd0e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">puntatore memoria condivisa messaggi <br /></td></tr>
+<tr class="separator:a0b268ec51e0860874f687d0d1ffcd0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef99f0b2f4ff9b59d2e02bf8e9349d04"><td class="memItemLeft" align="right" valign="top"><a id="aef99f0b2f4ff9b59d2e02bf8e9349d04"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#aef99f0b2f4ff9b59d2e02bf8e9349d04">shm_check_id</a></td></tr>
+<tr class="memdesc:aef99f0b2f4ff9b59d2e02bf8e9349d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">id memoria condivisa flag lettura/scrittura messaggi <br /></td></tr>
+<tr class="separator:aef99f0b2f4ff9b59d2e02bf8e9349d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687e40faeef71a19cdd81e1bb787ca77"><td class="memItemLeft" align="right" valign="top"><a id="a687e40faeef71a19cdd81e1bb787ca77"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a687e40faeef71a19cdd81e1bb787ca77">shm_check_ptr</a></td></tr>
+<tr class="memdesc:a687e40faeef71a19cdd81e1bb787ca77"><td class="mdescLeft">&#160;</td><td class="mdescRight">puntatore memoria condivisa flag lettura/scrittura messaggi <br /></td></tr>
+<tr class="separator:a687e40faeef71a19cdd81e1bb787ca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a709c4fcdc1217a8f8785cb59e85beee5"><td class="memItemLeft" align="right" valign="top"><a id="a709c4fcdc1217a8f8785cb59e85beee5"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html#a709c4fcdc1217a8f8785cb59e85beee5">EXECUTABLE_DIR</a> [<a class="el" href="defines_8h.html#a22ad48d95fdd6689ea92e17ca5bbfccb">BUFFER_SZ</a>]</td></tr>
 <tr class="memdesc:a709c4fcdc1217a8f8785cb59e85beee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percorso cartella eseguibile. <br /></td></tr>
@@ -224,6 +254,45 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a55586f2b7e9b3620294cf78cda8abdad_icgraph.svg" width="555" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a748983b7ce27515a3ad116ada4334c4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a748983b7ce27515a3ad116ada4334c4e">&#9670;&nbsp;</a></span>int_to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* int_to_string </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Converte un intero in stringa.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Valore intero da convertire in stringa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>char* Stringa contenente il valore </dd></dl>
+<blockquote class="doxtable">
+<p>E' necessaria la free() dopo aver terminato l'uso della stringa.</p>
+</blockquote>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a748983b7ce27515a3ad116ada4334c4e_icgraph.svg" width="422" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -264,8 +333,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="284" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="284" height="206"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -302,6 +370,16 @@ Questo è il grafo delle chiamate per questa funzione:</div>
   </table>
   </dd>
 </dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="575" height="267"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a54b47b58f228d7bc9827d2919687e25a_icgraph.svg" width="448" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
@@ -339,8 +417,7 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -373,8 +450,51 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="ac129a55ffa08a55addb9ea1afbd709f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac129a55ffa08a55addb9ea1afbd709f8">&#9670;&nbsp;</a></span>strEquals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool strEquals </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Restituisce vero se due stringhe sono uguali</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Stringa da confrontare </td></tr>
+    <tr><td class="paramname">b</td><td>Stringa da confrontare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>true a e b sono uguali </dd>
+<dd>
+false a e b sono diverse </dd></dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8c_ac129a55ffa08a55addb9ea1afbd709f8_icgraph.svg" width="402" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

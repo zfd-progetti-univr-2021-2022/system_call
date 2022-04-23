@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,6 +11,8 @@
 .br
 \fC#include <stdio\&.h>\fP
 .br
+\fC#include <string\&.h>\fP
+.br
 \fC#include <stdlib\&.h>\fP
 .br
 \fC#include <unistd\&.h>\fP
@@ -22,6 +24,12 @@
 \fC#include <inttypes\&.h>\fP
 .br
 \fC#include <errno\&.h>\fP
+.br
+\fC#include <sys/msg\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
 .br
 \fC#include 'err_exit\&.h'\fP
 .br
@@ -47,6 +55,12 @@
 .RI "int \fBstring_to_int\fP (char *string)"
 .br
 .ti -1c
+.RI "void \fBaggiungiAMatrice\fP (\fBmsg_t\fP a, int righe)"
+.br
+.ti -1c
+.RI "char * \fBcostruisciStringa\fP (\fBmsg_t\fP a)"
+.br
+.ti -1c
 .RI "int \fBmain\fP (int argc, char *argv[])"
 .br
 .in -1c
@@ -60,15 +74,39 @@
 .ti -1c
 .RI "int \fBfifo1_fd\fP"
 .br
+.RI "file descriptor della FIFO 1 "
+.ti -1c
+.RI "int \fBfifo2_fd\fP"
+.br
+.RI "file descriptor della FIFO 2 "
+.ti -1c
+.RI "int \fBmsqid\fP"
+.br
+.RI "identifier della message queue "
 .ti -1c
 .RI "int \fBsemid\fP"
 .br
+.RI "identifier del set di semafori "
 .ti -1c
 .RI "int \fBshmid\fP"
 .br
+.RI "identifier della memoria condivisa contenente i messaggi "
 .ti -1c
 .RI "\fBmsg_t\fP * \fBshm_ptr\fP"
 .br
+.RI "puntatore alla memoria condivisa contenente i messaggi "
+.ti -1c
+.RI "int \fBshm_check_id\fP"
+.br
+.RI "identifier della memoria condivisa contenente le flag cella libera/occupata "
+.ti -1c
+.RI "int * \fBshm_check_ptr\fP"
+.br
+.RI "puntatore alla memoria condivisa contenente le flag cella libera/occupata "
+.ti -1c
+.RI "\fBmsg_t\fP ** \fBmatriceFile\fP"
+.br
+.RI "e' una matrice che per ogni riga contiene le 4 parti di un file "
 .in -1c
 .SH "Descrizione dettagliata"
 .PP 
@@ -77,10 +115,48 @@ Contiene l'implementazione del server\&.
 
 .SH "Documentazione delle funzioni"
 .PP 
+.SS "void aggiungiAMatrice (\fBmsg_t\fP a, int righe)"
+Aggiunge un messaggio alla matrice buffer\&. Il buffer verra' usato per recuperare i pezzi di file quando verra' ricostruito il file di output\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP Messaggio da inserire nel buffer 
+.br
+\fIrighe\fP Numero di righe nella matrice 
+.RE
+.PP
+
+.SS "char* costruisciStringa (\fBmsg_t\fP a)"
+Costruisce la stringa da scrivere nel file di output\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP Messaggio contenente il pezzo di file arrivato dal client 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+char* Stringa pronta per essere scritta su file 
+.RE
+.PP
+
 .SS "int main (int argc, char * argv[])"
 ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file\&. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine\&.
 .PP
-terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&. 
+terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
+.PP
+\fBDa fare\fP
+.RS 4
+La ricezione dei messaggi dai vari canali dovra' essere asincrona\&.
+.RE
+.PP
+.PP
+\fBWarnings\fP
+.RS 4
+I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? 
+.RE
+.PP
+
 .SS "void SIGINTSignalHandler (int sig)"
 
 .PP
@@ -88,10 +164,34 @@ Chiude tutte le IPC e termina\&. Handler del segnale SIGINT\&.
 .PP
 \fBParametri:\fP
 .RS 4
-\fIsig\fP 
+\fIsig\fP Intero che rappresenta il segnale catturato dalla funzione 
 .RE
 .PP
 
+.SS "int string_to_int (char * string)"
+Converte stringa in intero\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIstring\fP Stringa da convertire in intero 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Valore intero ottenuto convertendo la stringa in input 
+.RE
+.PP
+
+.SH "Documentazione delle variabili"
+.PP 
+.SS "int semid"
+
+.PP
+identifier del set di semafori id set di semafori 
+.SS "int shmid"
+
+.PP
+identifier della memoria condivisa contenente i messaggi id memoria condivisa messaggi 
 .SH "Autore"
 .PP 
 Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

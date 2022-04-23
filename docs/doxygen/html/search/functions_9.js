@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5flist',['print_list',['../files_8c.html#a1cdd9b5b37408e31d80f31e474a71483',1,'print_list(files_list *head):&#160;files.c'],['../files_8h.html#a1cdd9b5b37408e31d80f31e474a71483',1,'print_list(files_list *head):&#160;files.c']]]
+  ['operazioni_5ffiglio',['operazioni_figlio',['../client_8c.html#a54b47b58f228d7bc9827d2919687e25a',1,'operazioni_figlio(char *filePath):&#160;client.c'],['../client_8h.html#a54b47b58f228d7bc9827d2919687e25a',1,'operazioni_figlio(char *filePath):&#160;client.c']]]
 ];

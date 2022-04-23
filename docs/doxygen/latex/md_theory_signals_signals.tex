@@ -106,7 +106,7 @@ Esempio\+:
 \}
 
 
-\textcolor{keywordtype}{int} \hyperlink{client_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
     \textcolor{keywordflow}{if} (signal(SIGINT, sigHandler) == SIG\_ERR) \{
         printf(\textcolor{stringliteral}{"Non sono riuscito ad impostare il nuovo signal handler!\(\backslash\)n"});
         exit(1);
@@ -213,7 +213,7 @@ Esempio\+:
     printf(\textcolor{stringliteral}{"\(\backslash\)nMi hai svegliato! volevo dormire ancora...\(\backslash\)n"});
 \}
 
-\textcolor{keywordtype}{int} \hyperlink{client_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
     \textcolor{keywordflow}{if} (signal(SIGINT, sigHandler) == SIG\_ERR) \{
         printf(\textcolor{stringliteral}{"Non sono riuscito ad impostare il nuovo signal handler\(\backslash\)n"});
         exit(1);
@@ -267,7 +267,7 @@ In realta\textquotesingle{} puo\textquotesingle{} essere\+:
 
 Esempio\+: 
 \begin{DoxyCode}
-\textcolor{keywordtype}{int} \hyperlink{client_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
     pid\_t child = fork();
     \textcolor{keywordflow}{if} (child == -1) \{
         errExit(\textcolor{stringliteral}{"fork"});
@@ -398,7 +398,7 @@ Puo\textquotesingle{} essere\+:
 
 Esempio\+: 
 \begin{DoxyCode}
-\textcolor{keywordtype}{int} \hyperlink{client_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
+\textcolor{keywordtype}{int} \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[]) \{
     sigset\_t mySet, prevSet;
 
     \textcolor{comment}{// inizializza mySet con tutti i segnali}

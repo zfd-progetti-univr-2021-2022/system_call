@@ -1,5 +1,5 @@
 <map id="create_new_fifo" name="create_new_fifo">
-<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="452,5,517,32"/>
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="452,31,517,57"/>
 <area shape="rect" id="node3" href="$fifo_8c.html#a54a1ae8162825128cf02f95692402c18" title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura..." alt="" coords="179,31,269,57"/>
-<area shape="rect" id="node4" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="317,31,404,57"/>
+<area shape="rect" id="node4" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="317,81,404,108"/>
 </map>

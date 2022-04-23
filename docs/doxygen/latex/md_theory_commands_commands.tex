@@ -22,6 +22,7 @@ Comandi G\+DB\+:
 \item {\ttfamily continue}\+: esegue il codice finche\textquotesingle{} non viene raggiunto un breakpoint o watchpoint
 \item {\ttfamily list}\+: visualizza la riga
 \item {\ttfamily quit}\+: esce da gdb
+\item {\ttfamily signal $<$segnale$>$}\+: invia al processo il segnale {\ttfamily $<$segnale$>$} $>$ Esempio\+: {\ttfamily signal S\+I\+G\+I\+NT}, utile per fare debugging del client del progetto
 \end{DoxyItemize}
 
 \subsection*{Estensioni dell\textquotesingle{}interfaccia G\+DB e interfacce grafiche}
@@ -48,6 +49,34 @@ pip install pygments
 
 \href{https://github.com/cs01/gdbgui}{\tt gdbgui} e\textquotesingle{} una interfaccia grafica basata su tecnologie web.
 
+
+
+\subsection*{Ricerca memory leak}
+
+Valgrind e\textquotesingle{} uno strumento che permette di analizzare la memoria usata dai processi per trovare memory leak oppure in generale accessi errati della memoria.
+
+Testare il server\+: 
+\begin{DoxyCode}
+valgrind --leak-check=full \(\backslash\)
+    --show-leak-kinds=all \(\backslash\)
+    --track-origins=yes \(\backslash\)
+    --verbose \(\backslash\)
+    --log-file=valgrind-server-out.txt \(\backslash\)
+    ./server
+\end{DoxyCode}
+
+
+Testare il client\+: 
+\begin{DoxyCode}
+valgrind --leak-check=full \(\backslash\)
+    --show-leak-kinds=all \(\backslash\)
+    --track-origins=yes \(\backslash\)
+    --verbose \(\backslash\)
+    --log-file=valgrind-client-out.txt \(\backslash\)
+    ./client\_0 <percorso cartella file>
+\end{DoxyCode}
+ \begin{quote}
+Sostituire {\ttfamily $<$percorso cartella file$>$} con l\textquotesingle{}input corretto \end{quote}
 
 
 \subsection*{Visualizza informazioni I\+PC}

@@ -1,8 +1,8 @@
-.TH "/mnt/c/Users/stefa/Desktop/new/system_call/src/debug.h" 3 "Mar 19 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/debug.h" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/mnt/c/Users/stefa/Desktop/new/system_call/src/debug.h \- Contiene la definizioni di variabili e funzioni per il debugging\&.  
+/mnt/c/Users/stefa/Desktop/system_call/src/debug.h \- Contiene la definizioni di variabili e funzioni per il debugging\&.  
 
 .SH SYNOPSIS
 .br
@@ -13,9 +13,11 @@
 .ti -1c
 .RI "#define \fBDEBUG\fP   3"
 .br
+.RI "Flag per abilitare/disabilitare la funzionalita' di \fBDEBUG_PRINT()\fP "
 .ti -1c
 .RI "#define \fBDEBUG_PRINT\fP(fmt,  args\&.\&.\&.)"
 .br
+.RI "Visualizza messaggio stile printf ma con ulteriori informazioni per il debugging\&. "
 .in -1c
 .SH "Descrizione dettagliata"
 .PP 
@@ -29,8 +31,10 @@ Contiene la definizioni di variabili e funzioni per il debugging\&.
 .PP
 .nf
 fprintf(stderr, "DEBUG: %s:%d:%s(): " fmt, \
-    __FILE__, __LINE__, __func__, ##args)
+        __FILE__, __LINE__, __func__, ##args)
 .fi
+.PP
+Visualizza messaggio stile printf ma con ulteriori informazioni per il debugging\&. 
 .SH "Autore"
 .PP 
 Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

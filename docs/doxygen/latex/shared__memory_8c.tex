@@ -1,5 +1,5 @@
-\hypertarget{shared__memory_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/shared\+\_\+memory.c}
-\label{shared__memory_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/shared\+\_\+memory.\+c@{/mnt/c/\+Users/stefa/\+Desktop/new/system\+\_\+call/src/shared\+\_\+memory.\+c}}
+\hypertarget{shared__memory_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/shared\+\_\+memory.c}
+\label{shared__memory_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/shared\+\_\+memory.\+c@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/shared\+\_\+memory.\+c}}
 
 
 Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la gestione della M\+E\+M\+O\+R\+IA C\+O\+N\+D\+I\+V\+I\+SA.  
@@ -11,8 +11,7 @@ Contiene l\textquotesingle{}implementazione delle funzioni specifiche per la ges
 {\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}err\+\_\+exit.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}shared\+\_\+memory.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per shared\+\_\+memory.\+c\+:
-\nopagebreak
+Grafo delle dipendenze di inclusione per shared\+\_\+memory.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -24,11 +23,11 @@ Grafo delle dipendenze di inclusione per shared\+\_\+memory.\+c\+:
 \item 
 int \hyperlink{shared__memory_8c_a660a60242a5174977ab2debcdbd0e587}{alloc\+\_\+shared\+\_\+memory} (key\+\_\+t shm\+Key, size\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Ottiene l\textquotesingle{}id o crea una memoria condivisa. \end{DoxyCompactList}\item 
-void $\ast$ \hyperlink{shared__memory_8c_ab2ffe00ec7425a3a4229cd0d53ed901c}{get\+\_\+shared\+\_\+memory} (int shmid, int shmflg)
+void $\ast$ \hyperlink{shared__memory_8c_ab2ffe00ec7425a3a4229cd0d53ed901c}{get\+\_\+shared\+\_\+memory} (int \hyperlink{server_8c_ac8807d215d2ee6d9779d76aeb1147430}{shmid}, int shmflg)
 \begin{DoxyCompactList}\small\item\em Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi. \end{DoxyCompactList}\item 
 void \hyperlink{shared__memory_8c_a6530d61365abd3e580722ed907ea5f5b}{free\+\_\+shared\+\_\+memory} (void $\ast$ptr\+\_\+sh)
 \begin{DoxyCompactList}\small\item\em Scollega la memoria condivisa dallo spazio degli indirizzi. \end{DoxyCompactList}\item 
-void \hyperlink{shared__memory_8c_a8fd9943e1b39a1f286977096e0a50d7b}{remove\+\_\+shared\+\_\+memory} (int shmid)
+void \hyperlink{shared__memory_8c_a8fd9943e1b39a1f286977096e0a50d7b}{remove\+\_\+shared\+\_\+memory} (int \hyperlink{server_8c_ac8807d215d2ee6d9779d76aeb1147430}{shmid})
 \begin{DoxyCompactList}\small\item\em Elimina la memoria condivisa. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -58,12 +57,18 @@ Ottiene l\textquotesingle{}id o crea una memoria condivisa.
 \begin{DoxyReturn}{Restituisce}
 int Identificativo della memoria condivisa 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=290pt]{shared__memory_8c_a660a60242a5174977ab2debcdbd0e587_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shared__memory_8c_a660a60242a5174977ab2debcdbd0e587_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{shared__memory_8c_a6530d61365abd3e580722ed907ea5f5b}\label{shared__memory_8c_a6530d61365abd3e580722ed907ea5f5b}} 
@@ -81,12 +86,18 @@ Scollega la memoria condivisa dallo spazio degli indirizzi.
 {\em ptr\+\_\+sh} & Puntatore per accedere alla memoria condivisa \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=286pt]{shared__memory_8c_a6530d61365abd3e580722ed907ea5f5b_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shared__memory_8c_a6530d61365abd3e580722ed907ea5f5b_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{shared__memory_8c_ab2ffe00ec7425a3a4229cd0d53ed901c}\label{shared__memory_8c_ab2ffe00ec7425a3a4229cd0d53ed901c}} 
@@ -109,12 +120,18 @@ Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli ind
 \begin{DoxyReturn}{Restituisce}
 void$\ast$ Puntatore per accedere alla memoria condivisa 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=282pt]{shared__memory_8c_ab2ffe00ec7425a3a4229cd0d53ed901c_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shared__memory_8c_ab2ffe00ec7425a3a4229cd0d53ed901c_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{shared__memory_8c_a8fd9943e1b39a1f286977096e0a50d7b}\label{shared__memory_8c_a8fd9943e1b39a1f286977096e0a50d7b}} 
@@ -132,11 +149,17 @@ Elimina la memoria condivisa.
 {\em shmid} & Identificativo della memoria condivisa \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=304pt]{shared__memory_8c_a8fd9943e1b39a1f286977096e0a50d7b_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shared__memory_8c_a8fd9943e1b39a1f286977096e0a50d7b_icgraph}
 \end{center}
 \end{figure}

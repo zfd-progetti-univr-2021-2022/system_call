@@ -1,4 +1,4 @@
 <map id="create_fifo" name="create_fifo">
 <area shape="rect" id="node2" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="144,5,231,32"/>
-<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="279,5,344,32"/>
+<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="279,31,344,57"/>
 </map>

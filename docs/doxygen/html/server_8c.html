@@ -100,12 +100,16 @@ $(document).ready(function(){initNavTree('server_8c.html','');});
 <a href="#details">Continua...</a></p>
 <div class="textblock"><code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;inttypes.h&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sys/msg.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="err__exit_8h_source.html">err_exit.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="defines_8h_source.html">defines.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="shared__memory_8h_source.html">shared_memory.h</a>&quot;</code><br />
@@ -115,8 +119,7 @@ $(document).ready(function(){initNavTree('server_8c.html','');});
 </div><div class="textblock"><div class="dynheader">
 Grafo delle dipendenze di inclusione per server.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="server_8c__incl.svg" width="100%" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="server_8c__incl.svg" width="100%" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -124,9 +127,12 @@ Funzioni</h2></td></tr>
 <tr class="memitem:a48d605ff689f470746c858648f0a98c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a> (int sig)</td></tr>
 <tr class="memdesc:a48d605ff689f470746c858648f0a98c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chiude tutte le IPC e termina.  <a href="#a48d605ff689f470746c858648f0a98c2">Continua...</a><br /></td></tr>
 <tr class="separator:a48d605ff689f470746c858648f0a98c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab53aa0eb44ad55d2e189f18d3bd6017b"><td class="memItemLeft" align="right" valign="top"><a id="ab53aa0eb44ad55d2e189f18d3bd6017b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>string_to_int</b> (char *string)</td></tr>
+<tr class="memitem:ab53aa0eb44ad55d2e189f18d3bd6017b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ab53aa0eb44ad55d2e189f18d3bd6017b">string_to_int</a> (char *string)</td></tr>
 <tr class="separator:ab53aa0eb44ad55d2e189f18d3bd6017b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac94aa68fd5fccbf448cfe8788bd46225"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ac94aa68fd5fccbf448cfe8788bd46225">aggiungiAMatrice</a> (<a class="el" href="structmsg__t.html">msg_t</a> a, int righe)</td></tr>
+<tr class="separator:ac94aa68fd5fccbf448cfe8788bd46225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefaefec035e6211d28b35a6d2ce3b3fa"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa">costruisciStringa</a> (<a class="el" href="structmsg__t.html">msg_t</a> a)</td></tr>
+<tr class="separator:aefaefec035e6211d28b35a6d2ce3b3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -137,21 +143,115 @@ char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="serv
 <tr class="memdesc:a709c4fcdc1217a8f8785cb59e85beee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percorso cartella eseguibile. <br /></td></tr>
 <tr class="separator:a709c4fcdc1217a8f8785cb59e85beee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e51f6e74ef591eef5a08e4a5a2d5ea8"><td class="memItemLeft" align="right" valign="top"><a id="a0e51f6e74ef591eef5a08e4a5a2d5ea8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>fifo1_fd</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a0e51f6e74ef591eef5a08e4a5a2d5ea8">fifo1_fd</a></td></tr>
+<tr class="memdesc:a0e51f6e74ef591eef5a08e4a5a2d5ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">file descriptor della FIFO 1 <br /></td></tr>
 <tr class="separator:a0e51f6e74ef591eef5a08e4a5a2d5ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c35ac5305085cf7360645b8d52988b5"><td class="memItemLeft" align="right" valign="top"><a id="a7c35ac5305085cf7360645b8d52988b5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>semid</b></td></tr>
+<tr class="memitem:a4a1b7b9ae118e79117db0755b4588077"><td class="memItemLeft" align="right" valign="top"><a id="a4a1b7b9ae118e79117db0755b4588077"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a4a1b7b9ae118e79117db0755b4588077">fifo2_fd</a></td></tr>
+<tr class="memdesc:a4a1b7b9ae118e79117db0755b4588077"><td class="mdescLeft">&#160;</td><td class="mdescRight">file descriptor della FIFO 2 <br /></td></tr>
+<tr class="separator:a4a1b7b9ae118e79117db0755b4588077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73e6a837794db6e63f23db2d64a8130"><td class="memItemLeft" align="right" valign="top"><a id="ae73e6a837794db6e63f23db2d64a8130"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae73e6a837794db6e63f23db2d64a8130">msqid</a></td></tr>
+<tr class="memdesc:ae73e6a837794db6e63f23db2d64a8130"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifier della message queue <br /></td></tr>
+<tr class="separator:ae73e6a837794db6e63f23db2d64a8130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c35ac5305085cf7360645b8d52988b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a></td></tr>
+<tr class="memdesc:a7c35ac5305085cf7360645b8d52988b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifier del set di semafori  <a href="#a7c35ac5305085cf7360645b8d52988b5">Continua...</a><br /></td></tr>
 <tr class="separator:a7c35ac5305085cf7360645b8d52988b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8807d215d2ee6d9779d76aeb1147430"><td class="memItemLeft" align="right" valign="top"><a id="ac8807d215d2ee6d9779d76aeb1147430"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>shmid</b></td></tr>
+<tr class="memitem:ac8807d215d2ee6d9779d76aeb1147430"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ac8807d215d2ee6d9779d76aeb1147430">shmid</a></td></tr>
+<tr class="memdesc:ac8807d215d2ee6d9779d76aeb1147430"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifier della memoria condivisa contenente i messaggi  <a href="#ac8807d215d2ee6d9779d76aeb1147430">Continua...</a><br /></td></tr>
 <tr class="separator:ac8807d215d2ee6d9779d76aeb1147430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b268ec51e0860874f687d0d1ffcd0e2"><td class="memItemLeft" align="right" valign="top"><a id="a0b268ec51e0860874f687d0d1ffcd0e2"></a>
-<a class="el" href="structmsg__t.html">msg_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>shm_ptr</b></td></tr>
+<a class="el" href="structmsg__t.html">msg_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a0b268ec51e0860874f687d0d1ffcd0e2">shm_ptr</a></td></tr>
+<tr class="memdesc:a0b268ec51e0860874f687d0d1ffcd0e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">puntatore alla memoria condivisa contenente i messaggi <br /></td></tr>
 <tr class="separator:a0b268ec51e0860874f687d0d1ffcd0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef99f0b2f4ff9b59d2e02bf8e9349d04"><td class="memItemLeft" align="right" valign="top"><a id="aef99f0b2f4ff9b59d2e02bf8e9349d04"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#aef99f0b2f4ff9b59d2e02bf8e9349d04">shm_check_id</a></td></tr>
+<tr class="memdesc:aef99f0b2f4ff9b59d2e02bf8e9349d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifier della memoria condivisa contenente le flag cella libera/occupata <br /></td></tr>
+<tr class="separator:aef99f0b2f4ff9b59d2e02bf8e9349d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687e40faeef71a19cdd81e1bb787ca77"><td class="memItemLeft" align="right" valign="top"><a id="a687e40faeef71a19cdd81e1bb787ca77"></a>
+int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a687e40faeef71a19cdd81e1bb787ca77">shm_check_ptr</a></td></tr>
+<tr class="memdesc:a687e40faeef71a19cdd81e1bb787ca77"><td class="mdescLeft">&#160;</td><td class="mdescRight">puntatore alla memoria condivisa contenente le flag cella libera/occupata <br /></td></tr>
+<tr class="separator:a687e40faeef71a19cdd81e1bb787ca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aaec567099944b97df11e662b3b4611"><td class="memItemLeft" align="right" valign="top"><a id="a1aaec567099944b97df11e662b3b4611"></a>
+<a class="el" href="structmsg__t.html">msg_t</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a1aaec567099944b97df11e662b3b4611">matriceFile</a></td></tr>
+<tr class="memdesc:a1aaec567099944b97df11e662b3b4611"><td class="mdescLeft">&#160;</td><td class="mdescRight">e' una matrice che per ogni riga contiene le 4 parti di un file <br /></td></tr>
+<tr class="separator:a1aaec567099944b97df11e662b3b4611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene l'implementazione del server. </p>
 </div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="ac94aa68fd5fccbf448cfe8788bd46225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac94aa68fd5fccbf448cfe8788bd46225">&#9670;&nbsp;</a></span>aggiungiAMatrice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void aggiungiAMatrice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmsg__t.html">msg_t</a>&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>righe</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Aggiunge un messaggio alla matrice buffer. Il buffer verra' usato per recuperare i pezzi di file quando verra' ricostruito il file di output.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Messaggio da inserire nel buffer </td></tr>
+    <tr><td class="paramname">righe</td><td>Numero di righe nella matrice </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_ac94aa68fd5fccbf448cfe8788bd46225_icgraph.svg" width="248" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aefaefec035e6211d28b35a6d2ce3b3fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefaefec035e6211d28b35a6d2ce3b3fa">&#9670;&nbsp;</a></span>costruisciStringa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* costruisciStringa </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmsg__t.html">msg_t</a>&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Costruisce la stringa da scrivere nel file di output.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>Messaggio contenente il pezzo di file arrivato dal client </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>char* Stringa pronta per essere scritta su file </dd></dl>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_aefaefec035e6211d28b35a6d2ce3b3fa_icgraph.svg" width="244" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&nbsp;</a></span>main()</h2>
 
@@ -178,12 +278,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>shmid</b></td></tr>
       </table>
 </div><div class="memdoc">
 <p>ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.</p>
-<p>terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC. </p>
+<p>terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Da fare:</a></b></dt><dd>La ricezione dei messaggi dai vari canali dovra' essere asincrona.</dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000008">Warnings:</a></b></dt><dd>I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? </dd></dl>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="452" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="server_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -208,22 +309,91 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <p>Handler del segnale SIGINT.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sig</td><td></td></tr>
+    <tr><td class="paramname">sig</td><td>Intero che rappresenta il segnale catturato dalla funzione </td></tr>
   </table>
   </dd>
 </dl>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="350" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="server_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
 </div>
 </div>
+<a id="ab53aa0eb44ad55d2e189f18d3bd6017b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab53aa0eb44ad55d2e189f18d3bd6017b">&#9670;&nbsp;</a></span>string_to_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int string_to_int </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Converte stringa in intero.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>Stringa da convertire in intero </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Restituisce</dt><dd>int Valore intero ottenuto convertendo la stringa in input </dd></dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_ab53aa0eb44ad55d2e189f18d3bd6017b_cgraph.svg" width="227" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_ab53aa0eb44ad55d2e189f18d3bd6017b_icgraph.svg" width="216" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentazione delle variabili</h2>
+<a id="a7c35ac5305085cf7360645b8d52988b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c35ac5305085cf7360645b8d52988b5">&#9670;&nbsp;</a></span>semid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int semid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>identifier del set di semafori </p>
+<p>id set di semafori </p>
+
+</div>
+</div>
+<a id="ac8807d215d2ee6d9779d76aeb1147430"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8807d215d2ee6d9779d76aeb1147430">&#9670;&nbsp;</a></span>shmid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int shmid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>identifier della memoria condivisa contenente i messaggi </p>
+<p>id memoria condivisa messaggi </p>
 
 </div>
 </div>

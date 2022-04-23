@@ -1,4 +1,4 @@
-.TH "md_theory_commands_commands" 3 "Mar 19 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "md_theory_commands_commands" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -40,6 +40,8 @@ Comandi GDB:
 \fClist\fP: visualizza la riga
 .IP "\(bu" 2
 \fCquit\fP: esce da gdb
+.IP "\(bu" 2
+\fCsignal <segnale>\fP: invia al processo il segnale \fC<segnale>\fP > Esempio: \fCsignal SIGINT\fP, utile per fare debugging del client del progetto
 .PP
 .PP
 .SS "Estensioni dell'interfaccia GDB e interfacce grafiche"
@@ -68,6 +70,42 @@ pip install pygments
 .SS "Interfacce GUI"
 .PP
 \fCgdbgui\fP e' una interfaccia grafica basata su tecnologie web\&.
+.PP
+.PP
+.SS "Ricerca memory leak"
+.PP
+Valgrind e' uno strumento che permette di analizzare la memoria usata dai processi per trovare memory leak oppure in generale accessi errati della memoria\&.
+.PP
+Testare il server: 
+.PP
+.nf
+valgrind --leak-check=full \
+    --show-leak-kinds=all \
+    --track-origins=yes \
+    --verbose \
+    --log-file=valgrind-server-out\&.txt \
+    \&./server
+
+.fi
+.PP
+.PP
+Testare il client: 
+.PP
+.nf
+valgrind --leak-check=full \
+    --show-leak-kinds=all \
+    --track-origins=yes \
+    --verbose \
+    --log-file=valgrind-client-out\&.txt \
+    \&./client_0 <percorso cartella file>
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Sostituire \fC<percorso cartella file>\fP con l'input corretto 
+.RE
 .PP
 .PP
 .SS "Visualizza informazioni IPC"

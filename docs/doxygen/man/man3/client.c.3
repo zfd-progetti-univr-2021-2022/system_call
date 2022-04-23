@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Sab 9 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -28,6 +28,8 @@
 \fC#include <sys/stat\&.h>\fP
 .br
 \fC#include <sys/wait\&.h>\fP
+.br
+\fC#include <sys/msg\&.h>\fP
 .br
 \fC#include 'defines\&.h'\fP
 .br
@@ -80,6 +82,38 @@
 .SS "Variabili"
 
 .in +1c
+.ti -1c
+.RI "int \fBfifo1_fd\fP"
+.br
+.RI "file descriptor prima fifo "
+.ti -1c
+.RI "int \fBfifo2_fd\fP"
+.br
+.RI "file descriptor seconda fifo "
+.ti -1c
+.RI "int \fBmsqid\fP"
+.br
+.RI "id coda dei messaggi "
+.ti -1c
+.RI "int \fBsemid\fP"
+.br
+.RI "id set di semafori "
+.ti -1c
+.RI "int \fBshmid\fP"
+.br
+.RI "id memoria condivisa messaggi "
+.ti -1c
+.RI "\fBmsg_t\fP * \fBshm_ptr\fP"
+.br
+.RI "puntatore memoria condivisa messaggi "
+.ti -1c
+.RI "int \fBshm_check_id\fP"
+.br
+.RI "id memoria condivisa flag lettura/scrittura messaggi "
+.ti -1c
+.RI "int * \fBshm_check_ptr\fP"
+.br
+.RI "puntatore memoria condivisa flag lettura/scrittura messaggi "
 .ti -1c
 .RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP]"
 .br
@@ -141,6 +175,24 @@ Divide in 4 parti il contenuto del file da inviare al server\&.
 \fIfilePath\fP Percorso del file da suddividere 
 .br
 \fIparte\fP Numero identificativo della porzione di messaggio 
+.RE
+.PP
+
+.SS "char* int_to_string (int value)"
+Converte un intero in stringa\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIvalue\fP Valore intero da convertire in stringa 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+char* Stringa contenente il valore 
+.RE
+.PP
+.RS 4
+E' necessaria la free() dopo aver terminato l'uso della stringa\&.
 .RE
 .PP
 
@@ -261,6 +313,24 @@ Termina il processo del client 0\&.
 \fBParametri:\fP
 .RS 4
 \fIsig\fP Valore intero corrispondente a SIGUSR1 
+.RE
+.PP
+
+.SS "bool strEquals (char * a, char * b)"
+Restituisce vero se due stringhe sono uguali
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP Stringa da confrontare 
+.br
+\fIb\fP Stringa da confrontare 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+true a e b sono uguali 
+.PP
+false a e b sono diverse 
 .RE
 .PP
 

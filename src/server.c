@@ -3,6 +3,7 @@
 
 #include <signal.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -10,6 +11,8 @@
 #include <inttypes.h>
 #include <errno.h>
 #include <sys/msg.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 #include "err_exit.h"
 #include "defines.h"
@@ -21,21 +24,31 @@
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
 
+/// file descriptor della FIFO 1
 int fifo1_fd;
+/// file descriptor della FIFO 2
 int fifo2_fd;
+/// identifier della message queue
 int msqid;
-int shmid;
+/// identifier del set di semafori
 int semid;
-
+/// identifier della memoria condivisa contenente i messaggi
+int shmid;
+/// puntatore alla memoria condivisa contenente i messaggi
 msg_t * shm_ptr;
-
+/// identifier della memoria condivisa contenente le flag cella libera/occupata
 int shm_check_id;
+/// puntatore alla memoria condivisa contenente le flag cella libera/occupata
 int * shm_check_ptr;
+
+/// e' una matrice che per ogni riga contiene le 4 parti di un file
+msg_t **matriceFile;
+
 
 /**
  * @brief Chiude tutte le IPC e termina
  *
- * @param sig
+ * @param sig Intero che rappresenta il segnale catturato dalla funzione
  */
 void SIGINTSignalHandler(int sig) {
 
@@ -59,6 +72,12 @@ void SIGINTSignalHandler(int sig) {
 }
 
 
+/**
+ * Converte stringa in intero.
+ *
+ * @param string Stringa da convertire in intero
+ * @return int Valore intero ottenuto convertendo la stringa in input
+*/
 int string_to_int(char * string) {
 
     uintmax_t num = strtoumax(string, NULL, 10);
@@ -70,11 +89,104 @@ int string_to_int(char * string) {
 
 
 /**
+ * Aggiunge un messaggio alla matrice buffer.
+ * Il buffer verra' usato per recuperare i pezzi di file
+ * quando verra' ricostruito il file di output.
+ *
+ * @param a Messaggio da inserire nel buffer
+ * @param righe Numero di righe nella matrice
+*/
+void aggiungiAMatrice(msg_t a,int righe){
+    bool aggiunto=false;
+    for(int i=0; i<righe && aggiunto==false; i++)
+        for(int j=0; j<4 && aggiunto==false; j++){
+            if(strcmp(matriceFile[i][j].file_path,a.file_path)==0){
+                matriceFile[i][a.mtype-2]=a;
+                aggiunto=true;
+            }
+        }
+
+    for(int i=0; i<righe && aggiunto==false; i++){
+        //cerco la prima riga vuota
+        if(matriceFile[i][0].mtype==INIZIALIZZAZIONE_MTYPE && matriceFile[i][1].mtype==INIZIALIZZAZIONE_MTYPE && matriceFile[i][2].mtype==INIZIALIZZAZIONE_MTYPE && matriceFile[i][3].mtype==INIZIALIZZAZIONE_MTYPE){
+            matriceFile[i][a.mtype-2]=a;
+            aggiunto=true;
+        }
+    }
+}
+
+
+/**
+ * Costruisce la stringa da scrivere nel file di output.
+ *
+ * @param a Messaggio contenente il pezzo di file arrivato dal client
+ * @return char* Stringa pronta per essere scritta su file
+*/
+char * costruisciStringa(msg_t a){
+	char buffer[20]; // serve per convertire il pid
+	sprintf(buffer, "%d", a.sender_pid);
+
+	char * stringa = (char *)malloc((strlen(a.msg_body) + strlen(a.file_path) + strlen(buffer)+61)*sizeof(char));
+
+	strcpy(stringa,"[Parte ");
+
+    switch (a.mtype) {
+        case CONTAINS_FIFO1_FILE_PART:
+            strcat(stringa,"1, del file ");
+            break;
+
+        case CONTAINS_FIFO2_FILE_PART:
+            strcat(stringa,"2, del file ");
+            break;
+
+        case CONTAINS_MSGQUEUE_FILE_PART:
+            strcat(stringa,"3, del file ");
+            break;
+
+        case CONTAINS_SHM_FILE_PART:
+            strcat(stringa,"4, del file ");
+            break;
+
+        default:
+            break;
+    }
+
+	strcat(stringa,a.file_path);
+	strcat(stringa," spedita dal processo ");
+	strcat(stringa,buffer);
+	strcat(stringa," tramite ");
+
+    switch (a.mtype) {
+        case CONTAINS_FIFO1_FILE_PART:
+            strcat(stringa, "FIFO1]\n");
+            break;
+        case CONTAINS_FIFO2_FILE_PART:
+            strcat(stringa, "FIFO2]\n");
+            break;
+        case CONTAINS_MSGQUEUE_FILE_PART:
+            strcat(stringa, "MsgQueue]\n");
+            break;
+        case CONTAINS_SHM_FILE_PART:
+            strcat(stringa, "ShdMem]\n");
+            break;
+        default:
+            break;
+    }
+
+	strcat(stringa, a.msg_body);
+
+    return stringa;
+}
+
+
+/**
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
  *
  * @todo La ricezione dei messaggi dai vari canali dovra' essere asincrona.
+ *
+ * @warning I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine?
 */
 int main(int argc, char * argv[]) {
 
@@ -131,6 +243,21 @@ int main(int argc, char * argv[]) {
 
         DEBUG_PRINT("Il client mi ha inviato un messaggio che dice che ci sono '%s' file da ricevere\n", n_msg.msg_body);
         int n = string_to_int(n_msg.msg_body);
+        //inizializzo la matrice contenente i pezzi di file
+        matriceFile=(msg_t **)malloc(n*sizeof(msg_t *));
+        for(int i=0; i<n;i++)
+            matriceFile[i]=(msg_t *)malloc(4*sizeof(msg_t));
+
+        msg_t vuoto;
+        vuoto.mtype = INIZIALIZZAZIONE_MTYPE;
+        //inizializzo i valori del percorso per evitare di fare confronti con null
+        for (int i = 0; i < BUFFER_SZ+1; i++)
+            vuoto.file_path[i] = '\0';
+        //riempio la matrice con una struttura che mi dice se le celle sono vuote
+        for(int i=0;i<n;i++)
+            for(int j=0; j<4;j++)
+                matriceFile[i][j]=vuoto;
+
         DEBUG_PRINT("Tradotto in numero e' %d (teoricamente lo stesso valore su terminale)\n", n);
 
         // scrive un messaggio di conferma su ShdMem
@@ -163,12 +290,14 @@ int main(int argc, char * argv[]) {
             //leggo da fifo1 la prima parte del file
             if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {
                 printf("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                aggiungiAMatrice(supporto1,n);
                 arrived_parts_counter++;
             }
 
             //leggo da fifo2 la seconda parte del file
             if (read(fifo2_fd,&supporto2,sizeof(supporto2)) != -1) {
                 printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                aggiungiAMatrice(supporto2,n);
                 arrived_parts_counter++;
             }
 
@@ -176,6 +305,7 @@ int main(int argc, char * argv[]) {
 
             if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
                 printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+                aggiungiAMatrice(supporto3,n);
                 arrived_parts_counter++;
             }
 
@@ -185,6 +315,7 @@ int main(int argc, char * argv[]) {
                 if (shm_check_ptr[i] == 1) {
                     DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
                     shm_check_ptr[i] = 0;
+                    aggiungiAMatrice(shm_ptr[i],n);
                     arrived_parts_counter++;
                 }
             }
@@ -197,9 +328,38 @@ int main(int argc, char * argv[]) {
 
 
             if (n_tries % 5000 == 0) {
-                DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
+		        DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
             }
             n_tries++;
+        }
+
+        for(int i=0;i<n;i++){
+            char *temp = (char *)malloc((strlen(matriceFile[i][0].file_path)+5)*sizeof(char)); // aggiungo lo spazio per _out
+            if (temp == NULL){
+                DEBUG_PRINT("temp is NULL!\n");
+            }
+            strcpy(temp, matriceFile[i][0].file_path);
+            strcat(temp, "_out"); // aggiungo -out
+            int file = open(temp, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+
+            if (file == -1) {
+                ErrExit("open failed");
+            }
+
+            for(int j=0; j<4;j++){
+                char * stampa = costruisciStringa(matriceFile[i][j]);
+                if (write(file, stampa, strlen(stampa) * sizeof(char)) == -1){
+                    ErrExit("write output file failed");
+                }
+
+                if (write(file, "\n", 1) == -1){
+                    ErrExit("write newline to output file failed");
+                }
+                free(stampa);
+            }
+
+            close(file);
+            free(temp);
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
@@ -216,6 +376,12 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 2);
         semWait(semid, 1);
         DEBUG_PRINT("Rese fifo bloccanti\n");
+
+        // libera memoria della matrice buffer
+        for(int i = 0; i < n; i++){
+            free(matriceFile[i]);
+        }
+        free(matriceFile);
 
         // si rimette in attesa su FIFO 1 di un nuovo valore n tornando all'inizio del ciclo
         DEBUG_PRINT("\n");

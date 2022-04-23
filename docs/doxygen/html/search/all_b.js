@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['remove_5fshared_5fmemory',['remove_shared_memory',['../shared__memory_8c.html#a8fd9943e1b39a1f286977096e0a50d7b',1,'remove_shared_memory(int shmid):&#160;shared_memory.c'],['../shared__memory_8h.html#a8fd9943e1b39a1f286977096e0a50d7b',1,'remove_shared_memory(int shmid):&#160;common.c']]]
+  ['path',['path',['../structfiles__list.html#a986ecc1174faf39b15c1ef655c2ed966',1,'files_list']]],
+  ['print_5flist',['print_list',['../files_8c.html#a1cdd9b5b37408e31d80f31e474a71483',1,'print_list(files_list *head):&#160;files.c'],['../files_8h.html#a1cdd9b5b37408e31d80f31e474a71483',1,'print_list(files_list *head):&#160;files.c']]]
 ];

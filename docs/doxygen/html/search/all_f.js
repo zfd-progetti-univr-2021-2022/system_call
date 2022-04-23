@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warnings',['Warnings',['../warning.html',1,'']]]
+  ['val',['val',['../unionsemun.html#ac6121ecb6d04a024e07e12bd71b94031',1,'semun']]]
 ];

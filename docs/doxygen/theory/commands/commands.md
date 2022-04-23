@@ -23,6 +23,8 @@ Comandi GDB:
 * ```continue```: esegue il codice finche' non viene raggiunto un breakpoint o watchpoint
 * ```list```: visualizza la riga
 * ```quit```: esce da gdb
+* ```signal <segnale>```: invia al processo il segnale ```<segnale>```
+    > Esempio: ```signal SIGINT```, utile per fare debugging del client del progetto
 
 ## Estensioni dell'interfaccia GDB e interfacce grafiche
 
@@ -47,6 +49,32 @@ pip install pygments
 [gdbgui](https://github.com/cs01/gdbgui) e' una interfaccia grafica basata su tecnologie web.
 
 ![](https://raw.githubusercontent.com/cs01/gdbgui/799d34051419653cfda7d068806f853007d46fac/screenshots/gdbgui_animation.gif)
+
+## Ricerca memory leak
+
+Valgrind e' uno strumento che permette di analizzare la memoria usata dai processi
+per trovare memory leak oppure in generale accessi errati della memoria.
+
+Testare il server:
+```
+valgrind --leak-check=full \
+    --show-leak-kinds=all \
+    --track-origins=yes \
+    --verbose \
+    --log-file=valgrind-server-out.txt \
+    ./server
+```
+
+Testare il client:
+```
+valgrind --leak-check=full \
+    --show-leak-kinds=all \
+    --track-origins=yes \
+    --verbose \
+    --log-file=valgrind-client-out.txt \
+    ./client_0 <percorso cartella file>
+```
+> Sostituire ```<percorso cartella file>``` con l'input corretto
 
 ## Visualizza informazioni IPC
 
