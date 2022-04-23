@@ -28,6 +28,8 @@ extern char EXECUTABLE_DIR[BUFFER_SZ];
 #define CONTAINS_SHM_FILE_PART 5
 /// mtype messaggio che contiene il messaggio di fine proveniente dal server
 #define CONTAINS_DONE 6
+/// mtype messaggio che contiene il valore usato per inizializzare la matrice contenente i file finali
+#define INIZIALIZZAZIONE_MTYPE -1
 
 // -- Macro suddivisione messaggi
 
