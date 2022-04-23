@@ -106,6 +106,7 @@ $(document).ready(function(){initNavTree('md_theory_commands_commands.html','');
 <li><code>continue</code>: esegue il codice finche' non viene raggiunto un breakpoint o watchpoint</li>
 <li><code>list</code>: visualizza la riga</li>
 <li><code>quit</code>: esce da gdb</li>
+<li><code>signal &lt;segnale&gt;</code>: invia al processo il segnale <code>&lt;segnale&gt;</code> &gt; Esempio: <code>signal SIGINT</code>, utile per fare debugging del client del progetto</li>
 </ul>
 <h2>Estensioni dell'interfaccia GDB e interfacce grafiche</h2>
 <h3>Interfacce CLI</h3>
@@ -118,6 +119,11 @@ $(document).ready(function(){initNavTree('md_theory_commands_commands.html','');
 <div class="image">
 <img src="https://raw.githubusercontent.com/cs01/gdbgui/799d34051419653cfda7d068806f853007d46fac/screenshots/gdbgui_animation.gif"/>
 </div>
+<h2>Ricerca memory leak</h2>
+<p>Valgrind e' uno strumento che permette di analizzare la memoria usata dai processi per trovare memory leak oppure in generale accessi errati della memoria.</p>
+<p>Testare il server: </p><div class="fragment"><div class="line">valgrind --leak-check=full \</div><div class="line">    --show-leak-kinds=all \</div><div class="line">    --track-origins=yes \</div><div class="line">    --verbose \</div><div class="line">    --log-file=valgrind-server-out.txt \</div><div class="line">    ./server</div></div><!-- fragment --><p>Testare il client: </p><div class="fragment"><div class="line">valgrind --leak-check=full \</div><div class="line">    --show-leak-kinds=all \</div><div class="line">    --track-origins=yes \</div><div class="line">    --verbose \</div><div class="line">    --log-file=valgrind-client-out.txt \</div><div class="line">    ./client_0 &lt;percorso cartella file&gt;</div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Sostituire <code>&lt;percorso cartella file&gt;</code> con l'input corretto </p>
+</blockquote>
 <h2>Visualizza informazioni IPC</h2>
 <p>Il comando <code>ipcs</code> permette di vedere una lista di:</p><ul>
 <li>code dei messaggi</li>
