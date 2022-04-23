@@ -108,7 +108,7 @@ void aggiungiAMatrice(msg_t a,int righe){
 
     for(int i=0; i<righe && aggiunto==false; i++){
         //cerco la prima riga vuota
-        if(matriceFile[i][0].mtype==666 && matriceFile[i][1].mtype==666 && matriceFile[i][2].mtype==666 && matriceFile[i][3].mtype==666){
+        if(matriceFile[i][0].mtype==INIZIALIZZAZIONE_MTYPE && matriceFile[i][1].mtype==INIZIALIZZAZIONE_MTYPE && matriceFile[i][2].mtype==INIZIALIZZAZIONE_MTYPE && matriceFile[i][3].mtype==INIZIALIZZAZIONE_MTYPE){
             matriceFile[i][a.mtype-2]=a;
             aggiunto=true;
         }
@@ -249,7 +249,8 @@ int main(int argc, char * argv[]) {
             matriceFile[i]=(msg_t *)malloc(4*sizeof(msg_t));
 
         msg_t vuoto;
-        vuoto.mtype = 666;//Stefano, io sono il diavolo!!!
+        vuoto.mtype = INIZIALIZZAZIONE_MTYPE;
+        //inizializzo i valori del percorso per evitare di fare confronti con null
         for (int i = 0; i < BUFFER_SZ+1; i++)
             vuoto.file_path[i] = '\0';
         //riempio la matrice con una struttura che mi dice se le celle sono vuote
