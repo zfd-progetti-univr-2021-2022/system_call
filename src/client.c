@@ -37,21 +37,21 @@
 #include "debug.h"
 
 /// file descriptor prima fifo
-int fifo1_fd;
+int fifo1_fd = -1;
 /// file descriptor seconda fifo
-int fifo2_fd;
+int fifo2_fd = -1;
 /// id coda dei messaggi
-int msqid;
+int msqid = -1;
 /// id set di semafori
-int semid;
+int semid = -1;
 /// id memoria condivisa messaggi
-int shmid;
+int shmid = -1;
 /// puntatore memoria condivisa messaggi
-msg_t * shm_ptr;
+msg_t * shm_ptr = NULL;
 /// id memoria condivisa flag lettura/scrittura messaggi
-int shm_check_id;
+int shm_check_id = -1;
 /// puntatore memoria condivisa flag lettura/scrittura messaggi
-int * shm_check_ptr;
+int * shm_check_ptr = NULL;
 
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ];
@@ -80,24 +80,32 @@ void SIGINTSignalHandler(int sig) {
     DEBUG_PRINT("Ho bloccato tutti i segnali\n");
 
     // Connettiti alle IPC e alle FIFO
-    shmid = alloc_shared_memory(get_ipc_key(), 53 * sizeof(msg_t));
-    shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
+    if (shmid < 0)
+        shmid = alloc_shared_memory(get_ipc_key(), 53 * sizeof(msg_t));
+    if (shm_ptr == NULL)
+        shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    shm_check_id = alloc_shared_memory(get_ipc_key()+1, 53 * sizeof(int));
-    shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
+    if (shm_check_id < 0)
+        shm_check_id = alloc_shared_memory(get_ipc_key()+1, 53 * sizeof(int));
+    if (shm_check_ptr == NULL)
+        shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
-    semid = getSemaphores(get_ipc_key(), 53);
+    if (semid < 0)
+        semid = getSemaphores(get_ipc_key(), 53);
     DEBUG_PRINT("Semafori: ottenuto il set di semafori\n");
 
-    fifo1_fd = create_fifo(FIFO1_PATH, 'w');
+    if (fifo1_fd < 0)
+        fifo1_fd = create_fifo(FIFO1_PATH, 'w');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
 
-    fifo2_fd = create_fifo(FIFO2_PATH, 'w');
+    if (fifo2_fd < 0)
+        fifo2_fd = create_fifo(FIFO2_PATH, 'w');
     DEBUG_PRINT("Mi sono collegato alla FIFO 2\n");  // collegamento a fifo2
 
-    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);  // creo la coda dei messaggi
+    if (msqid < 0)
+        msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);  // creo la coda dei messaggi
     DEBUG_PRINT("Mi sono collegato alla coda dei messaggi\n");
 
     // imposta la sua directory corrente ad un path passato da linea di comando all’avvio del programma
@@ -209,9 +217,6 @@ void SIGINTSignalHandler(int sig) {
     // libera lista dei file
     free_list(sendme_files);
 
-    // chiudi le IPC e le FIFO
-    // > senza eliminarle, quello e' compito del server
-
     // rendi fifo bloccanti
     DEBUG_PRINT("rendi fifo bloccanti\n");
     blockFD(fifo1_fd, 1);
@@ -220,15 +225,34 @@ void SIGINTSignalHandler(int sig) {
     semWait(semid, 2);
     DEBUG_PRINT("rese fifo bloccanti\n");
 
-
     // sblocca i segnali SIGINT e SIGUSR1
     block_sig_no_SIGINT_SIGUSR1();
 }
 
 
 void SIGUSR1SignalHandler(int sig) {
-    // TODO: chiudi tutto ?
-    // > se gestiti dalle altre funzioni forse non occorre fare nulla
+    // chiudi tutto
+    //
+    // NOTA: non e' possibile chiudere senza eliminare i semafori
+    //       e la coda dei messaggi. Quello sara' il compito del server
+
+    if (shm_ptr != NULL)
+        free_shared_memory(shm_ptr);
+
+    if (shm_check_ptr != NULL)
+        free_shared_memory(shm_check_ptr);
+
+    if (fifo1_fd != -1) {
+        if (close(fifo1_fd) == -1){
+            ErrExit("[client.c:SIGUSR1SignalHandler] close FIFO1 failed");
+        }
+    }
+
+    if (fifo2_fd != -1) {
+        if (close(fifo2_fd) == -1){
+            ErrExit("[client.c:SIGUSR1SignalHandler] close FIFO2 failed");
+        }
+    }
 
     // termina
     exit(0);
