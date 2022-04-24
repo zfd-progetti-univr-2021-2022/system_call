@@ -191,7 +191,7 @@ void SIGINTSignalHandler(int sig) {
 
             // libero lista dei file del figlio
             free_list(sendme_files);
-
+	
             // esegui operazioni del figlio
             operazioni_figlio(path);
 
@@ -313,6 +313,7 @@ void operazioni_figlio(char * filePath){
 
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
     // > Attesa con semop() finche' non arriva a zero.
+    semWait(semid, 4);
 
     // -- INVIO 4 MESSAGGI
     // > NOTA: servono meccanismi di sincronizzazione tra i client. Il server gestira' il riordino dei messaggi.
