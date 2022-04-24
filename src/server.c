@@ -202,7 +202,6 @@ char * costruisciStringa(msg_t a){
     }
 
 	strcat(stringa, a.msg_body);
-    strcat(stringa, "\n");
     return stringa;
 }
 
@@ -380,7 +379,7 @@ int main(int argc, char * argv[]) {
                     ErrExit("write output file failed");
                 }
 
-                if (write(file, "\n", 1) == -1){
+                if (write(file, "\n\n", 2) == -1){
                     ErrExit("write newline to output file failed");
                 }
                 free(stampa);
