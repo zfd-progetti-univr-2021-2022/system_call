@@ -247,7 +247,7 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
     semid = createSemaphores(get_ipc_key(), 53);
-    short unsigned int semValues[53] = {1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    short unsigned int semValues[53] = {1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -304,7 +304,11 @@ int main(int argc, char * argv[]) {
         semSignal(semid, 2);
         semWait(semid, 1);
         DEBUG_PRINT("Rese fifo non bloccanti\n");
-
+	
+	    //inizializzazione semaforo dei figli
+        for(int i=0;i<n;i++)
+        	semSignal(semid,4);
+        	
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
         int arrived_parts_counter = 0;
         int n_tries = 0;
