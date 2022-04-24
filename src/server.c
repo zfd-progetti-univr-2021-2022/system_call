@@ -202,7 +202,7 @@ char * costruisciStringa(msg_t a){
     }
 
 	strcat(stringa, a.msg_body);
-
+    strcat(stringa, "\n");
     return stringa;
 }
 
