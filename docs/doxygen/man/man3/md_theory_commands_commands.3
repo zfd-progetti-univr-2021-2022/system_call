@@ -108,6 +108,34 @@ Sostituire \fC<percorso cartella file>\fP con l'input corretto
 .RE
 .PP
 .PP
+.SS "Visualizza file aperti"
+.PP
+Per visualizzare file aperti dai processi (tra cui le FIFO) e' possibile utilizzare il programma \fClsof\fP\&.
+.PP
+Per installarlo su debian: 
+.PP
+.nf
+sudo apt install lsof
+
+.fi
+.PP
+.PP
+Per visualizzare tutti i file aperti eseguire il comando: 
+.PP
+.nf
+lsof
+
+.fi
+.PP
+.PP
+Per visualizzare i file aperti di un solo processo conoscendo il suo PID: 
+.PP
+.nf
+lsof -p <PID>
+
+.fi
+.PP
+.PP
 .SS "Visualizza informazioni IPC"
 .PP
 Il comando \fCipcs\fP permette di vedere una lista di:

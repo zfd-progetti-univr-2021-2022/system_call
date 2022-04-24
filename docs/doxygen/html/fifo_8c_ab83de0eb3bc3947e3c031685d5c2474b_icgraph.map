@@ -2,6 +2,6 @@
 <area shape="rect" id="node2" href="$fifo_8h.html#a54a1ae8162825128cf02f95692402c18" title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura..." alt="" coords="140,56,231,83"/>
 <area shape="rect" id="node3" href="$client_8h.html#a48d605ff689f470746c858648f0a98c2" title="Handler del segnale SIGINT. " alt="" coords="279,5,436,32"/>
 <area shape="rect" id="node5" href="$fifo_8h.html#ae4a1d7aadbfb8d041fccec7ebf8ab431" title="Garantisce la creazione di una nuova FIFO cancellando l&#39;eventuale file della FIFO esistente..." alt="" coords="295,56,420,83"/>
-<area shape="rect" id="node6" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="484,81,539,108"/>
+<area shape="rect" id="node6" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="330,107,385,133"/>
 <area shape="rect" id="node4" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="484,5,539,32"/>
 </map>

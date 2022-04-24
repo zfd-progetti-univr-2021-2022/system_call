@@ -124,7 +124,9 @@ $(document).ready(function(){initNavTree('md_theory_commands_commands.html','');
 <p>Testare il server: </p><div class="fragment"><div class="line">valgrind --leak-check=full \</div><div class="line">    --show-leak-kinds=all \</div><div class="line">    --track-origins=yes \</div><div class="line">    --verbose \</div><div class="line">    --log-file=valgrind-server-out.txt \</div><div class="line">    ./server</div></div><!-- fragment --><p>Testare il client: </p><div class="fragment"><div class="line">valgrind --leak-check=full \</div><div class="line">    --show-leak-kinds=all \</div><div class="line">    --track-origins=yes \</div><div class="line">    --verbose \</div><div class="line">    --log-file=valgrind-client-out.txt \</div><div class="line">    ./client_0 &lt;percorso cartella file&gt;</div></div><!-- fragment --> <blockquote class="doxtable">
 <p>Sostituire <code>&lt;percorso cartella file&gt;</code> con l'input corretto </p>
 </blockquote>
-<h2>Visualizza informazioni IPC</h2>
+<h2>Visualizza file aperti</h2>
+<p>Per visualizzare file aperti dai processi (tra cui le FIFO) e' possibile utilizzare il programma <code>lsof</code>.</p>
+<p>Per installarlo su debian: </p><div class="fragment"><div class="line">sudo apt install lsof</div></div><!-- fragment --><p>Per visualizzare tutti i file aperti eseguire il comando: </p><div class="fragment"><div class="line">lsof</div></div><!-- fragment --><p>Per visualizzare i file aperti di un solo processo conoscendo il suo PID: </p><div class="fragment"><div class="line">lsof -p &lt;PID&gt;</div></div><!-- fragment --><h2>Visualizza informazioni IPC</h2>
 <p>Il comando <code>ipcs</code> permette di vedere una lista di:</p><ul>
 <li>code dei messaggi</li>
 <li>segmenti di memoria condivisa</li>

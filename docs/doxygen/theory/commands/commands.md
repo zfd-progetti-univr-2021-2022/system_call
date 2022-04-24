@@ -76,6 +76,25 @@ valgrind --leak-check=full \
 ```
 > Sostituire ```<percorso cartella file>``` con l'input corretto
 
+## Visualizza file aperti
+
+Per visualizzare file aperti dai processi (tra cui le FIFO) e' possibile utilizzare il programma ```lsof```.
+
+Per installarlo su debian:
+```
+sudo apt install lsof
+```
+
+Per visualizzare tutti i file aperti eseguire il comando:
+```
+lsof
+```
+
+Per visualizzare i file aperti di un solo processo conoscendo il suo PID:
+```
+lsof -p <PID>
+```
+
 ## Visualizza informazioni IPC
 
 Il comando ```ipcs``` permette di vedere una lista di:

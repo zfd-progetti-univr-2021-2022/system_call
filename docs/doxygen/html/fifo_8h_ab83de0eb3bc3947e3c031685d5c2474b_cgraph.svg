@@ -8,24 +8,24 @@
  viewBox="0.00 0.00 158.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>make_fifo</title>
-<!-- Node14 -->
+<!-- Node13 -->
 <g id="node1" class="node">
-<title>Node14</title>
+<title>Node13</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-19.5 65,-19.5 65,-.5 0,-.5"/>
 <text text-anchor="middle" x="32.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">make_fifo</text>
 </g>
-<!-- Node15 -->
+<!-- Node14 -->
 <g id="node2" class="node">
-<title>Node15</title>
+<title>Node14</title>
 <g id="a_node2"><a xlink:href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" target="_top" xlink:title="Prints the error message of the last failed system call and terminates the calling process...">
 <polygon fill="none" stroke="#000000" points="101,-.5 101,-19.5 150,-19.5 150,-.5 101,-.5"/>
 <text text-anchor="middle" x="125.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">ErrExit</text>
 </a>
 </g>
 </g>
-<!-- Node14&#45;&gt;Node15 -->
+<!-- Node13&#45;&gt;Node14 -->
 <g id="edge1" class="edge">
-<title>Node14&#45;&gt;Node15</title>
+<title>Node13&#45;&gt;Node14</title>
 <path fill="none" stroke="#191970" d="M65.0269,-10C73.2767,-10 82.1734,-10 90.5384,-10"/>
 <polygon fill="#191970" stroke="#191970" points="90.7609,-13.5001 100.7609,-10 90.7609,-6.5001 90.7609,-13.5001"/>
 </g>

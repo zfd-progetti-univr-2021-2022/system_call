@@ -25,21 +25,21 @@
 char EXECUTABLE_DIR[BUFFER_SZ];
 
 /// file descriptor della FIFO 1
-int fifo1_fd;
+int fifo1_fd = -1;
 /// file descriptor della FIFO 2
-int fifo2_fd;
+int fifo2_fd = -1;
 /// identifier della message queue
-int msqid;
+int msqid = -1;
 /// identifier del set di semafori
-int semid;
+int semid = -1;
 /// identifier della memoria condivisa contenente i messaggi
-int shmid;
+int shmid = -1;
 /// puntatore alla memoria condivisa contenente i messaggi
-msg_t * shm_ptr;
+msg_t * shm_ptr = NULL;
 /// identifier della memoria condivisa contenente le flag cella libera/occupata
-int shm_check_id;
+int shm_check_id = -1;
 /// puntatore alla memoria condivisa contenente le flag cella libera/occupata
-int * shm_check_ptr;
+int * shm_check_ptr = NULL;
 
 /// e' una matrice che per ogni riga contiene le 4 parti di un file
 msg_t **matriceFile;
@@ -53,20 +53,48 @@ msg_t **matriceFile;
 void SIGINTSignalHandler(int sig) {
 
     // chiudi FIFO1
-    if (close(fifo1_fd) == -1) {
-        ErrExit("[server.c:SIGINTSignalHandler] close failed");
+    if (fifo1_fd != -1) {
+        if (close(fifo1_fd) == -1) {
+            ErrExit("[server.c:SIGINTSignalHandler] close FIFO1 failed");
+        }
+
+        if (unlink(FIFO1_PATH) == -1) {
+            ErrExit("[server.c:SIGINTSignalHandler] unlink FIFO1 failed");
+        }
     }
 
-    if (unlink(FIFO1_PATH) == -1) {
-        ErrExit("[server.c:SIGINTSignalHandler] unlink failed");
+    // chiudi FIFO2
+    if (fifo2_fd != -1) {
+        if (close(fifo2_fd) == -1) {
+            ErrExit("[server.c:SIGINTSignalHandler] close FIFO2 failed");
+        }
+
+        if (unlink(FIFO2_PATH) == -1) {
+            ErrExit("[server.c:SIGINTSignalHandler] unlink FIFO2 failed");
+        }
     }
 
-    // chiudi e dealloca memoria condivisa
-    free_shared_memory(shm_ptr);
-    remove_shared_memory(shmid);
+    // chiudi e dealloca memorie condivise
+    if (shm_ptr != NULL)
+        free_shared_memory(shm_ptr);
+    if (shmid != -1)
+        remove_shared_memory(shmid);
+
+    if (shm_check_ptr != NULL)
+        free_shared_memory(shm_check_ptr);
+    if (shm_check_id != -1)
+        remove_shared_memory(shm_check_id);
+
+    // chiudi coda dei messaggi
+    if (msqid != -1) {
+        if (msgctl(msqid, IPC_RMID, NULL) == -1){
+            ErrExit("[server.c:SIGINTSignalHandler] msgctl failed");
+        }
+    }
 
     // chiudi semafori
-    semDelete(semid);
+    if (semid != -1)
+        semDelete(semid);
 
     exit(0);
 }
@@ -174,7 +202,6 @@ char * costruisciStringa(msg_t a){
     }
 
 	strcat(stringa, a.msg_body);
-
     return stringa;
 }
 
@@ -224,7 +251,7 @@ int main(int argc, char * argv[]) {
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
-    fifo1_fd = create_new_fifo(FIFO1_PATH, 'r');
+    fifo1_fd = create_fifo(FIFO1_PATH, 'r');
     DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
 
     fifo2_fd = create_fifo(FIFO2_PATH, 'r');  // collegamento a fifo2
@@ -352,7 +379,7 @@ int main(int argc, char * argv[]) {
                     ErrExit("write output file failed");
                 }
 
-                if (write(file, "\n", 1) == -1){
+                if (write(file, "\n\n", 2) == -1){
                     ErrExit("write newline to output file failed");
                 }
                 free(stampa);
