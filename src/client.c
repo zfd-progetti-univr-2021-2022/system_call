@@ -313,6 +313,10 @@ void operazioni_figlio(char * filePath){
 
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
     // > Attesa con semop() finche' non arriva a zero.
+    DEBUG_PRINT("Sono il figlio %d, decremento il semaforo di sincronizzazione con gli altri figli e attendo\n", getpid());
+    semWait(semid, 4);
+    semWaitZero(semid, 4);
+    DEBUG_PRINT("Sono arrivati tutti i fratelli, parto a inviare il mio file (pid %d)\n", getpid());
 
     // -- INVIO 4 MESSAGGI
     // > NOTA: servono meccanismi di sincronizzazione tra i client. Il server gestira' il riordino dei messaggi.

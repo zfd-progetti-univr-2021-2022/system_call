@@ -247,7 +247,7 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
     semid = createSemaphores(get_ipc_key(), 53);
-    short unsigned int semValues[53] = {1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    short unsigned int semValues[53] = {1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -286,6 +286,10 @@ int main(int argc, char * argv[]) {
                 matriceFile[i][j]=vuoto;
 
         DEBUG_PRINT("Tradotto in numero e' %d (teoricamente lo stesso valore su terminale)\n", n);
+
+        //inizializzazione semaforo dei figli
+        for(int i=0;i<n;i++)
+        	semSignal(semid,4);
 
         // scrive un messaggio di conferma su ShdMem
         msg_t received_msg = {.msg_body = "OK", .mtype = CONTAINS_N, .sender_pid = getpid()};
