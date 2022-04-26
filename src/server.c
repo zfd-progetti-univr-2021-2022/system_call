@@ -205,7 +205,6 @@ char * costruisciStringa(msg_t a){
     return stringa;
 }
 
-
 /**
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
@@ -252,14 +251,19 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
     fifo1_fd = create_fifo(FIFO1_PATH, 'r');
-    DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");
+    DEBUG_PRINT("Mi sono collegato alla FIFO 1\n");//collegamento a fifo1
 
     fifo2_fd = create_fifo(FIFO2_PATH, 'r');  // collegamento a fifo2
     DEBUG_PRINT("Mi sono collegato alla FIFO 2\n");
 
-    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);
+    msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);//collegamento alla coda di messaggi
     DEBUG_PRINT("Mi sono collegato alla coda dei messaggi\n");
-
+    
+    //limito la coda
+    struct msqid_ds ds;
+    ds.msg_qbytes=sizeof(msg_t)*50;
+    if(msgctl(msqid,IPC_SET,&ds)==-1)
+        printf("Non sono riuscito a limitare la coda");
 
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
