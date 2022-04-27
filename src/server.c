@@ -205,6 +205,7 @@ char * costruisciStringa(msg_t a){
     return stringa;
 }
 
+
 /**
  * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
  *
@@ -246,7 +247,7 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
     semid = createSemaphores(get_ipc_key(), 53);
-    short unsigned int semValues[53] = {1,0,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    short unsigned int semValues[53] = {1,0,0,0,0,0,1,  0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -258,7 +259,7 @@ int main(int argc, char * argv[]) {
 
     msqid = msgget(get_ipc_key(), IPC_CREAT | S_IRUSR | S_IWUSR);//collegamento alla coda di messaggi
     DEBUG_PRINT("Mi sono collegato alla coda dei messaggi\n");
-    
+
     //limito la coda
     struct msqid_ds ds;
     ds.msg_qbytes=sizeof(msg_t)*50;
@@ -292,8 +293,15 @@ int main(int argc, char * argv[]) {
         DEBUG_PRINT("Tradotto in numero e' %d (teoricamente lo stesso valore su terminale)\n", n);
 
         //inizializzazione semaforo dei figli
+        for (int i=0; i < 2; i++) {
+            semSignal(semid, 1);
+            semSignal(semid, 2);
+            semSignal(semid, 3);
+            semSignal(semid, 4);
+        }
+
         for(int i=0;i<n;i++)
-        	semSignal(semid,4);
+        	semSignal(semid,5);
 
         // scrive un messaggio di conferma su ShdMem
         msg_t received_msg = {.msg_body = "OK", .mtype = CONTAINS_N, .sender_pid = getpid()};
@@ -307,10 +315,12 @@ int main(int argc, char * argv[]) {
 
         // rendi fifo non bloccanti
         DEBUG_PRINT("Rendi fifo non bloccanti\n");
+        semWait(semid, 1);
+        semWaitZero(semid, 1);
         blockFD(fifo1_fd, 0);
         blockFD(fifo2_fd, 0);
-        semSignal(semid, 2);
-        semWait(semid, 1);
+        semWait(semid, 2);
+        semWaitZero(semid, 2);
         DEBUG_PRINT("Rese fifo non bloccanti\n");
 
         // si mette in ricezione ciclicamente su ciascuno dei quattro canali
@@ -324,14 +334,14 @@ int main(int argc, char * argv[]) {
 
             //leggo da fifo1 la prima parte del file
             if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {
-                printf("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                DEBUG_PRINT("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
                 aggiungiAMatrice(supporto1,n);
                 arrived_parts_counter++;
             }
 
             //leggo da fifo2 la seconda parte del file
             if (read(fifo2_fd,&supporto2,sizeof(supporto2)) != -1) {
-                printf("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                DEBUG_PRINT("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
                 aggiungiAMatrice(supporto2,n);
                 arrived_parts_counter++;
             }
@@ -339,13 +349,15 @@ int main(int argc, char * argv[]) {
             //leggo dalla coda di messaggi la terza parte del file
 
             if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
-                printf("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+                DEBUG_PRINT("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
                 aggiungiAMatrice(supporto3,n);
                 arrived_parts_counter++;
             }
 
             // leggi dalla memoria condivisa
-            semWait(semid, 3);
+            DEBUG_PRINT("Tenta di entrare nella memoria condivisa\n");
+            semWait(semid, 6);
+            DEBUG_PRINT("Sono entrato nella memoria condivisa\n");
             for (int i = 0; i < 50; i++) {
                 if (shm_check_ptr[i] == 1) {
                     DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
@@ -354,7 +366,9 @@ int main(int argc, char * argv[]) {
                     arrived_parts_counter++;
                 }
             }
-            semSignal(semid, 3);
+            DEBUG_PRINT("Tenta di uscire nella memoria condivisa\n");
+            semSignal(semid, 6);
+            DEBUG_PRINT("Sono uscito dalla memoria condivisa\n");
 
             // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e
             // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
@@ -371,7 +385,8 @@ int main(int argc, char * argv[]) {
         for(int i=0;i<n;i++){
             char *temp = (char *)malloc((strlen(matriceFile[i][0].file_path)+5)*sizeof(char)); // aggiungo lo spazio per _out
             if (temp == NULL){
-                DEBUG_PRINT("temp is NULL!\n");
+                printf("[server.c:main] malloc failed\n");
+                exit(1);
             }
             strcpy(temp, matriceFile[i][0].file_path);
             strcat(temp, "_out"); // aggiungo -out
@@ -406,10 +421,12 @@ int main(int argc, char * argv[]) {
 
         // rendi fifo bloccanti
         DEBUG_PRINT("Rendi fifo bloccanti\n");
+        semWait(semid, 3);
+        semWaitZero(semid, 3);
         blockFD(fifo1_fd, 1);
         blockFD(fifo2_fd, 1);
-        semSignal(semid, 2);
-        semWait(semid, 1);
+        semWait(semid, 4);
+        semWaitZero(semid, 4);
         DEBUG_PRINT("Rese fifo bloccanti\n");
 
         // libera memoria della matrice buffer

@@ -64,6 +64,11 @@ char * int_to_string(int value){
     int needed = snprintf(NULL, 0, "%d", value);
 
     char * string = (char *) malloc(needed+1);
+    if (string == NULL){
+        printf("[client.c:int_to_string] malloc failed\n");
+        exit(1);
+    }
+
     snprintf(string, needed+1, "%d", value);
     return string;
 }
@@ -75,9 +80,11 @@ bool strEquals(char *a, char *b){
 
 
 void SIGINTSignalHandler(int sig) {
-    // blocca tutti i segnali (compresi SIGUSR1 e SIGINT) modificando la maschera
-    block_all_signals();
-    DEBUG_PRINT("Ho bloccato tutti i segnali\n");
+    // non fare niente: https://man7.org/linux/man-pages/man7/signal-safety.7.html
+}
+
+
+void operazioni_client0() {
 
     // Connettiti alle IPC e alle FIFO
     if (shmid < 0)
@@ -170,10 +177,12 @@ void SIGINTSignalHandler(int sig) {
 
     // rendi fifo non bloccanti
     DEBUG_PRINT("rendi fifo non bloccanti\n");
+    semWait(semid, 1);
+    semWaitZero(semid, 1);
     blockFD(fifo1_fd, 0);
     blockFD(fifo2_fd, 0);
-    semSignal(semid, 1);
     semWait(semid, 2);
+    semWaitZero(semid, 2);
     DEBUG_PRINT("Rese fifo non bloccanti\n");
 
     // genera <n> processi figlio Client_i (uno per ogni file "sendme_")
@@ -187,16 +196,26 @@ void SIGINTSignalHandler(int sig) {
         else if (pid == 0) {
             // copio il percorso in una nuova variabile per liberare la lista del figlio
             char * path = malloc(strlen(sendme_file->path)+1);
+            if (path == NULL){
+                printf("[client.c:SIGINTSignalHandler] malloc failed\n");
+                exit(1);
+            }
+            DEBUG_PRINT("Ho fatto la malloc (figlio %d)\n", getpid());
             strcpy(path, sendme_file->path);
+            DEBUG_PRINT("Ho copiato il percorso del file che devo gestire (figlio %d)\n", getpid());
 
             // libero lista dei file del figlio
             free_list(sendme_files);
+            DEBUG_PRINT("Ho liberato la memoria della lista dei file (figlio %d)\n", getpid());
 
             // esegui operazioni del figlio
             operazioni_figlio(path);
+            DEBUG_PRINT("Ho terminato le operazioni principali (figlio %d)\n", getpid());
 
             // libera la memoria della variabile con il percorso e termina
             free(path);
+            DEBUG_PRINT("Ho liberato la memoria occupata dal percorso del file che devo gestire (figlio %d)\n", getpid());
+
             exit(0);
         }
 
@@ -208,6 +227,7 @@ void SIGINTSignalHandler(int sig) {
     // informa che tutti i file di output sono stati creati dal server stesso e che il server ha concluso le sue operazioni.
     DEBUG_PRINT("Attendo di ricevere messaggio di fine.\n");
     msg_t end_msg;
+    // TODO: msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere
     while (msgrcv(msqid, &end_msg, sizeof(struct msg_t)-sizeof(long), CONTAINS_DONE, 0) == -1);
     DEBUG_PRINT("Ricevuto messaggio di fine: '%s'\n", end_msg.msg_body);
 
@@ -219,14 +239,13 @@ void SIGINTSignalHandler(int sig) {
 
     // rendi fifo bloccanti
     DEBUG_PRINT("rendi fifo bloccanti\n");
+    semWait(semid, 3);
+    semWaitZero(semid, 3);
     blockFD(fifo1_fd, 1);
     blockFD(fifo2_fd, 1);
-    semSignal(semid, 1);
-    semWait(semid, 2);
+    semWait(semid, 4);
+    semWaitZero(semid, 4);
     DEBUG_PRINT("rese fifo bloccanti\n");
-
-    // sblocca i segnali SIGINT e SIGUSR1
-    block_sig_no_SIGINT_SIGUSR1();
 }
 
 
@@ -303,7 +322,6 @@ void operazioni_figlio(char * filePath){
     DEBUG_PRINT("Il file %s contiene verra' diviso in parti con questi caratteri: %ld %ld %ld %ld\n", filePath, msg_lengths[0], msg_lengths[1], msg_lengths[2], msg_lengths[3]);
 
     // prepara i quattro messaggi (4 porzioni del contenuto del file) per l’invio
-    // > NOTA: questo codice sarebbe da sistemare: forse si puo' creare una matrice 4 x (MSG_BUFFER_SZ+1) e usare un for?
     lseek(fd, 0, SEEK_SET);
     char msg_buffer[MSG_PARTS_NUM][MSG_BUFFER_SZ + 1];
 
@@ -314,8 +332,8 @@ void operazioni_figlio(char * filePath){
     // si blocca su un semaforo fino a quando tutti i client sono arrivati a questo punto
     // > Attesa con semop() finche' non arriva a zero.
     DEBUG_PRINT("Sono il figlio %d, decremento il semaforo di sincronizzazione con gli altri figli e attendo\n", getpid());
-    semWait(semid, 4);
-    semWaitZero(semid, 4);
+    semWait(semid, 5);
+    semWaitZero(semid, 5);
     DEBUG_PRINT("Sono arrivati tutti i fratelli, parto a inviare il mio file (pid %d)\n", getpid());
 
     // -- INVIO 4 MESSAGGI
@@ -335,7 +353,7 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.file_path,filePath);
             strcpy(supporto.msg_body,msg_buffer[0]);
 
-            printf("Tenta invio messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+            DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
 
             if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
                 // la scrittura ha avuto successo
@@ -351,7 +369,7 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.file_path,filePath);
             strcpy(supporto.msg_body,msg_buffer[1]);
 
-            printf("Tenta invio messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+            DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
 
             if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
                 // la scrittura ha avuto successo
@@ -367,7 +385,7 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.file_path,filePath);
             strcpy(supporto.msg_body,msg_buffer[2]);
 
-            printf("Tenta invio messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
+            DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
 
             if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
                 // la scrittura ha avuto successo
@@ -388,7 +406,7 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[3]);
 
             DEBUG_PRINT("Tento di entrare nella zona critica (figlio %d)\n", getpid());
-            semWait(semid, 3);
+            semWait(semid, 6);
             DEBUG_PRINT("Sono dentro la zona critica (figlio %d)\n", getpid());
             for (int i = 0; i < 50; i++) {
                 if (shm_check_ptr[i] == 0) {
@@ -399,10 +417,12 @@ void operazioni_figlio(char * filePath){
                     break;
                 }
             }
-            semSignal(semid, 3);
+            semSignal(semid, 6);
             DEBUG_PRINT("Sono fuori la zona critica (figlio %d)\n", getpid());
         }
     }
+
+    DEBUG_PRINT("Sono il figlio %d e ho finito di inviare i messaggi\n", getpid());
 
     // chiude il file
     if (close(fd) == -1) {
@@ -442,9 +462,20 @@ int main(int argc, char * argv[]) {
     // > Il processo terminera' con il segnale SIGUSR1
     while (true) {
         pause();
+
+        // blocca tutti i segnali (compresi SIGUSR1 e SIGINT) modificando la maschera
+        block_all_signals();
+        DEBUG_PRINT("Ho bloccato tutti i segnali\n");
+
+        // esegui le operazioni del client_0
+        operazioni_client0();
+
         DEBUG_PRINT("\n");
         DEBUG_PRINT("==========================================================\n");
         DEBUG_PRINT("\n");
+
+        // sblocca i segnali SIGINT e SIGUSR1
+        block_sig_no_SIGINT_SIGUSR1();
     }
 
     return 0;
