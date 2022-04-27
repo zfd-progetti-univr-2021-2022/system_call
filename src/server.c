@@ -207,11 +207,9 @@ char * costruisciStringa(msg_t a){
 
 
 /**
- * ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
+ * Esegue operazioni principali del server.
  *
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
- *
- * @todo La ricezione dei messaggi dai vari canali dovra' essere asincrona.
  *
  * @warning I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine?
 */
@@ -242,7 +240,7 @@ int main(int argc, char * argv[]) {
     shm_ptr = (msg_t *) get_shared_memory(shmid, IPC_CREAT | S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    shm_check_id = alloc_shared_memory(get_ipc_key()+1, 53 * sizeof(int));
+    shm_check_id = alloc_shared_memory(get_ipc_key2(), 53 * sizeof(int));
     shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 

@@ -94,7 +94,7 @@ void operazioni_client0() {
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
     if (shm_check_id < 0)
-        shm_check_id = alloc_shared_memory(get_ipc_key()+1, 53 * sizeof(int));
+        shm_check_id = alloc_shared_memory(get_ipc_key2(), 53 * sizeof(int));
     if (shm_check_ptr == NULL)
         shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");

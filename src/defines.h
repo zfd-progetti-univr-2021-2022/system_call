@@ -66,12 +66,30 @@ typedef struct msg_t {
 
 
 /**
- * Restituisce la chiave IPC
- * ottenuta con ftok sull'eseguibile del server.
+ * Restituisce la prima chiave IPC
+ * ottenuta con get_project_ipc_key().
  *
  * @return key_t Chiave IPC
 */
 key_t get_ipc_key();
+
+
+/**
+ * Restituisce la seconda chiave IPC
+ * ottenuta con get_project_ipc_key().
+ *
+ * @return key_t Chiave IPC
+*/
+key_t get_ipc_key2();
+
+
+/**
+ * Restituisce una chiave IPC generica per il progetto
+ * ottenuta con ftok sulla cartella con gli eseguibili.
+ *
+ * @return key_t Chiave IPC
+*/
+key_t get_project_ipc_key(char proj_id);
 
 
 /**
