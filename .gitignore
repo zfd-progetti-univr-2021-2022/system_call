@@ -12,3 +12,13 @@ dist/
 docs/doxygen/warnings.log
 
 docs/doxygen/theory/*/build
+
+# ignore tests output
+tests/end2end/*.log
+*/test_area/*.txt_out*
+*/test_area/client_0
+*/test_area/server
+
+# ignore debugging files
+*/.gdb_history
+.gdb_history
