@@ -263,8 +263,10 @@ int main(int argc, char * argv[]) {
     //limito la coda
     struct msqid_ds ds;
     ds.msg_qbytes=sizeof(msg_t)*50;
-    if(msgctl(msqid,IPC_SET,&ds)==-1)
-        printf("Non sono riuscito a limitare la coda");
+    if(msgctl(msqid,IPC_SET,&ds)==-1){
+        if(errno != EPERM)
+            ErrExit("msgctl set msgqueue size failed");
+    }
 
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
