@@ -1,4 +1,4 @@
-CFLAGS   = -Wall -std=gnu99
+CFLAGS   = -Wall -std=gnu99 -DDEBUG=-1
 INCLUDES = -I .
 OBJDIR   = obj
 
