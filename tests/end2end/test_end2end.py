@@ -406,7 +406,14 @@ def soundness_test(production):
         time.sleep(5)
 
         print("[TEST_END2END:SOUNDNESS_TEST] FACCIO PARTIRE I TEST")
-        for _ in range(1000):
+        n_tests = 1000
+        try:
+            if os.environ["USER"] == "runner": # gh actions
+                n_tests = 100
+        except KeyError:
+            pass
+
+        for _ in range(n_tests):
             files = find_sendme_files()
             expected_outputs = prepare_expected_outputs(files)
             time.sleep(0.5)
