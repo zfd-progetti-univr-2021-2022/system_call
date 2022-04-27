@@ -50,7 +50,8 @@ void semOp (int semid, unsigned short sem_num, short sem_op);
 
 
 /**
- * @brief Attende che il semaforo sem_num raggiunga il valore zero.
+ * Attende che il semaforo sem_num raggiunga il valore zero.
+ * > Prima di usarla per sincronizzare processi richiamare semWait sullo stesso semaforo.
  *
  * @param semid Identificatore del set di semafori
  * @param sem_num Indice di un semaforo nel set

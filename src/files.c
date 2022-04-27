@@ -84,12 +84,7 @@ int count_files(files_list * head) {
     return num;
 }
 
-/**
- * @brief Restituisce dimensione del file in byte
- *
- * @param filePath
- * @return long
- */
+
 long getFileSize(char * filePath) {
     if (filePath == NULL)
         return -1;
@@ -114,8 +109,6 @@ int checkFileName(char * fileName) {
 }
 
 
-// search method recursively traverse the filesystem taking the value of searchPath
-// as root directory
 files_list * find_sendme_files(char *searchPath, files_list * head) {
     // open the current searchPath
     DIR *dirp = opendir(searchPath);
