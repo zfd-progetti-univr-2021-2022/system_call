@@ -20,6 +20,8 @@
  *       $$25 * 2 = 50$$
  *       Ovvero 50 KB.
  *
+ * @todo msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.
+ *
  * @warning Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe
  *          prima cercare e contare quanti file sono presenti senza creare una lista concatenata
  *          e poi ricercare i file e man mano che si trovano file send_me si puo' creare il

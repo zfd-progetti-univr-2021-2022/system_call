@@ -2,9 +2,8 @@
  * @file client.c
  * @brief Contiene l'implementazione del client.
  *
- * @todo Completare l'implementazione delle funzioni.
- * @todo Rimuovere printf di debug o gestirle tramite flag di compilazione.
- * @todo Spostare la funzione dividi() ? (una opzione e' metterla in files.c)
+ * @todo Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO.
+ * @todo Spostare le funzioni non main fuori dal file client.c ? (ad esempio una opzione per la funzioen dividi() e' metterla in files.c)
  *
  * @warning La specifica non richiede la documentazione. E' richiesta?
  *

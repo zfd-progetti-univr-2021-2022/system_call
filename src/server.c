@@ -1,5 +1,10 @@
-/// @file server.c
-/// @brief Contiene l'implementazione del server.
+/**
+ * @file server.c
+ * @brief Contiene l'implementazione del server.
+ *
+ * @todo Spostare le funzioni non main fuori dal file server.c ?
+ * @todo Spostare cio' che non riguarda i segnali in una funzione fuori dal main ?
+*/
 
 #include <signal.h>
 #include <stdio.h>
