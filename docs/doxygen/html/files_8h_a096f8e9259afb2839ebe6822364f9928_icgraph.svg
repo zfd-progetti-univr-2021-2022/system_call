@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 566;
+var viewWidth = 554;
 var viewHeight = 84;
 var sectionId = 'dynsection-10';
 </script>
@@ -93,32 +93,32 @@ var sectionId = 'dynsection-10';
 <!-- Node40 -->
 <g id="node3" class="node">
 <title>Node40</title>
-<g id="a_node3"><a xlink:href="client_8h.html#a48d605ff689f470746c858648f0a98c2" target="_top" xlink:title="Handler del segnale SIGINT. ">
-<polygon fill="none" stroke="#000000" points="363,-28.5 363,-47.5 481,-47.5 481,-28.5 363,-28.5"/>
-<text text-anchor="middle" x="422" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">SIGINTSignalHandler</text>
+<g id="a_node3"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
+<polygon fill="none" stroke="#000000" points="363,-28.5 363,-47.5 469,-47.5 469,-28.5 363,-28.5"/>
+<text text-anchor="middle" x="416" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
 <!-- Node39&#45;&gt;Node40 -->
 <g id="edge2" class="edge">
 <title>Node39&#45;&gt;Node40</title>
-<path fill="none" stroke="#191970" d="M333.5791,-54.8421C346.3011,-52.4188 359.6456,-49.877 372.0001,-47.5238"/>
-<polygon fill="#191970" stroke="#191970" points="332.7092,-51.4448 323.5407,-56.7542 334.019,-58.3211 332.7092,-51.4448"/>
+<path fill="none" stroke="#191970" d="M333.1832,-54.4459C344.7955,-52.1399 356.8679,-49.7425 368.0871,-47.5146"/>
+<polygon fill="#191970" stroke="#191970" points="332.2566,-51.0615 323.1298,-56.4423 333.6201,-57.9274 332.2566,-51.0615"/>
 </g>
 <!-- Node41 -->
 <g id="node4" class="node">
 <title>Node41</title>
 <g id="a_node4"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
-<polygon fill="none" stroke="#000000" points="517,-28.5 517,-47.5 558,-47.5 558,-28.5 517,-28.5"/>
-<text text-anchor="middle" x="537.5" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+<polygon fill="none" stroke="#000000" points="505,-28.5 505,-47.5 546,-47.5 546,-28.5 505,-28.5"/>
+<text text-anchor="middle" x="525.5" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
 <!-- Node40&#45;&gt;Node41 -->
 <g id="edge3" class="edge">
 <title>Node40&#45;&gt;Node41</title>
-<path fill="none" stroke="#191970" d="M491.2973,-38C500.5856,-38 509.4584,-38 516.9009,-38"/>
-<polygon fill="#191970" stroke="#191970" points="491.1034,-34.5001 481.1034,-38 491.1034,-41.5001 491.1034,-34.5001"/>
+<path fill="none" stroke="#191970" d="M479.2796,-38C488.5452,-38 497.4767,-38 504.9772,-38"/>
+<polygon fill="#191970" stroke="#191970" points="479.1462,-34.5001 469.1462,-38 479.1462,-41.5001 479.1462,-34.5001"/>
 </g>
 <!-- Node43 -->
 <g id="node6" class="node">
@@ -138,8 +138,8 @@ var sectionId = 'dynsection-10';
 <!-- Node43&#45;&gt;Node40 -->
 <g id="edge6" class="edge">
 <title>Node43&#45;&gt;Node40</title>
-<path fill="none" stroke="#191970" d="M335.2923,-21.4843C347.5112,-23.8116 360.2335,-26.235 372.0482,-28.4854"/>
-<polygon fill="#191970" stroke="#191970" points="335.6562,-17.9907 325.1779,-19.5577 334.3464,-24.8671 335.6562,-17.9907"/>
+<path fill="none" stroke="#191970" d="M333.1832,-21.5541C344.7955,-23.8601 356.8679,-26.2575 368.0871,-28.4854"/>
+<polygon fill="#191970" stroke="#191970" points="333.6201,-18.0726 323.1298,-19.5577 332.2566,-24.9385 333.6201,-18.0726"/>
 </g>
 <!-- Node43&#45;&gt;Node43 -->
 <g id="edge7" class="edge">

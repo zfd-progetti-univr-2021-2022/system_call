@@ -17,7 +17,7 @@
 <!-- Node12 -->
 <g id="node2" class="node">
 <title>Node12</title>
-<g id="a_node2"><a xlink:href="files_8c.html#a096f8e9259afb2839ebe6822364f9928" target="_top" xlink:title="Restituisce dimensione del file in byte. ">
+<g id="a_node2"><a xlink:href="files_8c.html#a096f8e9259afb2839ebe6822364f9928" target="_top" xlink:title="Restituisce la dimensione in byte del file con percorso filePath. ">
 <polygon fill="none" stroke="#000000" points="118,-.5 118,-19.5 187,-19.5 187,-.5 118,-.5"/>
 <text text-anchor="middle" x="152.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">getFileSize</text>
 </a>

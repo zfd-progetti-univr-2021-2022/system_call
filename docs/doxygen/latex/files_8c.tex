@@ -34,7 +34,7 @@ void \hyperlink{files_8c_a786a7b6f9c01e8489d7196a79f5f3862}{free\+\_\+list} (\hy
 int \hyperlink{files_8c_a3ba19f05c37434e7f20facff3445651a}{count\+\_\+files} (\hyperlink{structfiles__list}{files\+\_\+list} $\ast$head)
 \begin{DoxyCompactList}\small\item\em Conta il numero di file nella lista concatenata di file\+Path. \end{DoxyCompactList}\item 
 long \hyperlink{files_8c_a096f8e9259afb2839ebe6822364f9928}{get\+File\+Size} (char $\ast$file\+Path)
-\begin{DoxyCompactList}\small\item\em Restituisce dimensione del file in byte. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Restituisce la dimensione in byte del file con percorso file\+Path. \end{DoxyCompactList}\item 
 int \hyperlink{files_8c_a5ac4517096592013308a3252f3226f60}{check\+File\+Size} (char $\ast$file\+Path)
 \begin{DoxyCompactList}\small\item\em Restituisce 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti. \end{DoxyCompactList}\item 
 int \hyperlink{files_8c_a675d61c6bfe0d9ddd1be59233dfd7d5c}{check\+File\+Name} (char $\ast$file\+Name)
@@ -69,7 +69,8 @@ Aggiunge in fondo alla coda un nuovo file\+Path.
 \begin{DoxyReturn}{Restituisce}
 files\+\_\+list$\ast$ Nodo di testa della coda (se head == N\+U\+LL verra\textquotesingle{} creato il primo nodo) 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -101,7 +102,8 @@ Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \includegraphics[width=275pt]{files_8c_a675d61c6bfe0d9ddd1be59233dfd7d5c_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -126,14 +128,16 @@ Restituisce 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti.
 \begin{DoxyReturn}{Restituisce}
 int Vale 1 se il percorso ha la dimensione $<$= 4 KB, 0 altrimenti 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=267pt]{files_8c_a5ac4517096592013308a3252f3226f60_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -158,7 +162,8 @@ Conta il numero di file nella lista concatenata di file\+Path.
 \begin{DoxyReturn}{Restituisce}
 int Numero di file 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -183,14 +188,16 @@ Ricerca ricorsivamente nel percorso search\+Path i file che inizianano con \char
 \begin{DoxyReturn}{Restituisce}
 files\+\_\+list$\ast$ Testa della lista concatenata con i percorsi dei file che hanno i requisiti richiesti 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{files_8c_a627e4b202ea71f3bd241ccf562449bd6_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -212,7 +219,8 @@ Libera la memoria dello H\+E\+AP occupata dalla lista di file\+Path.
 {\em head} & Nodo di testa della coda \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -227,19 +235,18 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 
 
 
-Restituisce dimensione del file in byte. 
-
-Restituisce la dimensione in byte del file con percorso file\+Path.
+Restituisce la dimensione in byte del file con percorso file\+Path. 
 
 
 \begin{DoxyParams}{Parametri}
-{\em file\+Path} & \\
+{\em file\+Path} & Percorso del file \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Restituisce}
-long 
+long Dimensione del file in byte 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -261,7 +268,8 @@ Visualizza il contenuto della lista concatenata di file\+Path.
 {\em head} & Nodo di testa della coda \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

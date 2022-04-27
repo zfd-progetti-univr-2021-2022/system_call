@@ -1,5 +1,5 @@
 <map id="alloc_shared_memory" name="alloc_shared_memory">
-<area shape="rect" id="node2" href="$client_8h.html#a48d605ff689f470746c858648f0a98c2" title="Handler del segnale SIGINT. " alt="" coords="220,5,377,32"/>
-<area shape="rect" id="node4" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="271,56,326,83"/>
-<area shape="rect" id="node3" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="425,5,480,32"/>
+<area shape="rect" id="node2" href="$client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="220,5,361,32"/>
+<area shape="rect" id="node4" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="263,56,318,83"/>
+<area shape="rect" id="node3" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="409,5,464,32"/>
 </map>

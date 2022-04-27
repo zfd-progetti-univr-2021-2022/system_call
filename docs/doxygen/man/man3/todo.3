@@ -1,26 +1,20 @@
-.TH "todo" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "todo" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 todoElenco delle cose da fare 
  \- 
 .IP "\fBFile \fBclient\&.c\fP \fP" 1c
-Completare l'implementazione delle funzioni\&. 
+Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO\&. 
 .PP
-Rimuovere printf di debug o gestirle tramite flag di compilazione\&. 
+Spostare le funzioni non main fuori dal file \fBclient\&.c\fP ? (ad esempio una opzione per la funzioen \fBdividi()\fP e' metterla in \fBfiles\&.c\fP) 
+.IP "\fBGlobale \fBoperazioni_client0\fP ()\fP" 1c
+Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0\&. Attualmente la dimensione massima occupata dal client e': $$100 file * dim\&. path + 100 file * dim\&. pointer$$\&. Assumento dim\&. path massima = 250 caratteri e dim\&. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte\&. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un'altra lista concatenata\&. Quindi in pratica si occupano: $$25 * 2 = 50$$ Ovvero 50 KB\&.
 .PP
-Spostare la funzione \fBdividi()\fP ? (una opzione e' metterla in \fBfiles\&.c\fP) 
-.IP "\fBGlobale \fBmain\fP (int argc, char *argv[])\fP" 1c
-La ricezione dei messaggi dai vari canali dovra' essere asincrona\&. 
-.IP "\fBGlobale \fBoperazioni_figlio\fP (char *filePath)\fP" 1c
-Aggiungere la sincronizzazione con gli altri client
+msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere\&. 
+.IP "\fBFile \fBserver\&.c\fP \fP" 1c
+Spostare le funzioni non main fuori dal file \fBserver\&.c\fP ? 
 .PP
-Aggiungere la parte di comunicazione delle quattro parti dei messaggi 
-.IP "\fBGlobale \fBSIGINTSignalHandler\fP (int sig)\fP" 1c
-Gestire la parte di comunicazione con il server\&.
-.PP
-Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0\&. Attualmente la dimensione massima occupata dal client e': $$100 file * dim\&. path + 100 file * dim\&. pointer$$\&. Assumento dim\&. path massima = 250 caratteri e dim\&. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte\&. Altro problema: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero: $$25 + 100 * 25 = 2525$$ Ovvero 2525 KB, circa 2\&.5 MB\&. 
-.IP "\fBGlobale \fBSIGUSR1SignalHandler\fP (int sig)\fP" 1c
-Gestire la chiusura delle risorse\&. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni\&.
+Spostare cio' che non riguarda i segnali in una funzione fuori dal main ? 
 .PP
 

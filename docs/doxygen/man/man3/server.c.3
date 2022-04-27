@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -113,6 +113,15 @@
 Contiene l'implementazione del server\&. 
 
 
+.PP
+\fBDa fare\fP
+.RS 4
+Spostare le funzioni non main fuori dal file \fBserver\&.c\fP ? 
+.PP
+Spostare cio' che non riguarda i segnali in una funzione fuori dal main ? 
+.RE
+.PP
+
 .SH "Documentazione delle funzioni"
 .PP 
 .SS "void aggiungiAMatrice (\fBmsg_t\fP a, int righe)"
@@ -141,15 +150,9 @@ char* Stringa pronta per essere scritta su file
 .PP
 
 .SS "int main (int argc, char * argv[])"
-ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file\&. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine\&.
+Esegue operazioni principali del server\&.
 .PP
 terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
-.PP
-\fBDa fare\fP
-.RS 4
-La ricezione dei messaggi dai vari canali dovra' essere asincrona\&.
-.RE
-.PP
 .PP
 \fBWarnings\fP
 .RS 4
@@ -160,7 +163,7 @@ I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene ri
 .SS "void SIGINTSignalHandler (int sig)"
 
 .PP
-Chiude tutte le IPC e termina\&. Handler del segnale SIGINT\&.
+Chiude tutte le IPC e termina\&. 
 .PP
 \fBParametri:\fP
 .RS 4

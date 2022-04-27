@@ -1,0 +1,47 @@
+\subsection*{Come suddividere messaggi non divisibili per 4}
+
+D\+O\+M\+A\+N\+DA\+:
+
+Siccome l\textquotesingle{}ultima parte del messaggio e\textquotesingle{} l\textquotesingle{}unica che puo\textquotesingle{} essere piu\textquotesingle{} corta per specifica... Cosa bisogna fare in casi in cui non e\textquotesingle{} possibile garantire questo vincolo?
+
+Esempio\+: 2 caratteri possono essere divisi in\+:
+\begin{DoxyItemize}
+\item caratteri per parte\+: 1 1 0 0
+\item oppure\+: 2 0 0 0
+\end{DoxyItemize}
+
+Lo stesso problema si pone per 1, 2, 5, 6, 9, 10, ... caratteri.
+
+Non posso garantire come ad esempio nel caso di 3 caratteri che sono l\textquotesingle{}ultimo numero sia inferiore\+:
+
+Esempio di suddivisione di 3 caratteri\+: 1 1 1 0. L\textquotesingle{}ultimo, come per specifica, e\textquotesingle{} l\textquotesingle{}unico di dimensione inferiore
+
+R\+I\+S\+P\+O\+S\+TA\+:
+
+Va bene l\textquotesingle{}algoritmo attualmente utilizzato\+: il contenuto di un file viene diviso in parti uguali e intere tra i canali di comunicazione mentre il resto viene distribuito un pezzo per canale di comunicazione.
+
+Esempi\+:
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Numero caratteri}&\textbf{ Caratteri per F\+I\+FO 1}&\textbf{ Caratteri per F\+I\+FO 2}&\textbf{ Caratteri per msgqueue}&\textbf{ Caratteri per memoria condivisa  }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Numero caratteri}&\textbf{ Caratteri per F\+I\+FO 1}&\textbf{ Caratteri per F\+I\+FO 2}&\textbf{ Caratteri per msgqueue}&\textbf{ Caratteri per memoria condivisa  }\\\cline{1-5}
+\endhead
+0 &0 &0 &0 &0 \\\cline{1-5}
+1 &1 &0 &0 &0 \\\cline{1-5}
+2 &1 &1 &0 &0 \\\cline{1-5}
+3 &1 &1 &1 &0 \\\cline{1-5}
+4 &1 &1 &1 &1 \\\cline{1-5}
+5 &2 &1 &1 &1 \\\cline{1-5}
+6 &2 &2 &1 &1 \\\cline{1-5}
+7 &2 &2 &2 &1 \\\cline{1-5}
+8 &2 &2 &2 &2 \\\cline{1-5}
+9 &3 &2 &2 &2 \\\cline{1-5}
+10 &3 &3 &2 &2 \\\cline{1-5}
+... &... &... &... &... \\\cline{1-5}
+\end{longtabu}

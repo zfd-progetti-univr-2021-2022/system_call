@@ -1,3 +1,3 @@
 <map id="checkFileSize" name="checkFileSize">
-<area shape="rect" id="node2" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce dimensione del file in byte. " alt="" coords="163,5,255,32"/>
+<area shape="rect" id="node2" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce la dimensione in byte del file con percorso filePath. " alt="" coords="163,5,255,32"/>
 </map>

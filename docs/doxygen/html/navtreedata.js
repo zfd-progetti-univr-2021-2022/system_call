@@ -6,6 +6,7 @@ var NAVTREE =
     [ "Teoria: generare chiavi per le IPC", "md_theory_generate_keys_generate_keys.html", null ],
     [ "Teoria: coda dei messaggi", "md_theory_message_queue_message_queue.html", null ],
     [ "Teoria: PIPE", "md_theory_pipe_pipe.html", null ],
+    [ "DUBBI RISOLTI", "md_theory_questions_questions.html", null ],
     [ "Teoria: semafori", "md_theory_semaphores_semaphores.html", null ],
     [ "Teoria: memoria condivisa", "md_theory_shared_memory_shared_memory.html", null ],
     [ "Teoria: segnali", "md_theory_signals_signals.html", null ],

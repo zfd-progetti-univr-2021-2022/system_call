@@ -179,6 +179,9 @@ int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ser
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
 <div class="textblock"><p>Contiene l'implementazione del server. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Da fare:</a></b></dt><dd><p class="startdd">Spostare le funzioni non main fuori dal file <a class="el" href="server_8c.html" title="Contiene l&#39;implementazione del server. ">server.c</a> ? </p>
+<p class="enddd">Spostare cio' che non riguarda i segnali in una funzione fuori dal main ? </p>
+</dd></dl>
 </div><h2 class="groupheader">Documentazione delle funzioni</h2>
 <a id="ac94aa68fd5fccbf448cfe8788bd46225"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac94aa68fd5fccbf448cfe8788bd46225">&#9670;&nbsp;</a></span>aggiungiAMatrice()</h2>
@@ -277,10 +280,9 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>ANNOTAZIONE: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.</p>
+<p>Esegue operazioni principali del server.</p>
 <p>terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Da fare:</a></b></dt><dd>La ricezione dei messaggi dai vari canali dovra' essere asincrona.</dd></dl>
-<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000008">Warnings:</a></b></dt><dd>I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? </dd></dl>
+<dl class="warning"><dt><b><a class="el" href="warning.html#_warning000007">Warnings:</a></b></dt><dd>I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? </dd></dl>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
@@ -307,7 +309,6 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 </div><div class="memdoc">
 
 <p>Chiude tutte le IPC e termina. </p>
-<p>Handler del segnale SIGINT.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
     <tr><td class="paramname">sig</td><td>Intero che rappresenta il segnale catturato dalla funzione </td></tr>
@@ -317,7 +318,7 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="server_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8c_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="515" height="166"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <div class="dynheader">

@@ -18,5 +18,7 @@ var defines_8h =
     [ "arrayContainsAllTrue", "defines_8h.html#ac281b05b7a90ba292f5748cbfe3c389d", null ],
     [ "blockFD", "defines_8h.html#aea9b93cad897755a46cb9e3373ba8cc2", null ],
     [ "get_ipc_key", "defines_8h.html#a2d341373a96ffea0944553e5452cdbca", null ],
+    [ "get_ipc_key2", "defines_8h.html#afd25e0dffe44c8dd59ae86caabb94287", null ],
+    [ "get_project_ipc_key", "defines_8h.html#abe68b7232c057100c2e21586906436d7", null ],
     [ "EXECUTABLE_DIR", "defines_8h.html#a709c4fcdc1217a8f8785cb59e85beee5", null ]
 ];
