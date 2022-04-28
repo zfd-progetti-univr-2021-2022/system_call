@@ -1,0 +1,7 @@
+<map id="get_project_ipc_key" name="get_project_ipc_key">
+<area shape="rect" id="node2" href="$defines_8h.html#a2d341373a96ffea0944553e5452cdbca" title="get_ipc_key" alt="" coords="209,5,309,32"/>
+<area shape="rect" id="node6" href="$defines_8h.html#afd25e0dffe44c8dd59ae86caabb94287" title="get_ipc_key2" alt="" coords="205,56,313,83"/>
+<area shape="rect" id="node3" href="$client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="361,5,503,32"/>
+<area shape="rect" id="node5" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="405,56,459,83"/>
+<area shape="rect" id="node4" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="551,5,605,32"/>
+</map>

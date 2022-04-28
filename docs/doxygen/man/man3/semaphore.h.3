@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.h" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.h" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -207,10 +207,19 @@ Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente 
 .SS "void semWaitZero (int semid, int sem_num)"
 
 .PP
-Attende che il semaforo sem_num raggiunga il valore zero\&. 
+Attende che il semaforo sem_num raggiunga il valore zero\&. Attende che il semaforo sem_num raggiunga il valore zero\&. 
+.PP
+.RS 4
+Prima di usarla per sincronizzare processi richiamare semWait sullo stesso semaforo\&. 
+.RE
+.PP
 .PP
 \fBParametri:\fP
 .RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set
+.br
 \fIsemid\fP Identificatore del set di semafori 
 .br
 \fIsem_num\fP Indice di un semaforo nel set 

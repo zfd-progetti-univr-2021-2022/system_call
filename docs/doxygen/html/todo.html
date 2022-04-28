@@ -94,22 +94,17 @@ $(document).ready(function(){initNavTree('todo.html','');});
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt><a class="anchor" id="_todo000001"></a>File <a class="el" href="client_8c.html">client.c</a>  </dt>
-<dd><p class="startdd">Completare l'implementazione delle funzioni. </p>
-<p>Rimuovere printf di debug o gestirle tramite flag di compilazione. </p>
-<p class="enddd">Spostare la funzione <a class="el" href="client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. ">dividi()</a> ? (una opzione e' metterla in <a class="el" href="files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. ">files.c</a>) </p>
+<dd><p class="startdd">Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO. </p>
+<p class="enddd">Spostare le funzioni non main fuori dal file <a class="el" href="client_8c.html" title="Contiene l&#39;implementazione del client. ">client.c</a> ? (ad esempio una opzione per la funzioen <a class="el" href="client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. ">dividi()</a> e' metterla in <a class="el" href="files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. ">files.c</a>) </p>
 </dd>
-<dt><a class="anchor" id="_todo000007"></a>Globale <a class="el" href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>  (int argc, char *argv[])</dt>
-<dd>La ricezione dei messaggi dai vari canali dovra' essere asincrona. </dd>
-<dt><a class="anchor" id="_todo000005"></a>Globale <a class="el" href="client_8h.html#a54b47b58f228d7bc9827d2919687e25a">operazioni_figlio</a>  (char *filePath)</dt>
-<dd><p class="startdd">Aggiungere la sincronizzazione con gli altri client</p>
-<p class="enddd">Aggiungere la parte di comunicazione delle quattro parti dei messaggi </p>
+<dt><a class="anchor" id="_todo000002"></a>Globale <a class="el" href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6">operazioni_client0</a>  ()</dt>
+<dd><p class="startdd">Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0. Attualmente la dimensione massima occupata dal client e': $$100 file * dim. path + 100 file * dim. pointer$$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un'altra lista concatenata. Quindi in pratica si occupano: $$25 * 2 = 50$$ Ovvero 50 KB.</p>
+<p class="enddd">msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere. </p>
 </dd>
-<dt><a class="anchor" id="_todo000002"></a>Globale <a class="el" href="server_8c.html#a48d605ff689f470746c858648f0a98c2">SIGINTSignalHandler</a>  (int sig)</dt>
-<dd><p class="startdd">Gestire la parte di comunicazione con il server.</p>
-<p class="enddd">Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0. Attualmente la dimensione massima occupata dal client e': $$100 file * dim. path + 100 file * dim. pointer$$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte. Altro problema: ogni client i eredita la lista creando al massimo altre 100 liste concatenate? In quel caso si occuperebbero: $$25 + 100 * 25 = 2525$$ Ovvero 2525 KB, circa 2.5 MB. </p>
+<dt><a class="anchor" id="_todo000004"></a>File <a class="el" href="server_8c.html">server.c</a>  </dt>
+<dd><p class="startdd">Spostare le funzioni non main fuori dal file <a class="el" href="server_8c.html" title="Contiene l&#39;implementazione del server. ">server.c</a> ? </p>
+<p class="enddd">Spostare cio' che non riguarda i segnali in una funzione fuori dal main ? </p>
 </dd>
-<dt><a class="anchor" id="_todo000004"></a>Globale <a class="el" href="client_8h.html#a50b22adcb76198fcd9402a97ff4711bf">SIGUSR1SignalHandler</a>  (int sig)</dt>
-<dd>Gestire la chiusura delle risorse. Potrebbe non essere necessario: dipende dalla implementazione delle altre funzioni.</dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

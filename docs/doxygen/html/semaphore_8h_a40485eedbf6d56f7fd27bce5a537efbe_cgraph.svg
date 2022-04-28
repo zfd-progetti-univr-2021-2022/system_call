@@ -8,192 +8,192 @@
  viewBox="0.00 0.00 397.00 312.74" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 308.7418)">
 <title>semWaitZero</title>
-<!-- Node62 -->
+<!-- Node80 -->
 <g id="node1" class="node">
-<title>Node62</title>
+<title>Node80</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-152.5 0,-171.5 82,-171.5 82,-152.5 0,-152.5"/>
 <text text-anchor="middle" x="41" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semWaitZero</text>
 </g>
-<!-- Node63 -->
+<!-- Node81 -->
 <g id="node2" class="node">
-<title>Node63</title>
+<title>Node81</title>
 <g id="a_node2"><a xlink:href="semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" target="_top" xlink:title="Funzione di supporto per manipolare i valori di un set di semafori. ">
 <polygon fill="none" stroke="#000000" points="243.5,-247.5 243.5,-266.5 294.5,-266.5 294.5,-247.5 243.5,-247.5"/>
 <text text-anchor="middle" x="269" y="-254.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semOp</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node63 -->
+<!-- Node80&#45;&gt;Node81 -->
 <g id="edge1" class="edge">
-<title>Node62&#45;&gt;Node63</title>
+<title>Node80&#45;&gt;Node81</title>
 <path fill="none" stroke="#191970" d="M43.1243,-171.7206C49.3393,-197.4812 70.1535,-267.414 118,-295 159.5981,-318.9835 216.1658,-291.3911 246.9035,-272.2481"/>
 <polygon fill="#191970" stroke="#191970" points="249.0717,-275.0142 255.5684,-266.645 245.2706,-269.1361 249.0717,-275.0142"/>
 </g>
-<!-- Node64 -->
+<!-- Node82 -->
 <g id="node3" class="node">
-<title>Node64</title>
+<title>Node82</title>
 <g id="a_node3"><a xlink:href="err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" target="_top" xlink:title="Prints the error message of the last failed system call and terminates the calling process...">
 <polygon fill="none" stroke="#000000" points="340,-114.5 340,-133.5 389,-133.5 389,-114.5 340,-114.5"/>
 <text text-anchor="middle" x="364.5" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">ErrExit</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node64 -->
+<!-- Node80&#45;&gt;Node82 -->
 <g id="edge9" class="edge">
-<title>Node62&#45;&gt;Node64</title>
+<title>Node80&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M68.3084,-171.5354C117.4426,-187.0781 223.1547,-213.0855 304,-181 323.8053,-173.1397 340.891,-155.3842 351.8054,-141.7631"/>
 <polygon fill="#191970" stroke="#191970" points="354.7816,-143.6318 358.0532,-133.5547 349.2115,-139.3921 354.7816,-143.6318"/>
 </g>
-<!-- Node65 -->
+<!-- Node83 -->
 <g id="node4" class="node">
-<title>Node65</title>
+<title>Node83</title>
 <g id="a_node4"><a xlink:href="semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" target="_top" xlink:title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr...">
 <polygon fill="none" stroke="#000000" points="128.5,-266.5 128.5,-285.5 187.5,-285.5 187.5,-266.5 128.5,-266.5"/>
 <text text-anchor="middle" x="158" y="-273.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semWait</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node65 -->
+<!-- Node80&#45;&gt;Node83 -->
 <g id="edge3" class="edge">
-<title>Node62&#45;&gt;Node65</title>
+<title>Node80&#45;&gt;Node83</title>
 <path fill="none" stroke="#191970" d="M46.6655,-171.5366C58.1008,-190.1087 85.6291,-231.5348 118,-257 120.0091,-258.5805 122.1711,-260.071 124.4124,-261.4681"/>
 <polygon fill="#191970" stroke="#191970" points="122.8504,-264.6039 133.294,-266.3874 126.242,-258.4805 122.8504,-264.6039"/>
 </g>
-<!-- Node66 -->
+<!-- Node84 -->
 <g id="node5" class="node">
-<title>Node66</title>
+<title>Node84</title>
 <g id="a_node5"><a xlink:href="semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" target="_top" xlink:title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. ">
 <polygon fill="none" stroke="#000000" points="124,-228.5 124,-247.5 192,-247.5 192,-228.5 124,-228.5"/>
 <text text-anchor="middle" x="158" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semSignal</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node66 -->
+<!-- Node80&#45;&gt;Node84 -->
 <g id="edge5" class="edge">
-<title>Node62&#45;&gt;Node66</title>
+<title>Node80&#45;&gt;Node84</title>
 <path fill="none" stroke="#191970" d="M54.7621,-171.6198C70.0534,-182.2318 95.5518,-199.7001 118,-214 122.7813,-217.0458 127.9385,-220.2203 132.9086,-223.2255"/>
 <polygon fill="#191970" stroke="#191970" points="131.1533,-226.2539 141.5311,-228.3875 134.7489,-220.2479 131.1533,-226.2539"/>
 </g>
-<!-- Node67 -->
+<!-- Node85 -->
 <g id="node6" class="node">
-<title>Node67</title>
+<title>Node85</title>
 <g id="a_node6"><a xlink:href="semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" target="_top" xlink:title="Inizializza il valore del semaforo sem_num al valore val. ">
 <polygon fill="none" stroke="#000000" points="235,-152.5 235,-171.5 303,-171.5 303,-152.5 235,-152.5"/>
 <text text-anchor="middle" x="269" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semSetVal</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node67 -->
+<!-- Node80&#45;&gt;Node85 -->
 <g id="edge7" class="edge">
-<title>Node62&#45;&gt;Node67</title>
+<title>Node80&#45;&gt;Node85</title>
 <path fill="none" stroke="#191970" d="M82.0252,-162C122.3286,-162 183.6257,-162 224.9435,-162"/>
 <polygon fill="#191970" stroke="#191970" points="224.9927,-165.5001 234.9926,-162 224.9926,-158.5001 224.9927,-165.5001"/>
 </g>
-<!-- Node68 -->
+<!-- Node86 -->
 <g id="node7" class="node">
-<title>Node68</title>
+<title>Node86</title>
 <g id="a_node7"><a xlink:href="semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" target="_top" xlink:title="Inizializza i valori del set di semafori semid ai valori in values. ">
 <polygon fill="none" stroke="#000000" points="236,-114.5 236,-133.5 302,-133.5 302,-114.5 236,-114.5"/>
 <text text-anchor="middle" x="269" y="-121.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semSetAll</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node68 -->
+<!-- Node80&#45;&gt;Node86 -->
 <g id="edge10" class="edge">
-<title>Node62&#45;&gt;Node68</title>
+<title>Node80&#45;&gt;Node86</title>
 <path fill="none" stroke="#191970" d="M82.0252,-155.1625C122.565,-148.4058 184.3454,-138.1091 225.6684,-131.2219"/>
 <polygon fill="#191970" stroke="#191970" points="226.4196,-134.6451 235.7081,-129.5486 225.2688,-127.7403 226.4196,-134.6451"/>
 </g>
-<!-- Node69 -->
+<!-- Node87 -->
 <g id="node8" class="node">
-<title>Node69</title>
+<title>Node87</title>
 <g id="a_node8"><a xlink:href="semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" target="_top" xlink:title="Cancella il set di semafori svegliando eventuali processi in attesa. ">
 <polygon fill="none" stroke="#000000" points="234,-76.5 234,-95.5 304,-95.5 304,-76.5 234,-76.5"/>
 <text text-anchor="middle" x="269" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semDelete</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node69 -->
+<!-- Node80&#45;&gt;Node87 -->
 <g id="edge12" class="edge">
-<title>Node62&#45;&gt;Node69</title>
+<title>Node80&#45;&gt;Node87</title>
 <path fill="none" stroke="#191970" d="M64.0798,-152.4799C79.2874,-146.3382 99.6996,-138.3423 118,-132 153.8265,-119.5838 195.0346,-107.1519 225.3422,-98.3481"/>
 <polygon fill="#191970" stroke="#191970" points="226.543,-101.6444 235.179,-95.5068 224.6004,-94.9193 226.543,-101.6444"/>
 </g>
-<!-- Node70 -->
+<!-- Node88 -->
 <g id="node9" class="node">
-<title>Node70</title>
+<title>Node88</title>
 <g id="a_node9"><a xlink:href="semaphore_8c.html#a7d80413e893e7d9ae3d153e23c2df2e4" target="_top" xlink:title="Recupera statistiche di un set di semafori. ">
 <polygon fill="none" stroke="#000000" points="118,-38.5 118,-57.5 198,-57.5 198,-38.5 118,-38.5"/>
 <text text-anchor="middle" x="158" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semGetStats</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node70 -->
+<!-- Node80&#45;&gt;Node88 -->
 <g id="edge14" class="edge">
-<title>Node62&#45;&gt;Node70</title>
+<title>Node80&#45;&gt;Node88</title>
 <path fill="none" stroke="#191970" d="M47.5701,-152.4437C59.9055,-134.9745 88.0047,-97.3547 118,-72 121.8192,-68.7717 126.1233,-65.7044 130.456,-62.9082"/>
 <polygon fill="#191970" stroke="#191970" points="132.5041,-65.7597 139.2439,-57.585 128.8773,-59.7725 132.5041,-65.7597"/>
 </g>
-<!-- Node71 -->
+<!-- Node89 -->
 <g id="node10" class="node">
-<title>Node71</title>
+<title>Node89</title>
 <g id="a_node10"><a xlink:href="semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" target="_top" xlink:title="Imposta i permessi su un set di semafori. ">
 <polygon fill="none" stroke="#000000" points="118.5,-.5 118.5,-19.5 197.5,-19.5 197.5,-.5 118.5,-.5"/>
 <text text-anchor="middle" x="158" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semSetPerm</text>
 </a>
 </g>
 </g>
-<!-- Node62&#45;&gt;Node71 -->
+<!-- Node80&#45;&gt;Node89 -->
 <g id="edge16" class="edge">
-<title>Node62&#45;&gt;Node71</title>
+<title>Node80&#45;&gt;Node89</title>
 <path fill="none" stroke="#191970" d="M44.2867,-152.3329C52.8461,-128.4429 77.9798,-65.8902 118,-29 119.6535,-27.4759 121.4513,-26.052 123.3388,-24.7253"/>
 <polygon fill="#191970" stroke="#191970" points="125.2421,-27.6652 132.0202,-19.5222 121.6434,-21.661 125.2421,-27.6652"/>
 </g>
-<!-- Node63&#45;&gt;Node64 -->
+<!-- Node81&#45;&gt;Node82 -->
 <g id="edge2" class="edge">
-<title>Node63&#45;&gt;Node64</title>
+<title>Node81&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M277.3241,-247.2972C284.5856,-238.7118 295.2916,-225.7571 304,-214 321.94,-189.7792 341.1024,-160.6547 352.9423,-142.232"/>
 <polygon fill="#191970" stroke="#191970" points="355.9867,-143.9677 358.421,-133.6563 350.0877,-140.1991 355.9867,-143.9677"/>
 </g>
-<!-- Node65&#45;&gt;Node63 -->
+<!-- Node83&#45;&gt;Node81 -->
 <g id="edge4" class="edge">
-<title>Node65&#45;&gt;Node63</title>
+<title>Node83&#45;&gt;Node81</title>
 <path fill="none" stroke="#191970" d="M187.746,-270.9083C201.6983,-268.5201 218.4408,-265.6543 233.0931,-263.1462"/>
 <polygon fill="#191970" stroke="#191970" points="234.0569,-266.5322 243.323,-261.3952 232.8758,-259.6326 234.0569,-266.5322"/>
 </g>
-<!-- Node66&#45;&gt;Node63 -->
+<!-- Node84&#45;&gt;Node81 -->
 <g id="edge6" class="edge">
-<title>Node66&#45;&gt;Node63</title>
+<title>Node84&#45;&gt;Node81</title>
 <path fill="none" stroke="#191970" d="M192.2094,-243.8557C205.1773,-246.0754 219.9731,-248.608 233.0931,-250.8538"/>
 <polygon fill="#191970" stroke="#191970" points="232.7416,-254.3444 243.1888,-252.5819 233.9226,-247.4448 232.7416,-254.3444"/>
 </g>
-<!-- Node67&#45;&gt;Node64 -->
+<!-- Node85&#45;&gt;Node82 -->
 <g id="edge8" class="edge">
-<title>Node67&#45;&gt;Node64</title>
+<title>Node85&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M293.0987,-152.411C304.522,-147.8656 318.3614,-142.3588 330.8033,-137.4081"/>
 <polygon fill="#191970" stroke="#191970" points="332.4116,-140.5351 340.409,-133.5859 329.8235,-134.0311 332.4116,-140.5351"/>
 </g>
-<!-- Node68&#45;&gt;Node64 -->
+<!-- Node86&#45;&gt;Node82 -->
 <g id="edge11" class="edge">
-<title>Node68&#45;&gt;Node64</title>
+<title>Node86&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M302.1332,-124C311.039,-124 320.6956,-124 329.6896,-124"/>
 <polygon fill="#191970" stroke="#191970" points="329.8589,-127.5001 339.8589,-124 329.8588,-120.5001 329.8589,-127.5001"/>
 </g>
-<!-- Node69&#45;&gt;Node64 -->
+<!-- Node87&#45;&gt;Node82 -->
 <g id="edge13" class="edge">
-<title>Node69&#45;&gt;Node64</title>
+<title>Node87&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M293.0987,-95.589C304.522,-100.1344 318.3614,-105.6412 330.8033,-110.5919"/>
 <polygon fill="#191970" stroke="#191970" points="329.8235,-113.9689 340.409,-114.4141 332.4116,-107.4649 329.8235,-113.9689"/>
 </g>
-<!-- Node70&#45;&gt;Node64 -->
+<!-- Node88&#45;&gt;Node82 -->
 <g id="edge15" class="edge">
-<title>Node70&#45;&gt;Node64</title>
+<title>Node88&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M198.2839,-46.6774C228.7001,-47.1969 270.7376,-51.2384 304,-67 323.0417,-76.023 340.0439,-93.2966 351.1383,-106.4736"/>
 <polygon fill="#191970" stroke="#191970" points="348.5373,-108.8239 357.5379,-114.4133 353.9874,-104.431 348.5373,-108.8239"/>
 </g>
-<!-- Node71&#45;&gt;Node64 -->
+<!-- Node89&#45;&gt;Node82 -->
 <g id="edge17" class="edge">
-<title>Node71&#45;&gt;Node64</title>
+<title>Node89&#45;&gt;Node82</title>
 <path fill="none" stroke="#191970" d="M197.7343,-11.9408C228.8338,-15.0985 272.0257,-23.2314 304,-44 327.5191,-59.2766 345.3909,-86.9949 355.4124,-105.4539"/>
 <polygon fill="#191970" stroke="#191970" points="352.332,-107.1167 360.0423,-114.3833 358.5464,-103.8946 352.332,-107.1167"/>
 </g>

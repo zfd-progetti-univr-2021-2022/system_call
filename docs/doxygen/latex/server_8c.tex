@@ -79,6 +79,10 @@ int $\ast$ \hyperlink{server_8c_a687e40faeef71a19cdd81e1bb787ca77}{shm\+\_\+chec
 \subsection{Descrizione dettagliata}
 Contiene l\textquotesingle{}implementazione del server. 
 
+\begin{DoxyRefDesc}{Da fare}
+\item[\hyperlink{todo__todo000004}{Da fare}]Spostare le funzioni non main fuori dal file \hyperlink{server_8c}{server.\+c} ? 
+
+Spostare cio\textquotesingle{} che non riguarda i segnali in una funzione fuori dal main ? \end{DoxyRefDesc}
 
 
 \subsection{Documentazione delle funzioni}
@@ -133,16 +137,12 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
-A\+N\+N\+O\+T\+A\+Z\+I\+O\+NE\+: Probabilmente bisogna fare un ciclo per aspettare ogni file. Per ogni file bisogna attendere le 4 parti e poi scriverle su file in ordine.
+Esegue operazioni principali del server.
 
 terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC.
 
-\begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000007}{Da fare}]La ricezione dei messaggi dai vari canali dovra\textquotesingle{} essere asincrona.\end{DoxyRefDesc}
-
-
 \begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000008}{Warnings}]I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? \end{DoxyRefDesc}
+\item[\hyperlink{warning__warning000007}{Warnings}]I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? \end{DoxyRefDesc}
 Questo è il grafo delle chiamate per questa funzione\+:
 \nopagebreak
 \begin{figure}[H]
@@ -160,8 +160,6 @@ Questo è il grafo delle chiamate per questa funzione\+:
 
 
 Chiude tutte le I\+PC e termina. 
-
-Handler del segnale S\+I\+G\+I\+NT.
 
 
 \begin{DoxyParams}{Parametri}

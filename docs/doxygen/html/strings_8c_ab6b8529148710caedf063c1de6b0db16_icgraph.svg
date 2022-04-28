@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 574;
+var viewWidth = 562;
 var viewHeight = 46;
 var sectionId = 'dynsection-2';
 </script>
@@ -99,32 +99,32 @@ var sectionId = 'dynsection-2';
 <!-- Node9 -->
 <g id="node4" class="node">
 <title>Node9</title>
-<g id="a_node4"><a xlink:href="client_8h.html#a48d605ff689f470746c858648f0a98c2" target="_top" xlink:title="Handler del segnale SIGINT. ">
-<polygon fill="none" stroke="#000000" points="371,-.5 371,-19.5 489,-19.5 489,-.5 371,-.5"/>
-<text text-anchor="middle" x="430" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">SIGINTSignalHandler</text>
+<g id="a_node4"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
+<polygon fill="none" stroke="#000000" points="371,-.5 371,-19.5 477,-19.5 477,-.5 371,-.5"/>
+<text text-anchor="middle" x="424" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
 <!-- Node8&#45;&gt;Node9 -->
 <g id="edge3" class="edge">
 <title>Node8&#45;&gt;Node9</title>
-<path fill="none" stroke="#191970" d="M345.4207,-10C353.8733,-10 362.526,-10 370.9176,-10"/>
-<polygon fill="#191970" stroke="#191970" points="345.2406,-6.5001 335.2406,-10 345.2406,-13.5001 345.2406,-6.5001"/>
+<path fill="none" stroke="#191970" d="M345.317,-10C353.7832,-10 362.409,-10 370.6971,-10"/>
+<polygon fill="#191970" stroke="#191970" points="345.1026,-6.5001 335.1026,-10 345.1026,-13.5001 345.1026,-6.5001"/>
 </g>
 <!-- Node10 -->
 <g id="node5" class="node">
 <title>Node10</title>
 <g id="a_node5"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
-<polygon fill="none" stroke="#000000" points="525,-.5 525,-19.5 566,-19.5 566,-.5 525,-.5"/>
-<text text-anchor="middle" x="545.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
+<polygon fill="none" stroke="#000000" points="513,-.5 513,-19.5 554,-19.5 554,-.5 513,-.5"/>
+<text text-anchor="middle" x="533.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
 <!-- Node9&#45;&gt;Node10 -->
 <g id="edge4" class="edge">
 <title>Node9&#45;&gt;Node10</title>
-<path fill="none" stroke="#191970" d="M499.2973,-10C508.5856,-10 517.4584,-10 524.9009,-10"/>
-<polygon fill="#191970" stroke="#191970" points="499.1034,-6.5001 489.1034,-10 499.1034,-13.5001 499.1034,-6.5001"/>
+<path fill="none" stroke="#191970" d="M487.2796,-10C496.5452,-10 505.4767,-10 512.9772,-10"/>
+<polygon fill="#191970" stroke="#191970" points="487.1462,-6.5001 477.1462,-10 487.1462,-13.5001 487.1462,-6.5001"/>
 </g>
 </g>
 </svg>

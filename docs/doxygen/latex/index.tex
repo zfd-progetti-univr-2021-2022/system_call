@@ -25,10 +25,6 @@ make
 Gli eseguibili finiranno nella cartella {\ttfamily dist} \end{quote}
 
 
-\begin{quote}
-N\+O\+TA\+: a volte non vengono rilevate le modifiche e quindi occorre cancellare gli eseguibili dalla cartella src \end{quote}
-
-
 Terminazione del client\+:
 \begin{DoxyEnumerate}
 \item Aprire un altro terminale
@@ -36,5 +32,30 @@ Terminazione del client\+:
 
 ```bash kill -\/s S\+I\+G\+U\+S\+R1 \$(pgrep client\+\_\+0) ```
 
-$>$ Prende l\textquotesingle{}output del comando pgrep, che restituisce il P\+ID del processo con nome client\+\_\+0, e usa il P\+ID restituito per mandargli il segnale S\+I\+G\+U\+S\+R1 di terminazione. 
+$>$ Prende l\textquotesingle{}output del comando pgrep, che restituisce il P\+ID del processo con nome client\+\_\+0, e usa il P\+ID restituito per mandargli il segnale S\+I\+G\+U\+S\+R1 di terminazione.
 \end{DoxyEnumerate}
+
+E\textquotesingle{} possibile trovare altri \href{https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/md_theory_commands_commands.html}{\tt comandi utili sulla documentazione doxygen}
+
+\subsection*{I\+PC}
+
+Set di semafori {\ttfamily semid}\+:
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Identificativo}&\textbf{ Valore Iniziale}&\textbf{ Descrizione  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Identificativo}&\textbf{ Valore Iniziale}&\textbf{ Descrizione  }\\\cline{1-3}
+\endhead
+0 &1 &Mutex per leggere/scrivere il messaggio con il numero N di file sulla memoria condivisa \\\cline{1-3}
+1 &0 &Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano terminato operazioni sulle F\+I\+FO prima di renderle N\+ON bloccanti \\\cline{1-3}
+2 &0 &Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le F\+I\+FO N\+ON bloccanti \\\cline{1-3}
+3 &0 &Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano terminato operazioni sulle F\+I\+FO prima di renderle bloccanti \\\cline{1-3}
+4 &0 &Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le F\+I\+FO bloccanti \\\cline{1-3}
+5 &0 &Incrementato in runtime per valere tanto quanto sono il numero di file/figli. Aspetta che tutti i processi figlio di client\+\_\+0 abbiano suddiviso il proprio file in 4 parti prima di mandarle sulle I\+PC o F\+I\+FO \\\cline{1-3}
+6 &1 &Mutex per leggere/scrivere messaggi con la quarta parte di file sulla memoria condivisa \\\cline{1-3}
+\end{longtabu}

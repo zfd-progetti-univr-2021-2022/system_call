@@ -78,6 +78,10 @@ typedef struct \hyperlink{structmsg__t}{msg\+\_\+t} \hyperlink{defines_8h_a928de
 \item 
 key\+\_\+t \hyperlink{defines_8h_a2d341373a96ffea0944553e5452cdbca}{get\+\_\+ipc\+\_\+key} ()
 \item 
+key\+\_\+t \hyperlink{defines_8h_afd25e0dffe44c8dd59ae86caabb94287}{get\+\_\+ipc\+\_\+key2} ()
+\item 
+key\+\_\+t \hyperlink{defines_8h_abe68b7232c057100c2e21586906436d7}{get\+\_\+project\+\_\+ipc\+\_\+key} (char proj\+\_\+id)
+\item 
 bool \hyperlink{defines_8h_ac281b05b7a90ba292f5748cbfe3c389d}{array\+Contains\+All\+True} (bool arr\mbox{[}$\,$\mbox{]}, int len)
 \begin{DoxyCompactList}\small\item\em Restituisce vero se l\textquotesingle{}array contiene tutti true. \end{DoxyCompactList}\item 
 int \hyperlink{defines_8h_aea9b93cad897755a46cb9e3373ba8cc2}{block\+FD} (int fd, int blocking)
@@ -127,7 +131,8 @@ true arr contiene tutti true
 
 false arr contiene almeno un false 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -154,7 +159,8 @@ Rende bloccante oppure non bloccante un file descriptor.
 \begin{DoxyReturn}{Restituisce}
 int Vale 0 se fallisce 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -167,22 +173,78 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \subsubsection{\texorpdfstring{get\+\_\+ipc\+\_\+key()}{get\_ipc\_key()}}
 {\footnotesize\ttfamily key\+\_\+t get\+\_\+ipc\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Restituisce la chiave I\+PC ottenuta con ftok sull\textquotesingle{}eseguibile del server.
+Restituisce la prima chiave I\+PC ottenuta con \hyperlink{defines_8h_abe68b7232c057100c2e21586906436d7}{get\+\_\+project\+\_\+ipc\+\_\+key()}.
 
 \begin{DoxyReturn}{Restituisce}
 key\+\_\+t Chiave I\+PC 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=240pt]{defines_8h_a2d341373a96ffea0944553e5452cdbca_cgraph}
+\includegraphics[width=350pt]{defines_8h_a2d341373a96ffea0944553e5452cdbca_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{defines_8h_a2d341373a96ffea0944553e5452cdbca_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{defines_8h_afd25e0dffe44c8dd59ae86caabb94287}\label{defines_8h_afd25e0dffe44c8dd59ae86caabb94287}} 
+\index{defines.\+h@{defines.\+h}!get\+\_\+ipc\+\_\+key2@{get\+\_\+ipc\+\_\+key2}}
+\index{get\+\_\+ipc\+\_\+key2@{get\+\_\+ipc\+\_\+key2}!defines.\+h@{defines.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+ipc\+\_\+key2()}{get\_ipc\_key2()}}
+{\footnotesize\ttfamily key\+\_\+t get\+\_\+ipc\+\_\+key2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Restituisce la seconda chiave I\+PC ottenuta con \hyperlink{defines_8h_abe68b7232c057100c2e21586906436d7}{get\+\_\+project\+\_\+ipc\+\_\+key()}.
+
+\begin{DoxyReturn}{Restituisce}
+key\+\_\+t Chiave I\+PC 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_afd25e0dffe44c8dd59ae86caabb94287_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_afd25e0dffe44c8dd59ae86caabb94287_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{defines_8h_abe68b7232c057100c2e21586906436d7}\label{defines_8h_abe68b7232c057100c2e21586906436d7}} 
+\index{defines.\+h@{defines.\+h}!get\+\_\+project\+\_\+ipc\+\_\+key@{get\+\_\+project\+\_\+ipc\+\_\+key}}
+\index{get\+\_\+project\+\_\+ipc\+\_\+key@{get\+\_\+project\+\_\+ipc\+\_\+key}!defines.\+h@{defines.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+project\+\_\+ipc\+\_\+key()}{get\_project\_ipc\_key()}}
+{\footnotesize\ttfamily key\+\_\+t get\+\_\+project\+\_\+ipc\+\_\+key (\begin{DoxyParamCaption}\item[{char}]{proj\+\_\+id }\end{DoxyParamCaption})}
+
+Restituisce una chiave I\+PC generica per il progetto ottenuta con ftok sulla cartella con gli eseguibili.
+
+\begin{DoxyReturn}{Restituisce}
+key\+\_\+t Chiave I\+PC 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{defines_8h_abe68b7232c057100c2e21586906436d7_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_abe68b7232c057100c2e21586906436d7_icgraph}
 \end{center}
 \end{figure}

@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/files.c" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/files.c" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -50,7 +50,7 @@
 .ti -1c
 .RI "long \fBgetFileSize\fP (char *filePath)"
 .br
-.RI "Restituisce dimensione del file in byte\&. "
+.RI "Restituisce la dimensione in byte del file con percorso filePath\&. "
 .ti -1c
 .RI "int \fBcheckFileSize\fP (char *filePath)"
 .br
@@ -166,16 +166,16 @@ Libera la memoria dello HEAP occupata dalla lista di filePath\&.
 .SS "long getFileSize (char * filePath)"
 
 .PP
-Restituisce dimensione del file in byte\&. Restituisce la dimensione in byte del file con percorso filePath\&.
+Restituisce la dimensione in byte del file con percorso filePath\&. 
 .PP
 \fBParametri:\fP
 .RS 4
-\fIfilePath\fP 
+\fIfilePath\fP Percorso del file 
 .RE
 .PP
 \fBRestituisce:\fP
 .RS 4
-long 
+long Dimensione del file in byte 
 .RE
 .PP
 

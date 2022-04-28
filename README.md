@@ -22,8 +22,6 @@ make
 ```
 > Gli eseguibili finiranno nella cartella ```dist```
 
-> NOTA: a volte non vengono rilevate le modifiche e quindi occorre cancellare gli eseguibili dalla cartella src
-
 Terminazione del client:
 1. Aprire un altro terminale
 2. Eseguire il comando:
@@ -33,3 +31,19 @@ Terminazione del client:
     ```
 
     > Prende l'output del comando pgrep, che restituisce il PID del processo con nome client_0, e usa il PID restituito per mandargli il segnale SIGUSR1 di terminazione.
+
+E' possibile trovare altri [comandi utili sulla documentazione doxygen](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/md_theory_commands_commands.html)
+
+## IPC
+
+Set di semafori ```semid```:
+
+|Identificativo|Valore Iniziale|Descrizione                                                                                                                                                       |
+|--------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|0             |1              |Mutex per leggere/scrivere il messaggio con il numero N di file sulla memoria condivisa                                                                           |
+|1             |0              |Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano terminato operazioni sulle FIFO prima di renderle NON bloccanti|
+|2             |0              |Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le FIFO NON bloccanti                                     |
+|3             |0              |Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano terminato operazioni sulle FIFO prima di renderle bloccanti    |
+|4             |0              |Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le FIFO bloccanti                                         |
+|5             |0              |Incrementato in runtime per valere tanto quanto sono il numero di file/figli. Aspetta che tutti i processi figlio di client_0 abbiano suddiviso il proprio file in 4 parti prima di mandarle sulle IPC o FIFO|
+|6             |1              |Mutex per leggere/scrivere messaggi con la quarta parte di file sulla memoria condivisa|

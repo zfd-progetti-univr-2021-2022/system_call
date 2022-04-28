@@ -1,0 +1,4 @@
+<map id="get_ipc_key2" name="get_ipc_key2">
+<area shape="rect" id="node2" href="$defines_8c.html#abe68b7232c057100c2e21586906436d7" title="get_project_ipc_key" alt="" coords="161,5,313,32"/>
+<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="361,5,427,32"/>
+</map>

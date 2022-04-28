@@ -11,7 +11,17 @@
 
 
 key_t get_ipc_key() {
-    key_t key = ftok(EXECUTABLE_DIR, 'b');
+    return get_project_ipc_key('b');
+}
+
+
+key_t get_ipc_key2() {
+    return get_project_ipc_key('G');
+}
+
+
+key_t get_project_ipc_key(char proj_id) {
+    key_t key = ftok(EXECUTABLE_DIR, proj_id);
 
     if (key == -1)
         ErrExit("ftok failed");

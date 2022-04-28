@@ -17,7 +17,7 @@
 <!-- Node9 -->
 <g id="node2" class="node">
 <title>Node9</title>
-<g id="a_node2"><a xlink:href="client_8h.html#a50b22adcb76198fcd9402a97ff4711bf" target="_top" xlink:title="Handler del segnale SIGUSR1. ">
+<g id="a_node2"><a xlink:href="client_8h.html#a50b22adcb76198fcd9402a97ff4711bf" target="_top" xlink:title="Handler del segnale SIGUSR1: chiude le risorse del client 0 e termina la sua esecuzione. ">
 <polygon fill="none" stroke="#000000" points="157,-38.5 157,-57.5 285,-57.5 285,-38.5 157,-38.5"/>
 <text text-anchor="middle" x="221" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">SIGUSR1SignalHandler</text>
 </a>

@@ -6,5 +6,6 @@ var searchData=
   ['debug_5fprint',['DEBUG_PRINT',['../debug_8h.html#a5f50bfe761aec48e94d11aa3a64e58a4',1,'debug.h']]],
   ['defines_2ec',['defines.c',['../defines_8c.html',1,'']]],
   ['defines_2eh',['defines.h',['../defines_8h.html',1,'']]],
-  ['dividi',['dividi',['../client_8c.html#a55586f2b7e9b3620294cf78cda8abdad',1,'dividi(int fd, char *buf, size_t count, char *filePath, int parte):&#160;client.c'],['../client_8h.html#a55586f2b7e9b3620294cf78cda8abdad',1,'dividi(int fd, char *buf, size_t count, char *filePath, int parte):&#160;client.c']]]
+  ['dividi',['dividi',['../client_8c.html#a55586f2b7e9b3620294cf78cda8abdad',1,'dividi(int fd, char *buf, size_t count, char *filePath, int parte):&#160;client.c'],['../client_8h.html#a55586f2b7e9b3620294cf78cda8abdad',1,'dividi(int fd, char *buf, size_t count, char *filePath, int parte):&#160;client.c']]],
+  ['dubbi_20risolti',['DUBBI RISOLTI',['../md_theory_questions_questions.html',1,'']]]
 ];

@@ -5,5 +5,5 @@
 <area shape="rect" id="node7" href="$files_8c.html#a6a46f37bcdbf048db0fba5bb3e0e6342" title="Aggiunge in fondo alla coda un nuovo filePath. " alt="" coords="217,157,288,184"/>
 <area shape="rect" id="node8" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="220,208,285,235"/>
 <area shape="rect" id="node4" href="$strings_8c.html#ab6b8529148710caedf063c1de6b0db16" title="Restituisce vero se la stringa a inizia con la sotto stringa b. " alt="" coords="362,56,453,83"/>
-<area shape="rect" id="node6" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce dimensione del file in byte. " alt="" coords="361,107,453,133"/>
+<area shape="rect" id="node6" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce la dimensione in byte del file con percorso filePath. " alt="" coords="361,107,453,133"/>
 </map>

@@ -122,7 +122,7 @@
 <!-- Node26 -->
 <g id="node6" class="node">
 <title>Node26</title>
-<g id="a_node6"><a xlink:href="files_8c.html#a096f8e9259afb2839ebe6822364f9928" target="_top" xlink:title="Restituisce dimensione del file in byte. ">
+<g id="a_node6"><a xlink:href="files_8c.html#a096f8e9259afb2839ebe6822364f9928" target="_top" xlink:title="Restituisce la dimensione in byte del file con percorso filePath. ">
 <polygon fill="none" stroke="#000000" points="407,-76.5 407,-95.5 476,-95.5 476,-76.5 407,-76.5"/>
 <text text-anchor="middle" x="441.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">getFileSize</text>
 </a>

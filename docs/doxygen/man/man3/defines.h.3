@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.h" 3 "Sab 23 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.h" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -89,6 +89,12 @@
 .RI "key_t \fBget_ipc_key\fP ()"
 .br
 .ti -1c
+.RI "key_t \fBget_ipc_key2\fP ()"
+.br
+.ti -1c
+.RI "key_t \fBget_project_ipc_key\fP (char proj_id)"
+.br
+.ti -1c
 .RI "bool \fBarrayContainsAllTrue\fP (bool arr[], int len)"
 .br
 .RI "Restituisce vero se l'array contiene tutti true\&. "
@@ -155,7 +161,25 @@ int Vale 0 se fallisce
 .PP
 
 .SS "key_t get_ipc_key ()"
-Restituisce la chiave IPC ottenuta con ftok sull'eseguibile del server\&.
+Restituisce la prima chiave IPC ottenuta con \fBget_project_ipc_key()\fP\&.
+.PP
+\fBRestituisce:\fP
+.RS 4
+key_t Chiave IPC 
+.RE
+.PP
+
+.SS "key_t get_ipc_key2 ()"
+Restituisce la seconda chiave IPC ottenuta con \fBget_project_ipc_key()\fP\&.
+.PP
+\fBRestituisce:\fP
+.RS 4
+key_t Chiave IPC 
+.RE
+.PP
+
+.SS "key_t get_project_ipc_key (char proj_id)"
+Restituisce una chiave IPC generica per il progetto ottenuta con ftok sulla cartella con gli eseguibili\&.
 .PP
 \fBRestituisce:\fP
 .RS 4

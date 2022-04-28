@@ -5,7 +5,9 @@
 #pragma once
 
 /// Flag per abilitare/disabilitare la funzionalita' di DEBUG_PRINT()
-#define DEBUG 3
+#if !defined(DEBUG)
+    #define DEBUG 3
+#endif
 
 #if defined(DEBUG) && DEBUG > 0
 

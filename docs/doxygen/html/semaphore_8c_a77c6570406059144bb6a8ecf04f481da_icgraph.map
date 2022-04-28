@@ -1,10 +1,10 @@
 <map id="semOp" name="semOp">
-<area shape="rect" id="node2" href="$semaphore_8h.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="144,157,223,184"/>
-<area shape="rect" id="node3" href="$semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="303,245,413,272"/>
-<area shape="rect" id="node8" href="$semaphore_8h.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="138,107,229,133"/>
-<area shape="rect" id="node9" href="$semaphore_8h.html#afee4d9b0eb613bf632622e9244204d51" title="Ottiene un insieme di semafori gia&#39; creato. " alt="" coords="121,5,245,32"/>
-<area shape="rect" id="node4" href="$client_8h.html#a48d605ff689f470746c858648f0a98c2" title="Handler del segnale SIGINT. " alt="" coords="471,93,628,120"/>
-<area shape="rect" id="node6" href="$client_8h.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="293,144,423,171"/>
-<area shape="rect" id="node7" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="331,93,385,120"/>
-<area shape="rect" id="node5" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="676,93,731,120"/>
+<area shape="rect" id="node2" href="$semaphore_8h.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="127,157,206,184"/>
+<area shape="rect" id="node3" href="$semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="267,208,377,235"/>
+<area shape="rect" id="node8" href="$semaphore_8h.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="121,259,212,285"/>
+<area shape="rect" id="node9" href="$semaphore_8h.html#afee4d9b0eb613bf632622e9244204d51" title="Ottiene un insieme di semafori gia&#39; creato. " alt="" coords="260,5,384,32"/>
+<area shape="rect" id="node4" href="$client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="609,183,751,209"/>
+<area shape="rect" id="node6" href="$client_8h.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="432,183,561,209"/>
+<area shape="rect" id="node7" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="469,132,524,159"/>
+<area shape="rect" id="node5" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="799,183,853,209"/>
 </map>

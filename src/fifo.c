@@ -49,15 +49,3 @@ int create_fifo(char * path, char mode) {
 
     return fifo1_fd;
 }
-
-
-int create_new_fifo(char * path, char mode) {
-
-    if (unlink(path) == -1) {
-        if (errno != ENOENT) {
-            ErrExit("[fifo.c:create_new_fifo] unlink failed\n");
-        }
-    }
-
-    return create_fifo(path, mode);
-}

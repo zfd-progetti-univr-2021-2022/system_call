@@ -105,16 +105,34 @@ $(document).ready(function(){initNavTree('index.html','');});
 <p>Compilazione: </p><div class="fragment"><div class="line">make</div></div><!-- fragment --> <blockquote class="doxtable">
 <p>Gli eseguibili finiranno nella cartella <code>dist</code> </p>
 </blockquote>
-<blockquote class="doxtable">
-<p>NOTA: a volte non vengono rilevate le modifiche e quindi occorre cancellare gli eseguibili dalla cartella src </p>
-</blockquote>
 <p>Terminazione del client:</p><ol type="1">
 <li>Aprire un altro terminale</li>
 <li><p class="startli">Eseguire il comando:</p>
 <p class="startli">```bash kill -s SIGUSR1 $(pgrep client_0) ```</p>
-<p class="startli">&gt; Prende l'output del comando pgrep, che restituisce il PID del processo con nome client_0, e usa il PID restituito per mandargli il segnale SIGUSR1 di terminazione. </p>
+<p class="startli">&gt; Prende l'output del comando pgrep, che restituisce il PID del processo con nome client_0, e usa il PID restituito per mandargli il segnale SIGUSR1 di terminazione.</p>
 </li>
 </ol>
+<p>E' possibile trovare altri <a href="https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/md_theory_commands_commands.html">comandi utili sulla documentazione doxygen</a></p>
+<h2>IPC</h2>
+<p>Set di semafori <code>semid</code>:</p>
+<table class="doxtable">
+<tr>
+<th>Identificativo</th><th>Valore Iniziale</th><th>Descrizione  </th></tr>
+<tr>
+<td>0 </td><td>1 </td><td>Mutex per leggere/scrivere il messaggio con il numero N di file sulla memoria condivisa </td></tr>
+<tr>
+<td>1 </td><td>0 </td><td>Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano terminato operazioni sulle FIFO prima di renderle NON bloccanti </td></tr>
+<tr>
+<td>2 </td><td>0 </td><td>Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le FIFO NON bloccanti </td></tr>
+<tr>
+<td>3 </td><td>0 </td><td>Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano terminato operazioni sulle FIFO prima di renderle bloccanti </td></tr>
+<tr>
+<td>4 </td><td>0 </td><td>Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le FIFO bloccanti </td></tr>
+<tr>
+<td>5 </td><td>0 </td><td>Incrementato in runtime per valere tanto quanto sono il numero di file/figli. Aspetta che tutti i processi figlio di client_0 abbiano suddiviso il proprio file in 4 parti prima di mandarle sulle IPC o FIFO </td></tr>
+<tr>
+<td>6 </td><td>1 </td><td>Mutex per leggere/scrivere messaggi con la quarta parte di file sulla memoria condivisa </td></tr>
+</table>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
