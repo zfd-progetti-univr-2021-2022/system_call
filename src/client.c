@@ -136,6 +136,7 @@ void operazioni_client0() {
     strcat(buffer,CURRDIR);
     strcat(buffer,"\n");
     write(STDOUT_FILENO,buffer,strlen(buffer));
+    free(buffer);
 
     // ricerca in CURRDIR e nelle sotto-directory tutti i file che iniziano con "sendme_"
     // e la dimensione e' inferiore a 4KByte e memorizzali
