@@ -129,11 +129,12 @@ void operazioni_client0() {
         ErrExit("getcwd");
     }
     
-    char buffer[]="Ciao "
-    strcat(buffer,USER)
-    strcat(buffer,", ora inizio l'invio dei file contenuti in ")
-    strcat(buffer,CURRDIR)
-    strcat(buffer,"\n")
+    char *buffer=(char *)malloc((strlen(CURRDIR)+strlen(USER)+49)*sizeof(char));
+    strcat(buffer,"Ciao ");
+    strcat(buffer,USER);
+    strcat(buffer,", ora inizio l'invio dei file contenuti in ");
+    strcat(buffer,CURRDIR);
+    strcat(buffer,"\n");
     write(STDOUT_FILENO,buffer,strlen(buffer));
 
     // ricerca in CURRDIR e nelle sotto-directory tutti i file che iniziano con "sendme_"
