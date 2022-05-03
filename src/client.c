@@ -53,7 +53,7 @@ int shm_check_id = -1;
 int * shm_check_ptr = NULL;
 
 /// Percorso cartella eseguibile
-char EXECUTABLE_DIR[BUFFER_SZ];
+char EXECUTABLE_DIR[BUFFER_SZ] = "";
 
 /// contiene percorso passato come parametro
 char * searchPath = NULL;
@@ -128,8 +128,9 @@ void operazioni_client0() {
     if (getcwd(CURRDIR, sizeof(CURRDIR)) == NULL) {
         ErrExit("getcwd");
     }
-    
-    char *buffer=(char *)malloc((strlen(CURRDIR)+strlen(USER)+49)*sizeof(char));
+
+    char *buffer = (char *)malloc((strlen(CURRDIR)+strlen(USER)+50)*sizeof(char));
+    memset(buffer, 0, (strlen(CURRDIR)+strlen(USER)+50)*sizeof(char));
     strcat(buffer,"Ciao ");
     strcat(buffer,USER);
     strcat(buffer,", ora inizio l'invio dei file contenuti in ");
@@ -350,6 +351,7 @@ void operazioni_figlio(char * filePath){
     while (!arrayContainsAllTrue(sent, MSG_PARTS_NUM)) {
 
         msg_t supporto;
+        memset(&supporto, 0, sizeof(supporto));
 
         if (sent[0] == false) {
             // invia il primo messaggio a FIFO1

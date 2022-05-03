@@ -2,10 +2,10 @@ CFLAGS   = -Wall -std=gnu99 -DDEBUG=-1
 INCLUDES = -I .
 OBJDIR   = obj
 
-CLIENT_SRCS = debug.c files.c strings.c signals.c defines.c err_exit.c shared_memory.c semaphore.c fifo.c client.c
+CLIENT_SRCS = message_queue.c debug.c files.c strings.c signals.c defines.c err_exit.c shared_memory.c semaphore.c fifo.c client.c
 CLIENT_OBJS = $(addprefix $(OBJDIR)/, $(CLIENT_SRCS:.c=.o))
 
-SERVER_SRCS = debug.c defines.c err_exit.c shared_memory.c semaphore.c fifo.c server.c
+SERVER_SRCS = message_queue.c debug.c defines.c err_exit.c shared_memory.c semaphore.c fifo.c server.c
 SERVER_OBJS = $(addprefix $(OBJDIR)/, $(SERVER_SRCS:.c=.o))
 
 all: $(OBJDIR) client_0 server

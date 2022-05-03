@@ -25,9 +25,10 @@
 #include "semaphore.h"
 #include "fifo.h"
 #include "debug.h"
+#include "message_queue.h"
 
 /// Percorso cartella eseguibile
-char EXECUTABLE_DIR[BUFFER_SZ];
+char EXECUTABLE_DIR[BUFFER_SZ] = "";
 
 /// file descriptor della FIFO 1
 int fifo1_fd = -1;
@@ -47,7 +48,7 @@ int shm_check_id = -1;
 int * shm_check_ptr = NULL;
 
 /// e' una matrice che per ogni riga contiene le 4 parti di un file
-msg_t **matriceFile;
+msg_t **matriceFile = NULL;
 
 
 /**
@@ -264,12 +265,9 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Mi sono collegato alla coda dei messaggi\n");
 
     //limito la coda
-    struct msqid_ds ds;
-    ds.msg_qbytes=sizeof(msg_t)*50;
-    if(msgctl(msqid,IPC_SET,&ds)==-1){
-        if(errno != EPERM)
-            ErrExit("msgctl set msgqueue size failed");
-    }
+    struct msqid_ds ds = msqGetStats(msqid);
+    ds.msg_qbytes = sizeof(msg_t) * 50;
+    msqSetStats(msqid, ds);
 
     while (true) {
         // Attendo il valore <n> dal Client_0 su FIFO1 e lo memorizzo
@@ -335,7 +333,7 @@ int main(int argc, char * argv[]) {
 
             // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
             // di file trasmesso
-            msg_t supporto1,supporto2,supporto3,supporto4;
+            msg_t supporto1, supporto2, supporto3; // ,supporto4;
 
             //leggo da fifo1 la prima parte del file
             if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {

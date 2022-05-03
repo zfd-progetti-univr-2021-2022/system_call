@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include <stdio.h>
+#include <stdlib.h>
+
 /// Flag per abilitare/disabilitare la funzionalita' di DEBUG_PRINT()
 #if !defined(DEBUG)
     #define DEBUG 3

@@ -57,10 +57,10 @@ typedef struct msg_t {
     pid_t sender_pid;
 
     /// Percorso file
-    char file_path[BUFFER_SZ+1];
+    char file_path[BUFFER_SZ+2];
 
     /// Contenuto messaggio
-    char msg_body[MSG_BUFFER_SZ+1];
+    char msg_body[MSG_BUFFER_SZ+2];
 
 } msg_t;
 

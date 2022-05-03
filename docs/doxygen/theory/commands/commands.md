@@ -64,6 +64,8 @@ valgrind --leak-check=full \
     --log-file=valgrind-server-out.txt \
     ./server
 ```
+> Terminare il processo server con CTRL+C
+
 
 Testare il client:
 ```
@@ -75,6 +77,8 @@ valgrind --leak-check=full \
     ./client_0 <percorso cartella file>
 ```
 > Sostituire ```<percorso cartella file>``` con l'input corretto
+
+> Terminare il processo client eseguendo il comando ```pkill -USR1 memcheck``` su un altro terminale.
 
 ## Visualizza file aperti
 
