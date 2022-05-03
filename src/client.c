@@ -128,8 +128,13 @@ void operazioni_client0() {
     if (getcwd(CURRDIR, sizeof(CURRDIR)) == NULL) {
         ErrExit("getcwd");
     }
-
-    printf("Ciao %s, ora inizio l'invio dei file contenuti in %s\n", USER, CURRDIR);
+    
+    char buffer[]="Ciao "
+    strcat(buffer,USER)
+    strcat(buffer,", ora inizio l'invio dei file contenuti in ")
+    strcat(buffer,CURRDIR)
+    strcat(buffer,"\n")
+    write(STDOUT_FILENO,buffer,strlen(buffer));
 
     // ricerca in CURRDIR e nelle sotto-directory tutti i file che iniziano con "sendme_"
     // e la dimensione e' inferiore a 4KByte e memorizzali
