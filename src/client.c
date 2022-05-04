@@ -363,9 +363,11 @@ void operazioni_figlio(char * filePath){
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
             semWaitNoBlocc(semid,7);
-            if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
-                // la scrittura ha avuto successo
-                sent[0] = true;
+            if(errno!=EAGAIN){
+                if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */){
+                    // la scrittura ha avuto successo
+                    sent[0] = true;
+                }
             }
         }
 
@@ -379,9 +381,11 @@ void operazioni_figlio(char * filePath){
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
             semWaitNoBlocc(semid,8);
-            if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
-                // la scrittura ha avuto successo
-                sent[1] = true;
+            if(errno!=EAGAIN){
+                if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */){
+                    // la scrittura ha avuto successo
+                    sent[1] = true;
+                }
             }
         }
 
@@ -395,12 +399,14 @@ void operazioni_figlio(char * filePath){
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
             semWaitNoBlocc(semid,9);
-            if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
-                // la scrittura ha avuto successo
-                sent[2] = true;
-            }
-            else{
-                perror("msgsnd failed");
+            if(errno!=EAGAIN){
+                if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
+                    // la scrittura ha avuto successo
+                    sent[2] = true;
+                }
+                else{
+                    perror("msgsnd failed");
+                }
             }
         }
 
