@@ -47,7 +47,7 @@ int createSemaphores(key_t key, int n_sem);
  * @param sem_op Operazione eseguita sul semaforo sem_num
 */
 void semOp (int semid, unsigned short sem_num, short sem_op);
-
+void semOpNoBlocc (int semid, unsigned short sem_num, short sem_op);
 
 /**
  * Attende che il semaforo sem_num raggiunga il valore zero.
@@ -66,7 +66,7 @@ void semWaitZero(int semid, int sem_num);
  * @param sem_num Indice di un semaforo nel set
 */
 void semWait(int semid, int sem_num);
-
+void semWaitNoBlocc(int semid, int sem_num);
 
 /**
  * @brief Esegue la signal sul semaforo sem_num: incrementa il valore di 1.
@@ -75,7 +75,7 @@ void semWait(int semid, int sem_num);
  * @param sem_num Indice di un semaforo nel set
 */
 void semSignal(int semid, int sem_num);
-
+void semSignalNoBlocc(int semid, int sem_num);
 
 /**
  * @brief Inizializza il valore del semaforo sem_num al valore val.
