@@ -305,16 +305,16 @@ int main(int argc, char * argv[]) {
 
         //semaforo per far attendere i figli
         for(int i=0;i<n;i++)
-        	semSignalNoBlocc(semid,5);
+        	semSignal(semid,5);
         //semaforo per limitare la fifo1
         for(int i=0;i<50;i++)
-        	semSignalNoBlocc(semid,7);
+        	semSignal(semid,7);
         //semaforo per limitare la fifo2
         for(int i=0;i<50;i++)
-        	semSignalNoBlocc(semid,8);
+        	semSignal(semid,8);
         //semaforo per limitare la coda di messaggi
         for(int i=0;i<50;i++)
-        	semSignalNoBlocc(semid,9);
+        	semSignal(semid,9);
 
         // scrive un messaggio di conferma su ShdMem
         msg_t received_msg = {.msg_body = "OK", .mtype = CONTAINS_N, .sender_pid = getpid()};
@@ -343,12 +343,12 @@ int main(int argc, char * argv[]) {
 
             // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
             // di file trasmesso
-            msg_t supporto1, supporto2, supporto3; // ,supporto4;
+            msg_t supporto1, supporto2, supporto3;
 
             //leggo da fifo1 la prima parte del file
             if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {
                 DEBUG_PRINT("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
-                semSignalNoBlocc(semid,7);
+                semSignal(semid,7);
                 aggiungiAMatrice(supporto1,n);
                 arrived_parts_counter++;
             }
@@ -356,7 +356,7 @@ int main(int argc, char * argv[]) {
             //leggo da fifo2 la seconda parte del file
             if (read(fifo2_fd,&supporto2,sizeof(supporto2)) != -1) {
                 DEBUG_PRINT("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
-                semSignalNoBlocc(semid,8);
+                semSignal(semid,8);
                 aggiungiAMatrice(supporto2,n);
                 arrived_parts_counter++;
             }
@@ -365,7 +365,7 @@ int main(int argc, char * argv[]) {
 
             if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
                 DEBUG_PRINT("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
-                semSignalNoBlocc(semid,9);
+                semSignal(semid,9);
                 aggiungiAMatrice(supporto3,n);
                 arrived_parts_counter++;
             }

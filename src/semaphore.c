@@ -35,9 +35,7 @@ void semOp (int semid, unsigned short sem_num, short sem_op) {
 
 void semOpNoBlocc (int semid, unsigned short sem_num, short sem_op) {
     struct sembuf sop = {.sem_num = sem_num, .sem_op = sem_op, .sem_flg = IPC_NOWAIT};
-
-    if (semop(semid, &sop, 1) == -1)
-        ErrExit("semop failed");
+    semop(semid, &sop, 1);
 }
 
 void semWaitZero(int semid, int sem_num) {
