@@ -2,8 +2,10 @@
  * @file server.c
  * @brief Contiene l'implementazione del server.
  *
- * @todo Spostare le funzioni non main fuori dal file server.c ?
- * @todo Spostare cio' che non riguarda i segnali in una funzione fuori dal main ?
+ * @todo Spostare le funzioni non main fuori dal file server.c
+ * @todo Creare una funzione che fa cio' che e' nel while(true)
+ * @todo Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
+ *
 */
 
 #include <signal.h>

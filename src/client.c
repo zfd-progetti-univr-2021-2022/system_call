@@ -2,14 +2,9 @@
  * @file client.c
  * @brief Contiene l'implementazione del client.
  *
- * @todo Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO.
- * @todo Spostare le funzioni non main fuori dal file client.c ? (ad esempio una opzione per la funzioen dividi() e' metterla in files.c)
+ * @todo Spostare le funzioni non main fuori dal file client.c ? (ad esempio una opzione per la funzione dividi() e' metterla in files.c)
  *
- * @warning La specifica non richiede la documentazione. E' richiesta?
- *
- * @warning I percorsi dei file hanno dimensione massima?
- *
- * @warning I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?
+ * @todo Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
 */
 
 #include <stdio.h>
@@ -365,7 +360,7 @@ void operazioni_figlio(char * filePath){
             errno=0;
             semWaitNoBlocc(semid,7);
             if(errno!=EAGAIN){
-                if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */){
+                if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1){
                     // la scrittura ha avuto successo
                     sent[0] = true;
                 }
@@ -387,7 +382,7 @@ void operazioni_figlio(char * filePath){
             errno=0;
             semWaitNoBlocc(semid,8);
             if(errno!=EAGAIN){
-                if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */){
+                if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1){
                     // la scrittura ha avuto successo
                     sent[1] = true;
                 }
