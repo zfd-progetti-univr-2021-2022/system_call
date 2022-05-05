@@ -47,3 +47,6 @@ Set di semafori ```semid```:
 |4             |0              |Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le FIFO bloccanti                                         |
 |5             |0              |Incrementato in runtime per valere tanto quanto sono il numero di file/figli. Aspetta che tutti i processi figlio di client_0 abbiano suddiviso il proprio file in 4 parti prima di mandarle sulle IPC o FIFO|
 |6             |1              |Mutex per leggere/scrivere messaggi con la quarta parte di file sulla memoria condivisa|
+|7             |50             |Limita il numero di messaggi memorizzabili contemporaneamente nella FIFO 1 a 50 messaggi|
+|8             |50             |Limita il numero di messaggi memorizzabili contemporaneamente nella FIFO 2 a 50 messaggi|
+|9             |50             |Limita il numero di messaggi memorizzabili contemporaneamente nella coda dei messaggi a 50 messaggi|
