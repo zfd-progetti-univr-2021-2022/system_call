@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -43,6 +43,8 @@
 .br
 \fC#include 'debug\&.h'\fP
 .br
+\fC#include 'message_queue\&.h'\fP
+.br
 
 .SS "Funzioni"
 
@@ -68,7 +70,7 @@
 
 .in +1c
 .ti -1c
-.RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP]"
+.RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP] = ''"
 .br
 .RI "Percorso cartella eseguibile\&. "
 .ti -1c
@@ -104,7 +106,7 @@
 .br
 .RI "puntatore alla memoria condivisa contenente le flag cella libera/occupata "
 .ti -1c
-.RI "\fBmsg_t\fP ** \fBmatriceFile\fP"
+.RI "\fBmsg_t\fP ** \fBmatriceFile\fP = NULL"
 .br
 .RI "e' una matrice che per ogni riga contiene le 4 parti di un file "
 .in -1c
@@ -116,9 +118,11 @@ Contiene l'implementazione del server\&.
 .PP
 \fBDa fare\fP
 .RS 4
-Spostare le funzioni non main fuori dal file \fBserver\&.c\fP ? 
+Spostare le funzioni non main fuori dal file \fBserver\&.c\fP 
 .PP
-Spostare cio' che non riguarda i segnali in una funzione fuori dal main ? 
+Creare una funzione che fa cio' che e' nel while(true) 
+.PP
+Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
 .RE
 .PP
 

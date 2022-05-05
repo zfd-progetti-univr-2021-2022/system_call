@@ -26,12 +26,21 @@ int \hyperlink{semaphore_8h_a2081de3d1c08dbacaf10ca46a717fabb}{create\+Semaphore
 \begin{DoxyCompactList}\small\item\em Crea un insieme di semafori. \end{DoxyCompactList}\item 
 void \hyperlink{semaphore_8h_a77c6570406059144bb6a8ecf04f481da}{sem\+Op} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, unsigned short sem\+\_\+num, short sem\+\_\+op)
 \begin{DoxyCompactList}\small\item\em Funzione di supporto per manipolare i valori di un set di semafori. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{semaphore_8h_ac3447c0a872324dc2c75cf6bab2d8aca}\label{semaphore_8h_ac3447c0a872324dc2c75cf6bab2d8aca}} 
+void {\bfseries sem\+Op\+No\+Blocc} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, unsigned short sem\+\_\+num, short sem\+\_\+op)
+\item 
 void \hyperlink{semaphore_8h_a40485eedbf6d56f7fd27bce5a537efbe}{sem\+Wait\+Zero} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
 \begin{DoxyCompactList}\small\item\em Attende che il semaforo sem\+\_\+num raggiunga il valore zero. \end{DoxyCompactList}\item 
 void \hyperlink{semaphore_8h_a2581efba6a0833e3f289de94c779cc21}{sem\+Wait} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
 \begin{DoxyCompactList}\small\item\em Esegue la wait sul semaforo sem\+\_\+num\+: decrementa il valore di 1 ed eventualmente mette in attesa il processo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{semaphore_8h_a9506f5f2d5f272bbb556329385524a76}\label{semaphore_8h_a9506f5f2d5f272bbb556329385524a76}} 
+void {\bfseries sem\+Wait\+No\+Blocc} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
+\item 
 void \hyperlink{semaphore_8h_a7bad0eb0b0c6ac701b59c36b8b7837bf}{sem\+Signal} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
 \begin{DoxyCompactList}\small\item\em Esegue la signal sul semaforo sem\+\_\+num\+: incrementa il valore di 1. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{semaphore_8h_aac2ee9630c6d6751980afd8317f47a1f}\label{semaphore_8h_aac2ee9630c6d6751980afd8317f47a1f}} 
+void {\bfseries sem\+Signal\+No\+Blocc} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num)
+\item 
 void \hyperlink{semaphore_8h_aad78dc4ccefb184a74dd9ef808df8db6}{sem\+Set\+Val} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, int sem\+\_\+num, int val)
 \begin{DoxyCompactList}\small\item\em Inizializza il valore del semaforo sem\+\_\+num al valore val. \end{DoxyCompactList}\item 
 void \hyperlink{semaphore_8h_a8df9b8ea63eaf93d09f437b356a4a1eb}{sem\+Set\+All} (int \hyperlink{server_8c_a7c35ac5305085cf7360645b8d52988b5}{semid}, short unsigned int values\mbox{[}$\,$\mbox{]})
@@ -105,8 +114,7 @@ Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \includegraphics[width=345pt]{semaphore_8h_afee4d9b0eb613bf632622e9244204d51_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -135,8 +143,7 @@ Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \includegraphics[width=235pt]{semaphore_8h_a530566146b6e3cc8415d8ae4259fd68f_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -161,16 +168,14 @@ Recupera statistiche di un set di semafori.
 \begin{DoxyReturn}{Restituisce}
 struct semid\+\_\+ds Statistiche del set di semafori 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=245pt]{semaphore_8h_a7d80413e893e7d9ae3d153e23c2df2e4_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -196,8 +201,7 @@ Funzione di supporto per manipolare i valori di un set di semafori.
 {\em sem\+\_\+op} & Operazione eseguita sul semaforo sem\+\_\+num \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -229,16 +233,14 @@ Inizializza i valori del set di semafori semid ai valori in values.
 {\em values} & Array di valori a cui impostare ogni semaforo del set \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=231pt]{semaphore_8h_a8df9b8ea63eaf93d09f437b356a4a1eb_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -262,16 +264,14 @@ Imposta i permessi su un set di semafori.
 {\em arg} & Contiene i permessi da impostare \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=244pt]{semaphore_8h_a34a010b0a39236a7261d7d5103426491_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -297,16 +297,14 @@ Inizializza il valore del semaforo sem\+\_\+num al valore val.
 {\em val} & Valore a cui impostare il semaforo sem\+\_\+num \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=233pt]{semaphore_8h_aad78dc4ccefb184a74dd9ef808df8db6_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -330,8 +328,7 @@ Esegue la signal sul semaforo sem\+\_\+num\+: incrementa il valore di 1.
 {\em sem\+\_\+num} & Indice di un semaforo nel set \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -363,16 +360,14 @@ Esegue la wait sul semaforo sem\+\_\+num\+: decrementa il valore di 1 ed eventua
 {\em sem\+\_\+num} & Indice di un semaforo nel set \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=311pt]{semaphore_8h_a2581efba6a0833e3f289de94c779cc21_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -404,16 +399,14 @@ Prima di usarla per sincronizzare processi richiamare sem\+Wait sullo stesso sem
 {\em sem\+\_\+num} & Indice di un semaforo nel set \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:
-\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{semaphore_8h_a40485eedbf6d56f7fd27bce5a537efbe_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

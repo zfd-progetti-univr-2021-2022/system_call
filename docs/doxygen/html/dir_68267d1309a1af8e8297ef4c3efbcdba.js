@@ -12,6 +12,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "fifo.h", "fifo_8h.html", "fifo_8h" ],
     [ "files.c", "files_8c.html", "files_8c" ],
     [ "files.h", "files_8h.html", "files_8h" ],
+    [ "message_queue.c", "message__queue_8c.html", "message__queue_8c" ],
+    [ "message_queue.h", "message__queue_8h.html", "message__queue_8h" ],
     [ "semaphore.c", "semaphore_8c.html", "semaphore_8c" ],
     [ "semaphore.h", "semaphore_8h.html", "semaphore_8h" ],
     [ "server.c", "server_8c.html", "server_8c" ],

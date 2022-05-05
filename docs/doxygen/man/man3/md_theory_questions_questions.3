@@ -1,4 +1,4 @@
-.TH "md_theory_questions_questions" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "md_theory_questions_questions" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -30,3 +30,39 @@ Va bene l'algoritmo attualmente utilizzato: il contenuto di un file viene diviso
 Esempi:
 .PP
 Numero caratteriCaratteri per FIFO 1Caratteri per FIFO 2Caratteri per msgqueueCaratteri per memoria condivisa  0 0 0 0 0 1 1 0 0 0 2 1 1 0 0 3 1 1 1 0 4 1 1 1 1 5 2 1 1 1 6 2 2 1 1 7 2 2 2 1 8 2 2 2 2 9 3 2 2 2 10 3 3 2 2 \&.\&.\&. \&.\&.\&. \&.\&.\&. \&.\&.\&. \&.\&.\&. 
+.SS "dimensione massima percorsi file"
+.PP
+DOMANDA:
+.PP
+I percorsi dei file hanno dimensione massima?
+.PP
+RISPOSTA:
+.PP
+Non sappiamo la lunghezza massima dei percorsi dei file ma sappiamo che sono molto corti\&.
+.PP
+I test verranno eseguiti nella cartella \fC/home\fP oppure \fC/runner\fP e ci saranno al massimo 3 o 4 sottocartelle: probabilmente non si superera' il centinaio di caratteri\&. 
+.PP
+.RS 4
+Attualmente vengono supportati percorsi di lunghezza massima di 255 caratteri 
+.RE
+.PP
+.PP
+.SS "Serve la documentazione?"
+.PP
+DOMANDA:
+.PP
+La specifica non richiede la documentazione\&. E' richiesta?
+.PP
+RISPOSTA:
+.PP
+Non e' mai stata richiesta, quindi in teoria no\&.
+.PP
+.SS "Caratteri non ASCII"
+.PP
+DOMANDA:
+.PP
+I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, \&.\&.\&.?
+.PP
+RISPOSTA:
+.PP
+I caratteri che verranno letti sono tutti da un byte e di conseguenza non c'e' da preoccuparsi di caratteri non ASCII\&. 

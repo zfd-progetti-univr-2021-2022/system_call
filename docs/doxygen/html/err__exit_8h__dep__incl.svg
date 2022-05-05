@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 1112;
+var viewWidth = 1256;
 var viewHeight = 128;
 var sectionId = 'dynsection-0';
 </script>
@@ -57,10 +57,10 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<polygon fill="#bfbfbf" stroke="#000000" points="490,-78.5 490,-119.5 612,-119.5 612,-78.5 490,-78.5"/>
-<text text-anchor="start" x="498" y="-107.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
-<text text-anchor="start" x="498" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
-<text text-anchor="middle" x="551" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/err_exit.h</text>
+<polygon fill="#bfbfbf" stroke="#000000" points="560,-78.5 560,-119.5 682,-119.5 682,-78.5 560,-78.5"/>
+<text text-anchor="start" x="568" y="-107.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
+<text text-anchor="start" x="568" y="-96.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
+<text text-anchor="middle" x="621" y="-85.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/err_exit.h</text>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node">
@@ -76,8 +76,8 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="#191970" d="M479.7739,-92.7647C395.7522,-84.6209 252.165,-68.2277 131,-42 128.1478,-41.3826 125.2432,-40.7067 122.3184,-39.9876"/>
-<polygon fill="#191970" stroke="#191970" points="479.6824,-96.2719 489.9705,-93.7408 480.3495,-89.3037 479.6824,-96.2719"/>
+<path fill="none" stroke="#191970" d="M549.5528,-94.6365C453.5818,-87.8797 278.081,-72.3713 131,-42 128.1421,-41.4099 125.2327,-40.7562 122.3041,-40.0553"/>
+<polygon fill="#191970" stroke="#191970" points="549.5037,-98.1414 559.7216,-95.3405 549.9873,-91.1581 549.5037,-98.1414"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
@@ -93,8 +93,8 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="#191970" d="M479.777,-86.346C422.9464,-75.8063 341.4645,-59.7033 271,-42 268.1697,-41.2889 265.283,-40.5361 262.3728,-39.7548"/>
-<polygon fill="#191970" stroke="#191970" points="479.2703,-89.8115 489.7392,-88.1834 480.54,-82.9276 479.2703,-89.8115"/>
+<path fill="none" stroke="#191970" d="M549.6464,-90.1477C478.5436,-80.679 366.4915,-64.0012 271,-42 268.1563,-41.3448 265.2585,-40.6378 262.3394,-39.8937"/>
+<polygon fill="#191970" stroke="#191970" points="549.461,-93.6535 559.833,-91.4922 550.377,-86.7137 549.461,-93.6535"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
@@ -110,8 +110,8 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="#191970" d="M486.0096,-74.8607C457.3012,-64.1976 423.9006,-51.7917 396.396,-41.5757"/>
-<polygon fill="#191970" stroke="#191970" points="484.9573,-78.2035 495.5503,-78.4044 487.3947,-71.6415 484.9573,-78.2035"/>
+<path fill="none" stroke="#191970" d="M549.9367,-80.2114C509.197,-69.3151 457.1416,-55.1808 411,-42 408.072,-41.1636 405.0778,-40.2994 402.0555,-39.4201"/>
+<polygon fill="#191970" stroke="#191970" points="549.209,-83.6397 559.7735,-82.8383 551.0151,-76.8767 549.209,-83.6397"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
@@ -127,8 +127,8 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="#191970" d="M525.3118,-70.376C516.781,-60.8703 507.4544,-50.4778 499.5678,-41.6898"/>
-<polygon fill="#191970" stroke="#191970" points="522.9573,-72.9927 532.2413,-78.0974 528.167,-68.3173 522.9573,-72.9927"/>
+<path fill="none" stroke="#191970" d="M574.979,-73.3597C556.4355,-63.0283 535.3383,-51.2742 517.8377,-41.5239"/>
+<polygon fill="#191970" stroke="#191970" points="573.411,-76.4926 583.8501,-78.3022 576.8179,-70.3776 573.411,-76.4926"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
@@ -144,59 +144,76 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node1&#45;&gt;Node6</title>
-<path fill="none" stroke="#191970" d="M576.6882,-70.376C585.219,-60.8703 594.5456,-50.4778 602.4322,-41.6898"/>
-<polygon fill="#191970" stroke="#191970" points="573.833,-68.3173 569.7587,-78.0974 579.0427,-72.9927 573.833,-68.3173"/>
+<path fill="none" stroke="#191970" d="M621,-68.0789C621,-59.2178 621,-49.7747 621,-41.6898"/>
+<polygon fill="#191970" stroke="#191970" points="617.5001,-68.0974 621,-78.0974 624.5001,-68.0975 617.5001,-68.0974"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node7"><a xlink:href="semaphore_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione dei SEMAFORI. ">
-<polygon fill="none" stroke="#000000" points="700,-.5 700,-41.5 822,-41.5 822,-.5 700,-.5"/>
-<text text-anchor="start" x="708" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
-<text text-anchor="start" x="708" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
-<text text-anchor="middle" x="761" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/semaphore.c</text>
+<g id="a_node7"><a xlink:href="message__queue_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione delle CODE DEI MESSAGGI...">
+<polygon fill="none" stroke="#000000" points="700.5,-.5 700.5,-41.5 825.5,-41.5 825.5,-.5 700.5,-.5"/>
+<text text-anchor="start" x="708.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
+<text text-anchor="start" x="708.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
+<text text-anchor="middle" x="763" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/message_queue.c</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node7 -->
 <g id="edge6" class="edge">
 <title>Node1&#45;&gt;Node7</title>
-<path fill="none" stroke="#191970" d="M615.9904,-74.8607C644.6988,-64.1976 678.0994,-51.7917 705.604,-41.5757"/>
-<polygon fill="#191970" stroke="#191970" points="614.6053,-71.6415 606.4497,-78.4044 617.0427,-78.2035 614.6053,-71.6415"/>
+<path fill="none" stroke="#191970" d="M667.6784,-73.3597C686.4869,-63.0283 707.8854,-51.2742 725.6361,-41.5239"/>
+<polygon fill="#191970" stroke="#191970" points="665.7603,-70.42 658.6806,-78.3022 669.1304,-76.5554 665.7603,-70.42"/>
 </g>
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="server_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione del server. ">
-<polygon fill="none" stroke="#000000" points="840,-.5 840,-41.5 962,-41.5 962,-.5 840,-.5"/>
-<text text-anchor="start" x="848" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
-<text text-anchor="start" x="848" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
-<text text-anchor="middle" x="901" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/server.c</text>
+<g id="a_node8"><a xlink:href="semaphore_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione dei SEMAFORI. ">
+<polygon fill="none" stroke="#000000" points="844,-.5 844,-41.5 966,-41.5 966,-.5 844,-.5"/>
+<text text-anchor="start" x="852" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
+<text text-anchor="start" x="852" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
+<text text-anchor="middle" x="905" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/semaphore.c</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node8 -->
 <g id="edge7" class="edge">
 <title>Node1&#45;&gt;Node8</title>
-<path fill="none" stroke="#191970" d="M622.223,-86.346C679.0536,-75.8063 760.5355,-59.7033 831,-42 833.8303,-41.2889 836.717,-40.5361 839.6272,-39.7548"/>
-<polygon fill="#191970" stroke="#191970" points="621.46,-82.9276 612.2608,-88.1834 622.7297,-89.8115 621.46,-82.9276"/>
+<path fill="none" stroke="#191970" d="M691.8191,-80.7286C733.5758,-69.8079 787.3946,-55.4773 835,-42 837.9299,-41.1705 840.9257,-40.312 843.9493,-39.4372"/>
+<polygon fill="#191970" stroke="#191970" points="690.81,-77.3746 682.0183,-83.2871 692.5782,-84.1477 690.81,-77.3746"/>
 </g>
 <!-- Node9 -->
 <g id="node9" class="node">
 <title>Node9</title>
-<g id="a_node9"><a xlink:href="shared__memory_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione della MEMORIA CONDIVISA...">
-<polygon fill="none" stroke="#000000" points="980.5,-.5 980.5,-41.5 1103.5,-41.5 1103.5,-.5 980.5,-.5"/>
-<text text-anchor="start" x="988.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
-<text text-anchor="start" x="988.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
-<text text-anchor="middle" x="1042" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/shared_memory.c</text>
+<g id="a_node9"><a xlink:href="server_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione del server. ">
+<polygon fill="none" stroke="#000000" points="984,-.5 984,-41.5 1106,-41.5 1106,-.5 984,-.5"/>
+<text text-anchor="start" x="992" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
+<text text-anchor="start" x="992" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
+<text text-anchor="middle" x="1045" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/server.c</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node9 -->
 <g id="edge8" class="edge">
 <title>Node1&#45;&gt;Node9</title>
-<path fill="none" stroke="#191970" d="M622.2084,-92.6822C706.2131,-84.4601 849.7843,-67.9925 971,-42 974.0165,-41.3532 977.0913,-40.6431 980.1872,-39.8872"/>
-<polygon fill="#191970" stroke="#191970" points="621.6305,-89.2217 612.0139,-93.6681 622.3044,-96.1892 621.6305,-89.2217"/>
+<path fill="none" stroke="#191970" d="M692.5277,-90.3001C764.4119,-80.8984 878.1362,-64.226 975,-42 977.8443,-41.3474 980.7425,-40.6425 983.6621,-39.9"/>
+<polygon fill="#191970" stroke="#191970" points="691.6996,-86.878 682.2324,-91.6342 692.5993,-93.82 691.6996,-86.878"/>
+</g>
+<!-- Node10 -->
+<g id="node10" class="node">
+<title>Node10</title>
+<g id="a_node10"><a xlink:href="shared__memory_8c.html" target="_top" xlink:title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione della MEMORIA CONDIVISA...">
+<polygon fill="none" stroke="#000000" points="1124.5,-.5 1124.5,-41.5 1247.5,-41.5 1247.5,-.5 1124.5,-.5"/>
+<text text-anchor="start" x="1132.5" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/mnt/c/Users/stefa</text>
+<text text-anchor="start" x="1132.5" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/Desktop/system_call</text>
+<text text-anchor="middle" x="1186" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">/src/shared_memory.c</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node10 -->
+<g id="edge9" class="edge">
+<title>Node1&#45;&gt;Node10</title>
+<path fill="none" stroke="#191970" d="M692.6146,-94.6311C789.2621,-87.8519 966.457,-72.3008 1115,-42 1118.0228,-41.3834 1121.1028,-40.6978 1124.2028,-39.9617"/>
+<polygon fill="#191970" stroke="#191970" points="692.1114,-91.1574 682.376,-95.3375 692.5933,-98.1408 692.1114,-91.1574"/>
 </g>
 </g>
 </svg>

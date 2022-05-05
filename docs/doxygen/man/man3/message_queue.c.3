@@ -1,0 +1,71 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/message_queue.c" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/message_queue.c \- Contiene l'implementazione delle funzioni specifiche per la gestione delle CODE DEI MESSAGGI\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sys/msg\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include 'err_exit\&.h'\fP
+.br
+\fC#include 'message_queue\&.h'\fP
+.br
+\fC#include 'debug\&.h'\fP
+.br
+
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "struct msqid_ds \fBmsqGetStats\fP (int \fBmsqid\fP)"
+.br
+.RI "Restituisce statistiche della coda dei messaggi\&. "
+.ti -1c
+.RI "void \fBmsqSetStats\fP (int \fBmsqid\fP, struct msqid_ds ds)"
+.br
+.RI "Imposta nuove configurazioni sulla coda dei messaggi\&. "
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene l'implementazione delle funzioni specifiche per la gestione delle CODE DEI MESSAGGI\&. 
+
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "struct msqid_ds msqGetStats (int msqid)"
+
+.PP
+Restituisce statistiche della coda dei messaggi\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fImsqid\fP Identifier coda dei messaggi 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+struct msqid_ds Struttura con statistiche della coda dei messaggi 
+.RE
+.PP
+
+.SS "void msqSetStats (int msqid, struct msqid_ds ds)"
+
+.PP
+Imposta nuove configurazioni sulla coda dei messaggi\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fImsqid\fP Identifier coda dei messaggi 
+.br
+\fIds\fP Struttura con nuove statistiche della coda dei messaggi 
+.RE
+.PP
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

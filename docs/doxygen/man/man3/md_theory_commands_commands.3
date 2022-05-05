@@ -1,4 +1,4 @@
-.TH "md_theory_commands_commands" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "md_theory_commands_commands" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -88,6 +88,12 @@ valgrind --leak-check=full \
 
 .fi
 .PP
+ 
+.PP
+.RS 4
+Terminare il processo server con CTRL+C 
+.RE
+.PP
 .PP
 Testare il client: 
 .PP
@@ -105,6 +111,11 @@ valgrind --leak-check=full \
 .PP
 .RS 4
 Sostituire \fC<percorso cartella file>\fP con l'input corretto 
+.RE
+.PP
+.PP
+.RS 4
+Terminare il processo client eseguendo il comando \fCpkill -USR1 memcheck\fP su un altro terminale\&. 
 .RE
 .PP
 .PP
@@ -163,6 +174,20 @@ key     semid  owner      perms  nsems
 0x1111  102    professor  330    20
 
 .fi
+.PP
+.PP
+Il comando \fCipcs\fP permette anche di vedere il valore dei semafori con il comando: 
+.PP
+.nf
+ipcs -s -i <semid>
+
+.fi
+.PP
+ 
+.PP
+.RS 4
+Sostituire \fC<semid>\fP con il semid ottenuto con il comando \fCipcs\fP\&. 
+.RE
 .PP
 .PP
 .SS "Rimuovi IPC dal sistema:"
