@@ -227,8 +227,7 @@ void operazioni_client0() {
     // informa che tutti i file di output sono stati creati dal server stesso e che il server ha concluso le sue operazioni.
     DEBUG_PRINT("Attendo di ricevere messaggio di fine.\n");
     msg_t end_msg;
-    // TODO: msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere
-    while (msgrcv(msqid, &end_msg, sizeof(struct msg_t)-sizeof(long), CONTAINS_DONE, 0) == -1);
+    msgrcv(msqid, &end_msg, sizeof(struct msg_t)-sizeof(long), CONTAINS_DONE, 0);  // lettura bloccante
     DEBUG_PRINT("Ricevuto messaggio di fine: '%s'\n", end_msg.msg_body);
 
     // attendi fine dei processi figlio
