@@ -30,7 +30,7 @@
 .br
 .RI "Funzione di supporto per manipolare i valori di un set di semafori\&. "
 .ti -1c
-.RI "void \fBsemOpNoBlocc\fP (int \fBsemid\fP, unsigned short sem_num, short sem_op)"
+.RI "int \fBsemOpNoBlocc\fP (int \fBsemid\fP, unsigned short sem_num, short sem_op)"
 .br
 .ti -1c
 .RI "void \fBsemWaitZero\fP (int \fBsemid\fP, int sem_num)"
@@ -41,15 +41,12 @@
 .br
 .RI "Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il processo\&. "
 .ti -1c
-.RI "void \fBsemWaitNoBlocc\fP (int \fBsemid\fP, int sem_num)"
+.RI "int \fBsemWaitNoBlocc\fP (int \fBsemid\fP, int sem_num)"
 .br
 .ti -1c
 .RI "void \fBsemSignal\fP (int \fBsemid\fP, int sem_num)"
 .br
 .RI "Esegue la signal sul semaforo sem_num: incrementa il valore di 1\&. "
-.ti -1c
-.RI "void \fBsemSignalNoBlocc\fP (int \fBsemid\fP, int sem_num)"
-.br
 .ti -1c
 .RI "void \fBsemSetVal\fP (int \fBsemid\fP, int sem_num, int val)"
 .br
@@ -62,10 +59,6 @@
 .RI "void \fBsemDelete\fP (int \fBsemid\fP)"
 .br
 .RI "Cancella il set di semafori svegliando eventuali processi in attesa\&. "
-.ti -1c
-.RI "struct semid_ds \fBsemGetStats\fP (int \fBsemid\fP)"
-.br
-.RI "Recupera statistiche di un set di semafori\&. "
 .ti -1c
 .RI "void \fBsemSetPerm\fP (int \fBsemid\fP, struct semid_ds arg)"
 .br
@@ -115,22 +108,6 @@ Cancella il set di semafori svegliando eventuali processi in attesa\&.
 .RE
 .PP
 
-.SS "struct semid_ds semGetStats (int semid)"
-
-.PP
-Recupera statistiche di un set di semafori\&. 
-.PP
-\fBParametri:\fP
-.RS 4
-\fIsemid\fP Identificatore del set di semafori 
-.RE
-.PP
-\fBRestituisce:\fP
-.RS 4
-struct semid_ds Statistiche del set di semafori 
-.RE
-.PP
-
 .SS "void semOp (int semid, unsigned short sem_num, short sem_op)"
 
 .PP
@@ -143,6 +120,24 @@ Funzione di supporto per manipolare i valori di un set di semafori\&.
 \fIsem_num\fP Indice di un semaforo nel set 
 .br
 \fIsem_op\fP Operazione eseguita sul semaforo sem_num 
+.RE
+.PP
+
+.SS "int semOpNoBlocc (int semid, unsigned short sem_num, short sem_op)"
+Funzione di supporto per manipolare i valori di un set di semafori in modo non bloccante\&. Restituisce -1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
+.br
+\fIsem_op\fP Operazione eseguita sul semaforo sem_num 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+-1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti 
 .RE
 .PP
 
@@ -210,6 +205,22 @@ Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente 
 \fIsemid\fP Identificatore del set di semafori 
 .br
 \fIsem_num\fP Indice di un semaforo nel set 
+.RE
+.PP
+
+.SS "int semWaitNoBlocc (int semid, int sem_num)"
+Esegue la wait non bloccante sul semaforo sem_num: tenta di decrementare il suo valore di 1\&. Restituisce -1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsemid\fP Identificatore del set di semafori 
+.br
+\fIsem_num\fP Indice di un semaforo nel set 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+-1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti 
 .RE
 .PP
 

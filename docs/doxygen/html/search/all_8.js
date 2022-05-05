@@ -3,6 +3,7 @@ var searchData=
   ['main',['main',['../client_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;client.c'],['../client_8h.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;test_sleep.c'],['../server_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;server.c']]],
   ['make_5ffifo',['make_fifo',['../fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b',1,'make_fifo(char *path):&#160;fifo.c'],['../fifo_8h.html#ab83de0eb3bc3947e3c031685d5c2474b',1,'make_fifo(char *path):&#160;fifo.c']]],
   ['matricefile',['matriceFile',['../server_8c.html#a1aaec567099944b97df11e662b3b4611',1,'server.c']]],
+  ['max_5fmsg_5fper_5fchannel',['MAX_MSG_PER_CHANNEL',['../defines_8h.html#a145b4c29c9494d8356c6108d9bf39aca',1,'defines.h']]],
   ['message_5fqueue_2ec',['message_queue.c',['../message__queue_8c.html',1,'']]],
   ['message_5fqueue_2eh',['message_queue.h',['../message__queue_8h.html',1,'']]],
   ['msg_5fbody',['msg_body',['../structmsg__t.html#ad212a8746fcd05ce2f48e9d2c854071b',1,'msg_t']]],

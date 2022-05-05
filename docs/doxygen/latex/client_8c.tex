@@ -26,8 +26,7 @@ Contiene l\textquotesingle{}implementazione del client.
 {\ttfamily \#include \char`\"{}shared\+\_\+memory.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}fifo.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per client.\+c\+:
-\nopagebreak
+Grafo delle dipendenze di inclusione per client.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -92,11 +91,7 @@ char $\ast$ \hyperlink{client_8c_ab68195a262278b18e5dc84f677ad434d}{search\+Path
 Contiene l\textquotesingle{}implementazione del client. 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000001}{Da fare}]Spostare le funzioni non main fuori dal file \hyperlink{client_8c}{client.\+c} ? (ad esempio una opzione per la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c})\end{DoxyRefDesc}
-
-
-\begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000002}{Da fare}]Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa \end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000001}{Da fare}]Spostare le funzioni non main fuori dal file \hyperlink{client_8c}{client.\+c} ? (ad esempio una opzione per la funzione \hyperlink{client_8c_a55586f2b7e9b3620294cf78cda8abdad}{dividi()} e\textquotesingle{} metterla in \hyperlink{files_8c}{files.\+c}) \end{DoxyRefDesc}
 
 
 \subsection{Documentazione delle funzioni}
@@ -192,11 +187,11 @@ Esegue tutte le funzionalita\textquotesingle{} principali del client 0.
 Non vengono eseguite in \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler()} per il seguente motivo\+: \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{\tt https\+://man7.\+org/linux/man-\/pages/man7/signal-\/safety.\+7.\+html}
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000003}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un\textquotesingle{}altra lista concatenata. Quindi in pratica si occupano\+: \$\$25 $\ast$ 2 = 50\$\$ Ovvero 50 KB.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000002}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un\textquotesingle{}altra lista concatenata. Quindi in pratica si occupano\+: \$\$25 $\ast$ 2 = 50\$\$ Ovvero 50 KB.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000004}{Da fare}]msgrcv e\textquotesingle{} bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000003}{Da fare}]msgrcv e\textquotesingle{} bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Warnings}
@@ -219,7 +214,8 @@ Questo è il grafo delle chiamate per questa funzione\+:
 \includegraphics[width=350pt]{client_8c_a8c7084a254c7cd640d66e647795ff8f6_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -249,7 +245,8 @@ Questo è il grafo delle chiamate per questa funzione\+:
 \includegraphics[width=350pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -273,7 +270,8 @@ Le funzionalita\textquotesingle{} principali vengono eseguite da \hyperlink{clie
 {\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -295,14 +293,16 @@ Handler del segnale S\+I\+G\+U\+S\+R1\+: chiude le risorse del client 0 e termin
 {\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8c_a50b22adcb76198fcd9402a97ff4711bf_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -329,7 +329,8 @@ true a e b sono uguali
 
 false a e b sono diverse 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

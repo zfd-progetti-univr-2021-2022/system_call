@@ -1,0 +1,4 @@
+<map id="semWaitNoBlocc" name="semWaitNoBlocc">
+<area shape="rect" id="node2" href="$semaphore_8c.html#a78e24598fb0a5416db19120d6748627e" title="semOpNoBlocc" alt="" coords="185,5,307,32"/>
+<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="355,5,420,32"/>
+</map>

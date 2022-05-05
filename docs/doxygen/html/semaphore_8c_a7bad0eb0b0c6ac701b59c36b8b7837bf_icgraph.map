@@ -1,7 +1,7 @@
 <map id="semSignal" name="semSignal">
-<area shape="rect" id="node2" href="$semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="144,22,253,49"/>
-<area shape="rect" id="node3" href="$client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="479,22,620,49"/>
-<area shape="rect" id="node6" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="339,73,393,100"/>
-<area shape="rect" id="node5" href="$client_8h.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="301,22,431,49"/>
-<area shape="rect" id="node4" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="668,22,723,49"/>
+<area shape="rect" id="node2" href="$semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="144,81,253,108"/>
+<area shape="rect" id="node3" href="$client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="479,81,620,108"/>
+<area shape="rect" id="node5" href="$client_8h.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="301,132,431,159"/>
+<area shape="rect" id="node6" href="$server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="339,31,393,57"/>
+<area shape="rect" id="node4" href="$client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="668,81,723,108"/>
 </map>

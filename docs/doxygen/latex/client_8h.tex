@@ -137,11 +137,11 @@ Esegue tutte le funzionalita\textquotesingle{} principali del client 0.
 Non vengono eseguite in \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler()} per il seguente motivo\+: \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{\tt https\+://man7.\+org/linux/man-\/pages/man7/signal-\/safety.\+7.\+html}
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000003}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un\textquotesingle{}altra lista concatenata. Quindi in pratica si occupano\+: \$\$25 $\ast$ 2 = 50\$\$ Ovvero 50 KB.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000002}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un\textquotesingle{}altra lista concatenata. Quindi in pratica si occupano\+: \$\$25 $\ast$ 2 = 50\$\$ Ovvero 50 KB.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000004}{Da fare}]msgrcv e\textquotesingle{} bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000003}{Da fare}]msgrcv e\textquotesingle{} bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Warnings}

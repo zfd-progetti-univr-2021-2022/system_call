@@ -11,6 +11,7 @@ var defines_8h =
     [ "FIFO1_PATH", "defines_8h.html#a1e79a43e6110ccf4b3e3fcacc6e1a07e", null ],
     [ "FIFO2_PATH", "defines_8h.html#a04902929b62d6decfed3e7ef544a5cdb", null ],
     [ "INIZIALIZZAZIONE_MTYPE", "defines_8h.html#ac4360beb7ee2bb020a085321d799418f", null ],
+    [ "MAX_MSG_PER_CHANNEL", "defines_8h.html#a145b4c29c9494d8356c6108d9bf39aca", null ],
     [ "MSG_BUFFER_SZ", "defines_8h.html#a46b84a677ff2bcf693b89247e39d75f7", null ],
     [ "MSG_MAX_SZ", "defines_8h.html#a0b8b71c287c99c2bd2e36f6bc95a005e", null ],
     [ "MSG_PARTS_NUM", "defines_8h.html#a2f72e71f34fb7e6074d029377ab31918", null ],
