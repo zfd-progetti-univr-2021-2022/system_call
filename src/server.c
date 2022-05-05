@@ -354,7 +354,11 @@ int main(int argc, char * argv[]) {
         semWaitZero(semid, 2);
         DEBUG_PRINT("Rese fifo non bloccanti\n");
 
-        // si mette in ricezione ciclicamente su ciascuno dei quattro canali
+        // si mette in ricezione ciclicamente su ciascuno dei quattro canali.
+        // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e
+        // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
+        // bianca (carattere newline) ed ha l’intestazione
+        // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
         int arrived_parts_counter = 0;
         int n_tries = 0;
         while (arrived_parts_counter < n * 4) {
@@ -406,12 +410,6 @@ int main(int argc, char * argv[]) {
             DEBUG_PRINT("Tenta di uscire nella memoria condivisa\n");
             semSignal(semid, 6);
             DEBUG_PRINT("Sono uscito dalla memoria condivisa\n");
-
-            // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e
-            // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
-            // bianca (carattere newline) ed ha l’intestazione
-            // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
-
 
             if (n_tries % 5000 == 0) {
 		        DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
