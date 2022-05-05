@@ -251,7 +251,7 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
     semid = createSemaphores(get_ipc_key(), 53);
-    short unsigned int semValues[53] = {1,0,0,0,0,0,1,  0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    short unsigned int semValues[53] = {1,0,0,0,0,0,1,  50,50,50,  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -306,15 +306,6 @@ int main(int argc, char * argv[]) {
         //semaforo per far attendere i figli
         for(int i=0;i<n;i++)
         	semSignal(semid,5);
-        //semaforo per limitare la fifo1
-        for(int i=0;i<50;i++)
-        	semSignal(semid,7);
-        //semaforo per limitare la fifo2
-        for(int i=0;i<50;i++)
-        	semSignal(semid,8);
-        //semaforo per limitare la coda di messaggi
-        for(int i=0;i<50;i++)
-        	semSignal(semid,9);
 
         // scrive un messaggio di conferma su ShdMem
         msg_t received_msg = {.msg_body = "OK", .mtype = CONTAINS_N, .sender_pid = getpid()};

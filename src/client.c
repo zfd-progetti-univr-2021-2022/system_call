@@ -369,6 +369,9 @@ void operazioni_figlio(char * filePath){
                     // la scrittura ha avuto successo
                     sent[0] = true;
                 }
+                else{
+                    semSignal(semid, 7);
+                }
             }
         }
 
@@ -387,6 +390,9 @@ void operazioni_figlio(char * filePath){
                 if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */){
                     // la scrittura ha avuto successo
                     sent[1] = true;
+                }
+                else{
+                    semSignal(semid, 8);
                 }
             }
         }
@@ -408,6 +414,7 @@ void operazioni_figlio(char * filePath){
                     sent[2] = true;
                 }
                 else{
+                    semSignal(semid, 9);
                     perror("msgsnd failed");
                 }
             }
