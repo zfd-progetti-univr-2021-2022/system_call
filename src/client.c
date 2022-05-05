@@ -3,8 +3,6 @@
  * @brief Contiene l'implementazione del client.
  *
  * @todo Spostare le funzioni non main fuori dal file client.c ? (ad esempio una opzione per la funzione dividi() e' metterla in files.c)
- *
- * @todo Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
 */
 
 #include <stdio.h>
@@ -82,19 +80,19 @@ void operazioni_client0() {
 
     // Connettiti alle IPC e alle FIFO
     if (shmid < 0)
-        shmid = alloc_shared_memory(get_ipc_key(), 53 * sizeof(msg_t));
+        shmid = alloc_shared_memory(get_ipc_key(), MAX_MSG_PER_CHANNEL * sizeof(msg_t));
     if (shm_ptr == NULL)
         shm_ptr = (msg_t *) get_shared_memory(shmid, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
     if (shm_check_id < 0)
-        shm_check_id = alloc_shared_memory(get_ipc_key2(), 53 * sizeof(int));
+        shm_check_id = alloc_shared_memory(get_ipc_key2(), MAX_MSG_PER_CHANNEL * sizeof(int));
     if (shm_check_ptr == NULL)
         shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
     if (semid < 0)
-        semid = getSemaphores(get_ipc_key(), 53);
+        semid = getSemaphores(get_ipc_key(), 10);
     DEBUG_PRINT("Semafori: ottenuto il set di semafori\n");
 
     if (fifo1_fd < 0)
@@ -427,7 +425,7 @@ void operazioni_figlio(char * filePath){
             DEBUG_PRINT("Tento di entrare nella zona critica (figlio %d)\n", getpid());
             semWait(semid, 6);
             DEBUG_PRINT("Sono dentro la zona critica (figlio %d)\n", getpid());
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < MAX_MSG_PER_CHANNEL; i++) {
                 if (shm_check_ptr[i] == 0) {
                     DEBUG_PRINT("Trovata posizione libera %d per inviare: %s\n", i, supporto.msg_body);
                     shm_check_ptr[i] = 1;

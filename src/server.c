@@ -4,7 +4,6 @@
  *
  * @todo Spostare le funzioni non main fuori dal file server.c
  * @todo Creare una funzione che fa cio' che e' nel while(true)
- * @todo Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
  *
 */
 
@@ -244,16 +243,16 @@ int main(int argc, char * argv[]) {
 
     DEBUG_PRINT("Recuperata la chiave IPC: %x\n", get_ipc_key());
 
-    shmid = alloc_shared_memory(get_ipc_key(), 53 * sizeof(msg_t));
+    shmid = alloc_shared_memory(get_ipc_key(), MAX_MSG_PER_CHANNEL * sizeof(msg_t));
     shm_ptr = (msg_t *) get_shared_memory(shmid, IPC_CREAT | S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa: allocata e connessa\n");
 
-    shm_check_id = alloc_shared_memory(get_ipc_key2(), 53 * sizeof(int));
+    shm_check_id = alloc_shared_memory(get_ipc_key2(), MAX_MSG_PER_CHANNEL * sizeof(int));
     shm_check_ptr = (int *) get_shared_memory(shm_check_id, S_IRUSR | S_IWUSR);
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
-    semid = createSemaphores(get_ipc_key(), 53);
-    short unsigned int semValues[53] = {1,0,0,0,0,0,1,  50,50,50,  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    semid = createSemaphores(get_ipc_key(), 10);
+    short unsigned int semValues[10] = {1,0,0,0,0,0,1,MAX_MSG_PER_CHANNEL,MAX_MSG_PER_CHANNEL,MAX_MSG_PER_CHANNEL};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -268,7 +267,7 @@ int main(int argc, char * argv[]) {
 
     //limito la coda
     struct msqid_ds ds = msqGetStats(msqid);
-    ds.msg_qbytes = sizeof(msg_t) * 50;
+    ds.msg_qbytes = sizeof(msg_t) * MAX_MSG_PER_CHANNEL;
     msqSetStats(msqid, ds);
 
     while (true) {
@@ -367,7 +366,7 @@ int main(int argc, char * argv[]) {
             DEBUG_PRINT("Tenta di entrare nella memoria condivisa\n");
             semWait(semid, 6);
             DEBUG_PRINT("Sono entrato nella memoria condivisa\n");
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < MAX_MSG_PER_CHANNEL; i++) {
                 if (shm_check_ptr[i] == 1) {
                     DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
                     shm_check_ptr[i] = 0;

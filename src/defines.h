@@ -31,6 +31,9 @@ extern char EXECUTABLE_DIR[BUFFER_SZ];
 /// mtype messaggio che contiene il valore usato per inizializzare la matrice contenente i file finali
 #define INIZIALIZZAZIONE_MTYPE -1
 
+/// numero massimo di messaggi per canale di comunicazione
+#define MAX_MSG_PER_CHANNEL 50
+
 // -- Macro suddivisione messaggi
 
 // > 4 KB -> 4096 byte -> 1024 caratteri da 1 byte ciascuno per le 4 parti dei messaggi
