@@ -58,4 +58,7 @@ Set di semafori {\ttfamily semid}\+:
 4 &0 &Incrementato a 2 in runtime per prevedere il ciclo successivo. Aspetta che client e server abbiano reso le F\+I\+FO bloccanti \\\cline{1-3}
 5 &0 &Incrementato in runtime per valere tanto quanto sono il numero di file/figli. Aspetta che tutti i processi figlio di client\+\_\+0 abbiano suddiviso il proprio file in 4 parti prima di mandarle sulle I\+PC o F\+I\+FO \\\cline{1-3}
 6 &1 &Mutex per leggere/scrivere messaggi con la quarta parte di file sulla memoria condivisa \\\cline{1-3}
+7 &50 &Limita il numero di messaggi memorizzabili contemporaneamente nella F\+I\+FO 1 a 50 messaggi \\\cline{1-3}
+8 &50 &Limita il numero di messaggi memorizzabili contemporaneamente nella F\+I\+FO 2 a 50 messaggi \\\cline{1-3}
+9 &50 &Limita il numero di messaggi memorizzabili contemporaneamente nella coda dei messaggi a 50 messaggi \\\cline{1-3}
 \end{longtabu}

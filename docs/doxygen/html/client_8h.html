@@ -267,8 +267,7 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -290,7 +289,6 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <p>Esegue tutte le funzionalita' principali del client 0.</p>
 <p>Non vengono eseguite in <a class="el" href="client_8h.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. ">SIGINTSignalHandler()</a> per il seguente motivo: <a href="https://man7.org/linux/man-pages/man7/signal-safety.7.html">https://man7.org/linux/man-pages/man7/signal-safety.7.html</a></p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Da fare:</a></b></dt><dd>Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0. Attualmente la dimensione massima occupata dal client e': $$100 file * dim. path + 100 file * dim. pointer$$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un'altra lista concatenata. Quindi in pratica si occupano: $$25 * 2 = 50$$ Ovvero 50 KB.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Da fare:</a></b></dt><dd>msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.</dd></dl>
 <dl class="warning"><dt><b><a class="el" href="warning.html#_warning000001">Warnings:</a></b></dt><dd>Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send_me si puo' creare il processo figlio per inviare il file. Per fare questo BISOGNA sapere se il numero di file puo' cambiare durante l'esecuzione di questa funzione: se trovo 3 file e dopo un file viene cancellato cosa succede? <br />
  NOTA: questo problema puo' esserci anche nella situazione attuale...</dd></dl>
 <dl class="warning"><dt><b><a class="el" href="warning.html#_warning000002">Warnings:</a></b></dt><dd>Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Attualmente prima si attendere il messaggio di fine e poi si aspetta che tutti i figlio terminino.</dd></dl>
@@ -299,14 +297,12 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a8c7084a254c7cd640d66e647795ff8f6_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a8c7084a254c7cd640d66e647795ff8f6_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a8c7084a254c7cd640d66e647795ff8f6_icgraph.svg" width="255" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a8c7084a254c7cd640d66e647795ff8f6_icgraph.svg" width="255" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -337,14 +333,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_icgraph.svg" width="432" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a54b47b58f228d7bc9827d2919687e25a_icgraph.svg" width="432" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -379,14 +373,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="515" height="166"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_cgraph.svg" width="515" height="166"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a48d605ff689f470746c858648f0a98c2_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -417,14 +409,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a50b22adcb76198fcd9402a97ff4711bf_cgraph.svg" width="504" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a50b22adcb76198fcd9402a97ff4711bf_cgraph.svg" width="504" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_a50b22adcb76198fcd9402a97ff4711bf_icgraph.svg" width="284" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -468,8 +458,7 @@ false a e b sono diverse </dd></dl>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_ac129a55ffa08a55addb9ea1afbd709f8_icgraph.svg" width="386" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="client_8h_ac129a55ffa08a55addb9ea1afbd709f8_icgraph.svg" width="386" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

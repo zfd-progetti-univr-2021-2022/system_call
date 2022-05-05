@@ -204,12 +204,6 @@ Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0\&. Attualme
 .RE
 .PP
 .PP
-\fBDa fare\fP
-.RS 4
-msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere\&.
-.RE
-.PP
-.PP
 \fBWarnings\fP
 .RS 4
 Per ottimizzare l'uso dello HEAP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send_me si puo' creare il processo figlio per inviare il file\&. Per fare questo BISOGNA sapere se il numero di file puo' cambiare durante l'esecuzione di questa funzione: se trovo 3 file e dopo un file viene cancellato cosa succede? 
