@@ -46,8 +46,18 @@ int createSemaphores(key_t key, int n_sem);
  * @param sem_num Indice di un semaforo nel set
  * @param sem_op Operazione eseguita sul semaforo sem_num
 */
-void semOp (int semid, unsigned short sem_num, short sem_op);
-void semOpNoBlocc (int semid, unsigned short sem_num, short sem_op);
+void semOp(int semid, unsigned short sem_num, short sem_op);
+
+/**
+ * Funzione di supporto per manipolare i valori di un set di semafori in modo non bloccante.
+ * Restituisce -1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param sem_num Indice di un semaforo nel set
+ * @param sem_op Operazione eseguita sul semaforo sem_num
+ * @return -1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti
+*/
+int semOpNoBlocc(int semid, unsigned short sem_num, short sem_op);
 
 /**
  * Attende che il semaforo sem_num raggiunga il valore zero.
@@ -66,7 +76,16 @@ void semWaitZero(int semid, int sem_num);
  * @param sem_num Indice di un semaforo nel set
 */
 void semWait(int semid, int sem_num);
-void semWaitNoBlocc(int semid, int sem_num);
+
+/**
+ * Esegue la wait non bloccante sul semaforo sem_num: tenta di decrementare il suo valore di 1.
+ * Restituisce -1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti.
+ *
+ * @param semid Identificatore del set di semafori
+ * @param sem_num Indice di un semaforo nel set
+ * @return -1 se il semaforo ha tentato di bloccare il processo, 0 altrimenti
+*/
+int semWaitNoBlocc(int semid, int sem_num);
 
 /**
  * @brief Esegue la signal sul semaforo sem_num: incrementa il valore di 1.
@@ -75,7 +94,6 @@ void semWaitNoBlocc(int semid, int sem_num);
  * @param sem_num Indice di un semaforo nel set
 */
 void semSignal(int semid, int sem_num);
-void semSignalNoBlocc(int semid, int sem_num);
 
 /**
  * @brief Inizializza il valore del semaforo sem_num al valore val.
@@ -102,15 +120,6 @@ void semSetAll(int semid, short unsigned int values[]);
  * @param semid Identificatore del set di semafori
  */
 void semDelete(int semid);
-
-
-/**
- * @brief Recupera statistiche di un set di semafori
- *
- * @param semid Identificatore del set di semafori
- * @return struct semid_ds Statistiche del set di semafori
-*/
-struct semid_ds semGetStats(int semid);
 
 
 /**

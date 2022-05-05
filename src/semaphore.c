@@ -4,6 +4,7 @@
 
 #include <sys/stat.h>
 #include <sys/sem.h>
+#include <errno.h>
 
 #include "err_exit.h"
 #include "semaphore.h"
@@ -26,16 +27,25 @@ int getSemaphores(key_t key, int n_sem) {
 }
 
 
-void semOp (int semid, unsigned short sem_num, short sem_op) {
+void semOp(int semid, unsigned short sem_num, short sem_op) {
     struct sembuf sop = {.sem_num = sem_num, .sem_op = sem_op, .sem_flg = 0};
 
     if (semop(semid, &sop, 1) == -1)
         ErrExit("semop failed");
 }
 
-void semOpNoBlocc (int semid, unsigned short sem_num, short sem_op) {
+int semOpNoBlocc(int semid, unsigned short sem_num, short sem_op) {
     struct sembuf sop = {.sem_num = sem_num, .sem_op = sem_op, .sem_flg = IPC_NOWAIT};
-    semop(semid, &sop, 1);
+    if (semop(semid, &sop, 1) == -1){
+        if (errno == EAGAIN){
+            return -1;
+        }
+        else{
+            ErrExit("semop failed");
+        }
+    }
+
+    return 0;
 }
 
 void semWaitZero(int semid, int sem_num) {
@@ -46,17 +56,14 @@ void semWait(int semid, int sem_num) {
     semOp(semid, sem_num, -1);
 }
 
-void semWaitNoBlocc(int semid, int sem_num) {
-    semOpNoBlocc(semid, sem_num, -1);
+int semWaitNoBlocc(int semid, int sem_num) {
+    return semOpNoBlocc(semid, sem_num, -1);
 }
 
 void semSignal(int semid, int sem_num) {
     semOp(semid, sem_num, 1);
 }
 
-void semSignalNoBlocc(int semid, int sem_num) {
-    semOpNoBlocc(semid, sem_num, 1);
-}
 
 void semSetVal(int semid, int sem_num, int val) {
     union semun arg;
@@ -82,17 +89,6 @@ void semDelete(int semid) {
     if (semctl(semid, 0/*semnum: ignored*/, IPC_RMID, 0/*arg: ignored*/) == -1) {
         ErrExit("semctl failed");
     }
-}
-
-
-struct semid_ds semGetStats(int semid){
-    struct semid_ds arg;
-
-    if (semctl(semid, 0 /* semnum: ignored */, IPC_STAT, arg) == -1){
-        ErrExit("semctl failed");
-    }
-
-    return arg;
 }
 
 

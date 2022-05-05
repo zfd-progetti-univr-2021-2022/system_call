@@ -355,9 +355,8 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[0]);
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-            errno=0;
-            semWaitNoBlocc(semid,7);
-            if(errno!=EAGAIN){
+
+            if(semWaitNoBlocc(semid,7) == 0){
                 if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1){
                     // la scrittura ha avuto successo
                     sent[0] = true;
@@ -377,9 +376,8 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[1]);
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-            errno=0;
-            semWaitNoBlocc(semid,8);
-            if(errno!=EAGAIN){
+
+            if(semWaitNoBlocc(semid,8) == 0){
                 if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1){
                     // la scrittura ha avuto successo
                     sent[1] = true;
@@ -399,9 +397,8 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[2]);
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-            errno=0;
-            semWaitNoBlocc(semid,9);
-            if(errno!=EAGAIN){
+
+            if(semWaitNoBlocc(semid,9) == 0){
                 if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
                     // la scrittura ha avuto successo
                     sent[2] = true;
