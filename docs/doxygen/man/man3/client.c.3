@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.c" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -117,7 +117,7 @@
 .br
 .RI "puntatore memoria condivisa flag lettura/scrittura messaggi "
 .ti -1c
-.RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP]"
+.RI "char \fBEXECUTABLE_DIR\fP [\fBBUFFER_SZ\fP] = ''"
 .br
 .RI "Percorso cartella eseguibile\&. "
 .ti -1c
@@ -133,27 +133,13 @@ Contiene l'implementazione del client\&.
 .PP
 \fBDa fare\fP
 .RS 4
-Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO\&. 
-.PP
-Spostare le funzioni non main fuori dal file \fBclient\&.c\fP ? (ad esempio una opzione per la funzioen \fBdividi()\fP e' metterla in \fBfiles\&.c\fP)
+Spostare le funzioni non main fuori dal file \fBclient\&.c\fP ? (ad esempio una opzione per la funzione \fBdividi()\fP e' metterla in \fBfiles\&.c\fP)
 .RE
 .PP
 .PP
-\fBWarnings\fP
+\fBDa fare\fP
 .RS 4
-La specifica non richiede la documentazione\&. E' richiesta?
-.RE
-.PP
-.PP
-\fBWarnings\fP
-.RS 4
-I percorsi dei file hanno dimensione massima?
-.RE
-.PP
-.PP
-\fBWarnings\fP
-.RS 4
-I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, \&.\&.\&.? 
+Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa 
 .RE
 .PP
 

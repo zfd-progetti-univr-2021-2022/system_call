@@ -3,5 +3,6 @@
 <area shape="rect" id="node3" href="$debug_8c.html" title="Contiene l&#39;implementazione delle funzioni per il debugging. " alt="" coords="192,109,355,165"/>
 <area shape="rect" id="node4" href="$fifo_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione delle FIFO. " alt="" coords="379,109,541,165"/>
 <area shape="rect" id="node5" href="$files_8c.html" title="Contiene le funzioni specifiche per la gestione dei FILE. " alt="" coords="565,109,728,165"/>
-<area shape="rect" id="node6" href="$server_8c.html" title="Contiene l&#39;implementazione del server. " alt="" coords="752,109,915,165"/>
+<area shape="rect" id="node6" href="$message__queue_8c.html" title="Contiene l&#39;implementazione delle funzioni specifiche per la gestione delle CODE DEI MESSAGGI..." alt="" coords="753,109,919,165"/>
+<area shape="rect" id="node7" href="$server_8c.html" title="Contiene l&#39;implementazione del server. " alt="" coords="944,109,1107,165"/>
 </map>

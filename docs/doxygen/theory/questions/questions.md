@@ -36,3 +36,36 @@ Esempi:
 |9               |3                   |2                   |2                     |2                              |
 |10              |3                   |3                   |2                     |2                              |
 |...             |...                 |...                 |...                   |...                            |
+
+## dimensione massima percorsi file
+
+DOMANDA:
+
+I percorsi dei file hanno dimensione massima?
+
+RISPOSTA:
+
+Non sappiamo la lunghezza massima dei percorsi dei file ma sappiamo che sono molto corti.
+
+I test verranno eseguiti nella cartella ```/home``` oppure ```/runner``` e ci saranno al massimo 3 o 4 sottocartelle: probabilmente non si superera' il centinaio di caratteri.
+> Attualmente vengono supportati percorsi di lunghezza massima di 255 caratteri
+
+## Serve la documentazione?
+
+DOMANDA:
+
+La specifica non richiede la documentazione. E' richiesta?
+
+RISPOSTA:
+
+Non e' mai stata richiesta, quindi in teoria no.
+
+## Caratteri non ASCII
+
+DOMANDA:
+
+I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?
+
+RISPOSTA:
+
+I caratteri che verranno letti sono tutti da un byte e di conseguenza non c'e' da preoccuparsi di caratteri non ASCII.

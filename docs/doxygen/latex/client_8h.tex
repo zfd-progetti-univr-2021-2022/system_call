@@ -62,8 +62,7 @@ Divide in 4 parti il contenuto del file da inviare al server.
 {\em parte} & Numero identificativo della porzione di messaggio \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -88,8 +87,7 @@ E\textquotesingle{} necessaria la free() dopo aver terminato l\textquotesingle{}
 \begin{DoxyReturn}{Restituisce}
 char$\ast$ Stringa contenente il valore 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:
-\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -119,7 +117,7 @@ Esegue operazioni principali del server.
 terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC.
 
 \begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000007}{Warnings}]I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? \end{DoxyRefDesc}
+\item[\hyperlink{warning__warning000004}{Warnings}]I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? \end{DoxyRefDesc}
 Questo è il grafo delle chiamate per questa funzione\+:
 \nopagebreak
 \begin{figure}[H]
@@ -139,24 +137,24 @@ Esegue tutte le funzionalita\textquotesingle{} principali del client 0.
 Non vengono eseguite in \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler()} per il seguente motivo\+: \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{\tt https\+://man7.\+org/linux/man-\/pages/man7/signal-\/safety.\+7.\+html}
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000002}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un\textquotesingle{}altra lista concatenata. Quindi in pratica si occupano\+: \$\$25 $\ast$ 2 = 50\$\$ Ovvero 50 KB.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000003}{Da fare}]Potrebbe essere necessario ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0. Attualmente la dimensione massima occupata dal client e\textquotesingle{}\+: \$\$100 file $\ast$ dim. path + 100 file $\ast$ dim. pointer\$\$. Assumento dim. path massima = 250 caratteri e dim. pointer 4 byte (32 bit)\+: \$\$100 $\ast$ 250 + 100 $\ast$ 4 = 25400\$\$ Quindi solo lato client si occupano 25 K\+Byte. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un\textquotesingle{}altra lista concatenata. Quindi in pratica si occupano\+: \$\$25 $\ast$ 2 = 50\$\$ Ovvero 50 KB.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Da fare}
-\item[\hyperlink{todo__todo000003}{Da fare}]msgrcv e\textquotesingle{} bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.\end{DoxyRefDesc}
+\item[\hyperlink{todo__todo000004}{Da fare}]msgrcv e\textquotesingle{} bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000004}{Warnings}]Per ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send\+\_\+me si puo\textquotesingle{} creare il processo figlio per inviare il file. Per fare questo B\+I\+S\+O\+G\+NA sapere se il numero di file puo\textquotesingle{} cambiare durante l\textquotesingle{}esecuzione di questa funzione\+: se trovo 3 file e dopo un file viene cancellato cosa succede? ~\newline
+\item[\hyperlink{warning__warning000001}{Warnings}]Per ottimizzare l\textquotesingle{}uso dello H\+E\+AP nel client 0 si potrebbe prima cercare e contare quanti file sono presenti senza creare una lista concatenata e poi ricercare i file e man mano che si trovano file send\+\_\+me si puo\textquotesingle{} creare il processo figlio per inviare il file. Per fare questo B\+I\+S\+O\+G\+NA sapere se il numero di file puo\textquotesingle{} cambiare durante l\textquotesingle{}esecuzione di questa funzione\+: se trovo 3 file e dopo un file viene cancellato cosa succede? ~\newline
  N\+O\+TA\+: questo problema puo\textquotesingle{} esserci anche nella situazione attuale...\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000005}{Warnings}]Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Attualmente prima si attendere il messaggio di fine e poi si aspetta che tutti i figlio terminino.\end{DoxyRefDesc}
+\item[\hyperlink{warning__warning000002}{Warnings}]Il client 0 deve attendere i processi figlio? La specifica indica solo che bisogna attendere il messaggio di fine dal server... Attualmente prima si attendere il messaggio di fine e poi si aspetta che tutti i figlio terminino.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000006}{Warnings}]Il percorso passato al client deve essere assoluto o puo\textquotesingle{} essere relativo? Se si passa un percorso relativo chdir() fallira\textquotesingle{} alla seconda esecuzione. ~\newline
+\item[\hyperlink{warning__warning000003}{Warnings}]Il percorso passato al client deve essere assoluto o puo\textquotesingle{} essere relativo? Se si passa un percorso relativo chdir() fallira\textquotesingle{} alla seconda esecuzione. ~\newline
  S\+O\+L\+U\+Z\+I\+O\+NE\+: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo.\end{DoxyRefDesc}
 Questo è il grafo delle chiamate per questa funzione\+:
 \nopagebreak

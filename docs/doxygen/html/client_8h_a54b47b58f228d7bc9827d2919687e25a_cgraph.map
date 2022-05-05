@@ -1,15 +1,15 @@
 <map id="operazioni_figlio" name="operazioni_figlio">
-<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="684,261,749,288"/>
-<area shape="rect" id="node3" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce la dimensione in byte del file con percorso filePath. " alt="" coords="215,229,307,256"/>
-<area shape="rect" id="node4" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="232,280,291,307"/>
-<area shape="rect" id="node5" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="402,33,481,60"/>
-<area shape="rect" id="node7" href="$semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="207,179,316,205"/>
-<area shape="rect" id="node8" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="396,84,487,111"/>
-<area shape="rect" id="node14" href="$defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d" title="Restituisce vero se l&#39;array contiene tutti true. " alt="" coords="183,331,340,357"/>
-<area shape="rect" id="node6" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="555,109,623,136"/>
-<area shape="rect" id="node9" href="$semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" title="Inizializza il valore del semaforo sem_num al valore val. " alt="" coords="544,388,635,415"/>
-<area shape="rect" id="node10" href="$semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" title="Inizializza i valori del set di semafori semid ai valori in values. " alt="" coords="545,439,633,465"/>
-<area shape="rect" id="node11" href="$semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" title="Cancella il set di semafori svegliando eventuali processi in attesa. " alt="" coords="543,185,636,212"/>
-<area shape="rect" id="node12" href="$semaphore_8c.html#a7d80413e893e7d9ae3d153e23c2df2e4" title="Recupera statistiche di un set di semafori. " alt="" coords="388,236,495,263"/>
-<area shape="rect" id="node13" href="$semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" title="Imposta i permessi su un set di semafori. " alt="" coords="389,287,494,313"/>
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="684,277,749,304"/>
+<area shape="rect" id="node3" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce la dimensione in byte del file con percorso filePath. " alt="" coords="215,49,307,76"/>
+<area shape="rect" id="node4" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="232,100,291,126"/>
+<area shape="rect" id="node5" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="402,49,481,76"/>
+<area shape="rect" id="node7" href="$semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="207,201,316,228"/>
+<area shape="rect" id="node14" href="$defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d" title="Restituisce vero se l&#39;array contiene tutti true. " alt="" coords="183,252,340,278"/>
+<area shape="rect" id="node6" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="555,125,623,152"/>
+<area shape="rect" id="node8" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="396,150,487,177"/>
+<area shape="rect" id="node9" href="$semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" title="Inizializza il valore del semaforo sem_num al valore val. " alt="" coords="544,252,635,278"/>
+<area shape="rect" id="node10" href="$semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" title="Inizializza i valori del set di semafori semid ai valori in values. " alt="" coords="545,302,633,329"/>
+<area shape="rect" id="node11" href="$semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" title="Cancella il set di semafori svegliando eventuali processi in attesa. " alt="" coords="543,353,636,380"/>
+<area shape="rect" id="node12" href="$semaphore_8c.html#a7d80413e893e7d9ae3d153e23c2df2e4" title="Recupera statistiche di un set di semafori. " alt="" coords="388,404,495,430"/>
+<area shape="rect" id="node13" href="$semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" title="Imposta i permessi su un set di semafori. " alt="" coords="389,454,494,481"/>
 </map>

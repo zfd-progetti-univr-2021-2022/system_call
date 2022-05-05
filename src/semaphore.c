@@ -33,21 +33,30 @@ void semOp (int semid, unsigned short sem_num, short sem_op) {
         ErrExit("semop failed");
 }
 
+void semOpNoBlocc (int semid, unsigned short sem_num, short sem_op) {
+    struct sembuf sop = {.sem_num = sem_num, .sem_op = sem_op, .sem_flg = IPC_NOWAIT};
+    semop(semid, &sop, 1);
+}
 
 void semWaitZero(int semid, int sem_num) {
     semOp(semid, sem_num, 0);
 }
 
-
 void semWait(int semid, int sem_num) {
     semOp(semid, sem_num, -1);
 }
 
+void semWaitNoBlocc(int semid, int sem_num) {
+    semOpNoBlocc(semid, sem_num, -1);
+}
 
 void semSignal(int semid, int sem_num) {
     semOp(semid, sem_num, 1);
 }
 
+void semSignalNoBlocc(int semid, int sem_num) {
+    semOpNoBlocc(semid, sem_num, 1);
+}
 
 void semSetVal(int semid, int sem_num, int val) {
     union semun arg;

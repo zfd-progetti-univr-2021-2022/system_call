@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.h" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/semaphore.h" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -30,6 +30,9 @@
 .br
 .RI "Funzione di supporto per manipolare i valori di un set di semafori\&. "
 .ti -1c
+.RI "void \fBsemOpNoBlocc\fP (int \fBsemid\fP, unsigned short sem_num, short sem_op)"
+.br
+.ti -1c
 .RI "void \fBsemWaitZero\fP (int \fBsemid\fP, int sem_num)"
 .br
 .RI "Attende che il semaforo sem_num raggiunga il valore zero\&. "
@@ -38,9 +41,15 @@
 .br
 .RI "Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il processo\&. "
 .ti -1c
+.RI "void \fBsemWaitNoBlocc\fP (int \fBsemid\fP, int sem_num)"
+.br
+.ti -1c
 .RI "void \fBsemSignal\fP (int \fBsemid\fP, int sem_num)"
 .br
 .RI "Esegue la signal sul semaforo sem_num: incrementa il valore di 1\&. "
+.ti -1c
+.RI "void \fBsemSignalNoBlocc\fP (int \fBsemid\fP, int sem_num)"
+.br
 .ti -1c
 .RI "void \fBsemSetVal\fP (int \fBsemid\fP, int sem_num, int val)"
 .br

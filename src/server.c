@@ -2,8 +2,10 @@
  * @file server.c
  * @brief Contiene l'implementazione del server.
  *
- * @todo Spostare le funzioni non main fuori dal file server.c ?
- * @todo Spostare cio' che non riguarda i segnali in una funzione fuori dal main ?
+ * @todo Spostare le funzioni non main fuori dal file server.c
+ * @todo Creare una funzione che fa cio' che e' nel while(true)
+ * @todo Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
+ *
 */
 
 #include <signal.h>
@@ -251,7 +253,7 @@ int main(int argc, char * argv[]) {
     DEBUG_PRINT("Memoria condivisa flag: allocata e connessa\n");
 
     semid = createSemaphores(get_ipc_key(), 53);
-    short unsigned int semValues[53] = {1,0,0,0,0,0,1,  0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    short unsigned int semValues[53] = {1,0,0,0,0,0,1,  50,50,50,  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
     semSetAll(semid, semValues);
     DEBUG_PRINT("Semafori: creati e inizializzati\n");
 
@@ -303,6 +305,7 @@ int main(int argc, char * argv[]) {
             semSignal(semid, 4);
         }
 
+        //semaforo per far attendere i figli
         for(int i=0;i<n;i++)
         	semSignal(semid,5);
 
@@ -333,11 +336,12 @@ int main(int argc, char * argv[]) {
 
             // memorizza il PID del processo mittente, il nome del file con percorso completo ed il pezzo
             // di file trasmesso
-            msg_t supporto1, supporto2, supporto3; // ,supporto4;
+            msg_t supporto1, supporto2, supporto3;
 
             //leggo da fifo1 la prima parte del file
             if (read(fifo1_fd,&supporto1,sizeof(supporto1)) != -1) {
                 DEBUG_PRINT("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
+                semSignal(semid,7);
                 aggiungiAMatrice(supporto1,n);
                 arrived_parts_counter++;
             }
@@ -345,6 +349,7 @@ int main(int argc, char * argv[]) {
             //leggo da fifo2 la seconda parte del file
             if (read(fifo2_fd,&supporto2,sizeof(supporto2)) != -1) {
                 DEBUG_PRINT("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
+                semSignal(semid,8);
                 aggiungiAMatrice(supporto2,n);
                 arrived_parts_counter++;
             }
@@ -353,6 +358,7 @@ int main(int argc, char * argv[]) {
 
             if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
                 DEBUG_PRINT("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
+                semSignal(semid,9);
                 aggiungiAMatrice(supporto3,n);
                 arrived_parts_counter++;
             }

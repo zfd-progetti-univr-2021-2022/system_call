@@ -2,14 +2,9 @@
  * @file client.c
  * @brief Contiene l'implementazione del client.
  *
- * @todo Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO.
- * @todo Spostare le funzioni non main fuori dal file client.c ? (ad esempio una opzione per la funzioen dividi() e' metterla in files.c)
+ * @todo Spostare le funzioni non main fuori dal file client.c ? (ad esempio una opzione per la funzione dividi() e' metterla in files.c)
  *
- * @warning La specifica non richiede la documentazione. E' richiesta?
- *
- * @warning I percorsi dei file hanno dimensione massima?
- *
- * @warning I caratteri nei file di testo in input ai client sono ASCII? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?
+ * @todo Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
 */
 
 #include <stdio.h>
@@ -362,10 +357,16 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[0]);
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO1\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-
-            if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
-                // la scrittura ha avuto successo
-                sent[0] = true;
+            errno=0;
+            semWaitNoBlocc(semid,7);
+            if(errno!=EAGAIN){
+                if (write(fifo1_fd,&supporto,sizeof(supporto)) != -1){
+                    // la scrittura ha avuto successo
+                    sent[0] = true;
+                }
+                else{
+                    semSignal(semid, 7);
+                }
             }
         }
 
@@ -378,10 +379,16 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[1]);
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su FIFO2\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-
-            if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1 /* TODO: verifica se c'e' abbastanza spazio per scrivere (max 50 msg) */) {
-                // la scrittura ha avuto successo
-                sent[1] = true;
+            errno=0;
+            semWaitNoBlocc(semid,8);
+            if(errno!=EAGAIN){
+                if (write(fifo2_fd,&supporto,sizeof(supporto)) != -1){
+                    // la scrittura ha avuto successo
+                    sent[1] = true;
+                }
+                else{
+                    semSignal(semid, 8);
+                }
             }
         }
 
@@ -394,13 +401,17 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.msg_body,msg_buffer[2]);
 
             DEBUG_PRINT("Tenta invio messaggio [ %s, %d, %s] su msgQueue\n",supporto.msg_body,supporto.sender_pid,supporto.file_path);
-
-            if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
-                // la scrittura ha avuto successo
-                sent[2] = true;
-            }
-            else{
-                perror("msgsnd failed");
+            errno=0;
+            semWaitNoBlocc(semid,9);
+            if(errno!=EAGAIN){
+                if (msgsnd(msqid, &supporto, sizeof(struct msg_t)-sizeof(long), IPC_NOWAIT) != -1) {
+                    // la scrittura ha avuto successo
+                    sent[2] = true;
+                }
+                else{
+                    semSignal(semid, 9);
+                    perror("msgsnd failed");
+                }
             }
         }
 

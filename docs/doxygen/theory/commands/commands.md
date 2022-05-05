@@ -121,6 +121,12 @@ key     semid  owner      perms  nsems
 0x1111  102    professor  330    20
 ```
 
+Il comando ```ipcs``` permette anche di vedere il valore dei semafori con il comando:
+```
+ipcs -s -i <semid>
+```
+> Sostituire ```<semid>``` con il semid ottenuto con il comando ```ipcs```.
+
 ## Rimuovi IPC dal sistema:
 
 Il comando ```ipcrm``` permette di rimuovere le IPC.

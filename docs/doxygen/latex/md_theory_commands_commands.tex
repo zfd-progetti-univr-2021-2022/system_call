@@ -64,6 +64,8 @@ valgrind --leak-check=full \(\backslash\)
     --log-file=valgrind-server-out.txt \(\backslash\)
     ./server
 \end{DoxyCode}
+ \begin{quote}
+Terminare il processo server con C\+T\+R\+L+C \end{quote}
 
 
 Testare il client\+: 
@@ -77,6 +79,10 @@ valgrind --leak-check=full \(\backslash\)
 \end{DoxyCode}
  \begin{quote}
 Sostituire {\ttfamily $<$percorso cartella file$>$} con l\textquotesingle{}input corretto \end{quote}
+
+
+\begin{quote}
+Terminare il processo client eseguendo il comando {\ttfamily pkill -\/\+U\+S\+R1 memcheck} su un altro terminale. \end{quote}
 
 
 \subsection*{Visualizza file aperti}
@@ -124,6 +130,14 @@ key     shmid  owner      perms  bytes  nattch  status
 key     semid  owner      perms  nsems
 0x1111  102    professor  330    20
 \end{DoxyCode}
+
+
+Il comando {\ttfamily ipcs} permette anche di vedere il valore dei semafori con il comando\+: 
+\begin{DoxyCode}
+ipcs -s -i <semid>
+\end{DoxyCode}
+ \begin{quote}
+Sostituire {\ttfamily $<$semid$>$} con il semid ottenuto con il comando {\ttfamily ipcs}. \end{quote}
 
 
 \subsection*{Rimuovi I\+PC dal sistema\+:}

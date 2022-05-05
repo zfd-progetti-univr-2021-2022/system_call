@@ -118,15 +118,24 @@ Funzioni</h2></td></tr>
 <tr class="memitem:a77c6570406059144bb6a8ecf04f481da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da">semOp</a> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, unsigned short sem_num, short sem_op)</td></tr>
 <tr class="memdesc:a77c6570406059144bb6a8ecf04f481da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di supporto per manipolare i valori di un set di semafori.  <a href="#a77c6570406059144bb6a8ecf04f481da">Continua...</a><br /></td></tr>
 <tr class="separator:a77c6570406059144bb6a8ecf04f481da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3447c0a872324dc2c75cf6bab2d8aca"><td class="memItemLeft" align="right" valign="top"><a id="ac3447c0a872324dc2c75cf6bab2d8aca"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>semOpNoBlocc</b> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, unsigned short sem_num, short sem_op)</td></tr>
+<tr class="separator:ac3447c0a872324dc2c75cf6bab2d8aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40485eedbf6d56f7fd27bce5a537efbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe">semWaitZero</a> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, int sem_num)</td></tr>
 <tr class="memdesc:a40485eedbf6d56f7fd27bce5a537efbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attende che il semaforo sem_num raggiunga il valore zero.  <a href="#a40485eedbf6d56f7fd27bce5a537efbe">Continua...</a><br /></td></tr>
 <tr class="separator:a40485eedbf6d56f7fd27bce5a537efbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2581efba6a0833e3f289de94c779cc21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21">semWait</a> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, int sem_num)</td></tr>
 <tr class="memdesc:a2581efba6a0833e3f289de94c779cc21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il processo.  <a href="#a2581efba6a0833e3f289de94c779cc21">Continua...</a><br /></td></tr>
 <tr class="separator:a2581efba6a0833e3f289de94c779cc21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9506f5f2d5f272bbb556329385524a76"><td class="memItemLeft" align="right" valign="top"><a id="a9506f5f2d5f272bbb556329385524a76"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>semWaitNoBlocc</b> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, int sem_num)</td></tr>
+<tr class="separator:a9506f5f2d5f272bbb556329385524a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bad0eb0b0c6ac701b59c36b8b7837bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf">semSignal</a> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, int sem_num)</td></tr>
 <tr class="memdesc:a7bad0eb0b0c6ac701b59c36b8b7837bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esegue la signal sul semaforo sem_num: incrementa il valore di 1.  <a href="#a7bad0eb0b0c6ac701b59c36b8b7837bf">Continua...</a><br /></td></tr>
 <tr class="separator:a7bad0eb0b0c6ac701b59c36b8b7837bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2ee9630c6d6751980afd8317f47a1f"><td class="memItemLeft" align="right" valign="top"><a id="aac2ee9630c6d6751980afd8317f47a1f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>semSignalNoBlocc</b> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, int sem_num)</td></tr>
+<tr class="separator:aac2ee9630c6d6751980afd8317f47a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad78dc4ccefb184a74dd9ef808df8db6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6">semSetVal</a> (int <a class="el" href="server_8c.html#a7c35ac5305085cf7360645b8d52988b5">semid</a>, int sem_num, int val)</td></tr>
 <tr class="memdesc:aad78dc4ccefb184a74dd9ef808df8db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inizializza il valore del semaforo sem_num al valore val.  <a href="#aad78dc4ccefb184a74dd9ef808df8db6">Continua...</a><br /></td></tr>
 <tr class="separator:aad78dc4ccefb184a74dd9ef808df8db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,8 +244,7 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_afee4d9b0eb613bf632622e9244204d51_icgraph.svg" width="427" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_afee4d9b0eb613bf632622e9244204d51_icgraph.svg" width="427" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -272,8 +280,7 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a530566146b6e3cc8415d8ae4259fd68f_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -305,14 +312,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4_cgraph.svg" width="231" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4_cgraph.svg" width="231" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7d80413e893e7d9ae3d153e23c2df2e4_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -361,13 +366,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a77c6570406059144bb6a8ecf04f481da_cgraph.svg" width="192" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a77c6570406059144bb6a8ecf04f481da_cgraph.svg" width="192" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a77c6570406059144bb6a8ecf04f481da_icgraph.svg" width="100%" height="540"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a77c6570406059144bb6a8ecf04f481da_icgraph.svg" width="100%" height="541"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -410,14 +414,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a8df9b8ea63eaf93d09f437b356a4a1eb_cgraph.svg" width="212" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a8df9b8ea63eaf93d09f437b356a4a1eb_cgraph.svg" width="212" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a8df9b8ea63eaf93d09f437b356a4a1eb_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a8df9b8ea63eaf93d09f437b356a4a1eb_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -459,14 +461,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a34a010b0a39236a7261d7d5103426491_cgraph.svg" width="230" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a34a010b0a39236a7261d7d5103426491_cgraph.svg" width="230" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a34a010b0a39236a7261d7d5103426491_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a34a010b0a39236a7261d7d5103426491_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -515,14 +515,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_aad78dc4ccefb184a74dd9ef808df8db6_cgraph.svg" width="215" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_aad78dc4ccefb184a74dd9ef808df8db6_cgraph.svg" width="215" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_aad78dc4ccefb184a74dd9ef808df8db6_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_aad78dc4ccefb184a74dd9ef808df8db6_icgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -564,13 +562,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf_cgraph.svg" width="331" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf_cgraph.svg" width="331" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf_icgraph.svg" width="100%" height="423"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a7bad0eb0b0c6ac701b59c36b8b7837bf_icgraph.svg" width="100%" height="400"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 
@@ -613,14 +610,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a2581efba6a0833e3f289de94c779cc21_cgraph.svg" width="319" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a2581efba6a0833e3f289de94c779cc21_cgraph.svg" width="319" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a2581efba6a0833e3f289de94c779cc21_icgraph.svg" width="100%" height="423"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a2581efba6a0833e3f289de94c779cc21_icgraph.svg" width="100%" height="423"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -662,14 +657,12 @@ Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dynheader">
 Questo è il grafo delle chiamate per questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe_cgraph.svg" width="530" height="418"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe_cgraph.svg" width="530" height="418"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe_icgraph.svg" width="590" height="114"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="semaphore_8c_a40485eedbf6d56f7fd27bce5a537efbe_icgraph.svg" width="590" height="114"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

@@ -1,0 +1,106 @@
+\hypertarget{message__queue_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/message\+\_\+queue.h}
+\label{message__queue_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/message\+\_\+queue.\+h@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/message\+\_\+queue.\+h}}
+
+
+Contiene la definizioni di variabili e funzioni specifiche per la gestione delle C\+O\+DE D\+EI M\+E\+S\+S\+A\+G\+GI.  
+
+
+{\ttfamily \#include $<$sys/msg.\+h$>$}\newline
+Grafo delle dipendenze di inclusione per message\+\_\+queue.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{message__queue_8h__incl}
+\end{center}
+\end{figure}
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{message__queue_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+struct msqid\+\_\+ds \hyperlink{message__queue_8h_afebbb2a5c42d6a8bd4c95ab012c1dc8a}{msq\+Get\+Stats} (int \hyperlink{server_8c_ae73e6a837794db6e63f23db2d64a8130}{msqid})
+\begin{DoxyCompactList}\small\item\em Restituisce statistiche della coda dei messaggi. \end{DoxyCompactList}\item 
+void \hyperlink{message__queue_8h_aded429c9008be24df92b60660cc0acfe}{msq\+Set\+Stats} (int \hyperlink{server_8c_ae73e6a837794db6e63f23db2d64a8130}{msqid}, struct msqid\+\_\+ds ds)
+\begin{DoxyCompactList}\small\item\em Imposta nuove configurazioni sulla coda dei messaggi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrizione dettagliata}
+Contiene la definizioni di variabili e funzioni specifiche per la gestione delle C\+O\+DE D\+EI M\+E\+S\+S\+A\+G\+GI. 
+
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{message__queue_8h_afebbb2a5c42d6a8bd4c95ab012c1dc8a}\label{message__queue_8h_afebbb2a5c42d6a8bd4c95ab012c1dc8a}} 
+\index{message\+\_\+queue.\+h@{message\+\_\+queue.\+h}!msq\+Get\+Stats@{msq\+Get\+Stats}}
+\index{msq\+Get\+Stats@{msq\+Get\+Stats}!message\+\_\+queue.\+h@{message\+\_\+queue.\+h}}
+\subsubsection{\texorpdfstring{msq\+Get\+Stats()}{msqGetStats()}}
+{\footnotesize\ttfamily struct msqid\+\_\+ds msq\+Get\+Stats (\begin{DoxyParamCaption}\item[{int}]{msqid }\end{DoxyParamCaption})}
+
+
+
+Restituisce statistiche della coda dei messaggi. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em msqid} & Identifier coda dei messaggi \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+struct msqid\+\_\+ds Struttura con statistiche della coda dei messaggi 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{message__queue_8h_afebbb2a5c42d6a8bd4c95ab012c1dc8a_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{message__queue_8h_afebbb2a5c42d6a8bd4c95ab012c1dc8a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__queue_8h_aded429c9008be24df92b60660cc0acfe}\label{message__queue_8h_aded429c9008be24df92b60660cc0acfe}} 
+\index{message\+\_\+queue.\+h@{message\+\_\+queue.\+h}!msq\+Set\+Stats@{msq\+Set\+Stats}}
+\index{msq\+Set\+Stats@{msq\+Set\+Stats}!message\+\_\+queue.\+h@{message\+\_\+queue.\+h}}
+\subsubsection{\texorpdfstring{msq\+Set\+Stats()}{msqSetStats()}}
+{\footnotesize\ttfamily void msq\+Set\+Stats (\begin{DoxyParamCaption}\item[{int}]{msqid,  }\item[{struct msqid\+\_\+ds}]{ds }\end{DoxyParamCaption})}
+
+
+
+Imposta nuove configurazioni sulla coda dei messaggi. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em msqid} & Identifier coda dei messaggi \\
+\hline
+{\em ds} & Struttura con nuove statistiche della coda dei messaggi \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{message__queue_8h_aded429c9008be24df92b60660cc0acfe_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{message__queue_8h_aded429c9008be24df92b60660cc0acfe_icgraph}
+\end{center}
+\end{figure}

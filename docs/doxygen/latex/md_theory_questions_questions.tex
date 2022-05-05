@@ -45,3 +45,36 @@ Esempi\+:
 10 &3 &3 &2 &2 \\\cline{1-5}
 ... &... &... &... &... \\\cline{1-5}
 \end{longtabu}
+\subsection*{dimensione massima percorsi file}
+
+D\+O\+M\+A\+N\+DA\+:
+
+I percorsi dei file hanno dimensione massima?
+
+R\+I\+S\+P\+O\+S\+TA\+:
+
+Non sappiamo la lunghezza massima dei percorsi dei file ma sappiamo che sono molto corti.
+
+I test verranno eseguiti nella cartella {\ttfamily /home} oppure {\ttfamily /runner} e ci saranno al massimo 3 o 4 sottocartelle\+: probabilmente non si superera\textquotesingle{} il centinaio di caratteri. \begin{quote}
+Attualmente vengono supportati percorsi di lunghezza massima di 255 caratteri \end{quote}
+
+
+\subsection*{Serve la documentazione?}
+
+D\+O\+M\+A\+N\+DA\+:
+
+La specifica non richiede la documentazione. E\textquotesingle{} richiesta?
+
+R\+I\+S\+P\+O\+S\+TA\+:
+
+Non e\textquotesingle{} mai stata richiesta, quindi in teoria no.
+
+\subsection*{Caratteri non A\+S\+C\+II}
+
+D\+O\+M\+A\+N\+DA\+:
+
+I caratteri nei file di testo in input ai client sono A\+S\+C\+II? Sono tutti da 1 byte? Bisogna gestire lettere accentate, ...?
+
+R\+I\+S\+P\+O\+S\+TA\+:
+
+I caratteri che verranno letti sono tutti da un byte e di conseguenza non c\textquotesingle{}e\textquotesingle{} da preoccuparsi di caratteri non A\+S\+C\+II. 

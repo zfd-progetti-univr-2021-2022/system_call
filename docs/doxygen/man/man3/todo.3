@@ -1,20 +1,22 @@
-.TH "todo" 3 "Mer 27 Apr 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "todo" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 todoElenco delle cose da fare 
  \- 
 .IP "\fBFile \fBclient\&.c\fP \fP" 1c
-Limitare il numero di messaggi memorizzabili contemporaneamente sulle FIFO\&. 
+Spostare le funzioni non main fuori dal file \fBclient\&.c\fP ? (ad esempio una opzione per la funzione \fBdividi()\fP e' metterla in \fBfiles\&.c\fP)
 .PP
-Spostare le funzioni non main fuori dal file \fBclient\&.c\fP ? (ad esempio una opzione per la funzioen \fBdividi()\fP e' metterla in \fBfiles\&.c\fP) 
+Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa  
 .IP "\fBGlobale \fBoperazioni_client0\fP ()\fP" 1c
 Potrebbe essere necessario ottimizzare l'uso dello HEAP nel client 0\&. Attualmente la dimensione massima occupata dal client e': $$100 file * dim\&. path + 100 file * dim\&. pointer$$\&. Assumento dim\&. path massima = 250 caratteri e dim\&. pointer 4 byte (32 bit): $$100 * 250 + 100 * 4 = 25400$$ Quindi solo lato client si occupano 25 KByte\&. Quando viene creato un client esso eredita momentaneamente la lista creando al massimo un'altra lista concatenata\&. Quindi in pratica si occupano: $$25 * 2 = 50$$ Ovvero 50 KB\&.
 .PP
 msgrcv e' bloccante quando flag = 0 e non ci sono messaggi da leggere quindi il while si potrebbe rimuovere\&. 
 .IP "\fBFile \fBserver\&.c\fP \fP" 1c
-Spostare le funzioni non main fuori dal file \fBserver\&.c\fP ? 
+Spostare le funzioni non main fuori dal file \fBserver\&.c\fP 
 .PP
-Spostare cio' che non riguarda i segnali in una funzione fuori dal main ? 
+Creare una funzione che fa cio' che e' nel while(true) 
+.PP
+Utilizzare solo il numero necessario di semafori e la dimensione richiesta per la memoria condivisa
 .PP
 
