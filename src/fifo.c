@@ -13,6 +13,7 @@
 #include "err_exit.h"
 #include "fifo.h"
 #include "debug.h"
+#include "defines.h"
 
 
 void make_fifo(char * path) {
@@ -43,7 +44,7 @@ int create_fifo(char * path, char mode) {
         }
     }
     else {
-        printf("[fifo.c:create_fifo] mode should be 'r' or 'w'\n");
+        print_msg("[fifo.c:create_fifo] mode should be 'r' or 'w'\n");
         exit(1);
     }
 

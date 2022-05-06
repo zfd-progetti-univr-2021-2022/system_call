@@ -151,7 +151,7 @@ void findAndMakeFullFiles(int righe){
         // recupera path del file completo, aggiungi "_out" e aprilo
         char *temp = (char *)malloc((strlen(matriceFile[i][0].file_path)+5)*sizeof(char)); // aggiungo lo spazio per _out
         if (temp == NULL){
-            printf("[server.c:main] malloc failed\n");
+            print_msg("[server.c:main] malloc failed\n");
             exit(1);
         }
         strcpy(temp, matriceFile[i][0].file_path);

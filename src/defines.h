@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <stdbool.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 
@@ -114,3 +115,9 @@ bool arrayContainsAllTrue(bool arr[], int len);
  * @return int Vale 0 se fallisce
  */
 int blockFD(int fd, int blocking);
+
+/**
+ * @brief Visualizza sullo standard output un messaggio utilizzando la write
+ * @param msg messaggio da visualizzare
+*/
+void print_msg(char * msg);

@@ -57,7 +57,7 @@ char * int_to_string(int value){
 
     char * string = (char *) malloc(needed+1);
     if (string == NULL){
-        printf("[client.c:int_to_string] malloc failed\n");
+        print_msg("[client.c:int_to_string] malloc failed\n");
         exit(1);
     }
 
@@ -129,7 +129,7 @@ void operazioni_client0() {
     strcat(buffer,", ora inizio l'invio dei file contenuti in ");
     strcat(buffer,CURRDIR);
     strcat(buffer,"\n");
-    write(STDOUT_FILENO,buffer,strlen(buffer));
+    print_msg(buffer);
     free(buffer);
 
     // ricerca in CURRDIR e nelle sotto-directory tutti i file che iniziano con "sendme_"
@@ -197,7 +197,7 @@ void operazioni_client0() {
             // copio il percorso in una nuova variabile per liberare la lista del figlio
             char * path = malloc(strlen(sendme_file->path)+1);
             if (path == NULL){
-                printf("[client.c:SIGINTSignalHandler] malloc failed\n");
+                print_msg("[client.c:SIGINTSignalHandler] malloc failed\n");
                 exit(1);
             }
             DEBUG_PRINT("Ho fatto la malloc (figlio %d)\n", getpid());
@@ -456,7 +456,7 @@ int main(int argc, char * argv[]) {
 
     // assicurati che sia stato passato un percorso come parametro e memorizzalo
     if (argc != 2) {
-        printf("Please, execute this program passing the directory with the send_me files as a parameter\n");
+        print_msg("Please, execute this program passing the directory with the send_me files as a parameter\n");
         exit(1);
     }
 

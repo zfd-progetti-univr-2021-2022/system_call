@@ -5,6 +5,8 @@
 #include <sys/ipc.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#include <string.h>
+#include <unistd.h>
 
 #include "defines.h"
 #include "err_exit.h"
@@ -52,4 +54,11 @@ int blockFD(int fd, int blocking) {
         flags |= O_NONBLOCK;
 
     return fcntl(fd, F_SETFL, flags) != -1;
+}
+
+
+void print_msg(char * msg){
+    if (write(STDOUT_FILENO, msg, strlen(msg)) == -1){
+        ErrExit("write stdout failed");
+    }
 }
