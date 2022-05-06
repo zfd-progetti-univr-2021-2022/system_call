@@ -1,0 +1,227 @@
+\hypertarget{server_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/server.h}
+\label{server_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/server.\+h@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/server.\+h}}
+
+
+Contiene la definizioni di variabili e funzioni specifiche del S\+E\+R\+V\+ER.  
+
+
+{\ttfamily \#include \char`\"{}defines.\+h\char`\"{}}\newline
+Grafo delle dipendenze di inclusione per server.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{server_8h__incl}
+\end{center}
+\end{figure}
+Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{server_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Funzioni}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{server_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
+\begin{DoxyCompactList}\small\item\em Chiude tutte le I\+PC e termina. \end{DoxyCompactList}\item 
+int \hyperlink{server_8h_ab53aa0eb44ad55d2e189f18d3bd6017b}{string\+\_\+to\+\_\+int} (char $\ast$string)
+\item 
+void \hyperlink{server_8h_ac94aa68fd5fccbf448cfe8788bd46225}{aggiungi\+A\+Matrice} (\hyperlink{structmsg__t}{msg\+\_\+t} a, int righe)
+\item 
+void \hyperlink{server_8h_a6a3979b89e7153de6f4e9c4308d60403}{find\+And\+Make\+Full\+Files} (int righe)
+\item 
+char $\ast$ \hyperlink{server_8h_aefaefec035e6211d28b35a6d2ce3b3fa}{costruisci\+Stringa} (\hyperlink{structmsg__t}{msg\+\_\+t} a)
+\item 
+int \hyperlink{server_8h_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrizione dettagliata}
+Contiene la definizioni di variabili e funzioni specifiche del S\+E\+R\+V\+ER. 
+
+
+
+\subsection{Documentazione delle funzioni}
+\mbox{\Hypertarget{server_8h_ac94aa68fd5fccbf448cfe8788bd46225}\label{server_8h_ac94aa68fd5fccbf448cfe8788bd46225}} 
+\index{server.\+h@{server.\+h}!aggiungi\+A\+Matrice@{aggiungi\+A\+Matrice}}
+\index{aggiungi\+A\+Matrice@{aggiungi\+A\+Matrice}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{aggiungi\+A\+Matrice()}{aggiungiAMatrice()}}
+{\footnotesize\ttfamily void aggiungi\+A\+Matrice (\begin{DoxyParamCaption}\item[{\hyperlink{structmsg__t}{msg\+\_\+t}}]{a,  }\item[{int}]{righe }\end{DoxyParamCaption})}
+
+Aggiunge un messaggio alla matrice buffer. Il buffer verra\textquotesingle{} usato per recuperare i pezzi di file quando verra\textquotesingle{} ricostruito il file di output.
+
+
+\begin{DoxyParams}{Parametri}
+{\em a} & Messaggio da inserire nel buffer \\
+\hline
+{\em righe} & Numero di righe nella matrice \\
+\hline
+\end{DoxyParams}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{server_8h_ac94aa68fd5fccbf448cfe8788bd46225_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_aefaefec035e6211d28b35a6d2ce3b3fa}\label{server_8h_aefaefec035e6211d28b35a6d2ce3b3fa}} 
+\index{server.\+h@{server.\+h}!costruisci\+Stringa@{costruisci\+Stringa}}
+\index{costruisci\+Stringa@{costruisci\+Stringa}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{costruisci\+Stringa()}{costruisciStringa()}}
+{\footnotesize\ttfamily char$\ast$ costruisci\+Stringa (\begin{DoxyParamCaption}\item[{\hyperlink{structmsg__t}{msg\+\_\+t}}]{a }\end{DoxyParamCaption})}
+
+Costruisce la stringa da scrivere nel file di output.
+
+
+\begin{DoxyParams}{Parametri}
+{\em a} & Messaggio contenente il pezzo di file arrivato dal client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+char$\ast$ Stringa pronta per essere scritta su file 
+\end{DoxyReturn}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_aefaefec035e6211d28b35a6d2ce3b3fa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a6a3979b89e7153de6f4e9c4308d60403}\label{server_8h_a6a3979b89e7153de6f4e9c4308d60403}} 
+\index{server.\+h@{server.\+h}!find\+And\+Make\+Full\+Files@{find\+And\+Make\+Full\+Files}}
+\index{find\+And\+Make\+Full\+Files@{find\+And\+Make\+Full\+Files}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{find\+And\+Make\+Full\+Files()}{findAndMakeFullFiles()}}
+{\footnotesize\ttfamily void find\+And\+Make\+Full\+Files (\begin{DoxyParamCaption}\item[{int}]{righe }\end{DoxyParamCaption})}
+
+Trova nella matrice buffer 4 pezzi di un file e poi li usa per creare e scrivere un file di output.
+
+
+\begin{DoxyParams}{Parametri}
+{\em righe} & Numero di righe nella matrice \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{server_8h_a6a3979b89e7153de6f4e9c4308d60403_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{server_8h_a6a3979b89e7153de6f4e9c4308d60403_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a0ddf1224851353fc92bfbff6f499fa97}\label{server_8h_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{server.\+h@{server.\+h}!main@{main}}
+\index{main@{main}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Esegue operazioni principali del server.
+
+terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC.
+
+Memorizza il percorso passato come parametro, gestisce segnali e handler, attende i segnali S\+I\+G\+I\+NT o S\+I\+G\+U\+S\+R1.
+
+
+\begin{DoxyParams}{Parametri}
+{\em argc} & Numero argomenti passati da linea di comando (compreso il nome dell\textquotesingle{}eseguibile) \\
+\hline
+{\em argv} & Array di argomenti passati da linea di comando \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Exit code dell\textquotesingle{}intero programma 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_a48d605ff689f470746c858648f0a98c2}\label{server_8h_a48d605ff689f470746c858648f0a98c2}} 
+\index{server.\+h@{server.\+h}!S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}}
+\index{S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{S\+I\+G\+I\+N\+T\+Signal\+Handler()}{SIGINTSignalHandler()}}
+{\footnotesize\ttfamily void S\+I\+G\+I\+N\+T\+Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Chiude tutte le I\+PC e termina. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em sig} & Intero che rappresenta il segnale catturato dalla funzione\\
+\hline
+\end{DoxyParams}
+Handler del segnale S\+I\+G\+I\+NT.
+
+Non fa niente, permette solo al processo di risvegliarsi dal pause().
+
+Le funzionalita\textquotesingle{} principali vengono eseguite da \hyperlink{client_8h_a8c7084a254c7cd640d66e647795ff8f6}{operazioni\+\_\+client0()} e non qui per il seguente motivo\+: \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{\tt https\+://man7.\+org/linux/man-\/pages/man7/signal-\/safety.\+7.\+html}
+
+
+\begin{DoxyParams}{Parametri}
+{\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{server_8h_a48d605ff689f470746c858648f0a98c2_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{server_8h_a48d605ff689f470746c858648f0a98c2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{server_8h_ab53aa0eb44ad55d2e189f18d3bd6017b}\label{server_8h_ab53aa0eb44ad55d2e189f18d3bd6017b}} 
+\index{server.\+h@{server.\+h}!string\+\_\+to\+\_\+int@{string\+\_\+to\+\_\+int}}
+\index{string\+\_\+to\+\_\+int@{string\+\_\+to\+\_\+int}!server.\+h@{server.\+h}}
+\subsubsection{\texorpdfstring{string\+\_\+to\+\_\+int()}{string\_to\_int()}}
+{\footnotesize\ttfamily int string\+\_\+to\+\_\+int (\begin{DoxyParamCaption}\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+Converte stringa in intero.
+
+
+\begin{DoxyParams}{Parametri}
+{\em string} & Stringa da convertire in intero \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+int Valore intero ottenuto convertendo la stringa in input 
+\end{DoxyReturn}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{server_8h_ab53aa0eb44ad55d2e189f18d3bd6017b_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{server_8h_ab53aa0eb44ad55d2e189f18d3bd6017b_icgraph}
+\end{center}
+\end{figure}

@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.h" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/client.h" 3 "Ven 6 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,7 +16,6 @@
 .ti -1c
 .RI "void \fBSIGINTSignalHandler\fP (int sig)"
 .br
-.RI "Chiude tutte le IPC e termina\&. "
 .ti -1c
 .RI "void \fBSIGUSR1SignalHandler\fP (int sig)"
 .br
@@ -96,16 +95,7 @@ Memorizza il percorso passato come parametro, gestisce segnali e handler, attend
 .PP
 \fBRestituisce:\fP
 .RS 4
-int Exit code dell'intero programma
-.RE
-.PP
-Esegue operazioni principali del server\&.
-.PP
-terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
-.PP
-\fBWarnings\fP
-.RS 4
-I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? 
+int Exit code dell'intero programma 
 .RE
 .PP
 
@@ -154,9 +144,7 @@ Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al ser
 .PP
 
 .SS "void SIGINTSignalHandler (int sig)"
-
-.PP
-Chiude tutte le IPC e termina\&. Handler del segnale SIGINT\&.
+Handler del segnale SIGINT\&.
 .PP
 Non fa niente, permette solo al processo di risvegliarsi dal pause()\&.
 .PP
@@ -164,9 +152,7 @@ Le funzionalita' principali vengono eseguite da \fBoperazioni_client0()\fP e non
 .PP
 \fBParametri:\fP
 .RS 4
-\fIsig\fP Valore intero corrispondente a SIGINT
-.br
-\fIsig\fP Intero che rappresenta il segnale catturato dalla funzione 
+\fIsig\fP Valore intero corrispondente a SIGINT 
 .RE
 .PP
 

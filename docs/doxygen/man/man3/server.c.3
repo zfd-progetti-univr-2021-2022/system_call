@@ -1,4 +1,4 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Gio 5 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.c" 3 "Ven 6 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -45,6 +45,8 @@
 .br
 \fC#include 'message_queue\&.h'\fP
 .br
+\fC#include 'server\&.h'\fP
+.br
 
 .SS "Funzioni"
 
@@ -58,6 +60,9 @@
 .br
 .ti -1c
 .RI "void \fBaggiungiAMatrice\fP (\fBmsg_t\fP a, int righe)"
+.br
+.ti -1c
+.RI "void \fBfindAndMakeFullFiles\fP (int righe)"
 .br
 .ti -1c
 .RI "char * \fBcostruisciStringa\fP (\fBmsg_t\fP a)"
@@ -151,25 +156,43 @@ char* Stringa pronta per essere scritta su file
 .RE
 .PP
 
-.SS "int main (int argc, char * argv[])"
-Esegue operazioni principali del server\&.
+.SS "void findAndMakeFullFiles (int righe)"
+Trova nella matrice buffer 4 pezzi di un file e poi li usa per creare e scrivere un file di output\&.
 .PP
-terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
-.PP
-\fBWarnings\fP
+\fBParametri:\fP
 .RS 4
-I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? 
+\fIrighe\fP Numero di righe nella matrice 
+.RE
+.PP
+
+.SS "int main (int argc, char * argv[])"
+Memorizza il percorso passato come parametro, gestisce segnali e handler, attende i segnali SIGINT o SIGUSR1\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIargc\fP Numero argomenti passati da linea di comando (compreso il nome dell'eseguibile) 
+.br
+\fIargv\fP Array di argomenti passati da linea di comando 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Exit code dell'intero programma 
 .RE
 .PP
 
 .SS "void SIGINTSignalHandler (int sig)"
 
 .PP
-Chiude tutte le IPC e termina\&. 
+Chiude tutte le IPC e termina\&. Handler del segnale SIGINT\&.
+.PP
+Non fa niente, permette solo al processo di risvegliarsi dal pause()\&.
+.PP
+Le funzionalita' principali vengono eseguite da \fBoperazioni_client0()\fP e non qui per il seguente motivo: https://man7.org/linux/man-pages/man7/signal-safety.7.html
 .PP
 \fBParametri:\fP
 .RS 4
-\fIsig\fP Intero che rappresenta il segnale catturato dalla funzione 
+\fIsig\fP Valore intero corrispondente a SIGINT 
 .RE
 .PP
 

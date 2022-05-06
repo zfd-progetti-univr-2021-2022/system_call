@@ -41,7 +41,7 @@ char $\ast$ \hyperlink{client_8c_a748983b7ce27515a3ad116ada4334c4e}{int\+\_\+to\
 bool \hyperlink{client_8c_ac129a55ffa08a55addb9ea1afbd709f8}{str\+Equals} (char $\ast$a, char $\ast$b)
 \item 
 void \hyperlink{client_8c_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
-\item 
+\begin{DoxyCompactList}\small\item\em Chiude tutte le I\+PC e termina. \end{DoxyCompactList}\item 
 void \hyperlink{client_8c_a8c7084a254c7cd640d66e647795ff8f6}{operazioni\+\_\+client0} ()
 \item 
 void \hyperlink{client_8c_a50b22adcb76198fcd9402a97ff4711bf}{S\+I\+G\+U\+S\+R1\+Signal\+Handler} (int sig)
@@ -168,7 +168,8 @@ Memorizza il percorso passato come parametro, gestisce segnali e handler, attend
 \begin{DoxyReturn}{Restituisce}
 int Exit code dell\textquotesingle{}intero programma 
 \end{DoxyReturn}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -249,6 +250,10 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \index{S\+I\+G\+I\+N\+T\+Signal\+Handler@{S\+I\+G\+I\+N\+T\+Signal\+Handler}!client.\+c@{client.\+c}}
 \subsubsection{\texorpdfstring{S\+I\+G\+I\+N\+T\+Signal\+Handler()}{SIGINTSignalHandler()}}
 {\footnotesize\ttfamily void S\+I\+G\+I\+N\+T\+Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Chiude tutte le I\+PC e termina. 
 
 Handler del segnale S\+I\+G\+I\+NT.
 

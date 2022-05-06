@@ -1,7 +1,7 @@
 <map id="main" name="main">
 <area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="1139,701,1204,728"/>
 <area shape="rect" id="node3" href="$signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4" title="block_sig_no_SIGINT\l_SIGUSR1" alt="" coords="108,525,265,566"/>
-<area shape="rect" id="node4" href="$client_8c.html#a48d605ff689f470746c858648f0a98c2" title="SIGINTSignalHandler" alt="" coords="108,591,265,617"/>
+<area shape="rect" id="node4" href="$client_8c.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. " alt="" coords="108,591,265,617"/>
 <area shape="rect" id="node5" href="$client_8c.html#a50b22adcb76198fcd9402a97ff4711bf" title="Handler del segnale SIGUSR1: chiude le risorse del client 0 e termina la sua esecuzione. " alt="" coords="705,296,876,323"/>
 <area shape="rect" id="node7" href="$signals_8c.html#a6e96709c7c3ecbcde283f4a2a09e4baf" title="block_all_signals" alt="" coords="120,641,253,668"/>
 <area shape="rect" id="node8" href="$client_8c.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="116,473,257,500"/>

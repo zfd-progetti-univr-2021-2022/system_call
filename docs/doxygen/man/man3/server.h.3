@@ -1,0 +1,135 @@
+.TH "/mnt/c/Users/stefa/Desktop/system_call/src/server.h" 3 "Ven 6 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/mnt/c/Users/stefa/Desktop/system_call/src/server.h \- Contiene la definizioni di variabili e funzioni specifiche del SERVER\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'defines\&.h'\fP
+.br
+
+.SS "Funzioni"
+
+.in +1c
+.ti -1c
+.RI "void \fBSIGINTSignalHandler\fP (int sig)"
+.br
+.RI "Chiude tutte le IPC e termina\&. "
+.ti -1c
+.RI "int \fBstring_to_int\fP (char *string)"
+.br
+.ti -1c
+.RI "void \fBaggiungiAMatrice\fP (\fBmsg_t\fP a, int righe)"
+.br
+.ti -1c
+.RI "void \fBfindAndMakeFullFiles\fP (int righe)"
+.br
+.ti -1c
+.RI "char * \fBcostruisciStringa\fP (\fBmsg_t\fP a)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SH "Descrizione dettagliata"
+.PP 
+Contiene la definizioni di variabili e funzioni specifiche del SERVER\&. 
+
+
+.SH "Documentazione delle funzioni"
+.PP 
+.SS "void aggiungiAMatrice (\fBmsg_t\fP a, int righe)"
+Aggiunge un messaggio alla matrice buffer\&. Il buffer verra' usato per recuperare i pezzi di file quando verra' ricostruito il file di output\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP Messaggio da inserire nel buffer 
+.br
+\fIrighe\fP Numero di righe nella matrice 
+.RE
+.PP
+
+.SS "char* costruisciStringa (\fBmsg_t\fP a)"
+Costruisce la stringa da scrivere nel file di output\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIa\fP Messaggio contenente il pezzo di file arrivato dal client 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+char* Stringa pronta per essere scritta su file 
+.RE
+.PP
+
+.SS "void findAndMakeFullFiles (int righe)"
+Trova nella matrice buffer 4 pezzi di un file e poi li usa per creare e scrivere un file di output\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIrighe\fP Numero di righe nella matrice 
+.RE
+.PP
+
+.SS "int main (int argc, char * argv[])"
+Esegue operazioni principali del server\&.
+.PP
+terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC\&.
+.PP
+Memorizza il percorso passato come parametro, gestisce segnali e handler, attende i segnali SIGINT o SIGUSR1\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIargc\fP Numero argomenti passati da linea di comando (compreso il nome dell'eseguibile) 
+.br
+\fIargv\fP Array di argomenti passati da linea di comando 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Exit code dell'intero programma 
+.RE
+.PP
+
+.SS "void SIGINTSignalHandler (int sig)"
+
+.PP
+Chiude tutte le IPC e termina\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsig\fP Intero che rappresenta il segnale catturato dalla funzione
+.RE
+.PP
+Handler del segnale SIGINT\&.
+.PP
+Non fa niente, permette solo al processo di risvegliarsi dal pause()\&.
+.PP
+Le funzionalita' principali vengono eseguite da \fBoperazioni_client0()\fP e non qui per il seguente motivo: https://man7.org/linux/man-pages/man7/signal-safety.7.html
+.PP
+\fBParametri:\fP
+.RS 4
+\fIsig\fP Valore intero corrispondente a SIGINT 
+.RE
+.PP
+
+.SS "int string_to_int (char * string)"
+Converte stringa in intero\&.
+.PP
+\fBParametri:\fP
+.RS 4
+\fIstring\fP Stringa da convertire in intero 
+.RE
+.PP
+\fBRestituisce:\fP
+.RS 4
+int Valore intero ottenuto convertendo la stringa in input 
+.RE
+.PP
+
+.SH "Autore"
+.PP 
+Generato automaticamente da Doxygen per SYSTEM_CALL a partire dal codice sorgente\&.

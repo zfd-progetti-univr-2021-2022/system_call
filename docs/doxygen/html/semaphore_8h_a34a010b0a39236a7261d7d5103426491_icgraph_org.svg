@@ -8,90 +8,90 @@
  viewBox="0.00 0.00 557.00 85.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 81)">
 <title>semSetPerm</title>
-<!-- Node47 -->
+<!-- Node48 -->
 <g id="node1" class="node">
-<title>Node47</title>
+<title>Node48</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-38.5 0,-57.5 79,-57.5 79,-38.5 0,-38.5"/>
 <text text-anchor="middle" x="39.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semSetPerm</text>
 </g>
-<!-- Node48 -->
+<!-- Node49 -->
 <g id="node2" class="node">
-<title>Node48</title>
+<title>Node49</title>
 <g id="a_node2"><a xlink:href="semaphore_8h.html#a40485eedbf6d56f7fd27bce5a537efbe" target="_top" xlink:title="Attende che il semaforo sem_num raggiunga il valore zero. ">
 <polygon fill="none" stroke="#000000" points="115,-38.5 115,-57.5 197,-57.5 197,-38.5 115,-38.5"/>
 <text text-anchor="middle" x="156" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semWaitZero</text>
 </a>
 </g>
 </g>
-<!-- Node47&#45;&gt;Node48 -->
+<!-- Node48&#45;&gt;Node49 -->
 <g id="edge1" class="edge">
-<title>Node47&#45;&gt;Node48</title>
+<title>Node48&#45;&gt;Node49</title>
 <path fill="none" stroke="#191970" d="M89.4309,-48C97.9015,-48 106.6118,-48 114.8253,-48"/>
 <polygon fill="#191970" stroke="#191970" points="89.2669,-44.5001 79.2669,-48 89.2668,-51.5001 89.2669,-44.5001"/>
 </g>
-<!-- Node49 -->
+<!-- Node50 -->
 <g id="node3" class="node">
-<title>Node49</title>
+<title>Node50</title>
 <g id="a_node3"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
 <polygon fill="none" stroke="#000000" points="366,-57.5 366,-76.5 472,-76.5 472,-57.5 366,-57.5"/>
 <text text-anchor="middle" x="419" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
-<!-- Node48&#45;&gt;Node49 -->
+<!-- Node49&#45;&gt;Node50 -->
 <g id="edge2" class="edge">
-<title>Node48&#45;&gt;Node49</title>
+<title>Node49&#45;&gt;Node50</title>
 <path fill="none" stroke="#191970" d="M196.9681,-60.0557C208.516,-62.92 221.1597,-65.5608 233,-67 277.5574,-72.4161 328.5639,-71.9507 365.8799,-70.3939"/>
 <polygon fill="#191970" stroke="#191970" points="197.7087,-56.632 187.1499,-57.5056 195.9489,-63.4072 197.7087,-56.632"/>
 </g>
-<!-- Node51 -->
+<!-- Node52 -->
 <g id="node5" class="node">
-<title>Node51</title>
+<title>Node52</title>
 <g id="a_node5"><a xlink:href="client_8h.html#a54b47b58f228d7bc9827d2919687e25a" target="_top" xlink:title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. ">
 <polygon fill="none" stroke="#000000" points="233,-38.5 233,-57.5 330,-57.5 330,-38.5 233,-38.5"/>
 <text text-anchor="middle" x="281.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_figlio</text>
 </a>
 </g>
 </g>
-<!-- Node48&#45;&gt;Node51 -->
+<!-- Node49&#45;&gt;Node52 -->
 <g id="edge4" class="edge">
-<title>Node48&#45;&gt;Node51</title>
+<title>Node49&#45;&gt;Node52</title>
 <path fill="none" stroke="#191970" d="M207.2429,-48C215.7173,-48 224.4815,-48 232.8886,-48"/>
 <polygon fill="#191970" stroke="#191970" points="207.0934,-44.5001 197.0934,-48 207.0934,-51.5001 207.0934,-44.5001"/>
 </g>
-<!-- Node52 -->
+<!-- Node53 -->
 <g id="node6" class="node">
-<title>Node52</title>
+<title>Node53</title>
 <g id="a_node6"><a xlink:href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="261,-.5 261,-19.5 302,-19.5 302,-.5 261,-.5"/>
 <text text-anchor="middle" x="281.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node48&#45;&gt;Node52 -->
+<!-- Node49&#45;&gt;Node53 -->
 <g id="edge6" class="edge">
-<title>Node48&#45;&gt;Node52</title>
+<title>Node49&#45;&gt;Node53</title>
 <path fill="none" stroke="#191970" d="M197.4506,-35.4492C218.7218,-29.0085 243.6978,-21.4461 260.8641,-16.2483"/>
 <polygon fill="#191970" stroke="#191970" points="196.2255,-32.1632 187.6689,-38.411 198.2541,-38.8628 196.2255,-32.1632"/>
 </g>
-<!-- Node50 -->
+<!-- Node51 -->
 <g id="node4" class="node">
-<title>Node50</title>
+<title>Node51</title>
 <g id="a_node4"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="508,-57.5 508,-76.5 549,-76.5 549,-57.5 508,-57.5"/>
 <text text-anchor="middle" x="528.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node49&#45;&gt;Node50 -->
+<!-- Node50&#45;&gt;Node51 -->
 <g id="edge3" class="edge">
-<title>Node49&#45;&gt;Node50</title>
+<title>Node50&#45;&gt;Node51</title>
 <path fill="none" stroke="#191970" d="M482.2796,-67C491.5452,-67 500.4767,-67 507.9772,-67"/>
 <polygon fill="#191970" stroke="#191970" points="482.1462,-63.5001 472.1462,-67 482.1462,-70.5001 482.1462,-63.5001"/>
 </g>
-<!-- Node51&#45;&gt;Node49 -->
+<!-- Node52&#45;&gt;Node50 -->
 <g id="edge5" class="edge">
-<title>Node51&#45;&gt;Node49</title>
+<title>Node52&#45;&gt;Node50</title>
 <path fill="none" stroke="#191970" d="M340.4381,-56.1442C348.8052,-57.3003 357.3702,-58.4839 365.6237,-59.6244"/>
 <polygon fill="#191970" stroke="#191970" points="340.7495,-52.654 330.3645,-54.7522 339.7913,-59.5881 340.7495,-52.654"/>
 </g>
