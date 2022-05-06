@@ -27,6 +27,7 @@
 #include "fifo.h"
 #include "debug.h"
 #include "message_queue.h"
+#include "server.h"
 
 /// Percorso cartella eseguibile
 char EXECUTABLE_DIR[BUFFER_SZ] = "";
@@ -52,11 +53,6 @@ int * shm_check_ptr = NULL;
 msg_t **matriceFile = NULL;
 
 
-/**
- * @brief Chiude tutte le IPC e termina
- *
- * @param sig Intero che rappresenta il segnale catturato dalla funzione
- */
 void SIGINTSignalHandler(int sig) {
 
     // chiudi FIFO1
@@ -107,12 +103,6 @@ void SIGINTSignalHandler(int sig) {
 }
 
 
-/**
- * Converte stringa in intero.
- *
- * @param string Stringa da convertire in intero
- * @return int Valore intero ottenuto convertendo la stringa in input
-*/
 int string_to_int(char * string) {
 
     uintmax_t num = strtoumax(string, NULL, 10);
@@ -123,14 +113,6 @@ int string_to_int(char * string) {
 }
 
 
-/**
- * Aggiunge un messaggio alla matrice buffer.
- * Il buffer verra' usato per recuperare i pezzi di file
- * quando verra' ricostruito il file di output.
- *
- * @param a Messaggio da inserire nel buffer
- * @param righe Numero di righe nella matrice
-*/
 void aggiungiAMatrice(msg_t a,int righe){
     bool aggiunto=false;
     for(int i=0; i<righe && aggiunto==false; i++)
@@ -151,12 +133,63 @@ void aggiungiAMatrice(msg_t a,int righe){
 }
 
 
-/**
- * Costruisce la stringa da scrivere nel file di output.
- *
- * @param a Messaggio contenente il pezzo di file arrivato dal client
- * @return char* Stringa pronta per essere scritta su file
-*/
+void findAndMakeFullFiles(int righe){
+    for(int i=0; i<righe; i++){
+        // cerca righe complete
+        bool fullLine = true;
+        for (int j=0; j < 4 && fullLine; j++) {
+            if(matriceFile[i][j].mtype==INIZIALIZZAZIONE_MTYPE){
+                fullLine = false;
+            }
+        }
+
+        if (!fullLine){
+            // mancano dei pezzi di file, passa alla prossima riga
+            continue;
+        }
+
+        // recupera path del file completo, aggiungi "_out" e aprilo
+        char *temp = (char *)malloc((strlen(matriceFile[i][0].file_path)+5)*sizeof(char)); // aggiungo lo spazio per _out
+        if (temp == NULL){
+            printf("[server.c:main] malloc failed\n");
+            exit(1);
+        }
+        strcpy(temp, matriceFile[i][0].file_path);
+        strcat(temp, "_out"); // aggiungo _out
+        int file = open(temp, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+
+        if (file == -1) {
+            ErrExit("open failed");
+        }
+
+        // prepara l'output e scrivilo sul file
+        for(int j=0; j<4;j++){
+            char * stampa = costruisciStringa(matriceFile[i][j]);
+            if (write(file, stampa, strlen(stampa) * sizeof(char)) == -1){
+                ErrExit("write output file failed");
+            }
+
+            if (write(file, "\n\n", 2) == -1){
+                ErrExit("write newline to output file failed");
+            }
+            free(stampa);
+        }
+
+        close(file);
+        free(temp);
+
+        // segna la riga come letta
+        for (int j=0; j < 4; j++) {
+            matriceFile[i][j].mtype = INIZIALIZZAZIONE_MTYPE;
+        }
+
+        // se cerco file completi ad ogni arrivo di una parte di file,
+        // trovero' sempre al massimo un file completo: smetti di scorrere la matrice
+        break;
+    }
+}
+
+
 char * costruisciStringa(msg_t a){
 	char buffer[20]; // serve per convertire il pid
 	sprintf(buffer, "%d", a.sender_pid);
@@ -213,13 +246,6 @@ char * costruisciStringa(msg_t a){
 }
 
 
-/**
- * Esegue operazioni principali del server.
- *
- * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
- *
- * @warning I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine?
-*/
 int main(int argc, char * argv[]) {
 
     // memorizza il percorso dell'eseguibile per ftok()
@@ -328,7 +354,11 @@ int main(int argc, char * argv[]) {
         semWaitZero(semid, 2);
         DEBUG_PRINT("Rese fifo non bloccanti\n");
 
-        // si mette in ricezione ciclicamente su ciascuno dei quattro canali
+        // si mette in ricezione ciclicamente su ciascuno dei quattro canali.
+        // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e
+        // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
+        // bianca (carattere newline) ed ha l’intestazione
+        // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
         int arrived_parts_counter = 0;
         int n_tries = 0;
         while (arrived_parts_counter < n * 4) {
@@ -342,6 +372,7 @@ int main(int argc, char * argv[]) {
                 DEBUG_PRINT("[Parte1, del file %s spedita dal processo %d tramite FIFO1]\n%s\n",supporto1.file_path,supporto1.sender_pid,supporto1.msg_body);
                 semSignal(semid,7);
                 aggiungiAMatrice(supporto1,n);
+                findAndMakeFullFiles(n);
                 arrived_parts_counter++;
             }
 
@@ -350,15 +381,16 @@ int main(int argc, char * argv[]) {
                 DEBUG_PRINT("[Parte2,del file %s spedita dal processo %d tramite FIFO2]\n%s\n",supporto2.file_path,supporto2.sender_pid,supporto2.msg_body);
                 semSignal(semid,8);
                 aggiungiAMatrice(supporto2,n);
+                findAndMakeFullFiles(n);
                 arrived_parts_counter++;
             }
 
             //leggo dalla coda di messaggi la terza parte del file
-
             if (msgrcv(msqid,&supporto3,sizeof(struct msg_t)-sizeof(long),CONTAINS_MSGQUEUE_FILE_PART, IPC_NOWAIT) != -1) {
                 DEBUG_PRINT("[Parte3,del file %s spedita dal processo %d tramite MsgQueue]\n%s\n",supporto3.file_path,supporto3.sender_pid,supporto3.msg_body);
                 semSignal(semid,9);
                 aggiungiAMatrice(supporto3,n);
+                findAndMakeFullFiles(n);
                 arrived_parts_counter++;
             }
 
@@ -371,6 +403,7 @@ int main(int argc, char * argv[]) {
                     DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
                     shm_check_ptr[i] = 0;
                     aggiungiAMatrice(shm_ptr[i],n);
+                    findAndMakeFullFiles(n);
                     arrived_parts_counter++;
                 }
             }
@@ -378,46 +411,10 @@ int main(int argc, char * argv[]) {
             semSignal(semid, 6);
             DEBUG_PRINT("Sono uscito dalla memoria condivisa\n");
 
-            // una volta ricevute tutte e quattro le parti di un file le riunisce nell’ordine corretto e
-            // salva le 4 parti in un file di testo in cui ognuna delle quattro parti e’ separata dalla successiva da una riga
-            // bianca (carattere newline) ed ha l’intestazione
-            // > Il file verrà chiamato con lo stesso nome e percorso del file originale ma con l'aggiunta del postfisso "_out"
-
-
             if (n_tries % 5000 == 0) {
 		        DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);
             }
             n_tries++;
-        }
-
-        for(int i=0;i<n;i++){
-            char *temp = (char *)malloc((strlen(matriceFile[i][0].file_path)+5)*sizeof(char)); // aggiungo lo spazio per _out
-            if (temp == NULL){
-                printf("[server.c:main] malloc failed\n");
-                exit(1);
-            }
-            strcpy(temp, matriceFile[i][0].file_path);
-            strcat(temp, "_out"); // aggiungo -out
-            int file = open(temp, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-
-            if (file == -1) {
-                ErrExit("open failed");
-            }
-
-            for(int j=0; j<4;j++){
-                char * stampa = costruisciStringa(matriceFile[i][j]);
-                if (write(file, stampa, strlen(stampa) * sizeof(char)) == -1){
-                    ErrExit("write output file failed");
-                }
-
-                if (write(file, "\n\n", 2) == -1){
-                    ErrExit("write newline to output file failed");
-                }
-                free(stampa);
-            }
-
-            close(file);
-            free(temp);
         }
 
         // quando ha ricevuto e salvato tutti i file invia un messaggio di terminazione sulla coda di
