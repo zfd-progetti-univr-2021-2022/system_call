@@ -456,7 +456,7 @@ int main(int argc, char * argv[]) {
 
     // assicurati che sia stato passato un percorso come parametro e memorizzalo
     if (argc != 2) {
-        print_msg("Please, execute this program passing the directory with the send_me files as a parameter\n");
+        print_msg("Please, execute this program passing the directory with the 'sendme_' files as a parameter\n");
         exit(1);
     }
 
