@@ -418,20 +418,21 @@ void operazioni_figlio(char * filePath){
             strcpy(supporto.file_path,filePath);
             strcpy(supporto.msg_body,msg_buffer[3]);
 
-            DEBUG_PRINT("Tento di entrare nella zona critica (figlio %d)\n", getpid());
-            semWait(semid, 6);
-            DEBUG_PRINT("Sono dentro la zona critica (figlio %d)\n", getpid());
-            for (int i = 0; i < MAX_MSG_PER_CHANNEL; i++) {
-                if (shm_check_ptr[i] == 0) {
-                    DEBUG_PRINT("Trovata posizione libera %d per inviare: %s\n", i, supporto.msg_body);
-                    shm_check_ptr[i] = 1;
-                    sent[3] = true;
-                    shm_ptr[i] = supporto;
-                    break;
+            DEBUG_PRINT("Tento di entrare nella memoria condivisa (figlio %d)\n", getpid());
+            if (semWaitNoBlocc(semid, 6) == 0){
+                DEBUG_PRINT("Sono dentro la memoria condivisa (figlio %d)\n", getpid());
+                for (int i = 0; i < MAX_MSG_PER_CHANNEL; i++) {
+                    if (shm_check_ptr[i] == 0) {
+                        DEBUG_PRINT("Trovata posizione libera %d per inviare: %s\n", i, supporto.msg_body);
+                        shm_check_ptr[i] = 1;
+                        sent[3] = true;
+                        shm_ptr[i] = supporto;
+                        break;
+                    }
                 }
+                semSignal(semid, 6);
+                DEBUG_PRINT("Sono fuori dalla memoria condivisa (figlio %d)\n", getpid());
             }
-            semSignal(semid, 6);
-            DEBUG_PRINT("Sono fuori la zona critica (figlio %d)\n", getpid());
         }
     }
 

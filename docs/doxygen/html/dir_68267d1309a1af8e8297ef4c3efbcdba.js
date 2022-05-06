@@ -17,6 +17,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "semaphore.c", "semaphore_8c.html", "semaphore_8c" ],
     [ "semaphore.h", "semaphore_8h.html", "semaphore_8h" ],
     [ "server.c", "server_8c.html", "server_8c" ],
+    [ "server.h", "server_8h.html", "server_8h" ],
     [ "shared_memory.c", "shared__memory_8c.html", "shared__memory_8c" ],
     [ "shared_memory.h", "shared__memory_8h.html", "shared__memory_8h" ],
     [ "signals.c", "signals_8c.html", "signals_8c" ],

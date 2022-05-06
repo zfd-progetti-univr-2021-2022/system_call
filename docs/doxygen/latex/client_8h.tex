@@ -18,7 +18,7 @@ Questo grafo mostra quali altri file includono direttamente o indirettamente que
 void \hyperlink{client_8h_a8c7084a254c7cd640d66e647795ff8f6}{operazioni\+\_\+client0} ()
 \item 
 void \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{S\+I\+G\+I\+N\+T\+Signal\+Handler} (int sig)
-\begin{DoxyCompactList}\small\item\em Chiude tutte le I\+PC e termina. \end{DoxyCompactList}\item 
+\item 
 void \hyperlink{client_8h_a50b22adcb76198fcd9402a97ff4711bf}{S\+I\+G\+U\+S\+R1\+Signal\+Handler} (int sig)
 \begin{DoxyCompactList}\small\item\em Handler del segnale S\+I\+G\+U\+S\+R1\+: chiude le risorse del client 0 e termina la sua esecuzione. \end{DoxyCompactList}\item 
 void \hyperlink{client_8h_a55586f2b7e9b3620294cf78cda8abdad}{dividi} (int fd, char $\ast$buf, size\+\_\+t count, char $\ast$file\+Path, int parte)
@@ -110,21 +110,8 @@ Memorizza il percorso passato come parametro, gestisce segnali e handler, attend
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Restituisce}
-int Exit code dell\textquotesingle{}intero programma
+int Exit code dell\textquotesingle{}intero programma 
 \end{DoxyReturn}
-Esegue operazioni principali del server.
-
-terminazione effettuata con S\+I\+G\+I\+NT\+: Al termine chiudi tutte le I\+PC.
-
-\begin{DoxyRefDesc}{Warnings}
-\item[\hyperlink{warning__warning000004}{Warnings}]I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine? \end{DoxyRefDesc}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{client_8h_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{client_8h_a8c7084a254c7cd640d66e647795ff8f6}\label{client_8h_a8c7084a254c7cd640d66e647795ff8f6}} 
 \index{client.\+h@{client.\+h}!operazioni\+\_\+client0@{operazioni\+\_\+client0}}
 \index{operazioni\+\_\+client0@{operazioni\+\_\+client0}!client.\+h@{client.\+h}}
@@ -151,14 +138,16 @@ Non vengono eseguite in \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{
 \begin{DoxyRefDesc}{Warnings}
 \item[\hyperlink{warning__warning000003}{Warnings}]Il percorso passato al client deve essere assoluto o puo\textquotesingle{} essere relativo? Se si passa un percorso relativo chdir() fallira\textquotesingle{} alla seconda esecuzione. ~\newline
  S\+O\+L\+U\+Z\+I\+O\+NE\+: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo.\end{DoxyRefDesc}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8h_a8c7084a254c7cd640d66e647795ff8f6_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -180,14 +169,16 @@ Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al ser
 {\em file\+Path} & Percorso del file che il client deve suddividere e mandare al server. \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8h_a54b47b58f228d7bc9827d2919687e25a_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -200,37 +191,17 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \subsubsection{\texorpdfstring{S\+I\+G\+I\+N\+T\+Signal\+Handler()}{SIGINTSignalHandler()}}
 {\footnotesize\ttfamily void S\+I\+G\+I\+N\+T\+Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
 
-
-
-Chiude tutte le I\+PC e termina. 
-
 Handler del segnale S\+I\+G\+I\+NT.
 
 Non fa niente, permette solo al processo di risvegliarsi dal pause().
 
-Le funzionalita\textquotesingle{} principali vengono eseguite da \hyperlink{client_8c_a8c7084a254c7cd640d66e647795ff8f6}{operazioni\+\_\+client0()} e non qui per il seguente motivo\+: \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{\tt https\+://man7.\+org/linux/man-\/pages/man7/signal-\/safety.\+7.\+html}
+Le funzionalita\textquotesingle{} principali vengono eseguite da \hyperlink{client_8h_a8c7084a254c7cd640d66e647795ff8f6}{operazioni\+\_\+client0()} e non qui per il seguente motivo\+: \href{https://man7.org/linux/man-pages/man7/signal-safety.7.html}{\tt https\+://man7.\+org/linux/man-\/pages/man7/signal-\/safety.\+7.\+html}
 
 
 \begin{DoxyParams}{Parametri}
-{\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT\\
-\hline
-{\em sig} & Intero che rappresenta il segnale catturato dalla funzione \\
+{\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{client_8h_a48d605ff689f470746c858648f0a98c2_cgraph}
-\end{center}
-\end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=275pt]{client_8h_a48d605ff689f470746c858648f0a98c2_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{client_8h_a50b22adcb76198fcd9402a97ff4711bf}\label{client_8h_a50b22adcb76198fcd9402a97ff4711bf}} 
 \index{client.\+h@{client.\+h}!S\+I\+G\+U\+S\+R1\+Signal\+Handler@{S\+I\+G\+U\+S\+R1\+Signal\+Handler}}
 \index{S\+I\+G\+U\+S\+R1\+Signal\+Handler@{S\+I\+G\+U\+S\+R1\+Signal\+Handler}!client.\+h@{client.\+h}}
@@ -246,14 +217,16 @@ Handler del segnale S\+I\+G\+U\+S\+R1\+: chiude le risorse del client 0 e termin
 {\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8h_a50b22adcb76198fcd9402a97ff4711bf_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -280,7 +253,8 @@ true a e b sono uguali
 
 false a e b sono diverse 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

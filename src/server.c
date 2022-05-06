@@ -396,20 +396,21 @@ int main(int argc, char * argv[]) {
 
             // leggi dalla memoria condivisa
             DEBUG_PRINT("Tenta di entrare nella memoria condivisa\n");
-            semWait(semid, 6);
-            DEBUG_PRINT("Sono entrato nella memoria condivisa\n");
-            for (int i = 0; i < MAX_MSG_PER_CHANNEL; i++) {
-                if (shm_check_ptr[i] == 1) {
-                    DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
-                    shm_check_ptr[i] = 0;
-                    aggiungiAMatrice(shm_ptr[i],n);
-                    findAndMakeFullFiles(n);
-                    arrived_parts_counter++;
+            if (semWaitNoBlocc(semid, 6) == 0) {
+                DEBUG_PRINT("Sono entrato nella memoria condivisa\n");
+                for (int i = 0; i < MAX_MSG_PER_CHANNEL; i++) {
+                    if (shm_check_ptr[i] == 1) {
+                        DEBUG_PRINT("Trovata posizione da leggere %d, messaggio: '%s'\n", i, shm_ptr[i].msg_body);
+                        shm_check_ptr[i] = 0;
+                        aggiungiAMatrice(shm_ptr[i],n);
+                        findAndMakeFullFiles(n);
+                        arrived_parts_counter++;
+                    }
                 }
+                DEBUG_PRINT("Tenta di uscire nella memoria condivisa\n");
+                semSignal(semid, 6);
+                DEBUG_PRINT("Sono uscito dalla memoria condivisa\n");
             }
-            DEBUG_PRINT("Tenta di uscire nella memoria condivisa\n");
-            semSignal(semid, 6);
-            DEBUG_PRINT("Sono uscito dalla memoria condivisa\n");
 
             if (n_tries % 5000 == 0) {
 		        DEBUG_PRINT("Ancora un altro tentativo... Counter = %d\n", arrived_parts_counter);

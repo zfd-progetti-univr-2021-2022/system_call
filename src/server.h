@@ -51,7 +51,5 @@ char * costruisciStringa(msg_t a);
  * Esegue operazioni principali del server.
  *
  * terminazione effettuata con SIGINT: Al termine chiudi tutte le IPC.
- *
- * @warning I file devono essere riuniti appena vengono ricevuti i 4 pezzi oppure va bene riunirli alla fine?
 */
 int main(int argc, char * argv[]);

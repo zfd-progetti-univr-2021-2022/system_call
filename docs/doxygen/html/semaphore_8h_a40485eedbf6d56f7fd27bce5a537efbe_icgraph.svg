@@ -8,75 +8,75 @@
  viewBox="0.00 0.00 442.00 85.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 81)">
 <title>semWaitZero</title>
-<!-- Node95 -->
+<!-- Node97 -->
 <g id="node1" class="node">
-<title>Node95</title>
+<title>Node97</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-38.5 0,-57.5 82,-57.5 82,-38.5 0,-38.5"/>
 <text text-anchor="middle" x="41" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">semWaitZero</text>
 </g>
-<!-- Node96 -->
+<!-- Node98 -->
 <g id="node2" class="node">
-<title>Node96</title>
+<title>Node98</title>
 <g id="a_node2"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
 <polygon fill="none" stroke="#000000" points="251,-57.5 251,-76.5 357,-76.5 357,-57.5 251,-57.5"/>
 <text text-anchor="middle" x="304" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
-<!-- Node95&#45;&gt;Node96 -->
+<!-- Node97&#45;&gt;Node98 -->
 <g id="edge1" class="edge">
-<title>Node95&#45;&gt;Node96</title>
+<title>Node97&#45;&gt;Node98</title>
 <path fill="none" stroke="#191970" d="M81.9681,-60.0557C93.516,-62.92 106.1597,-65.5608 118,-67 162.5574,-72.4161 213.5639,-71.9507 250.8799,-70.3939"/>
 <polygon fill="#191970" stroke="#191970" points="82.7087,-56.632 72.1499,-57.5056 80.9489,-63.4072 82.7087,-56.632"/>
 </g>
-<!-- Node98 -->
+<!-- Node100 -->
 <g id="node4" class="node">
-<title>Node98</title>
+<title>Node100</title>
 <g id="a_node4"><a xlink:href="client_8h.html#a54b47b58f228d7bc9827d2919687e25a" target="_top" xlink:title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. ">
 <polygon fill="none" stroke="#000000" points="118,-38.5 118,-57.5 215,-57.5 215,-38.5 118,-38.5"/>
 <text text-anchor="middle" x="166.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_figlio</text>
 </a>
 </g>
 </g>
-<!-- Node95&#45;&gt;Node98 -->
+<!-- Node97&#45;&gt;Node100 -->
 <g id="edge3" class="edge">
-<title>Node95&#45;&gt;Node98</title>
+<title>Node97&#45;&gt;Node100</title>
 <path fill="none" stroke="#191970" d="M92.2429,-48C100.7173,-48 109.4815,-48 117.8886,-48"/>
 <polygon fill="#191970" stroke="#191970" points="92.0934,-44.5001 82.0934,-48 92.0934,-51.5001 92.0934,-44.5001"/>
 </g>
-<!-- Node99 -->
+<!-- Node101 -->
 <g id="node5" class="node">
-<title>Node99</title>
+<title>Node101</title>
 <g id="a_node5"><a xlink:href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="146,-.5 146,-19.5 187,-19.5 187,-.5 146,-.5"/>
 <text text-anchor="middle" x="166.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node95&#45;&gt;Node99 -->
+<!-- Node97&#45;&gt;Node101 -->
 <g id="edge5" class="edge">
-<title>Node95&#45;&gt;Node99</title>
+<title>Node97&#45;&gt;Node101</title>
 <path fill="none" stroke="#191970" d="M82.4506,-35.4492C103.7218,-29.0085 128.6978,-21.4461 145.8641,-16.2483"/>
 <polygon fill="#191970" stroke="#191970" points="81.2255,-32.1632 72.6689,-38.411 83.2541,-38.8628 81.2255,-32.1632"/>
 </g>
-<!-- Node97 -->
+<!-- Node99 -->
 <g id="node3" class="node">
-<title>Node97</title>
+<title>Node99</title>
 <g id="a_node3"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="393,-57.5 393,-76.5 434,-76.5 434,-57.5 393,-57.5"/>
 <text text-anchor="middle" x="413.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node96&#45;&gt;Node97 -->
+<!-- Node98&#45;&gt;Node99 -->
 <g id="edge2" class="edge">
-<title>Node96&#45;&gt;Node97</title>
+<title>Node98&#45;&gt;Node99</title>
 <path fill="none" stroke="#191970" d="M367.2796,-67C376.5452,-67 385.4767,-67 392.9772,-67"/>
 <polygon fill="#191970" stroke="#191970" points="367.1462,-63.5001 357.1462,-67 367.1462,-70.5001 367.1462,-63.5001"/>
 </g>
-<!-- Node98&#45;&gt;Node96 -->
+<!-- Node100&#45;&gt;Node98 -->
 <g id="edge4" class="edge">
-<title>Node98&#45;&gt;Node96</title>
+<title>Node100&#45;&gt;Node98</title>
 <path fill="none" stroke="#191970" d="M225.4381,-56.1442C233.8052,-57.3003 242.3702,-58.4839 250.6237,-59.6244"/>
 <polygon fill="#191970" stroke="#191970" points="225.7495,-52.654 215.3645,-54.7522 224.7913,-59.5881 225.7495,-52.654"/>
 </g>

@@ -94,7 +94,7 @@ var sectionId = 'dynsection-3';
 <!-- Node12 -->
 <g id="node4" class="node">
 <title>Node12</title>
-<g id="a_node4"><a xlink:href="client_8c.html#a48d605ff689f470746c858648f0a98c2" target="_top" xlink:title="SIGINTSignalHandler">
+<g id="a_node4"><a xlink:href="client_8c.html#a48d605ff689f470746c858648f0a98c2" target="_top" xlink:title="Chiude tutte le IPC e termina. ">
 <polygon fill="none" stroke="#000000" points="77,-729.5 77,-748.5 195,-748.5 195,-729.5 77,-729.5"/>
 <text text-anchor="middle" x="136" y="-736.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">SIGINTSignalHandler</text>
 </a>
