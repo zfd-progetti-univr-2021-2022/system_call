@@ -155,6 +155,7 @@ void findAndMakeFullFiles(int righe){
             exit(1);
         }
 
+        memset(temp, 0, (strlen(matriceFile[i][0].file_path)+5)*sizeof(char));
         //strcpy(temp, matriceFile[i][0].file_path);
         //strcat(temp, "_out"); // aggiungo _out
         strncpy(temp, matriceFile[i][0].file_path,strlen(matriceFile[i][0].file_path)-4);
