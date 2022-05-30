@@ -154,8 +154,12 @@ void findAndMakeFullFiles(int righe){
             print_msg("[server.c:main] malloc failed\n");
             exit(1);
         }
-        strcpy(temp, matriceFile[i][0].file_path);
-        strcat(temp, "_out"); // aggiungo _out
+
+        memset(temp, 0, (strlen(matriceFile[i][0].file_path)+5)*sizeof(char));
+        //strcpy(temp, matriceFile[i][0].file_path);
+        //strcat(temp, "_out"); // aggiungo _out
+        strncpy(temp, matriceFile[i][0].file_path,strlen(matriceFile[i][0].file_path)-4);
+        strcat(temp, "_out.txt"); // aggiungo _out.txt
         int file = open(temp, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
         if (file == -1) {
