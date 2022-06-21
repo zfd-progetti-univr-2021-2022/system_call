@@ -1,18 +1,16 @@
 # system_call
 Elaborato System Call per il Corso di Sistemi Operativi (2021-2022)
 
----
-
-Work In Progress.
-
 ## Documentazione Doxygen
 
 E' possibile raggiungere la [documentazione generata da Doxygen cliccando qui](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/index.html).
 
 Navigando il menu' a tendina a sinistra e' possibile vedere:
 * Commenti delle funzioni e dei parametri con grafici interattivi delle chiamate ([link diretto](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/files.html))
-* Problemi o incomprensioni delle specifiche da risolvere ([link diretto](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/warning.html))
+* Problemi o incomprensioni delle specifiche da risolvere ([link diretto](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/warning.html)) o gia' risolte ([link](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/md_theory_questions_questions.html))
 * Lista delle cose da implementare ([link diretto](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/todo.html))
+* Comandi utili per il debugging e per l'analisi dei memory leak ([link](https://zfd-progetti-univr-2021-2022.github.io/system_call/doxygen/html/md_theory_commands_commands.html))
+* Riassunti di teoria
 
 ## Comandi utili
 
