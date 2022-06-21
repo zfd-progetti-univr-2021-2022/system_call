@@ -1,10 +1,10 @@
-<map id="/mnt/c/Users/stefa/Desktop/system_call/src/server.c" name="/mnt/c/Users/stefa/Desktop/system_call/src/server.c">
-<area shape="rect" id="node14" href="$err__exit_8h.html" title="Contiene la definizione della funzione di stampa degli errori. " alt="" coords="1472,109,1556,136"/>
-<area shape="rect" id="node15" href="$defines_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del progetto. " alt="" coords="1252,184,1333,211"/>
-<area shape="rect" id="node17" href="$shared__memory_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="1022,184,1161,211"/>
-<area shape="rect" id="node18" href="$semaphore_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="1581,109,1687,136"/>
-<area shape="rect" id="node19" href="$fifo_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO. " alt="" coords="1712,109,1767,136"/>
-<area shape="rect" id="node20" href="$debug_8h.html" title="Contiene la definizioni di variabili e funzioni per il debugging. " alt="" coords="154,109,229,136"/>
-<area shape="rect" id="node21" href="$message__queue_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle CODE DEI MESSAGGI..." alt="" coords="969,109,1109,136"/>
-<area shape="rect" id="node22" href="$server_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del SERVER. " alt="" coords="1286,109,1361,136"/>
+<map id="/mnt/c/Users/stefa/Desktop/progetti/system_call/src/server.c" name="/mnt/c/Users/stefa/Desktop/progetti/system_call/src/server.c">
+<area shape="rect" id="node14" href="$err__exit_8h.html" title="Contiene la definizione della funzione di stampa degli errori. " alt="" coords="1048,109,1132,136"/>
+<area shape="rect" id="node15" href="$defines_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del progetto. " alt="" coords="964,184,1045,211"/>
+<area shape="rect" id="node17" href="$shared__memory_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione della MEMORIA CONDIVISA..." alt="" coords="1521,184,1659,211"/>
+<area shape="rect" id="node18" href="$semaphore_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione dei SEMAFORI. " alt="" coords="1258,109,1365,136"/>
+<area shape="rect" id="node19" href="$fifo_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle FIFO. " alt="" coords="1389,109,1444,136"/>
+<area shape="rect" id="node20" href="$debug_8h.html" title="Contiene la definizioni di variabili e funzioni per il debugging. " alt="" coords="509,109,583,136"/>
+<area shape="rect" id="node21" href="$message__queue_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche per la gestione delle CODE DEI MESSAGGI..." alt="" coords="1468,109,1608,136"/>
+<area shape="rect" id="node22" href="$server_8h.html" title="Contiene la definizioni di variabili e funzioni specifiche del SERVER. " alt="" coords="862,109,937,136"/>
 </map>

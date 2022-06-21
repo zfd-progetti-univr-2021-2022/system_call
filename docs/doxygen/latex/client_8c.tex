@@ -1,5 +1,5 @@
-\hypertarget{client_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/client.c}
-\label{client_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/client.\+c@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/client.\+c}}
+\hypertarget{client_8c}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/progetti/system\+\_\+call/src/client.c}
+\label{client_8c}\index{/mnt/c/\+Users/stefa/\+Desktop/progetti/system\+\_\+call/src/client.\+c@{/mnt/c/\+Users/stefa/\+Desktop/progetti/system\+\_\+call/src/client.\+c}}
 
 
 Contiene l\textquotesingle{}implementazione del client.  
@@ -26,7 +26,8 @@ Contiene l\textquotesingle{}implementazione del client.
 {\ttfamily \#include \char`\"{}shared\+\_\+memory.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}fifo.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
-Grafo delle dipendenze di inclusione per client.\+c\+:\nopagebreak
+Grafo delle dipendenze di inclusione per client.\+c\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -143,7 +144,16 @@ E\textquotesingle{} necessaria la free() dopo aver terminato l\textquotesingle{}
 \begin{DoxyReturn}{Restituisce}
 char$\ast$ Stringa contenente il valore 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{client_8c_a748983b7ce27515a3ad116ada4334c4e_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -202,14 +212,16 @@ Non vengono eseguite in \hyperlink{client_8h_a48d605ff689f470746c858648f0a98c2}{
 \begin{DoxyRefDesc}{Warnings}
 \item[\hyperlink{warning__warning000003}{Warnings}]Il percorso passato al client deve essere assoluto o puo\textquotesingle{} essere relativo? Se si passa un percorso relativo chdir() fallira\textquotesingle{} alla seconda esecuzione. ~\newline
  S\+O\+L\+U\+Z\+I\+O\+NE\+: si potrebbe usare un altro chdir() a fine funzione per tornare al percorso di esecuzione iniziale anticipando il chdir() successivo.\end{DoxyRefDesc}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8c_a8c7084a254c7cd640d66e647795ff8f6_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -231,14 +243,16 @@ Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al ser
 {\em file\+Path} & Percorso del file che il client deve suddividere e mandare al server. \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8c_a54b47b58f228d7bc9827d2919687e25a_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -266,7 +280,8 @@ Le funzionalita\textquotesingle{} principali vengono eseguite da \hyperlink{clie
 {\em sig} & Valore intero corrispondente a S\+I\+G\+I\+NT \\
 \hline
 \end{DoxyParams}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -288,14 +303,16 @@ Handler del segnale S\+I\+G\+U\+S\+R1\+: chiude le risorse del client 0 e termin
 {\em sig} & Valore intero corrispondente a S\+I\+G\+U\+S\+R1 \\
 \hline
 \end{DoxyParams}
-Questo è il grafo delle chiamate per questa funzione\+:\nopagebreak
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{client_8c_a50b22adcb76198fcd9402a97ff4711bf_cgraph}
 \end{center}
 \end{figure}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -322,7 +339,8 @@ true a e b sono uguali
 
 false a e b sono diverse 
 \end{DoxyReturn}
-Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -8,24 +8,24 @@
  viewBox="0.00 0.00 191.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>operazioni_client0</title>
-<!-- Node47 -->
+<!-- Node50 -->
 <g id="node1" class="node">
-<title>Node47</title>
+<title>Node50</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-19.5 106,-19.5 106,-.5 0,-.5"/>
 <text text-anchor="middle" x="53" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </g>
-<!-- Node48 -->
+<!-- Node51 -->
 <g id="node2" class="node">
-<title>Node48</title>
+<title>Node51</title>
 <g id="a_node2"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="142,-.5 142,-19.5 183,-19.5 183,-.5 142,-.5"/>
 <text text-anchor="middle" x="162.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node47&#45;&gt;Node48 -->
+<!-- Node50&#45;&gt;Node51 -->
 <g id="edge1" class="edge">
-<title>Node47&#45;&gt;Node48</title>
+<title>Node50&#45;&gt;Node51</title>
 <path fill="none" stroke="#191970" d="M116.2796,-10C125.5452,-10 134.4767,-10 141.9772,-10"/>
 <polygon fill="#191970" stroke="#191970" points="116.1462,-6.5001 106.1462,-10 116.1462,-13.5001 116.1462,-6.5001"/>
 </g>

@@ -8,69 +8,69 @@
  viewBox="0.00 0.00 396.00 66.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>make_fifo</title>
-<!-- Node9 -->
+<!-- Node10 -->
 <g id="node1" class="node">
-<title>Node9</title>
+<title>Node10</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-19.5 0,-38.5 65,-38.5 65,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="32.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">make_fifo</text>
 </g>
-<!-- Node10 -->
+<!-- Node11 -->
 <g id="node2" class="node">
-<title>Node10</title>
+<title>Node11</title>
 <g id="a_node2"><a xlink:href="fifo_8h.html#a54a1ae8162825128cf02f95692402c18" target="_top" xlink:title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura...">
 <polygon fill="none" stroke="#000000" points="101,-19.5 101,-38.5 169,-38.5 169,-19.5 101,-19.5"/>
 <text text-anchor="middle" x="135" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">create_fifo</text>
 </a>
 </g>
 </g>
-<!-- Node9&#45;&gt;Node10 -->
+<!-- Node10&#45;&gt;Node11 -->
 <g id="edge1" class="edge">
-<title>Node9&#45;&gt;Node10</title>
+<title>Node10&#45;&gt;Node11</title>
 <path fill="none" stroke="#191970" d="M75.3573,-29C83.8555,-29 92.6702,-29 100.8323,-29"/>
 <polygon fill="#191970" stroke="#191970" points="75.2135,-25.5001 65.2135,-29 75.2134,-32.5001 75.2135,-25.5001"/>
 </g>
-<!-- Node11 -->
+<!-- Node12 -->
 <g id="node3" class="node">
-<title>Node11</title>
+<title>Node12</title>
 <g id="a_node3"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
 <polygon fill="none" stroke="#000000" points="205,-38.5 205,-57.5 311,-57.5 311,-38.5 205,-38.5"/>
 <text text-anchor="middle" x="258" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node11 -->
+<!-- Node11&#45;&gt;Node12 -->
 <g id="edge2" class="edge">
-<title>Node10&#45;&gt;Node11</title>
+<title>Node11&#45;&gt;Node12</title>
 <path fill="none" stroke="#191970" d="M179.3448,-35.85C187.529,-37.1142 196.1537,-38.4465 204.5731,-39.7471"/>
 <polygon fill="#191970" stroke="#191970" points="179.6795,-32.3603 169.2624,-34.2926 178.6108,-39.2782 179.6795,-32.3603"/>
 </g>
-<!-- Node13 -->
+<!-- Node14 -->
 <g id="node5" class="node">
-<title>Node13</title>
+<title>Node14</title>
 <g id="a_node5"><a xlink:href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="237.5,-.5 237.5,-19.5 278.5,-19.5 278.5,-.5 237.5,-.5"/>
 <text text-anchor="middle" x="258" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node13 -->
+<!-- Node11&#45;&gt;Node14 -->
 <g id="edge4" class="edge">
-<title>Node10&#45;&gt;Node13</title>
+<title>Node11&#45;&gt;Node14</title>
 <path fill="none" stroke="#191970" d="M179.3448,-22.15C199.1687,-19.0878 221.5775,-15.6262 237.3909,-13.1835"/>
 <polygon fill="#191970" stroke="#191970" points="178.6108,-18.7218 169.2624,-23.7074 179.6795,-25.6397 178.6108,-18.7218"/>
 </g>
-<!-- Node12 -->
+<!-- Node13 -->
 <g id="node4" class="node">
-<title>Node12</title>
+<title>Node13</title>
 <g id="a_node4"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="347,-38.5 347,-57.5 388,-57.5 388,-38.5 347,-38.5"/>
 <text text-anchor="middle" x="367.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node12 -->
+<!-- Node12&#45;&gt;Node13 -->
 <g id="edge3" class="edge">
-<title>Node11&#45;&gt;Node12</title>
+<title>Node12&#45;&gt;Node13</title>
 <path fill="none" stroke="#191970" d="M321.2796,-48C330.5452,-48 339.4767,-48 346.9772,-48"/>
 <polygon fill="#191970" stroke="#191970" points="321.1462,-44.5001 311.1462,-48 321.1462,-51.5001 321.1462,-44.5001"/>
 </g>

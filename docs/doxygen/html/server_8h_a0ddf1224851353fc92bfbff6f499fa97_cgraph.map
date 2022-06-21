@@ -1,50 +1,51 @@
 <map id="main" name="main">
-<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="1161,1003,1227,1030"/>
-<area shape="rect" id="node3" href="$signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4" title="block_sig_no_SIGINT\l_SIGUSR1" alt="" coords="108,67,265,108"/>
-<area shape="rect" id="node4" href="$client_8c.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. " alt="" coords="108,133,265,159"/>
-<area shape="rect" id="node5" href="$client_8c.html#a50b22adcb76198fcd9402a97ff4711bf" title="Handler del segnale SIGUSR1: chiude le risorse del client 0 e termina la sua esecuzione. " alt="" coords="733,117,904,143"/>
-<area shape="rect" id="node7" href="$signals_8c.html#a6e96709c7c3ecbcde283f4a2a09e4baf" title="block_all_signals" alt="" coords="120,357,253,383"/>
-<area shape="rect" id="node8" href="$client_8c.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="116,661,257,687"/>
-<area shape="rect" id="node9" href="$shared__memory_8c.html#a660a60242a5174977ab2debcdbd0e587" title="Ottiene l&#39;id o crea una memoria condivisa. " alt="" coords="313,167,480,194"/>
-<area shape="rect" id="node10" href="$defines_8c.html#a2d341373a96ffea0944553e5452cdbca" title="get_ipc_key" alt="" coords="347,218,447,245"/>
-<area shape="rect" id="node12" href="$shared__memory_8c.html#ab2ffe00ec7425a3a4229cd0d53ed901c" title="Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi. " alt="" coords="319,319,475,346"/>
-<area shape="rect" id="node13" href="$defines_8c.html#afd25e0dffe44c8dd59ae86caabb94287" title="get_ipc_key2" alt="" coords="343,269,451,295"/>
-<area shape="rect" id="node16" href="$fifo_8c.html#a54a1ae8162825128cf02f95692402c18" title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura..." alt="" coords="351,370,442,397"/>
-<area shape="rect" id="node28" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="779,978,858,1005"/>
-<area shape="rect" id="node30" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="773,927,864,954"/>
-<area shape="rect" id="node31" href="$semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="552,1282,661,1309"/>
-<area shape="rect" id="node33" href="$semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" title="Inizializza i valori del set di semafori semid ai valori in values. " alt="" coords="775,1333,863,1359"/>
-<area shape="rect" id="node36" href="$defines_8c.html#aea9b93cad897755a46cb9e3373ba8cc2" title="Rende bloccante oppure non bloccante un file descriptor. " alt="" coords="359,1130,434,1157"/>
-<area shape="rect" id="node41" href="$semaphore_8c.html#a0d970df04f11907f1acb332a47a39104" title="semWaitNoBlocc" alt="" coords="541,1383,673,1410"/>
-<area shape="rect" id="node43" href="$semaphore_8c.html#a2081de3d1c08dbacaf10ca46a717fabb" title="Crea un insieme di semafori. " alt="" coords="747,1434,891,1461"/>
-<area shape="rect" id="node44" href="$message__queue_8c.html#afebbb2a5c42d6a8bd4c95ab012c1dc8a" title="Restituisce statistiche della coda dei messaggi. " alt="" coords="979,1485,1086,1511"/>
-<area shape="rect" id="node45" href="$message__queue_8c.html#aded429c9008be24df92b60660cc0acfe" title="Imposta nuove configurazioni sulla coda dei messaggi. " alt="" coords="135,1535,239,1562"/>
-<area shape="rect" id="node46" href="$server_8c.html#ab53aa0eb44ad55d2e189f18d3bd6017b" title="string_to_int" alt="" coords="135,1586,238,1613"/>
-<area shape="rect" id="node47" href="$server_8c.html#ac94aa68fd5fccbf448cfe8788bd46225" title="aggiungiAMatrice" alt="" coords="119,1637,254,1663"/>
-<area shape="rect" id="node48" href="$server_8c.html#a6a3979b89e7153de6f4e9c4308d60403" title="findAndMakeFullFiles" alt="" coords="108,1687,265,1714"/>
-<area shape="rect" id="node6" href="$shared__memory_8c.html#a6530d61365abd3e580722ed907ea5f5b" title="Scollega la memoria condivisa dallo spazio degli indirizzi. " alt="" coords="952,117,1113,143"/>
-<area shape="rect" id="node14" href="$semaphore_8c.html#afee4d9b0eb613bf632622e9244204d51" title="Ottiene un insieme di semafori gia&#39; creato. " alt="" coords="757,421,881,447"/>
-<area shape="rect" id="node18" href="$files_8c.html#a627e4b202ea71f3bd241ccf562449bd6" title="find_sendme_files" alt="" coords="327,698,466,725"/>
-<area shape="rect" id="node25" href="$files_8c.html#a1cdd9b5b37408e31d80f31e474a71483" title="Visualizza il contenuto della lista concatenata di filePath. " alt="" coords="357,522,436,549"/>
-<area shape="rect" id="node26" href="$files_8c.html#a3ba19f05c37434e7f20facff3445651a" title="Conta il numero di file nella lista concatenata di filePath. " alt="" coords="351,573,443,599"/>
-<area shape="rect" id="node27" href="$client_8c.html#a748983b7ce27515a3ad116ada4334c4e" title="int_to_string" alt="" coords="345,813,448,839"/>
-<area shape="rect" id="node29" href="$client_8c.html#ac129a55ffa08a55addb9ea1afbd709f8" title="strEquals" alt="" coords="355,863,438,890"/>
-<area shape="rect" id="node37" href="$files_8c.html#a786a7b6f9c01e8489d7196a79f5f3862" title="Libera la memoria dello HEAP occupata dalla lista di filePath. " alt="" coords="359,471,434,498"/>
-<area shape="rect" id="node38" href="$client_8c.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="332,1029,461,1055"/>
-<area shape="rect" id="node11" href="$defines_8c.html#abe68b7232c057100c2e21586906436d7" title="get_project_ipc_key" alt="" coords="531,218,683,245"/>
-<area shape="rect" id="node15" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="999,978,1067,1005"/>
-<area shape="rect" id="node17" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="989,370,1076,397"/>
-<area shape="rect" id="node19" href="$strings_8c.html#a21b51584b636c81767ed74b8a527ffd3" title="Concatena la cartella directory al percorso path. " alt="" coords="553,623,660,650"/>
-<area shape="rect" id="node20" href="$files_8c.html#a675d61c6bfe0d9ddd1be59233dfd7d5c" title="Restituisce 1 se il percorso inizia con &quot;sendme_&quot;, 0 altrimenti. " alt="" coords="546,573,667,599"/>
-<area shape="rect" id="node22" href="$files_8c.html#a5ac4517096592013308a3252f3226f60" title="Restituisce 1 se il percorso ha la dimensione &lt;= 4 KB, 0 altrimenti. " alt="" coords="552,725,661,751"/>
-<area shape="rect" id="node24" href="$files_8c.html#a6a46f37bcdbf048db0fba5bb3e0e6342" title="Aggiunge in fondo alla coda un nuovo filePath. " alt="" coords="571,674,642,701"/>
-<area shape="rect" id="node21" href="$strings_8c.html#ab6b8529148710caedf063c1de6b0db16" title="Restituisce vero se la stringa a inizia con la sotto stringa b. " alt="" coords="773,573,864,599"/>
-<area shape="rect" id="node23" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce la dimensione in byte del file con percorso filePath. " alt="" coords="773,750,865,777"/>
-<area shape="rect" id="node32" href="$semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" title="Inizializza il valore del semaforo sem_num al valore val. " alt="" coords="987,1282,1078,1309"/>
-<area shape="rect" id="node34" href="$semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" title="Cancella il set di semafori svegliando eventuali processi in attesa. " alt="" coords="986,1105,1079,1131"/>
-<area shape="rect" id="node35" href="$semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" title="Imposta i permessi su un set di semafori. " alt="" coords="980,1155,1085,1182"/>
-<area shape="rect" id="node39" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="577,1079,636,1106"/>
-<area shape="rect" id="node40" href="$defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d" title="Restituisce vero se l&#39;array contiene tutti true. " alt="" coords="528,1029,685,1055"/>
-<area shape="rect" id="node42" href="$semaphore_8c.html#a78e24598fb0a5416db19120d6748627e" title="semOpNoBlocc" alt="" coords="972,1383,1093,1410"/>
-<area shape="rect" id="node49" href="$server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa" title="costruisciStringa" alt="" coords="331,1687,462,1714"/>
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="1161,835,1227,861"/>
+<area shape="rect" id="node3" href="$defines_8c.html#a2ce7c4d064c3b1a3f182c3e830a4c31d" title="Visualizza sullo standard output un messaggio utilizzando la write. " alt="" coords="563,201,650,228"/>
+<area shape="rect" id="node4" href="$signals_8c.html#a6060ad9cb62b184abfe113560b29f3c4" title="block_sig_no_SIGINT\l_SIGUSR1" alt="" coords="108,1722,265,1763"/>
+<area shape="rect" id="node5" href="$client_8c.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. " alt="" coords="108,1788,265,1815"/>
+<area shape="rect" id="node6" href="$client_8c.html#a50b22adcb76198fcd9402a97ff4711bf" title="Handler del segnale SIGUSR1: chiude le risorse del client 0 e termina la sua esecuzione. " alt="" coords="733,151,904,177"/>
+<area shape="rect" id="node8" href="$signals_8c.html#a6e96709c7c3ecbcde283f4a2a09e4baf" title="block_all_signals" alt="" coords="120,1839,253,1865"/>
+<area shape="rect" id="node9" href="$client_8c.html#a8c7084a254c7cd640d66e647795ff8f6" title="operazioni_client0" alt="" coords="116,780,257,807"/>
+<area shape="rect" id="node10" href="$shared__memory_8c.html#a660a60242a5174977ab2debcdbd0e587" title="Ottiene l&#39;id o crea una memoria condivisa. " alt="" coords="313,404,480,431"/>
+<area shape="rect" id="node11" href="$defines_8c.html#a2d341373a96ffea0944553e5452cdbca" title="get_ipc_key" alt="" coords="347,455,447,481"/>
+<area shape="rect" id="node13" href="$shared__memory_8c.html#ab2ffe00ec7425a3a4229cd0d53ed901c" title="Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi. " alt="" coords="319,556,475,583"/>
+<area shape="rect" id="node14" href="$defines_8c.html#afd25e0dffe44c8dd59ae86caabb94287" title="get_ipc_key2" alt="" coords="343,505,451,532"/>
+<area shape="rect" id="node17" href="$fifo_8c.html#a54a1ae8162825128cf02f95692402c18" title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura..." alt="" coords="351,353,442,380"/>
+<area shape="rect" id="node29" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="779,1113,858,1140"/>
+<area shape="rect" id="node31" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="773,1063,864,1089"/>
+<area shape="rect" id="node32" href="$semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="552,1367,661,1393"/>
+<area shape="rect" id="node34" href="$semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" title="Inizializza i valori del set di semafori semid ai valori in values. " alt="" coords="775,1417,863,1444"/>
+<area shape="rect" id="node37" href="$defines_8c.html#aea9b93cad897755a46cb9e3373ba8cc2" title="Rende bloccante oppure non bloccante un file descriptor. " alt="" coords="359,1265,434,1292"/>
+<area shape="rect" id="node42" href="$semaphore_8c.html#a0d970df04f11907f1acb332a47a39104" title="semWaitNoBlocc" alt="" coords="541,1468,673,1495"/>
+<area shape="rect" id="node44" href="$semaphore_8c.html#a2081de3d1c08dbacaf10ca46a717fabb" title="Crea un insieme di semafori. " alt="" coords="747,1519,891,1545"/>
+<area shape="rect" id="node45" href="$message__queue_8c.html#afebbb2a5c42d6a8bd4c95ab012c1dc8a" title="Restituisce statistiche della coda dei messaggi. " alt="" coords="979,1569,1086,1596"/>
+<area shape="rect" id="node46" href="$message__queue_8c.html#aded429c9008be24df92b60660cc0acfe" title="Imposta nuove configurazioni sulla coda dei messaggi. " alt="" coords="135,1620,239,1647"/>
+<area shape="rect" id="node47" href="$server_8c.html#ab53aa0eb44ad55d2e189f18d3bd6017b" title="string_to_int" alt="" coords="135,1671,238,1697"/>
+<area shape="rect" id="node48" href="$server_8c.html#ac94aa68fd5fccbf448cfe8788bd46225" title="aggiungiAMatrice" alt="" coords="119,1889,254,1916"/>
+<area shape="rect" id="node49" href="$server_8c.html#a6a3979b89e7153de6f4e9c4308d60403" title="findAndMakeFullFiles" alt="" coords="318,100,475,127"/>
+<area shape="rect" id="node7" href="$shared__memory_8c.html#a6530d61365abd3e580722ed907ea5f5b" title="Scollega la memoria condivisa dallo spazio degli indirizzi. " alt="" coords="952,151,1113,177"/>
+<area shape="rect" id="node15" href="$semaphore_8c.html#afee4d9b0eb613bf632622e9244204d51" title="Ottiene un insieme di semafori gia&#39; creato. " alt="" coords="757,835,881,861"/>
+<area shape="rect" id="node19" href="$files_8c.html#a627e4b202ea71f3bd241ccf562449bd6" title="find_sendme_files" alt="" coords="327,732,466,759"/>
+<area shape="rect" id="node26" href="$files_8c.html#a1cdd9b5b37408e31d80f31e474a71483" title="Visualizza il contenuto della lista concatenata di filePath. " alt="" coords="357,1063,436,1089"/>
+<area shape="rect" id="node27" href="$files_8c.html#a3ba19f05c37434e7f20facff3445651a" title="Conta il numero di file nella lista concatenata di filePath. " alt="" coords="351,607,443,633"/>
+<area shape="rect" id="node28" href="$client_8c.html#a748983b7ce27515a3ad116ada4334c4e" title="int_to_string" alt="" coords="345,252,448,279"/>
+<area shape="rect" id="node30" href="$client_8c.html#ac129a55ffa08a55addb9ea1afbd709f8" title="strEquals" alt="" coords="355,657,438,684"/>
+<area shape="rect" id="node38" href="$files_8c.html#a786a7b6f9c01e8489d7196a79f5f3862" title="Libera la memoria dello HEAP occupata dalla lista di filePath. " alt="" coords="359,961,434,988"/>
+<area shape="rect" id="node39" href="$client_8c.html#a54b47b58f228d7bc9827d2919687e25a" title="Funzione eseguita da ogni Client i (figli di Client 0) per mandare i file al server. " alt="" coords="332,1012,461,1039"/>
+<area shape="rect" id="node12" href="$defines_8c.html#abe68b7232c057100c2e21586906436d7" title="get_project_ipc_key" alt="" coords="531,404,683,431"/>
+<area shape="rect" id="node16" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="999,1063,1067,1089"/>
+<area shape="rect" id="node18" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="989,303,1076,329"/>
+<area shape="rect" id="node20" href="$strings_8c.html#a21b51584b636c81767ed74b8a527ffd3" title="Concatena la cartella directory al percorso path. " alt="" coords="553,556,660,583"/>
+<area shape="rect" id="node21" href="$files_8c.html#a675d61c6bfe0d9ddd1be59233dfd7d5c" title="Restituisce 1 se il percorso inizia con &quot;sendme_&quot;, 0 altrimenti. " alt="" coords="546,607,667,633"/>
+<area shape="rect" id="node23" href="$files_8c.html#a5ac4517096592013308a3252f3226f60" title="Restituisce 1 se il percorso ha la dimensione &lt;= 4 KB, 0 altrimenti. " alt="" coords="552,759,661,785"/>
+<area shape="rect" id="node25" href="$files_8c.html#a6a46f37bcdbf048db0fba5bb3e0e6342" title="Aggiunge in fondo alla coda un nuovo filePath. " alt="" coords="571,657,642,684"/>
+<area shape="rect" id="node22" href="$strings_8c.html#ab6b8529148710caedf063c1de6b0db16" title="Restituisce vero se la stringa a inizia con la sotto stringa b. " alt="" coords="773,607,864,633"/>
+<area shape="rect" id="node24" href="$files_8c.html#a096f8e9259afb2839ebe6822364f9928" title="Restituisce la dimensione in byte del file con percorso filePath. " alt="" coords="773,771,865,797"/>
+<area shape="rect" id="node33" href="$semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" title="Inizializza il valore del semaforo sem_num al valore val. " alt="" coords="987,1265,1078,1292"/>
+<area shape="rect" id="node35" href="$semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" title="Cancella il set di semafori svegliando eventuali processi in attesa. " alt="" coords="986,1316,1079,1343"/>
+<area shape="rect" id="node36" href="$semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" title="Imposta i permessi su un set di semafori. " alt="" coords="980,1367,1085,1393"/>
+<area shape="rect" id="node40" href="$client_8c.html#a55586f2b7e9b3620294cf78cda8abdad" title="Divide in 4 parti il contenuto del file da inviare al server. " alt="" coords="577,1063,636,1089"/>
+<area shape="rect" id="node41" href="$defines_8c.html#ac281b05b7a90ba292f5748cbfe3c389d" title="Restituisce vero se l&#39;array contiene tutti true. " alt="" coords="528,1012,685,1039"/>
+<area shape="rect" id="node43" href="$semaphore_8c.html#a78e24598fb0a5416db19120d6748627e" title="semOpNoBlocc" alt="" coords="972,1468,1093,1495"/>
+<area shape="rect" id="node50" href="$server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa" title="costruisciStringa" alt="" coords="541,100,672,127"/>
 </map>

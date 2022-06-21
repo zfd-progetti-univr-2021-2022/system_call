@@ -8,39 +8,39 @@
  viewBox="0.00 0.00 324.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 24)">
 <title>operazioni_figlio</title>
-<!-- Node64 -->
+<!-- Node67 -->
 <g id="node1" class="node">
-<title>Node64</title>
+<title>Node67</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-.5 0,-19.5 97,-19.5 97,-.5 0,-.5"/>
 <text text-anchor="middle" x="48.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_figlio</text>
 </g>
-<!-- Node65 -->
+<!-- Node68 -->
 <g id="node2" class="node">
-<title>Node65</title>
+<title>Node68</title>
 <g id="a_node2"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
 <polygon fill="none" stroke="#000000" points="133,-.5 133,-19.5 239,-19.5 239,-.5 133,-.5"/>
 <text text-anchor="middle" x="186" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
-<!-- Node64&#45;&gt;Node65 -->
+<!-- Node67&#45;&gt;Node68 -->
 <g id="edge1" class="edge">
-<title>Node64&#45;&gt;Node65</title>
+<title>Node67&#45;&gt;Node68</title>
 <path fill="none" stroke="#191970" d="M107.4381,-10C115.8052,-10 124.3702,-10 132.6237,-10"/>
 <polygon fill="#191970" stroke="#191970" points="107.3645,-6.5001 97.3645,-10 107.3645,-13.5001 107.3645,-6.5001"/>
 </g>
-<!-- Node66 -->
+<!-- Node69 -->
 <g id="node3" class="node">
-<title>Node66</title>
+<title>Node69</title>
 <g id="a_node3"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="275,-.5 275,-19.5 316,-19.5 316,-.5 275,-.5"/>
 <text text-anchor="middle" x="295.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node65&#45;&gt;Node66 -->
+<!-- Node68&#45;&gt;Node69 -->
 <g id="edge2" class="edge">
-<title>Node65&#45;&gt;Node66</title>
+<title>Node68&#45;&gt;Node69</title>
 <path fill="none" stroke="#191970" d="M249.2796,-10C258.5452,-10 267.4767,-10 274.9772,-10"/>
 <polygon fill="#191970" stroke="#191970" points="249.1462,-6.5001 239.1462,-10 249.1462,-13.5001 249.1462,-6.5001"/>
 </g>

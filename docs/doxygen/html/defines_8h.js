@@ -21,5 +21,6 @@ var defines_8h =
     [ "get_ipc_key", "defines_8h.html#a2d341373a96ffea0944553e5452cdbca", null ],
     [ "get_ipc_key2", "defines_8h.html#afd25e0dffe44c8dd59ae86caabb94287", null ],
     [ "get_project_ipc_key", "defines_8h.html#abe68b7232c057100c2e21586906436d7", null ],
+    [ "print_msg", "defines_8h.html#a2ce7c4d064c3b1a3f182c3e830a4c31d", null ],
     [ "EXECUTABLE_DIR", "defines_8h.html#a709c4fcdc1217a8f8785cb59e85beee5", null ]
 ];

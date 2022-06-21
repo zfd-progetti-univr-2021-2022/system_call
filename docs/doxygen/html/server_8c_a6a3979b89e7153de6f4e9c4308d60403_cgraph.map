@@ -1,4 +1,5 @@
 <map id="findAndMakeFullFiles" name="findAndMakeFullFiles">
-<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="243,5,309,32"/>
-<area shape="rect" id="node3" href="$server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa" title="costruisciStringa" alt="" coords="211,56,341,83"/>
+<area shape="rect" id="node2" href="$defines_8c.html#a2ce7c4d064c3b1a3f182c3e830a4c31d" title="Visualizza sullo standard output un messaggio utilizzando la write. " alt="" coords="233,5,319,32"/>
+<area shape="rect" id="node3" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="389,31,455,57"/>
+<area shape="rect" id="node4" href="$server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa" title="costruisciStringa" alt="" coords="211,107,341,133"/>
 </map>

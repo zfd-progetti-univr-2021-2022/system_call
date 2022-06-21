@@ -1,12 +1,14 @@
-.TH "/mnt/c/Users/stefa/Desktop/system_call/src/defines.h" 3 "Ven 6 Mag 2022" "Version 0.0.1" "SYSTEM_CALL" \" -*- nroff -*-
+.TH "/mnt/c/Users/stefa/Desktop/progetti/system_call/src/defines.h" 3 "Mar 21 Giu 2022" "Version 1.0.0" "SYSTEM_CALL" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/mnt/c/Users/stefa/Desktop/system_call/src/defines.h \- Contiene la definizioni di variabili e funzioni specifiche del progetto\&.  
+/mnt/c/Users/stefa/Desktop/progetti/system_call/src/defines.h \- Contiene la definizioni di variabili e funzioni specifiche del progetto\&.  
 
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <stdbool\&.h>\fP
+.br
 \fC#include <sys/types\&.h>\fP
 .br
 \fC#include <sys/ipc\&.h>\fP
@@ -106,6 +108,10 @@
 .RI "int \fBblockFD\fP (int fd, int blocking)"
 .br
 .RI "Rende bloccante oppure non bloccante un file descriptor\&. "
+.ti -1c
+.RI "void \fBprint_msg\fP (char *msg)"
+.br
+.RI "Visualizza sullo standard output un messaggio utilizzando la write\&. "
 .in -1c
 .SS "Variabili"
 
@@ -188,6 +194,17 @@ Restituisce una chiave IPC generica per il progetto ottenuta con ftok sulla cart
 \fBRestituisce:\fP
 .RS 4
 key_t Chiave IPC 
+.RE
+.PP
+
+.SS "void print_msg (char * msg)"
+
+.PP
+Visualizza sullo standard output un messaggio utilizzando la write\&. 
+.PP
+\fBParametri:\fP
+.RS 4
+\fImsg\fP messaggio da visualizzare 
 .RE
 .PP
 

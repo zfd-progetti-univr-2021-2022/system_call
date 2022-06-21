@@ -1,31 +1,32 @@
 <map id="main" name="main">
-<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="752,480,817,507"/>
-<area shape="rect" id="node3" href="$server_8c.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. " alt="" coords="313,126,471,152"/>
-<area shape="rect" id="node7" href="$defines_8c.html#a2d341373a96ffea0944553e5452cdbca" title="get_ipc_key" alt="" coords="137,176,237,203"/>
-<area shape="rect" id="node9" href="$shared__memory_8c.html#a660a60242a5174977ab2debcdbd0e587" title="Ottiene l&#39;id o crea una memoria condivisa. " alt="" coords="528,227,695,254"/>
-<area shape="rect" id="node10" href="$shared__memory_8c.html#ab2ffe00ec7425a3a4229cd0d53ed901c" title="Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi. " alt="" coords="314,379,470,406"/>
-<area shape="rect" id="node11" href="$defines_8c.html#afd25e0dffe44c8dd59ae86caabb94287" title="get_ipc_key2" alt="" coords="133,227,241,254"/>
-<area shape="rect" id="node12" href="$semaphore_8c.html#a2081de3d1c08dbacaf10ca46a717fabb" title="Crea un insieme di semafori. " alt="" coords="539,379,683,406"/>
-<area shape="rect" id="node13" href="$semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" title="Inizializza i valori del set di semafori semid ai valori in values. " alt="" coords="348,683,436,710"/>
-<area shape="rect" id="node14" href="$fifo_8c.html#a54a1ae8162825128cf02f95692402c18" title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura..." alt="" coords="347,480,437,507"/>
-<area shape="rect" id="node16" href="$message__queue_8c.html#afebbb2a5c42d6a8bd4c95ab012c1dc8a" title="Restituisce statistiche della coda dei messaggi. " alt="" coords="339,531,445,558"/>
-<area shape="rect" id="node17" href="$message__queue_8c.html#aded429c9008be24df92b60660cc0acfe" title="Imposta nuove configurazioni sulla coda dei messaggi. " alt="" coords="135,582,239,608"/>
-<area shape="rect" id="node18" href="$server_8c.html#ab53aa0eb44ad55d2e189f18d3bd6017b" title="string_to_int" alt="" coords="135,632,238,659"/>
-<area shape="rect" id="node19" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="347,987,437,1014"/>
-<area shape="rect" id="node21" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="353,936,431,963"/>
-<area shape="rect" id="node22" href="$semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="132,759,241,786"/>
-<area shape="rect" id="node25" href="$defines_8c.html#aea9b93cad897755a46cb9e3373ba8cc2" title="Rende bloccante oppure non bloccante un file descriptor. " alt="" coords="149,1012,224,1039"/>
-<area shape="rect" id="node26" href="$server_8c.html#ac94aa68fd5fccbf448cfe8788bd46225" title="aggiungiAMatrice" alt="" coords="119,1063,254,1090"/>
-<area shape="rect" id="node27" href="$server_8c.html#a6a3979b89e7153de6f4e9c4308d60403" title="findAndMakeFullFiles" alt="" coords="108,911,265,938"/>
-<area shape="rect" id="node29" href="$semaphore_8c.html#a0d970df04f11907f1acb332a47a39104" title="semWaitNoBlocc" alt="" coords="121,962,253,988"/>
-<area shape="rect" id="node4" href="$shared__memory_8c.html#a6530d61365abd3e580722ed907ea5f5b" title="Scollega la memoria condivisa dallo spazio degli indirizzi. " alt="" coords="531,75,692,102"/>
-<area shape="rect" id="node5" href="$shared__memory_8c.html#a8fd9943e1b39a1f286977096e0a50d7b" title="Elimina la memoria condivisa. " alt="" coords="519,126,704,152"/>
-<area shape="rect" id="node6" href="$semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" title="Cancella il set di semafori svegliando eventuali processi in attesa. " alt="" coords="565,278,658,304"/>
-<area shape="rect" id="node8" href="$defines_8c.html#abe68b7232c057100c2e21586906436d7" title="get_project_ipc_key" alt="" coords="316,176,468,203"/>
-<area shape="rect" id="node15" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="568,480,655,507"/>
-<area shape="rect" id="node20" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="577,911,645,938"/>
-<area shape="rect" id="node23" href="$semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" title="Inizializza il valore del semaforo sem_num al valore val. " alt="" coords="566,784,657,811"/>
-<area shape="rect" id="node24" href="$semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" title="Imposta i permessi su un set di semafori. " alt="" coords="559,835,664,862"/>
-<area shape="rect" id="node28" href="$server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa" title="costruisciStringa" alt="" coords="327,1088,457,1115"/>
-<area shape="rect" id="node30" href="$semaphore_8c.html#a78e24598fb0a5416db19120d6748627e" title="semOpNoBlocc" alt="" coords="551,1114,672,1140"/>
+<area shape="rect" id="node2" href="$err__exit_8c.html#aa223b0ecfe538d130ece562646a37d27" title="Prints the error message of the last failed system call and terminates the calling process..." alt="" coords="739,556,804,583"/>
+<area shape="rect" id="node3" href="$server_8c.html#a48d605ff689f470746c858648f0a98c2" title="Chiude tutte le IPC e termina. " alt="" coords="295,278,453,304"/>
+<area shape="rect" id="node7" href="$defines_8c.html#a2d341373a96ffea0944553e5452cdbca" title="get_ipc_key" alt="" coords="125,379,225,406"/>
+<area shape="rect" id="node9" href="$shared__memory_8c.html#a660a60242a5174977ab2debcdbd0e587" title="Ottiene l&#39;id o crea una memoria condivisa. " alt="" coords="291,379,457,406"/>
+<area shape="rect" id="node10" href="$shared__memory_8c.html#ab2ffe00ec7425a3a4229cd0d53ed901c" title="Recupera il puntatore alla memoria condivisa aggiungendola allo spazio degli indirizzi. " alt="" coords="296,430,452,456"/>
+<area shape="rect" id="node11" href="$defines_8c.html#afd25e0dffe44c8dd59ae86caabb94287" title="get_ipc_key2" alt="" coords="121,328,229,355"/>
+<area shape="rect" id="node12" href="$semaphore_8c.html#a2081de3d1c08dbacaf10ca46a717fabb" title="Crea un insieme di semafori. " alt="" coords="526,835,670,862"/>
+<area shape="rect" id="node13" href="$semaphore_8c.html#a8df9b8ea63eaf93d09f437b356a4a1eb" title="Inizializza i valori del set di semafori semid ai valori in values. " alt="" coords="330,886,418,912"/>
+<area shape="rect" id="node14" href="$fifo_8c.html#a54a1ae8162825128cf02f95692402c18" title="Facilita la creazione di una FIFO (o ne ottiene una esistente) in modalita&#39; lettura o scrittura..." alt="" coords="329,962,419,988"/>
+<area shape="rect" id="node17" href="$message__queue_8c.html#afebbb2a5c42d6a8bd4c95ab012c1dc8a" title="Restituisce statistiche della coda dei messaggi. " alt="" coords="122,24,229,51"/>
+<area shape="rect" id="node18" href="$message__queue_8c.html#aded429c9008be24df92b60660cc0acfe" title="Imposta nuove configurazioni sulla coda dei messaggi. " alt="" coords="123,75,227,102"/>
+<area shape="rect" id="node19" href="$server_8c.html#ab53aa0eb44ad55d2e189f18d3bd6017b" title="string_to_int" alt="" coords="124,126,227,152"/>
+<area shape="rect" id="node20" href="$semaphore_8c.html#a7bad0eb0b0c6ac701b59c36b8b7837bf" title="Esegue la signal sul semaforo sem_num: incrementa il valore di 1. " alt="" coords="329,480,419,507"/>
+<area shape="rect" id="node22" href="$semaphore_8c.html#a2581efba6a0833e3f289de94c779cc21" title="Esegue la wait sul semaforo sem_num: decrementa il valore di 1 ed eventualmente mette in attesa il pr..." alt="" coords="335,531,413,558"/>
+<area shape="rect" id="node23" href="$semaphore_8c.html#a40485eedbf6d56f7fd27bce5a537efbe" title="Attende che il semaforo sem_num raggiunga il valore zero. " alt="" coords="121,632,230,659"/>
+<area shape="rect" id="node26" href="$defines_8c.html#aea9b93cad897755a46cb9e3373ba8cc2" title="Rende bloccante oppure non bloccante un file descriptor. " alt="" coords="138,1038,213,1064"/>
+<area shape="rect" id="node27" href="$server_8c.html#ac94aa68fd5fccbf448cfe8788bd46225" title="aggiungiAMatrice" alt="" coords="108,1088,243,1115"/>
+<area shape="rect" id="node28" href="$server_8c.html#a6a3979b89e7153de6f4e9c4308d60403" title="findAndMakeFullFiles" alt="" coords="295,1063,453,1090"/>
+<area shape="rect" id="node30" href="$semaphore_8c.html#a0d970df04f11907f1acb332a47a39104" title="semWaitNoBlocc" alt="" coords="109,176,241,203"/>
+<area shape="rect" id="node4" href="$shared__memory_8c.html#a6530d61365abd3e580722ed907ea5f5b" title="Scollega la memoria condivisa dallo spazio degli indirizzi. " alt="" coords="517,328,679,355"/>
+<area shape="rect" id="node5" href="$shared__memory_8c.html#a8fd9943e1b39a1f286977096e0a50d7b" title="Elimina la memoria condivisa. " alt="" coords="505,379,691,406"/>
+<area shape="rect" id="node6" href="$semaphore_8c.html#a530566146b6e3cc8415d8ae4259fd68f" title="Cancella il set di semafori svegliando eventuali processi in attesa. " alt="" coords="551,582,645,608"/>
+<area shape="rect" id="node8" href="$defines_8c.html#abe68b7232c057100c2e21586906436d7" title="get_project_ipc_key" alt="" coords="298,328,450,355"/>
+<area shape="rect" id="node15" href="$fifo_8c.html#ab83de0eb3bc3947e3c031685d5c2474b" title="Crea o ottiene una IPC FIFO usando mkfifo. " alt="" coords="555,987,641,1014"/>
+<area shape="rect" id="node16" href="$defines_8c.html#a2ce7c4d064c3b1a3f182c3e830a4c31d" title="Visualizza sullo standard output un messaggio utilizzando la write. " alt="" coords="555,1038,641,1064"/>
+<area shape="rect" id="node21" href="$semaphore_8c.html#a77c6570406059144bb6a8ecf04f481da" title="Funzione di supporto per manipolare i valori di un set di semafori. " alt="" coords="564,632,632,659"/>
+<area shape="rect" id="node24" href="$semaphore_8c.html#aad78dc4ccefb184a74dd9ef808df8db6" title="Inizializza il valore del semaforo sem_num al valore val. " alt="" coords="553,784,643,811"/>
+<area shape="rect" id="node25" href="$semaphore_8c.html#a34a010b0a39236a7261d7d5103426491" title="Imposta i permessi su un set di semafori. " alt="" coords="545,683,651,710"/>
+<area shape="rect" id="node29" href="$server_8c.html#aefaefec035e6211d28b35a6d2ce3b3fa" title="costruisciStringa" alt="" coords="533,1139,663,1166"/>
+<area shape="rect" id="node31" href="$semaphore_8c.html#a78e24598fb0a5416db19120d6748627e" title="semOpNoBlocc" alt="" coords="313,176,435,203"/>
 </map>

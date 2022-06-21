@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SYSTEM_CALL: Riferimenti per il file /mnt/c/Users/stefa/Desktop/system_call/src/defines.h</title>
+<title>SYSTEM_CALL: Riferimenti per il file /mnt/c/Users/stefa/Desktop/progetti/system_call/src/defines.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -37,7 +37,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">SYSTEM_CALL
-   &#160;<span id="projectnumber">0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0</span>
    </div>
   </td>
  </tr>
@@ -101,17 +101,19 @@ $(document).ready(function(){initNavTree('defines_8h.html','');});
 
 <p>Contiene la definizioni di variabili e funzioni specifiche del progetto.  
 <a href="#details">Continua...</a></p>
-<div class="textblock"><code>#include &lt;sys/types.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;sys/ipc.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Grafo delle dipendenze di inclusione per defines.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h__incl.svg" width="211" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h__incl.svg" width="318" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 Questo grafo mostra quali altri file includono direttamente o indirettamente questo file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h__dep__incl.svg" width="598" height="275"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="defines_8h__dep__incl.svg" width="100%" height="506"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 </div>
@@ -200,6 +202,9 @@ Funzioni</h2></td></tr>
 <tr class="memitem:aea9b93cad897755a46cb9e3373ba8cc2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#aea9b93cad897755a46cb9e3373ba8cc2">blockFD</a> (int fd, int blocking)</td></tr>
 <tr class="memdesc:aea9b93cad897755a46cb9e3373ba8cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rende bloccante oppure non bloccante un file descriptor.  <a href="#aea9b93cad897755a46cb9e3373ba8cc2">Continua...</a><br /></td></tr>
 <tr class="separator:aea9b93cad897755a46cb9e3373ba8cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce7c4d064c3b1a3f182c3e830a4c31d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="defines_8h.html#a2ce7c4d064c3b1a3f182c3e830a4c31d">print_msg</a> (char *msg)</td></tr>
+<tr class="memdesc:a2ce7c4d064c3b1a3f182c3e830a4c31d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visualizza sullo standard output un messaggio utilizzando la write.  <a href="#a2ce7c4d064c3b1a3f182c3e830a4c31d">Continua...</a><br /></td></tr>
+<tr class="separator:a2ce7c4d064c3b1a3f182c3e830a4c31d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variabili</h2></td></tr>
@@ -399,6 +404,44 @@ Questo è il grafo delle chiamate per questa funzione:</div>
 Questo è il grafo dei chiamanti di questa funzione:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h_abe68b7232c057100c2e21586906436d7_icgraph.svg" width="611" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a2ce7c4d064c3b1a3f182c3e830a4c31d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ce7c4d064c3b1a3f182c3e830a4c31d">&#9670;&nbsp;</a></span>print_msg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_msg </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Visualizza sullo standard output un messaggio utilizzando la write. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>messaggio da visualizzare </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Questo è il grafo delle chiamate per questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d_cgraph.svg" width="211" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Questo è il grafo dei chiamanti di questa funzione:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d_icgraph.svg" width="595" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>

@@ -1,17 +1,19 @@
-\hypertarget{defines_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/defines.h}
-\label{defines_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/defines.\+h@{/mnt/c/\+Users/stefa/\+Desktop/system\+\_\+call/src/defines.\+h}}
+\hypertarget{defines_8h}{}\section{Riferimenti per il file /mnt/c/\+Users/stefa/\+Desktop/progetti/system\+\_\+call/src/defines.h}
+\label{defines_8h}\index{/mnt/c/\+Users/stefa/\+Desktop/progetti/system\+\_\+call/src/defines.\+h@{/mnt/c/\+Users/stefa/\+Desktop/progetti/system\+\_\+call/src/defines.\+h}}
 
 
 Contiene la definizioni di variabili e funzioni specifiche del progetto.  
 
 
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
 {\ttfamily \#include $<$sys/types.\+h$>$}\newline
 {\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
-Grafo delle dipendenze di inclusione per defines.\+h\+:\nopagebreak
+Grafo delle dipendenze di inclusione per defines.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=230pt]{defines_8h__incl}
+\includegraphics[width=310pt]{defines_8h__incl}
 \end{center}
 \end{figure}
 Questo grafo mostra quali altri file includono direttamente o indirettamente questo file\+:
@@ -89,7 +91,9 @@ key\+\_\+t \hyperlink{defines_8h_abe68b7232c057100c2e21586906436d7}{get\+\_\+pro
 bool \hyperlink{defines_8h_ac281b05b7a90ba292f5748cbfe3c389d}{array\+Contains\+All\+True} (bool arr\mbox{[}$\,$\mbox{]}, int len)
 \begin{DoxyCompactList}\small\item\em Restituisce vero se l\textquotesingle{}array contiene tutti true. \end{DoxyCompactList}\item 
 int \hyperlink{defines_8h_aea9b93cad897755a46cb9e3373ba8cc2}{block\+FD} (int fd, int blocking)
-\begin{DoxyCompactList}\small\item\em Rende bloccante oppure non bloccante un file descriptor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Rende bloccante oppure non bloccante un file descriptor. \end{DoxyCompactList}\item 
+void \hyperlink{defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d}{print\+\_\+msg} (char $\ast$msg)
+\begin{DoxyCompactList}\small\item\em Visualizza sullo standard output un messaggio utilizzando la write. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variabili}
 \begin{DoxyCompactItemize}
 \item 
@@ -242,5 +246,36 @@ Questo è il grafo dei chiamanti di questa funzione\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{defines_8h_abe68b7232c057100c2e21586906436d7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d}\label{defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d}} 
+\index{defines.\+h@{defines.\+h}!print\+\_\+msg@{print\+\_\+msg}}
+\index{print\+\_\+msg@{print\+\_\+msg}!defines.\+h@{defines.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+msg()}{print\_msg()}}
+{\footnotesize\ttfamily void print\+\_\+msg (\begin{DoxyParamCaption}\item[{char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+Visualizza sullo standard output un messaggio utilizzando la write. 
+
+
+\begin{DoxyParams}{Parametri}
+{\em msg} & messaggio da visualizzare \\
+\hline
+\end{DoxyParams}
+Questo è il grafo delle chiamate per questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d_cgraph}
+\end{center}
+\end{figure}
+Questo è il grafo dei chiamanti di questa funzione\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{defines_8h_a2ce7c4d064c3b1a3f182c3e830a4c31d_icgraph}
 \end{center}
 \end{figure}

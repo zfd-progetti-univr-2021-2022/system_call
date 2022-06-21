@@ -8,54 +8,54 @@
  viewBox="0.00 0.00 295.00 66.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>create_fifo</title>
-<!-- Node3 -->
+<!-- Node4 -->
 <g id="node1" class="node">
-<title>Node3</title>
+<title>Node4</title>
 <polygon fill="#bfbfbf" stroke="#000000" points="0,-19.5 0,-38.5 68,-38.5 68,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="34" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">create_fifo</text>
 </g>
-<!-- Node4 -->
+<!-- Node5 -->
 <g id="node2" class="node">
-<title>Node4</title>
+<title>Node5</title>
 <g id="a_node2"><a xlink:href="client_8h.html#a8c7084a254c7cd640d66e647795ff8f6" target="_top" xlink:title="operazioni_client0">
 <polygon fill="none" stroke="#000000" points="104,-38.5 104,-57.5 210,-57.5 210,-38.5 104,-38.5"/>
 <text text-anchor="middle" x="157" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">operazioni_client0</text>
 </a>
 </g>
 </g>
-<!-- Node3&#45;&gt;Node4 -->
+<!-- Node4&#45;&gt;Node5 -->
 <g id="edge1" class="edge">
-<title>Node3&#45;&gt;Node4</title>
+<title>Node4&#45;&gt;Node5</title>
 <path fill="none" stroke="#191970" d="M78.3448,-35.85C86.529,-37.1142 95.1537,-38.4465 103.5731,-39.7471"/>
 <polygon fill="#191970" stroke="#191970" points="78.6795,-32.3603 68.2624,-34.2926 77.6108,-39.2782 78.6795,-32.3603"/>
 </g>
-<!-- Node6 -->
+<!-- Node7 -->
 <g id="node4" class="node">
-<title>Node6</title>
+<title>Node7</title>
 <g id="a_node4"><a xlink:href="server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="136.5,-.5 136.5,-19.5 177.5,-19.5 177.5,-.5 136.5,-.5"/>
 <text text-anchor="middle" x="157" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node3&#45;&gt;Node6 -->
+<!-- Node4&#45;&gt;Node7 -->
 <g id="edge3" class="edge">
-<title>Node3&#45;&gt;Node6</title>
+<title>Node4&#45;&gt;Node7</title>
 <path fill="none" stroke="#191970" d="M78.3448,-22.15C98.1687,-19.0878 120.5775,-15.6262 136.3909,-13.1835"/>
 <polygon fill="#191970" stroke="#191970" points="77.6108,-18.7218 68.2624,-23.7074 78.6795,-25.6397 77.6108,-18.7218"/>
 </g>
-<!-- Node5 -->
+<!-- Node6 -->
 <g id="node3" class="node">
-<title>Node5</title>
+<title>Node6</title>
 <g id="a_node3"><a xlink:href="client_8c.html#a0ddf1224851353fc92bfbff6f499fa97" target="_top" xlink:title="main">
 <polygon fill="none" stroke="#000000" points="246,-38.5 246,-57.5 287,-57.5 287,-38.5 246,-38.5"/>
 <text text-anchor="middle" x="266.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000">main</text>
 </a>
 </g>
 </g>
-<!-- Node4&#45;&gt;Node5 -->
+<!-- Node5&#45;&gt;Node6 -->
 <g id="edge2" class="edge">
-<title>Node4&#45;&gt;Node5</title>
+<title>Node5&#45;&gt;Node6</title>
 <path fill="none" stroke="#191970" d="M220.2796,-48C229.5452,-48 238.4767,-48 245.9772,-48"/>
 <polygon fill="#191970" stroke="#191970" points="220.1462,-44.5001 210.1462,-48 220.1462,-51.5001 220.1462,-44.5001"/>
 </g>
